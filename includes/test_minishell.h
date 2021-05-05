@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:37:30 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/05/04 12:46:06 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/05/05 14:40:36 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 # include "minishell.h"
 
 void	test_wait_fork(void);
+void	test_waitpid(void);
 void	test_get_cwd(void);
+void	test_signal(void);
 
 
 #endif

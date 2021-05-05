@@ -1,0 +1,48 @@
+global commande : 
+	
+	nom [-options] [argument1...]
+
+	les crochets indique que c'est facultatif
+	Les points de suspension indiquent la possibilité de répéter un élément
+		Par exemple, ls /etc /usr pour plusieurs arguments.
+	Dans une commande, chaque mot est séparé des autres par un espace ou une tabulation.
+
+	nom 	: nom du programme
+	-option : -  un seul tiret = une seule lettre. 
+				parfois possible de grouper plusieurs lettre (ex -s -i equivaut a -si ou -is)
+			  - si l'option demande un parametre il est séparé par un espace (ex: -o fichier)
+	 
+
+C’est d’abord un interpréteur de commandes exécutant la boucle infinie suivante:
+Affichage de l’invite de commande ou prompt (« $ ») d’attente de lecture au clavier.
+Lecture d’une commande (validée par RETURN ou ENTRÉE).
+Analyse syntaxique (découpage en mots).
+Interprétation des caractères spéciaux.
+Exécution de la commande et retour au début.
+
+Entrée standard: stdin (numéro 0)
+Sortie standard et erreur standard: stdout et stderr (numéros 1 et 2)
+Une redirection est une modification de l’une ou de l’autre de ces associations.
+Elle est valable uniquement le temps de la commande sur laquelle elle porte.
+
+
+ ----------------------------------------------------------------------------------------------------------
+ pour SIGNAL CTRL + ..
+
+Malheureusement il n'y a aucun moyen de copier le comportement de bash sans accès aux termios
+(et donc aux bonus). Personnellement je fais un join lorsqu'un Ctrl+D est détecté.
+C'est vrai que c'est embêtant de ne pas pouvoir modifier la partie précédent le Ctrl+D
+mais c'est une solution propre
+Après rien ne t'empêches de le gérer autrement et d'argumenter lors des corrections, elles servent aussi à ça
+et j'imagine qu'il ne faut pas que le ^D s'affiche ?
+asoursou (Adrien)
+c'est mieux
+
+---------------------------------------------------------------------------------------------------------
+
+Hey, de quel facon vous verifie si un fichier existe
+vus que on a pas le droit a access
+vfurmane (Valentin) — Aujourd’hui à 12:17
+stat
+
+----------------------------------------------------------------------------------------------------------
