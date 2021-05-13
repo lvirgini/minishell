@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 16:01:44 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/05/05 14:37:29 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/05/07 15:52:16 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,9 +89,7 @@ void		test_waitpid(void)
 	int		status2;
 	int		status3;
 
-	pid2 = get_pid_fork();
-	/*pid3 = get_pid_fork(); si placé ici je ne comprends pas 
-	** 2*fils 2 et 1 fois fils 3 donc 2 fois fork pid3 ? */
+	pid2 = get_pid_fork();	
 	if (pid2 == 0)
 		processus_fils(2);
 

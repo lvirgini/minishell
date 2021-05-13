@@ -1,36 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   test_isatty.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/03 16:24:41 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/05/13 12:03:53 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/05/07 11:25:13 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/05/13 12:08:48 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "test_minishell.h"
 
-/*
-**
-*/
+void		test_isatty(void)
+{
+	char	*path = "srcs/a_retirer/test_chdir.c";
 
-# include <unistd.h>
-# include <sys/types.h>
-# include <sys/wait.h>
-# include <stdio.h>
-# include <signal.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-
-/*
-**
-*/
-
-# include "libft.h"
-# include "test_minishell.h" //
-
-#endif
+	printf("fd = %d\nisatty = %d\n", 1, isatty(1));
+	printf("ttyname = %s\n", ttyname(1));
+	printf("ttyslot = %d\n", ttyslot());
+}

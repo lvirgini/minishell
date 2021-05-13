@@ -6,7 +6,7 @@
 #    By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 17:38:13 by lvirgini          #+#    #+#              #
-#    Updated: 2021/05/04 12:41:36 by lvirgini         ###   ########.fr        #
+#    Updated: 2021/05/07 16:23:31 by lvirgini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRC_DIR =	$(shell find srcs -type d)
 INC_DIR = 	$(shell find includes -type d) libft/includes 
 OBJ_DIR =	obj/
 
-LIB		=	ft
+LIB		=	ft 
 
 SRC 	=	$(foreach dir, $(SRC_DIR), $(foreach file, $(wildcard $(dir)/*.c), $(notdir $(file))))
 OBJ 	=	$(addprefix $(OBJ_DIR),$(SRC:%.c=%.o))
@@ -48,10 +48,10 @@ vpath %.h $(foreach dir, $(INC_DIR)/, $(dir):)
 
 CC 		=	gcc
 
-CFLAG 	= 	-Wall -Wextra -g -fsanitize=leak
+CFLAG 	= 	-Wall -Wextra -g -fsanitize=leak -fsanitize=address
 # add -Werror
 IFLAG 	= 	$(foreach dir, $(INC_DIR), -I $(dir) )
-LFLAG 	=	$(foreach lib, $(LIB), -l $(lib) ) $(foreach dir, $(LIB_DIR), -L $(dir) )
+LFLAG 	=	$(foreach lib, $(LIB), -l $(lib) ) $(foreach dir, $(LIB_DIR), -L $(dir) ) 
 
 
 # ----------------- #
@@ -76,7 +76,7 @@ $(NAME):	install $(OBJ_MINISHELL)
 #			@echo "\n*     Compilation $(NAME)     *\t   \033[32;1m--> \033[4;5mComplete\033[0m"
 
 test:		install $(OBJ_TEST)		
-			@$(CC) $(CFLAG) $(IFLAG) $(OBJ_TEST) $(LFLAG)-o $@
+			@$(CC) $(CFLAG) $(IFLAG) $(OBJ_TEST) $(LFLAG) -lncurses -o $@
 			@echo "\n*     Compilation test     *\t   \033[32;1m--> \033[4;5mComplete\033[0m"
 
 

@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:37:30 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/05/05 14:40:36 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/05/07 12:22:48 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,14 @@
 void	test_wait_fork(void);
 void	test_waitpid(void);
 void	test_get_cwd(void);
+void	gestionnaire_de_signal(int signal);
 void	test_signal(void);
-
+void	test_execve(char **env);
+char	*test_getenv(void);
+void	test_chdir(char**env);
+void	test_stat(void);
+void	test_opendir(void);
+void	test_isatty(void);
+void	test_all_termcaps(void);
 
 #endif

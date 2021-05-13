@@ -1,36 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   test_chdir.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/03 16:24:41 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/05/13 12:03:53 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/05/06 15:10:20 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/05/13 12:04:52 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "test_minishell.h"
 
-/*
-**
-*/
-
-# include <unistd.h>
-# include <sys/types.h>
-# include <sys/wait.h>
-# include <stdio.h>
-# include <signal.h>
-# include <sys/types.h>
-# include <sys/stat.h>
-# include <fcntl.h>
-
-/*
-**
-*/
-
-# include "libft.h"
-# include "test_minishell.h" //
-
-#endif
+void		test_chdir(char**env)
+{
+	test_get_cwd();
+	int ret = chdir("/home");
+	printf("return CHDIR = %d\n", ret);
+	test_get_cwd();
+}
