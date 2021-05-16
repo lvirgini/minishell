@@ -1,34 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_minishell.h                                   :+:      :+:    :+:   */
+/*   minishell_error.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/03 17:37:30 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/05/16 14:10:04 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/05/13 19:47:57 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/05/14 19:44:23 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_MINISHELL_H
-# define TEST_MINISHELL_H
+#ifndef MINISHELL_ERROR_H
+# define MINISHELL_ERROR_H
 
-# include "minishell.h"
+enum e_error
+{
+	ERR_MALLOC,
+};
 
-void	test_wait_fork(void);
-void	test_waitpid(void);
-void	test_get_cwd(void);
-void	gestionnaire_de_signal(int signal);
-void	test_signal(void);
-void	test_execve(char **env);
-char	*test_getenv(void);
-void	test_chdir(char**env);
-void	test_stat(void);
-void	test_opendir(void);
-void	test_isatty(void);
-void	test_all_termcaps(void);
+enum e_reason_cmd_not_work
+{
+	NOT_FOUND,
+};
 
 
-
+void		display_command_error(char	*cmd, int reason);
 
 #endif

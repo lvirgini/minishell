@@ -6,7 +6,7 @@
 #    By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 17:38:13 by lvirgini          #+#    #+#              #
-#    Updated: 2021/05/07 16:23:31 by lvirgini         ###   ########.fr        #
+#    Updated: 2021/05/13 14:35:07 by lvirgini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,7 @@ $(OBJ_DIR)%.o: %.c $(HEADERS)
 			@$(CC) $(CFLAG) $(IFLAG) -o $@ -c $< 
 
 $(NAME):	install $(OBJ_MINISHELL)
-			@$(CC) $(CFLAG) $(IFLAG) $(OBJ_MINISHELL) $(LFLAG)-o $@
+			@$(CC) $(CFLAG) $(IFLAG) $(OBJ_MINISHELL) $(LFLAG) -lncurses  -o $@
 			@echo "\n*     Compilation $(NAME)     *\t   \033[32;1m--> \033[4;5mComplete\033[0m"
 
 

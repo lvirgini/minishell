@@ -6,14 +6,11 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/07 12:22:10 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/05/10 10:51:17 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/05/13 14:34:50 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test_minishell.h"
-#include <curses.h>
-#include <term.h>
-#include <termios.h>
 
 int init_term()
 {
@@ -42,7 +39,7 @@ int init_term()
 
 void	test_all_termcaps(void)
 {
-
+/*
 	if (init_term() == -1)
 		exit(EXIT_FAILURE);
 	printf("li = %d\n", tgetnum("li"));
@@ -77,5 +74,5 @@ void	test_all_termcaps(void)
 	}
 	free(buf);
 
-	tcsetattr(STDIN_FILENO, 0, &backup);
+	tcsetattr(STDIN_FILENO, 0, &backup);*/
 }

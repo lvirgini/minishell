@@ -1,34 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_minishell.h                                   :+:      :+:    :+:   */
+/*   minishell_terminal.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/03 17:37:30 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/05/16 14:10:04 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/05/13 14:56:01 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/05/16 18:00:46 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_MINISHELL_H
-# define TEST_MINISHELL_H
+#ifndef MINISHELL_TERMINAL_H
+# define MINISHELL_TERMINAL_H
 
-# include "minishell.h"
-
-void	test_wait_fork(void);
-void	test_waitpid(void);
-void	test_get_cwd(void);
-void	gestionnaire_de_signal(int signal);
-void	test_signal(void);
-void	test_execve(char **env);
-char	*test_getenv(void);
-void	test_chdir(char**env);
-void	test_stat(void);
-void	test_opendir(void);
-void	test_isatty(void);
-void	test_all_termcaps(void);
-
-
-
+int			create_terminal(t_env **env);
+char		*get_prompt_display(t_env *env);
+int			command_split(char *input);
 
 #endif

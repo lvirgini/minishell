@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test_isatty.c                                      :+:      :+:    :+:   */
+/*   minishell_define.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/07 11:25:13 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/05/13 12:08:48 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/05/13 12:51:17 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/05/16 11:23:10 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "test_minishell.h"
+#ifndef MINISHELL_DEFINE_H
+# define MINISHELL_DEFINE_H
 
-void		test_isatty(void)
-{
-	char	*path = "srcs/a_retirer/test_chdir.c";
+# define BUFFER_MAX		256
 
-	printf("fd = %d\nisatty = %d\n", 1, isatty(1));
-	printf("ttyname = %s\n", ttyname(1));
-	printf("ttyslot = %d\n", ttyslot());
-}
+# define FAILURE		0
+# define SUCCESS		1
+# define EXIT			2
+
+# define PROMPT_FORMATTING_SIZE	26
+# define STR_COLOR_GREEN		"\33[32m"
+# define STR_COLOR_BLUE			"\33[34m"
+# define STR_COLOR_STD			"\33[0m"
+
+#endif
