@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 13:28:18 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/05/16 18:15:00 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/05/18 10:31:09 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,36 +34,6 @@ t_env		*add_t_env_with_split_key_value(char *str)
 }
 
 /*
-** if not exist, add this env.
-*/
-
-static int	check_exist_or_add_env(t_env **env, char *key, char *value)
-{
-	t_env	*ptr;
-	
-	ptr = get_this_env(*env, key);
-	if (ptr == NULL)
-		if (add_front_env(env, add_new_env(key, value)) == FAILURE)
-			return (FAILURE);
-	return (SUCCESS);
-}
-
-/*
-** check or add the minimum needed ENV for minishell working
-*/
-
-int			check_and_set_minimum_t_env(t_env **env, char *shell_name)
-{
-
-	edit_or_add_t_env(env, "SHELL", shell_name + 2);
-	if (check_exist_or_add_env(env, "USER", "user") == FAILURE)
-		return (FAILURE);
-	if (check_exist_or_add_env(env, "PWD", "/home") == FAILURE)
-		return (FAILURE);
-	return (SUCCESS);
-}
-
-/*
 ** get the complete environment send in the main argument
 */
 
@@ -73,13 +43,13 @@ t_env		*get_complete_env(char **env, char *shell_name)
 	t_env	*ret;
 	t_env	*first;
 
-	if (!env)
+	if (!env || !*env)
 		return (add_new_env("SHELL", shell_name + 2));
-	i = 0;
 	ret = add_t_env_with_split_key_value(env[0]);
 	if (ret == NULL)
 		return (NULL);
 	first = ret;
+	i = 1;
 	while (env[i])
 	{
 		ret->next = add_t_env_with_split_key_value(env[i]);
@@ -91,5 +61,6 @@ t_env		*get_complete_env(char **env, char *shell_name)
 		ret = ret->next;
 		i++;
 	}
+	edit_or_add_t_env(&first, "SHELL", shell_name + 2);
 	return (first);
 }

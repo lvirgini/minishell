@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 11:56:22 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/05/16 18:16:35 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/05/18 11:19:40 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define MINISHELL_ENV_H
 
 typedef struct s_env	t_env;
-struct s_env
+struct		s_env
 {
 	char	*key;
 	char	*value;

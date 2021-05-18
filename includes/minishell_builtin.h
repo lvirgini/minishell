@@ -1,28 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_define.h                                 :+:      :+:    :+:   */
+/*   minishell_builtin.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/13 12:51:17 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/05/17 12:25:51 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/05/17 12:24:39 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/05/18 11:17:50 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_DEFINE_H
-# define MINISHELL_DEFINE_H
+#ifndef MINISHELL_BUILTIN_H
+# define MINISHELL_BUILTIN_H
 
-# define BUFFER_MAX		256
+# include "minishell.h"
 
-# define FAILURE		0
-# define SUCCESS		1
-# define EXIT			2
+# define S_ECHO		"echo"
+# define S_CD		"cd"
+# define S_PWD		"pwd"
+# define S_EXPORT	"export"
+# define S_UNSET	"unset"
+# define S_ENV		"env"
+# define S_EXIT		"exit"
 
-# define PROMPT_FORMATTING_SIZE	26
-
-# define STR_COLOR_GREEN		"\33[32m"
-# define STR_COLOR_BLUE			"\33[94m"
-# define STR_COLOR_STD			"\33[0m"
+enum	e_env
+{
+	CMD_ECHO,
+	CMD_CD,
+	CMD_PWD,
+	CMD_EXPORT,
+	CMD_UNSET,
+	CMD_ENV,
+	CMD_EXIT,
+};
 
 #endif

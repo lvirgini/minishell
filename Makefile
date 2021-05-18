@@ -6,7 +6,7 @@
 #    By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 17:38:13 by lvirgini          #+#    #+#              #
-#    Updated: 2021/05/13 14:35:07 by lvirgini         ###   ########.fr        #
+#    Updated: 2021/05/16 18:42:05 by lvirgini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRC_DIR =	$(shell find srcs -type d)
 INC_DIR = 	$(shell find includes -type d) libft/includes 
 OBJ_DIR =	obj/
 
-LIB		=	ft 
+LIB		=	ft ncurses
 
 SRC 	=	$(foreach dir, $(SRC_DIR), $(foreach file, $(wildcard $(dir)/*.c), $(notdir $(file))))
 OBJ 	=	$(addprefix $(OBJ_DIR),$(SRC:%.c=%.o))
@@ -67,7 +67,7 @@ $(OBJ_DIR)%.o: %.c $(HEADERS)
 			@$(CC) $(CFLAG) $(IFLAG) -o $@ -c $< 
 
 $(NAME):	install $(OBJ_MINISHELL)
-			@$(CC) $(CFLAG) $(IFLAG) $(OBJ_MINISHELL) $(LFLAG) -lncurses  -o $@
+			@$(CC) $(CFLAG) $(IFLAG) $(OBJ_MINISHELL) $(LFLAG) -o $@
 			@echo "\n*     Compilation $(NAME)     *\t   \033[32;1m--> \033[4;5mComplete\033[0m"
 
 
@@ -76,7 +76,7 @@ $(NAME):	install $(OBJ_MINISHELL)
 #			@echo "\n*     Compilation $(NAME)     *\t   \033[32;1m--> \033[4;5mComplete\033[0m"
 
 test:		install $(OBJ_TEST)		
-			@$(CC) $(CFLAG) $(IFLAG) $(OBJ_TEST) $(LFLAG) -lncurses -o $@
+			@$(CC) $(CFLAG) $(IFLAG) $(OBJ_TEST) $(LFLAG) -o $@
 			@echo "\n*     Compilation test     *\t   \033[32;1m--> \033[4;5mComplete\033[0m"
 
 

@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 16:14:04 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/05/16 18:17:39 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/05/18 10:33:17 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,20 @@ t_env		*get_this_env(t_env *env, char *key)
 			return (env);
 		env = env->next;
 	}
+	return (NULL);
+}
+
+/*
+** = getenv
+*/
+
+char		*get_value_t_env(t_env *env, char *key)
+{
+	t_env	*ptr;
+
+	ptr = get_this_env(env, key);
+	if (ptr)
+		return (ptr->value);
 	return (NULL);
 }
 
@@ -48,21 +62,7 @@ int			edit_or_add_t_env(t_env **env, char *key, char *value)
 		{
 			perror(ERR_MALLOC);
 			return (FAILURE);
-		}	
+		}
 	}
 	return (SUCCESS);
-}
-
-/*
-** = getenv
-*/
-
-char		*get_value_t_env(t_env *env, char *key)
-{
-	t_env	*ptr;
-
-	ptr = get_this_env(env, key);
-	if (ptr)
-		return (ptr->value);
-	return (NULL);
 }

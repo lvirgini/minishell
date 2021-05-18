@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:37:30 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/05/16 14:10:04 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/05/18 11:15:19 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ void	test_opendir(void);
 void	test_isatty(void);
 void	test_all_termcaps(void);
 
+/*
+**  test function from minishell
+*/
 
-
+int		test_prompt(void);
 
 #endif

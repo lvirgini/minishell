@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 14:06:51 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/05/16 18:19:14 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/05/18 10:30:09 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static void		free_this_env(t_env *env)
 		free(env);
 	}
 }
+
 /*
 ** free all t_env
 */
@@ -57,13 +58,13 @@ void			free_all_t_env(t_env *env)
 
 void			remove_t_env(t_env **env, char *key)
 {
-	t_env 	*tmp;
+	t_env	*tmp;
 	t_env	*next;
 
 	tmp = *env;
 	if (ft_strcmp(tmp->key, key) == 0)
 	{
-		env = &tmp->next;
+		*env = tmp->next;
 		free_this_env(tmp);
 		return ;
 	}
@@ -76,6 +77,6 @@ void			remove_t_env(t_env **env, char *key)
 			tmp->next = next;
 			return ;
 		}
+		tmp = tmp->next;
 	}
-	return ;
 }
