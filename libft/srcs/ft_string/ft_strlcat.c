@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 17:49:30 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/23 17:28:13 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/06/21 18:36:16 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size)
 		++srclen;
 	if (dstlen >= size)
 		return (size + srclen);
-	srclen = size <= dstlen ? srclen + size : srclen + dstlen;
+	if (size <= dstlen)
+		srclen += size;
+	else
+		srclen += dstlen;
 	while (src[j] && dstlen + 1 < size)
 		dst[dstlen++] = src[j++];
 	dst[dstlen] = '\0';

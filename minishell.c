@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 16:25:24 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/05/13 12:02:55 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/09/14 15:23:22 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int		main(int argc, char **argv)
 {
-	printf("IN MINISHELL \n");
+	(void)argc;
+	(void)argv;
 
-	for (int i = 0; i < argc; i++)
-		printf("argv[%d] = %s\n", i, argv[i]);
-
+	make_terminal();
+	
 	return (0);
 }

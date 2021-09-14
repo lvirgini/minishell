@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 14:05:43 by lvirgini          #+#    #+#             */
-/*   Updated: 2019/12/13 10:09:31 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/06/21 18:12:14 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 ** ou NULL si c n'a pas été trouvé dans les n premiers caractères de src.
 */
 
-void		*ft_memccpy(void *dest, const void *src, int c, size_t n)
+void	*ft_memccpy(void *dest, const void *src, int c, size_t n)
 {
 	unsigned char		*d;
 	unsigned char		*s;
@@ -28,7 +28,10 @@ void		*ft_memccpy(void *dest, const void *src, int c, size_t n)
 	s = (unsigned char *)src;
 	while (n-- > 0)
 	{
-		if ((*d++ = *s++) == (unsigned char)c)
+		*d = *s;
+		(*d)++;
+		(*s)++;
+		if (*d == (unsigned char)c)
 			return (d);
 	}
 	return (NULL);

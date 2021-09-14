@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 16:25:15 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/07/03 12:16:25 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/06/21 18:23:29 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** Copie src dans dst au plus size octets. protège dst en la finissant par \0.
 */
 
-size_t		ft_strlcpy(char *dst, const char *src, size_t size)
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
 	size_t	i;
 	size_t	src_len;

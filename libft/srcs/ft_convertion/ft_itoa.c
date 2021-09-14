@@ -5,57 +5,56 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/13 15:03:39 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/01/08 11:21:11 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/06/21 14:26:04 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/06/21 16:42:58 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
-/*
-** Conversion d'un int en chaine de caractère
-** Utilise Malloc
-*/
-
-static void		ft_itoatransfert(long int n, int size, int sign, char *dst)
+static size_t	get_integer_size(int n)
 {
-	dst[size + 1] = '\0';
-	if (n != 0)
+	unsigned int	unsigned_nbr;
+	size_t			size;
+
+	if (n == 0)
+		return (1);
+	size = 0;
+	if (n < 0)
+		size++;
+	unsigned_nbr = ft_abs(n);
+	while (unsigned_nbr > 0)
 	{
-		while (n > 0)
-		{
-			dst[size--] = n % 10 + '0';
-			n /= 10;
-		}
-		if (sign)
-			dst[0] = '-';
+		unsigned_nbr /= 10;
+		size++;
 	}
-	else
-		dst[0] = '0';
+	return (size);
 }
 
-char			*ft_itoa(int n)
+static void	get_str_from_int(char *dst, int n, size_t size)
 {
-	unsigned long int	i;
-	int					sign;
-	int					size;
-	char				*dst;
+	unsigned int	unsigned_nbr;
 
-	if (n == -2147483648)
+	dst[size] = '\0';
+	unsigned_nbr = ft_abs(n);
+	while (size-- > 0)
 	{
-		if (!(dst = malloc(sizeof(*dst) * 12)))
-			return (NULL);
-		ft_itoatransfert(2147483648, 10, 1, dst);
-		return (dst);
+		dst[size] = unsigned_nbr % 10 + '0';
+		unsigned_nbr /= 10;
 	}
-	i = 10;
-	sign = n < 0 ? 1 : 0;
-	if ((size = sign) == 1)
-		n *= -1;
-	while (n / i > 0 && ++size > 0)
-		i *= 10;
-	if (!(dst = malloc(sizeof(*dst) * (size + 2))))
+	if (n < 0)
+		dst[0] = '-';
+}
+
+char	*ft_itoa(int n)
+{
+	size_t		size;
+	char		*dst;
+
+	size = get_integer_size(n);
+	dst = (char *)malloc(sizeof(char) * (size + 1));
+	if (dst == NULL)
 		return (NULL);
-	ft_itoatransfert(n, size, sign, dst);
+	get_str_from_int(dst, n, size);
 	return (dst);
 }

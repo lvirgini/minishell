@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 13:40:09 by lvirgini          #+#    #+#             */
-/*   Updated: 2019/11/12 13:58:11 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/06/21 18:15:56 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 void	ft_putnbr_fd(int n, int fd)
 {
-	long int nb;
+	long int	nb;
 
 	if (fd)
 	{

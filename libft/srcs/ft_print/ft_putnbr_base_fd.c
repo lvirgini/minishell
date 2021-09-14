@@ -6,16 +6,16 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 16:53:26 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/01/29 18:09:11 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/06/21 18:16:51 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		ft_verif_base(char *base)
+static int	ft_verif_base(char *base)
 {
-	int i;
-	int j;
+	int		i;
+	int		j;
 
 	i = 0;
 	if (!base[i] || !base[i + 1])
@@ -36,7 +36,7 @@ static int		ft_verif_base(char *base)
 	return (1);
 }
 
-static void		ft_putnbr_recursif(int nbr, char *base, int len, int fd)
+static void	ft_putnbr_recursif(int nbr, char *base, int len, int fd)
 {
 	if (nbr >= len)
 	{
@@ -47,9 +47,9 @@ static void		ft_putnbr_recursif(int nbr, char *base, int len, int fd)
 		write(fd, &base[nbr], 1);
 }
 
-void			ft_putnbr_base_fd(int nbr, char *base, int fd)
+void	ft_putnbr_base_fd(int nbr, char *base, int fd)
 {
-	int len;
+	int		len;
 
 	len = ft_strlen(base);
 	if (ft_verif_base(base))

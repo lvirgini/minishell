@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/07 13:28:59 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/01/30 13:49:05 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/06/22 16:41:40 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,22 @@
 
 static char	*ft_strjoin_gnl(char *s1, char const *s2, size_t s2_len)
 {
-	unsigned int	len;
-	unsigned int	i;
-	unsigned int	j;
-	char			*dest;
+	size_t		len;
+	size_t		i;
+	size_t		j;
+	char		*dest;
 
-	len = s2_len;
-	i = 0;
-	j = 0;
 	if (!s2)
 		return (NULL);
-	while (s1 && (s1[i++] || (i = 0) != 0))
-		len++;
-	if (!(dest = malloc(sizeof(*dest) * (len + 1))))
+	len = s2_len + ft_strlen(s1);
+	dest = (char *)malloc(sizeof(*dest) * (len + 1));
+	if (dest == NULL)
 		return (NULL);
-	while ((s1 && s1[i]) || (i = 0) != 0)
+	i = 0;
+	j = 0;
+	while (s1 && s1[i])
 		dest[j++] = s1[i++];
+	i = 0;
 	while (i < s2_len)
 		dest[j++] = s2[i++];
 	dest[j] = '\0';
@@ -86,7 +86,8 @@ static int	stop_read(char **line, char *buf, int end_of_line, int len)
 	{
 		if (buf[0] == '\0')
 			return (0);
-		if ((end_of_line = ft_strchr_len(buf, '\n')) >= 0 || ft_strlen(buf) > 0)
+		end_of_line = ft_strchr_len(buf, '\n');
+		if (end_of_line >= 0 || ft_strlen(buf) > 0)
 		{
 			copy_buf_in_line(line, buf, end_of_line, len);
 			return (1);
@@ -103,7 +104,7 @@ static int	stop_read(char **line, char *buf, int end_of_line, int len)
 
 static int	find_t_gnl(t_gnl gnl[NB_FD], int fd)
 {
-	int i;
+	int		i;
 
 	i = 0;
 	while (gnl && gnl[i].fd != 0 && gnl[i].fd != fd)
@@ -122,7 +123,7 @@ static int	find_t_gnl(t_gnl gnl[NB_FD], int fd)
 **	- retourne 0 si EOF.
 */
 
-int			get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	static t_gnl	gnl[NB_FD];
 	int				i;
@@ -135,11 +136,15 @@ int			get_next_line(int fd, char **line)
 	i = find_t_gnl(gnl, fd);
 	len = 0;
 	*line = ft_strjoin_gnl(NULL, gnl[i].buf, 0);
-	while ((end_of_line = ft_strchr_len(gnl[i].buf, '\n')) < 0)
+	end_of_line = ft_strchr_len(gnl[i].buf, '\n');
+	while (end_of_line < 0)
 	{
-		if ((copy_buf_in_line(line, gnl[i].buf, end_of_line, len) != 1)
-		|| ((len = read(fd, gnl[i].buf, BUFFER_SIZE)) < BUFFER_SIZE))
+		if (copy_buf_in_line(line, gnl[i].buf, end_of_line, len) != 1)
 			return (stop_read(line, gnl[i].buf, end_of_line, len));
+		len = read(fd, gnl[i].buf, BUFFER_SIZE);
+		if (len < BUFFER_SIZE)
+			return (stop_read(line, gnl[i].buf, end_of_line, len));
+		end_of_line = ft_strchr_len(gnl[i].buf, '\n');
 	}
 	return (stop_read(line, gnl[i].buf, end_of_line, len));
 }

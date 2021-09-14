@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 13:39:14 by lvirgini          #+#    #+#             */
-/*   Updated: 2019/11/12 15:12:16 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/06/21 18:12:39 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 void	*ft_memset(void *s, int c, size_t n)
 {
-	char *d;
+	char	*d;
 
 	d = s;
 	while (n--)

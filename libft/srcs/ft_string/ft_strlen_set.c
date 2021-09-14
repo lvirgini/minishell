@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/12 12:55:52 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/08/12 13:02:24 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/06/21 18:21:52 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 size_t	ft_strlen_set(const char *s, const char *set)
 {
-	size_t len;
+	size_t	len;
 
 	len = 0;
 	while (!ft_strchr(set, s[len]))

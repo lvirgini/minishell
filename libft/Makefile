@@ -6,7 +6,7 @@
 #    By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 18:13:44 by lvirgini          #+#    #+#              #
-#    Updated: 2021/01/28 10:04:08 by lvirgini         ###   ########.fr        #
+#    Updated: 2021/06/21 21:40:24 by lvirgini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@
 
 NAME =		libft.a
 
-HEADERS = 	./includes/libft.h  ./includes/ft_printf.h ./includes/ft_vector.h
+HEADERS = 	./includes/libft.h
 
 OBJ_DIR =	obj/
 INC_DIR = 	$(shell find includes -type d)
@@ -27,6 +27,9 @@ vpath %.c $(foreach dir, $(SRC_DIR), $(dir):)
 SRC		= 	$(foreach dir, $(SRC_DIR), $(foreach file, $(wildcard $(dir)/*.c), $(notdir $(file))))
 OBJ 	=	$(addprefix $(OBJ_DIR), $(SRC:%.c=%.o))
 
+#TEST_DIR=	test/
+#TEST_SRC=	$(foreach dir, $(TEST_DIR), $(foreach file, $(wildcard $(dir)/*.c), $(notdir $(file))))
+#TEST_OBJ=	$(addprefix $(TEST_DIR), $(TEST_SRC:%.c=%.o))
 
 # ----------------- #
 #	 COMPILATION	#
@@ -56,7 +59,7 @@ $(NAME):	$(OBJ) $(INC_DIR) Makefile
 all:		${NAME}
 
 debug :		$(OBJ) $(INC_DIR) Makefile
-			@$(CC) $(CFLAG) $(IFLAG) $(OBJ) main.c 
+			@$(CC) $(CFLAG) $(IFLAG) $(OBJ) test/main_test.c test/itoa_test.c
 
 show	:
 			@echo "SRC_DIR : $(SRC_DIR)\n"
@@ -79,7 +82,7 @@ clean:
 			@echo "\033[36;1m ------>>  clean\033[0m"
 
 fclean:		clean
-			@rm -f $(NAME)
+			@rm -f $(NAME) a.out
 			@echo "\033[36;1m ------>> fclean\033[0m"
 
 re:			fclean all

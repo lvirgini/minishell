@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 16:26:34 by lvirgini          #+#    #+#             */
-/*   Updated: 2019/12/23 11:08:02 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/06/21 18:04:57 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 ** vérifie si le caractère (c) est alphabetique ou numérique.
 */
 
-int		ft_isalnum(int c)
+int	ft_isalnum(int c)
 {
 	return ((c >= 48 && c <= 57) || (c >= 65 && c <= 90)
-	|| (c >= 97 && c <= 122));
+		|| (c >= 97 && c <= 122));
 }

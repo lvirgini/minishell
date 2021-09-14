@@ -5,98 +5,89 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/11 16:33:09 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/05/03 12:27:26 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/06/21 14:02:22 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/09/14 13:47:39 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 /*
-** La fonction atoi convertit le début la chaine pointée par *s
-** en entier de type int.
+**  The atoi() function converts the initial portion of the string pointed
+**	to by *s to int.
+**	return 0 if > INT_MAX / < INT_MIN / no number.
 */
 
-static int		ft_is_ok(long int result, int sign)
+static int	get_first_sign_from_str(const char *s, size_t *i)
 {
-	result *= sign;
-	if (result > 2147483647)
-		return (0);
-	if (result < -2147483648)
+	if (s[*i] == '+' || s[*i] == '-')
+	{
+		if (s[*i] == '-')
+		{
+			*i += 1;
+			return (-1);
+		}
+	}
+	return (1);
+}
+
+static int	if_valid_integer(long int result)
+{
+	if (result > 2147483647 || result < -2147483648)
 		return (0);
 	return ((int)result);
 }
 
-static int		ft_is_ok_atoi_i(int *ret, long int result, int sign)
+int	ft_atoi(const char *s)
 {
-	result *= sign;
-	if (result > 2147483647)
-		return (0);
-	if (result < -2147483648)
-		return (0);
-	*ret = (int)result;
-	return (1);
-}
-
-int				ft_atoi(const char *s)
-{
-	int			i;
+	size_t		i;
 	int			max;
 	int			sign;
 	long int	result;
 
 	i = 0;
-	sign = 1;
-	result = 0;
-	if (s[i] == '\0')
+	if (!s || s[i] == '\0')
 		return (0);
-	while ((s[i] >= 9 && s[i] <= 13) || s[i] == ' ')
-		++i;
-	if (s[i] == '+' || s[i] == '-')
-	{
-		if (s[i++] == '-')
-			sign *= -1;
-	}
-	max = 0;
-	while (s[i] >= '0' && s[i] <= '9' && max++ < 10)
+	while (ft_isspace(s[i]))
+		i++;
+	sign = get_first_sign_from_str(s, &i);
+	result = 0;
+	max = 11;
+	while (ft_isdigit(s[i]) && max-- > 0)
 	{
 		result = result * 10 + (s[i] - '0');
-		++i;
+		i++;
 	}
-	return (ft_is_ok(result, sign));
+	return (if_valid_integer(result * sign));
 }
 
 /*
-** La fonction atoi convertit le début la chaine pointée par *s
-** en entier de type int.
-** Retourne 0 = false
-** Retoune 1 = true
+** same as atoi but return true if success convertion, or false if not;
 */
 
-int				ft_atoi_i(const char *s, int *result)
+int	ft_atoi_i(const char *s, int *ret)
 {
 	size_t		i;
 	int			max;
 	int			sign;
-	long int	res;
+	long int	result;
 
-	sign = 1;
 	i = 0;
-	res = 0;
-	max = 0;
-	if (s[i] == '\0')
+	if (!s || s[i] == '\0')
 		return (0);
-	while ((s[i] >= 9 && s[i] <= 13) || s[i] == ' ')
+	while (ft_isspace(s[i]))
 		i++;
-	if (s[i] == '+' || s[i] == '-')
+	sign = get_first_sign_from_str(s, &i);
+	result = 0;
+	max = 11;
+	while (ft_isdigit(s[i]) && max-- > 0)
 	{
-		if (s[i++] == '-')
-			sign *= -1;
+		result = result * 10 + (s[i] - '0');
+		i++;
 	}
-	while (ft_isdigit(s[i]) && max++ < 10)
-		res = res * 10 + (s[i++] - '0');
-	if (s[i])
+	result *= sign;
+	if (result > 2147483647 || result < -2147483648)
 		return (0);
-	return (ft_is_ok_atoi_i(result, res, sign));
+	*ret = (int)result;
+	return (1);
 }

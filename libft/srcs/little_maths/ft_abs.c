@@ -1,21 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_maths.h                                         :+:      :+:    :+:   */
+/*   ft_abs.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/20 12:07:33 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/05/03 10:50:21 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/04/20 12:09:23 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/06/21 18:40:41 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_MATHS_H
-# define FT_MATHS_H
+/*
+** return the absolute values (int, long, long long)
+*/
 
-double		ft_fabs(double n);
-int			ft_abs(int n);
-long		ft_labs(long n);
-long long	ft_llabs(long long n);
+int	ft_abs(int n)
+{
+	if (n < 0)
+		return (-n);
+	return (n);
+}
 
-#endif
+long	ft_labs(long n)
+{
+	if (n < 0)
+		return (-n);
+	return (n);
+}
+
+long long	ft_llabs(long long n)
+{
+	if (n < 0)
+		return (-n);
+	return (n);
+}

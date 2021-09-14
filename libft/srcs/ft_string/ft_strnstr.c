@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 17:59:25 by lvirgini          #+#    #+#             */
-/*   Updated: 2019/12/12 15:55:45 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/06/21 18:25:41 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
 
 char	*ft_strnstr(const char *s1, const char *s2, size_t len)
 {
-	unsigned int i;
-	unsigned int j;
+	size_t	i;
+	size_t	j;
 
 	i = 0;
 	if (!s2[i])
-		return ((char*)s1);
+		return ((char *)s1);
 	while (s1[i] && len)
 	{
 		j = 0;

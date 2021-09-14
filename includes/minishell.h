@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 16:24:41 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/05/18 11:16:47 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/09/14 15:22:08 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 # include <curses.h>
 # include <term.h>
 # include <termios.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 /*
 ** includes minishell headers
@@ -40,5 +42,8 @@
 # include "minishell_env.h"
 # include "minishell_error.h"
 # include "minishell_terminal.h"
+
+int	make_terminal(void);
+void		formatting_prompt(char *prompt, char *user, size_t size_max);
 
 #endif

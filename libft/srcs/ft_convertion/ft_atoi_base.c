@@ -6,25 +6,25 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 17:54:33 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/02/22 13:39:21 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/06/21 17:52:43 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		ft_pass_isspace(char *str)
+static int	ft_pass_isspace(char *str)
 {
-	int i;
+	size_t	i;
 
 	i = 0;
-	while (((str[i] >= 9) && (str[i] <= 13)) || (str[i] == ' '))
+	while (ft_isspace(str[i]))
 		++i;
 	return (i);
 }
 
-static int		ft_sign(char *str, int *i)
+static int	ft_sign(char *str, int *i)
 {
-	int sign;
+	int		sign;
 
 	sign = 1;
 	while ((str[*i] == '+') || (str[*i] == '-'))
@@ -36,10 +36,10 @@ static int		ft_sign(char *str, int *i)
 	return (sign);
 }
 
-static int		ft_verif_base(char *base)
+static int	ft_verif_base(char *base)
 {
-	int i;
-	int j;
+	int		i;
+	int		j;
 
 	i = 0;
 	if (!base[i] || !base[i + 1])
@@ -60,13 +60,13 @@ static int		ft_verif_base(char *base)
 	return (1);
 }
 
-int				ft_atoi_base(char *str, char *base)
+int	ft_atoi_base(char *str, char *base)
 {
-	int i;
-	int j;
-	int sign;
-	int res;
-	int len;
+	int		i;
+	int		j;
+	int		sign;
+	int		res;
+	int		len;
 
 	res = 0;
 	len = ft_strlen(base);

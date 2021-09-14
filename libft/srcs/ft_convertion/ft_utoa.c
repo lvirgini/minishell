@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/16 22:56:38 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/01/29 18:11:51 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/06/21 17:54:56 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,27 @@
 ** Utilise Malloc
 */
 
-static int		ft_intlen(unsigned int n)
+static int	ft_intlen(unsigned int n)
 {
-	unsigned int i;
+	size_t	i;
 
 	i = 1;
-	while (n /= 10)
+	while (n > 0)
+	{
+		n /= 10;
 		++i;
+	}
 	return (i);
 }
 
-char			*ft_utoa(unsigned int n)
+char	*ft_utoa(unsigned int n)
 {
-	int						size;
-	char					*dst;
+	size_t		size;
+	char		*dst;
 
 	size = ft_intlen(n);
-	if (!(dst = malloc(sizeof(*dst) * (size + 1))))
+	dst = malloc(sizeof(*dst) * (size + 1));
+	if (dst == NULL)
 		return (NULL);
 	dst[size] = '\0';
 	if (n == 0)

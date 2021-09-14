@@ -1,38 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec3_advance_others.c                              :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/11 15:14:20 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/10/11 15:15:25 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/05/25 10:22:56 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/06/22 11:15:04 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_vector.h"
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-t_vec3		create_vec3(double x, double y, double z)
+/*
+** GET NEXT LINE . c
+*/
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 32
+# endif
+
+# ifndef NB_FD
+#  define NB_FD 1
+# endif
+
+typedef struct s_gnl	t_gnl;
+
+struct			s_gnl
 {
-	t_vec3	res;
+	int		fd;
+	char	buf[BUFFER_SIZE + 1];
+};
 
-	res.x = x;
-	res.y = y;
-	res.z = z;
-	return (res);
-}
+int				get_next_line(int fd, char **line);
 
-t_vec3		*malloc_vec3(double x, double y, double z)
-{
-	t_vec3 *res;
-
-	if (!(res = malloc(sizeof(t_vec3))))
-		return (NULL);
-	*res = create_vec3(x, y, z);
-	return (res);
-}
-
-t_vec3		copy_vec3(t_vec3 a)
-{
-	return (a);
-}
+#endif

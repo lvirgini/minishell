@@ -6,7 +6,7 @@
 #    By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 17:38:13 by lvirgini          #+#    #+#              #
-#    Updated: 2021/05/16 18:42:05 by lvirgini         ###   ########.fr        #
+#    Updated: 2021/09/14 14:16:42 by lvirgini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRC_DIR =	$(shell find srcs -type d)
 INC_DIR = 	$(shell find includes -type d) libft/includes 
 OBJ_DIR =	obj/
 
-LIB		=	ft ncurses
+LIB		=	ft ncurses readline
 
 SRC 	=	$(foreach dir, $(SRC_DIR), $(foreach file, $(wildcard $(dir)/*.c), $(notdir $(file))))
 OBJ 	=	$(addprefix $(OBJ_DIR),$(SRC:%.c=%.o))

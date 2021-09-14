@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/13 14:19:48 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/03/11 11:53:18 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/06/21 13:22:30 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,20 @@
 void	*ft_calloc(size_t count, size_t size)
 {
 	char			*ptr;
-	unsigned int	i;
+	size_t			i;
+	size_t			max;
 
 	if (count == 0 || size == 0)
 	{
 		count = 1;
 		size = 1;
 	}
-	if (!(ptr = malloc(count * size)))
+	max = count * size;
+	ptr = (char *)malloc(max);
+	if (ptr == NULL)
 		return (NULL);
 	i = 0;
-	while (i < (count * size))
+	while (i < max)
 		ptr[i++] = 0;
 	return (ptr);
 }

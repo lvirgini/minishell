@@ -1,38 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec2_creation.c                                    :+:      :+:    :+:   */
+/*   get_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/11 15:16:58 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/10/11 15:18:30 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/09/14 15:23:02 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_vector.h"
+#include "minishell.h"
 
-t_vec2		create_vec2(double x, double y)
+int	make_terminal(void)
 {
-	t_vec2	res;
+	char	*line;
+	char	prompt[256];
 
-	res.x = x;
-	res.y = y;
-	return (res);
-}
-
-t_vec2		*malloc_vec2(double x, double y)
-{
-	t_vec2	*res;
-
-	if (!(res = malloc(sizeof(t_vec2))))
-		return (NULL);
-	res->x = x;
-	res->y = y;
-	return (res);
-}
-
-t_vec2		copy_vec2(t_vec2 a)
-{
-	return (a);
+	formatting_prompt(prompt, "lvirgini", 256);
+	while (1)
+	{
+		line = readline(prompt);
+		if (line)
+		{
+			if(*line)
+				add_history(line);
+			free(line);
+		}
+		else
+			printf("\n");
+	}
 }

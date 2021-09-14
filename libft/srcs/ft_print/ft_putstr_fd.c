@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 14:16:34 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/01/29 18:09:54 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/06/21 18:15:41 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	unsigned int i;
+	size_t	i;
 
 	if (s && fd)
 	{

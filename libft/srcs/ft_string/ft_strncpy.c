@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 13:23:59 by lvirgini          #+#    #+#             */
-/*   Updated: 2020/08/18 09:48:53 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/06/21 18:31:26 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** Si srclen < n , rajoute des \0 jusqu'a (n).
 */
 
-char		*ft_strncpy(char *dst, const char *src, size_t n)
+char	*ft_strncpy(char *dst, const char *src, size_t n)
 {
 	size_t		i;
 

@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 00:09:18 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/05/03 17:30:05 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/09/14 13:46:26 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,42 +16,12 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stddef.h>
-# include "ft_printf.h"
-# include "ft_maths.h"
-# include "ft_vector.h"
-# include "ft_list.h"
+# include "get_next_line.h"
 
 /*
 ** Global Usage
 */
 
-enum e_bool
-{
-	false,
-	true,
-};
-
-/*
-** GET NEXT LINE . c
-*/
-
-# ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 32
-# endif
-
-# ifndef NB_FD
-#  define NB_FD 1
-# endif
-
-typedef struct s_gnl	t_gnl;
-
-struct			s_gnl
-{
-	int		fd;
-	char	buf[BUFFER_SIZE + 1];
-};
-
-int				get_next_line(int fd, char **line);
 
 /*
 ** Fonctions verifiant si l'argument donné est bien quelque chose
@@ -67,7 +37,7 @@ int				ft_toupper(int c);
 int				ft_tolower(int c);
 
 /*
-** Fonctions d'impression et ou de conversion
+** Fonctions d'impression
 */
 
 void			ft_putchar(char c);
@@ -79,6 +49,11 @@ void			ft_putnbr_fd(int n, int fd);
 void			ft_putnbr_base_fd(int nbr, char *base, int fd);
 void			ft_putstr(char *s);
 void			ft_putstr_fd(char *s, int fd);
+
+/*
+** Fonctions de conversion
+*/
+
 int				ft_atoi(const char *s);
 int				ft_atoi_base(char *str, char *base);
 double			ft_atof(const char *str);
@@ -128,11 +103,17 @@ size_t			ft_strlcat(char *dst, const char *src, size_t size);
 char			*ft_strcut(char *s, size_t n);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 char			*ft_strjoin(char const *s1, char const *s2);
-char			*ft_strtrim(char const *s, char const *set);
 char			**ft_split(char const *s, const char c);
-char			**ft_split_set(char const *s, const char *set);
 char			**ft_split_count(const char *s, const char c, size_t *size);
 void			ft_free_split_str(char **str);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
+
+/*
+** little maths
+*/
+
+int				ft_abs(int n);
+long			ft_labs(long n);
+long long		ft_llabs(long long n);
 
 #endif

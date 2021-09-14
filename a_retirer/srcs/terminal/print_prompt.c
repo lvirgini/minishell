@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 12:13:32 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/05/16 18:00:33 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/09/14 13:49:15 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,12 +92,12 @@ int			create_terminal(t_env **env)
 		get_next_line(0, &input);
 		if (input)
 		{
-			ret_cmds = command_split(input);
+		/*	ret_cmds = command_split(input);
 			if (ret_cmds == FAILURE || ret_cmds == EXIT)
 			{
 				free(input);
 				return (ret_cmds);
-			}
+			}*/
 		}
 		free(input);
 	}
