@@ -37,7 +37,7 @@ A mechanism by which a process may be notified by the kernel of an event occurri
 
 
 
-Shell Operation
+Shell Operation 3.1.1
 * --------------------------	*
 The following is a brief description of the shell’s operation when it reads and executes a command.
 Basically, the shell does the following:
@@ -59,3 +59,124 @@ Basically, the shell does the following:
 6	Executes the command (see Executing Commands).
 
 7	Optionally waits for the command to complete and collects its exit status (see Exit Status).
+
+
+
+SPECIAL CHARACTER : 
+* --------------------------	*
+* Quoting : 3.1.2
+	There are three quoting mechanisms:
+		the escape character: \  see ANSI-C-QUOTING 3.1.2.4
+		single quotes '  inhibit all interpretation of a sequence of characters.
+		double quotes " inhibit all interpretation of a sequence of characters except for $.
+
+* Locale-Specific Translation
+	A double-quoted string preceded by a dollar sign (‘$’) 
+
+* Comment : #
+
+
+SHELL COMMANDS : 3.2
+* --------------------------	*
+
+* Reserved Words:
+ 	They are used to begin and end the shell’s compound commands.
+		if	then	elif	else	fi	time
+		for	in	until	while	do	done
+		case	esac	coproc	select	function
+		{	}	[[	]]	!
+
+
+* pipeline :
+[time [-p]] [!] command1 [ | or |& command2 ] …
+	A pipeline is a sequence of one or more commands separated by one 
+	of the control operators ‘|’ or ‘|&’.
+	This connection is performed before any redirections specified by the command.
+	Each command in a pipeline is executed in its own subshell, which is a separate process
+	The exit status of a pipeline is the exit status of the last command in the pipeline
+	If the reserved word ‘!’ precedes the pipeline, the exit status is the logical negation 
+	of the exit status as described above.
+	The shell waits for all commands in the pipeline to terminate before returning a value.
+
+
+* Lists of Commands:
+	A list is a sequence of one or more pipelines separated by one of the operators
+	‘;’, ‘&’, ‘&&’, or ‘||’, and optionally terminated by one of ‘;’, ‘&’, or a newline.
+
+	If a command is terminated by the control operator ‘&’, 
+	the shell executes the command asynchronously in a subshell.
+	This is known as executing the command in the background,
+	and these are referred to as asynchronous commands. 
+
+	Commands separated by a ‘;’ are executed sequentially; 
+	the shell waits for each command to terminate in turn. 
+	The return status is the exit status of the last command executed.
+
+* AND and OR lists are sequences of one or more pipelines separated by the control operators 
+	‘&&’ and ‘||’, respectively. 
+	AND and OR lists are executed with left associativity.
+
+		command1 && command2
+		command2 is executed if, and only if, command1 returns an exit status of zero (success).
+
+		command1 || command2
+		command2 is executed if, and only if, command1 returns a non-zero exit status.
+
+
+Special Parameters ($) 3.4.2
+* --------------------------	*
+
+The shell treats several parameters specially. 
+These parameters may only be referenced; assignment to them is not allowed.
+
+?	$?		Expands to the exit status of the most recently executed foreground pipeline.
+
+
+	$()		Environment variables ($ followed by characters) should expand to their values
+
+
+
+REDIRECTION	3.6
+* --------------------------	*
+
+‘<’, the redirection refers to the standard input (file descriptor 0). 
+‘>’, the redirection refers to the standard output (file descriptor 1).
+
+Note that the order of redirections is significant. For example, the command
+
+	ls > dirlist 2>&1
+	directs both standard output (file descriptor 1) and standard error (file descriptor 2)
+	 to the file dirlist, while the command
+
+	ls 2>&1 > dirlist
+	directs only the standard output to file dirlist, because the standard error was made 
+	a copy of the standard output before the standard output was redirected to dirlist.
+
+There are two formats for redirecting standard output and standard error:
+
+	&>word
+	>&word
+	Of the two forms, the first is preferred. This is semantically equivalent to
+
+	>word 2>&1
+
+
+APPENDING REDIRECTION
+* --------------------------	*
+
+The format for appending standard output and standard error is:
+
+	&>>word
+	>>word 2>&1
+
+
+Here Documents
+* --------------------------	*
+
+This type of redirection instructs the shell to read input from the current source until a line containing only word (with no trailing blanks) is seen. All of the lines read up to that point are then used as the standard input (or file descriptor n if n is specified) for a command.
+
+The format of here-documents is:
+
+[n]<<[-]word
+        here-document
+delimiter
