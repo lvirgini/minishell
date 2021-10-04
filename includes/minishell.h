@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 16:24:41 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/09/14 15:22:08 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/04 14:09:25 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@
 # include "minishell_error.h"
 # include "minishell_terminal.h"
 
-int	make_terminal(void);
+int			make_terminal(void);
 void		formatting_prompt(char *prompt, char *user, size_t size_max);
 
 #endif

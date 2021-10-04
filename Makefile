@@ -6,7 +6,7 @@
 #    By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 17:38:13 by lvirgini          #+#    #+#              #
-#    Updated: 2021/09/14 14:16:42 by lvirgini         ###   ########.fr        #
+#    Updated: 2021/10/04 14:24:57 by lvirgini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,10 +16,15 @@
 
 NAME =		minishell
 
-LIB_DIR =	libft/ 
-SRC_DIR =	$(shell find srcs -type d)
-INC_DIR = 	$(shell find includes -type d) libft/includes 
 OBJ_DIR =	obj/
+LIB_DIR =	libft/ 
+INC_DIR =	includes/	libft/includes/
+SRC_DIR =	srcs			\
+			srcs/terminal	\
+
+
+#SRC_DIR =	$(shell find srcs -type d)
+#INC_DIR = 	$(shell find includes -type d) libft/includes 
 
 LIB		=	ft ncurses readline
 
@@ -27,12 +32,12 @@ SRC 	=	$(foreach dir, $(SRC_DIR), $(foreach file, $(wildcard $(dir)/*.c), $(notd
 OBJ 	=	$(addprefix $(OBJ_DIR),$(SRC:%.c=%.o))
 
 
-SRC_TEST 		= $(SRC) main_test.c
-SRC_MINISHELL	= $(SRC) minishell.c
+#SRC_TEST 		= $(SRC) main_test.c
+#SRC_MINISHELL	= $(SRC) minishell.c
 
 
-OBJ_TEST 		=	$(addprefix $(OBJ_DIR),$(SRC_TEST:%.c=%.o))
-OBJ_MINISHELL	=	$(addprefix $(OBJ_DIR),$(SRC_MINISHELL:%.c=%.o))
+#OBJ_TEST 		=	$(addprefix $(OBJ_DIR),$(SRC_TEST:%.c=%.o))
+#OBJ_MINISHELL	=	$(addprefix $(OBJ_DIR),$(SRC_MINISHELL:%.c=%.o))
 
 
 HEADERS = 	$(foreach dir, $(INC_DIR), $(wildcard $(dir)/*.h))
@@ -48,7 +53,7 @@ vpath %.h $(foreach dir, $(INC_DIR)/, $(dir):)
 
 CC 		=	gcc
 
-CFLAG 	= 	-Wall -Wextra -g -fsanitize=leak -fsanitize=address
+CFLAG 	= 	-Wall -Wextra -g
 # add -Werror
 IFLAG 	= 	$(foreach dir, $(INC_DIR), -I $(dir) )
 LFLAG 	=	$(foreach lib, $(LIB), -l $(lib) ) $(foreach dir, $(LIB_DIR), -L $(dir) ) 
@@ -58,7 +63,6 @@ LFLAG 	=	$(foreach lib, $(LIB), -l $(lib) ) $(foreach dir, $(LIB_DIR), -L $(dir)
 #	  FONCTIONS		#
 # ----------------- #
 
-all:		$(NAME)
 
 
 $(OBJ_DIR)%.o: %.c $(HEADERS)
@@ -66,10 +70,11 @@ $(OBJ_DIR)%.o: %.c $(HEADERS)
 			@echo "\033[32mCompilation de ... $(foreach file, $< , $(notdir $<))"
 			@$(CC) $(CFLAG) $(IFLAG) -o $@ -c $< 
 
-$(NAME):	install $(OBJ_MINISHELL)
-			@$(CC) $(CFLAG) $(IFLAG) $(OBJ_MINISHELL) $(LFLAG) -o $@
+$(NAME):	install $(OBJ)
+			@$(CC) $(CFLAG) $(IFLAG) $(OBJ) $(LFLAG) -o $@
 			@echo "\n*     Compilation $(NAME)     *\t   \033[32;1m--> \033[4;5mComplete\033[0m"
 
+all:		$(NAME)
 
 #$(NAME): 	install $(OBJ)
 #			@$(CC) $(CFLAG) $(IFLAG) $(OBJ) $(LFLAG)-o $@

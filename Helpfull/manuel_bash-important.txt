@@ -161,7 +161,7 @@ There are two formats for redirecting standard output and standard error:
 	>word 2>&1
 
 
-APPENDING REDIRECTION
+APPENDING REDIRECTION >>
 * --------------------------	*
 
 The format for appending standard output and standard error is:
@@ -170,13 +170,39 @@ The format for appending standard output and standard error is:
 	>>word 2>&1
 
 
-Here Documents
+Here Documents <<
 * --------------------------	*
 
-This type of redirection instructs the shell to read input from the current source until a line containing only word (with no trailing blanks) is seen. All of the lines read up to that point are then used as the standard input (or file descriptor n if n is specified) for a command.
+This type of redirection instructs the shell to read input from the current source until a line 
+containing only word (with no trailing blanks) is seen.
+ All of the lines read up to that point are then used as the standard input 
+ (or file descriptor n if n is specified) for a command.
 
 The format of here-documents is:
 
 [n]<<[-]word
         here-document
 delimiter
+
+
+Command search  3.7.2
+* --------------------------	*
+
+
+	1	If the command name contains no slashes, the shell attempts to locate it. 
+		If there exists a shell function by that name, that function is invoked as described in 
+		Shell Functions.
+
+	2	If the name does not match a function, the shell searches for it in the list 
+		of shell builtins. If a match is found, that builtin is invoked.
+
+	3	If the name is neither a shell function nor a builtin, and contains no slashes, 
+		Bash searches each element of $PATH for a directory containing an executable file by that name.
+		If that function is not defined, the shell prints an error message 
+		and returns an exit status of 127.
+
+
+Command execution  3.7.3
+* --------------------------	*
+
+	1	the shell’s open files, plus any modifications and additions specified by redirections to the command

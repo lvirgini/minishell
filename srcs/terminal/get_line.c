@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/09/14 15:23:02 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/04 15:00:43 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,11 @@
 int	make_terminal(void)
 {
 	char	*line;
-	char	prompt[256];
+	char	*prompt;
+	char	pwd[256];
 
-	formatting_prompt(prompt, "lvirgini", 256);
+	getcwd(pwd, 256);
+	prompt = get_prompt("lvirgini", pwd);
 	while (1)
 	{
 		line = readline(prompt);
@@ -30,4 +32,5 @@ int	make_terminal(void)
 		else
 			printf("\n");
 	}
+	free(prompt);
 }
