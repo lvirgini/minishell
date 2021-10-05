@@ -1,34 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_line.c                                         :+:      :+:    :+:   */
+/*   print_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/05 15:32:56 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/05/16 14:11:58 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/10/05 17:11:31 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	make_terminal(void)
+void	print_this_env(t_env *env)
 {
-	char		*line;
-	t_prompt	*prompt;
-
-	prompt = get_prompt(NULL, NULL);
-	while (1)
+	if (env)
 	{
-		line = readline(prompt->formatted);
-		if (line)
-		{
-			if(*line)
-				add_history(line);
-			free(line);
-		}
-		else
-			printf("\n");
+		ft_putstr(env->key);
+		ft_putstr("=");
+		ft_putstr(env->value);
+		ft_putstr("\n");
 	}
-	free_t_prompt(prompt);
+}
+
+void	print_all_env(t_env **env)
+{
+	t_env	*current;
+
+	current = *env;
+	while (current)
+	{
+		print_this_env(current);
+		current = current->next;
+	}
 }

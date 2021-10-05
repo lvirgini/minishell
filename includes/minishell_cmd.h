@@ -1,23 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   minishell_cmd.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/03 16:25:24 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/09/14 15:23:22 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/10/05 12:17:28 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/10/05 12:20:58 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef	MINISHELL_CMD_H
+# define MINISHELL_CMD_H
 
-int		main(int argc, char **argv)
+# include "minishell.h"
+
+typedef struct s_cmd	t_cmd;
+struct		s_cmd
 {
-	(void)argc;
-	(void)argv;
+	char	*path;
+	char	**argv;
+	int		type;
+	int		pipe[2];
+	char	*input;
+	char	*output;
+	pid_t	pid;
+	int		exit_status;
 
-	make_terminal();
-	
-	return (0);
-}
+	t_cmd	*next;
+	t_cmd	*prev;
+};
+
+int			command_split(t_env *env, char *input);//
+
+#endif

@@ -1,19 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.c                                           :+:      :+:    :+:   */
+/*   get_prompt.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:12:26 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/04 14:59:24 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/05 14:21:06 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+t_prompt	*get_prompt(t_env *env, t_prompt *prompt)
+{	
+	char	*user;
+	char	*pwd;
+	t_bool	need_change;
 
-char	*get_prompt(char *user, char *pwd)
+	user = get_prompt_user(env);
+	pwd = get_prompt_pwd(env);
+	if (!prompt)
+		return (get_new_prompt(user, pwd));
+	
+}
+
+
+/*
+char	*get_prompt(t_env *env);
 {
 	size_t	len;
 	char	*prompt;
@@ -43,7 +57,7 @@ char	*get_prompt(char *user, char *pwd)
 	else
 		ft_strlcat(prompt, "$ ", len);
 	return (prompt);
-}
+}*/
 /*
 void		formatting_prompt(char *prompt, char *user, size_t size_max)
 {
