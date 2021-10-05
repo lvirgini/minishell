@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:40:27 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/05 17:09:15 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/05 21:30:56 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	free_this_env(t_env *env)
 void	free_all_t_env(t_env **env)
 {
 	t_env	*next;
-	t_env 	*current;
+	t_env	*current;
 
 	current = *env;
 	while (current)

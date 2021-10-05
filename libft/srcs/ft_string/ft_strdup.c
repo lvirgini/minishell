@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 13:50:04 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/06/21 18:32:33 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/05 14:18:34 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ char	*ft_strdup(const char *s)
 	size_t		i;
 	char		*dst;
 
+	if (!s)
+		return (NULL);
 	i = 0;
 	while (s[i])
 		++i;
@@ -51,6 +53,8 @@ char	*ft_strdup_max(const char *s, size_t max)
 	size_t		i;
 	char		*dst;
 
+	if (!s)
+		return (NULL);
 	dst = (char *)malloc(sizeof(*s) * (max + 1));
 	if (dst == NULL)
 		return (NULL);

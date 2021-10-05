@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 13:28:18 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/05 17:10:41 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/05 22:10:09 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,30 @@ static t_env	*add_t_env_with_split_key_value(char *str)
 **	shell_name = argv[0] + 2 : name of programme after './' 
 */
 
+static int	get_all_env(t_env **my_env, char *env[])
+
+{
+	t_env	*current;
+	int		i;
+
+	current = add_t_env_with_split_key_value(env[0]);
+	if (current == NULL)
+		return (FAILURE);
+	*my_env = current;
+	i = 1;
+	while (env[i])
+	{
+		current->next = add_t_env_with_split_key_value(env[i]);
+		if (current->next == NULL)
+			return (FAILURE);
+		current = current->next;
+		i++;
+	}
+	return (SUCCESS);
+}
+
 t_env	**recover_complete_env(char *env[], char *shell_name)
 {
-	int		i;
-	t_env	*current;
 	t_env	**my_env;
 
 	my_env = (t_env **)malloc(sizeof(t_env **));
@@ -52,21 +72,10 @@ t_env	**recover_complete_env(char *env[], char *shell_name)
 		return (NULL);
 	if (!*env)
 		return (my_env);
-	current = add_t_env_with_split_key_value(env[0]);
-	if (current == NULL)
-		return (NULL);
-	*my_env = current;
-	i = 1;
-	while (env[i])
+	if (get_all_env(my_env, env) == FAILURE)
 	{
-		current->next = add_t_env_with_split_key_value(env[i]);
-		if (current->next == NULL)
-		{
-			free_all_t_env(my_env);
-			return (NULL);
-		}
-		current = current->next;
-		i++;
+		free_all_t_env(my_env);
+		return (NULL);
 	}
 	edit_or_add_t_env(my_env, "SHELL", shell_name + 2); // ou "minishell" ou rien ?
 	return (my_env);

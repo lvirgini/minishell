@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 14:56:01 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/05 15:32:28 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/05 22:28:01 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "minishell.h"
 
-typedef	struct s_prompt	t_prompt;
+typedef struct s_prompt	t_prompt;
 
 struct s_prompt
 {

@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 14:02:22 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/09/14 13:47:39 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/06/21 17:47:49 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	ft_atoi_i(const char *s, int *ret)
 	}
 	result *= sign;
 	if (result > 2147483647 || result < -2147483648)
-		return (0);
+		return (false);
 	*ret = (int)result;
-	return (1);
+	return (true);
 }

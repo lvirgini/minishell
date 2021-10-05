@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 00:09:18 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/09/14 13:46:26 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/05 14:32:31 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@
 ** Global Usage
 */
 
+# ifndef false
+#  define false 0
+# endif
+
+# ifndef true
+#  define true 1
+# endif
 
 /*
 ** Fonctions verifiant si l'argument donné est bien quelque chose
@@ -104,8 +111,6 @@ char			*ft_strcut(char *s, size_t n);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			**ft_split(char const *s, const char c);
-char			**ft_split_count(const char *s, const char c, size_t *size);
-void			ft_free_split_str(char **str);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 
 /*

@@ -6,11 +6,11 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/12 17:49:30 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/06/21 18:36:16 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/09/21 15:24:38 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "libft.h"
 
 /*
 ** Concatène src apres dst avec pour taille maximale de dst : size.
@@ -19,25 +19,21 @@
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	unsigned int	dstlen;
-	unsigned int	j;
-	unsigned int	srclen;
+	size_t	dstlen;
+	size_t	srclen;
+	size_t	i;
 
-	dstlen = 0;
-	j = 0;
-	srclen = 0;
-	while (dst[dstlen])
-		++dstlen;
-	while (src[srclen])
-		++srclen;
+	dstlen = ft_strlen(dst);
+	srclen = ft_strlen(src);
 	if (dstlen >= size)
 		return (size + srclen);
 	if (size <= dstlen)
 		srclen += size;
 	else
 		srclen += dstlen;
-	while (src[j] && dstlen + 1 < size)
-		dst[dstlen++] = src[j++];
+	i = 0;
+	while (src[i] && dstlen + 1 < size)
+		dst[dstlen++] = src[i++];
 	dst[dstlen] = '\0';
 	return (srclen);
 }

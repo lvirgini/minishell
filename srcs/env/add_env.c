@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 11:55:27 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/05 17:15:36 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/05 22:21:23 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ static int	puts_in_env(t_env *res, char *key, char *value)
 
 /*
 ** malloc new env and puts inside key and value
+** CARREFULL : don't use this function directly : use edit_or_add_t_env
+** because we can't have two same key env
 */
 
 t_env	*add_new_env(char *key, char *value)
@@ -63,11 +65,32 @@ t_env	*add_new_env(char *key, char *value)
 ** return the fornt of env.
 */
 
-void	add_front_env(t_env **env, t_env *to_add)
+static void	add_front_env(t_env **env, t_env *to_add)
 {
 	if (to_add)
 	{
 		to_add->next = *env;
 		*env = to_add;
 	}
+}
+
+/*
+** Edit existing env or add it if no exist
+*/
+
+int	edit_or_add_t_env(t_env **env, char *key, char *value)
+{
+	t_env	*to_edit;
+
+	to_edit = get_this_env(env, key);
+	if (to_edit == NULL)
+		add_front_env(env, add_new_env(key, value));
+	else
+	{
+		free(to_edit->value);
+		to_edit->value = ft_strdup(value);
+		if (to_edit->value == NULL)
+			return (FAILURE);
+	}
+	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 11:56:22 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/05 17:11:47 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/05 22:29:37 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@ void		remove_t_env(t_env **env, char *key);
 
 /*
 ** manipulate t_env
+** don't use add new env ! use edit_or_add_t_env
 */
-void		add_front_env(t_env **env, t_env *to_add);
-t_env 		*add_new_env(char *key, char *value);
-int			edit_or_add_t_env(t_env **env, char *key, char *value);
 
+t_env		*add_new_env(char *key, char *value);
+int			edit_or_add_t_env(t_env **env, char *key, char *value);
 
 /*
 ** get data in t_env

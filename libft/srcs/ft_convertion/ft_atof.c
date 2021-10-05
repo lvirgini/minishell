@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/03 15:38:23 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/09/14 13:48:46 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/06/21 18:02:51 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int	ft_atof_i(const char *str, double *result)
 {
 	int		integer_part;
 
-	if (ft_atoi_i(str, &integer_part) == 0)
-		return (0);
+	if (ft_atoi_i(str, &integer_part) == false)
+		return (false);
 	while (*str && *str != '.')
 		str++;
 	if (*str && *str == '.')
@@ -59,5 +59,5 @@ int	ft_atof_i(const char *str, double *result)
 	while (*result >= 1)
 		*result /= 10;
 	*result += integer_part;
-	return (1);
+	return (true);
 }
