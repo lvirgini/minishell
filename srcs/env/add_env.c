@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 11:55:27 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/05 22:21:23 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/06 10:55:58 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ t_env	*add_new_env(char *key, char *value)
 
 /*
 ** add this env to front of all env
-** return the fornt of env.
+** return the front of env.
 */
 
 static void	add_front_env(t_env **env, t_env *to_add)
@@ -89,7 +89,7 @@ int	edit_or_add_t_env(t_env **env, char *key, char *value)
 	{
 		free(to_edit->value);
 		to_edit->value = ft_strdup(value);
-		if (to_edit->value == NULL)
+		if (to_edit->value == NULL && value != NULL)
 			return (FAILURE);
 	}
 	return (SUCCESS);

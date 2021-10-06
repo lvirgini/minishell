@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 16:24:41 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/05 22:22:11 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/06 10:48:26 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # include "test_minishell.h" //
 # include "minishell_define.h"
 # include "minishell_env.h"
-# include "minishell_cmd.h"
+# include "minishell_command.h"
 # include "minishell_error.h"
 # include "minishell_terminal.h"
 
