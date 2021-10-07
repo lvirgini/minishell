@@ -6,18 +6,23 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/05 15:32:56 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/06 16:19:57 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	make_terminal(void)
+/*
+** premier appel : get_prompt va creer t_prompt via l'environnement récuperé
+*/
+
+int	make_terminal(t_env **env)
 {
 	char		*line;
 	t_prompt	*prompt;
 
-	prompt = get_prompt(NULL, NULL);
+	prompt = get_prompt(env, NULL);
+	printf("formatted = %s\n", prompt->formatted);
 	while (1)
 	{
 		line = readline(prompt->formatted);
@@ -29,6 +34,8 @@ int	make_terminal(void)
 		}
 		else
 			printf("\n");
+		remove_t_env(env, "USER");
+		prompt = get_prompt(env, prompt);
 	}
 	free_t_prompt(prompt);
 }

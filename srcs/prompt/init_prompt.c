@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 13:58:59 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/05 15:44:30 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/06 16:15:38 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,9 @@ t_prompt	*init_prompt(char *user, char *pwd)
 		if (!prompt->cwd)
 			perror("malloc init_prompt())");
 	}
-	//layout_prompt(prompt);
+//	prompt->minishell = ft_strdup(STR_PROMPT_MINISHELL);
+//	prompt->end = ft_strdup(STR_PROMPT_END);
+	layout_prompt(prompt);
 	return (prompt);
 }
 
@@ -51,7 +53,7 @@ t_prompt	*init_prompt(char *user, char *pwd)
 void	free_t_prompt(t_prompt *prompt)
 {
 	if (prompt)
-	{
+	{	
 		if (prompt->user)
 			free(prompt->user);
 		if (prompt->cwd)

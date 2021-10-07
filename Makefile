@@ -6,7 +6,7 @@
 #    By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 17:38:13 by lvirgini          #+#    #+#              #
-#    Updated: 2021/10/05 15:53:11 by lvirgini         ###   ########.fr        #
+#    Updated: 2021/10/06 14:47:02 by lvirgini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,8 @@ LIB_DIR =	libft/
 INC_DIR =	includes/	libft/includes/
 SRC_DIR =	srcs			\
 			srcs/env		\
+			srcs/prompt		\
+			srcs/terminal	\
 
 
 #SRC_DIR =	$(shell find srcs -type d)

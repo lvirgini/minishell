@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 12:51:17 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/06 10:46:57 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/06 16:16:15 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,9 @@
 **
 */
 
-# define PROMPT_SIZE			37
-# define PROMPT_SIZE_NO_USER	36
-
 # define S_COLOR_GREEN			"\33[32m"
 # define S_COLOR_BLUE			"\33[94m"
-# define S_COLOR_STD			"\33[0m"
+# define S_COLOR_WHITE			"\33[0m"
 
 typedef int	t_bool;
 

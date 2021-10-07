@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 14:56:01 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/05 22:28:01 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/06 16:17:20 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ void		free_t_prompt(t_prompt *prompt);
 ** get_prompt for readline()
 */
 
-t_prompt	*get_prompt(t_env *env, t_prompt *prompt);
+void		layout_prompt(t_prompt *prompt);
+t_prompt	*get_prompt(t_env **env, t_prompt *prompt);
+
 
 int			create_terminal(t_env **env);
 char		*get_prompt_display(t_env *env);
