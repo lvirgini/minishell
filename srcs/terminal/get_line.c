@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/06 16:19:57 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/07 14:54:25 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	make_terminal(t_env **env)
 	t_prompt	*prompt;
 
 	prompt = get_prompt(env, NULL);
-	printf("formatted = %s\n", prompt->formatted);
 	while (1)
 	{
 		line = readline(prompt->formatted);
@@ -34,7 +33,8 @@ int	make_terminal(t_env **env)
 		}
 		else
 			printf("\n");
-		remove_t_env(env, "USER");
+		printf("line = %s\n", line);
+		edit_or_add_t_env(env, "USER", line);
 		prompt = get_prompt(env, prompt);
 	}
 	free_t_prompt(prompt);

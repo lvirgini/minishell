@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 11:55:27 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/06 10:55:58 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/07 14:56:16 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int	edit_or_add_t_env(t_env **env, char *key, char *value)
 {
 	t_env	*to_edit;
 
+	printf("value in edit env : %s\n", value);
 	to_edit = get_this_env(env, key);
 	if (to_edit == NULL)
 		add_front_env(env, add_new_env(key, value));
@@ -92,5 +93,7 @@ int	edit_or_add_t_env(t_env **env, char *key, char *value)
 		if (to_edit->value == NULL && value != NULL)
 			return (FAILURE);
 	}
+	printf("value in edit env : %s\n", value);
+
 	return (SUCCESS);
 }

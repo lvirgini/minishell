@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 16:25:24 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/06 14:46:32 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/07 14:22:47 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,24 @@ void		testing_env(t_env **env)
 
 }
 
+//void	printer_prompt(t_prompt	*prompt)
+
+void	testing_prompt(t_env **env)
+{
+	t_prompt *prompt;
+
+	prompt = get_prompt(env, NULL);
+	printf("formatted = %s\n", prompt->formatted);
+	remove_t_env(env, "USER");
+	prompt = get_prompt(env, prompt);
+	printf("formatted = %s\n", prompt->formatted);
+	edit_or_add_t_env(env, "USER", "user2eme");
+	prompt = get_prompt(env, prompt);
+	printf("formatted = %s\n", prompt->formatted);
+	print_this_env(get_this_env(env, "USER"));
+	//printer_prompt(prompt);
+	
+}
 int		main(int argc, char *argv[], char *env[])
 {
 	(void)argc;
@@ -57,7 +75,9 @@ int		main(int argc, char *argv[], char *env[])
 	t_env	**minishell_env;
 
 	minishell_env = recover_complete_env(env, argv[0]);
-	testing_env(minishell_env);
+	edit_or_add_t_env(minishell_env, "USER", "prout");
+//	testing_env(minishell_env);
+//	testing_prompt(minishell_env);
 	make_terminal(minishell_env);
 	free_all_t_env(minishell_env);
 	

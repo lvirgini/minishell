@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 16:14:04 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/05 21:26:32 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/07 14:17:49 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_env	*get_this_env(t_env **env, char *key)
 	t_env	*current;
 
 	current = *env;
-	while (current)
+	while (key && current)
 	{
 		if (ft_strcmp(current->key, key) == 0)
 			return (current);

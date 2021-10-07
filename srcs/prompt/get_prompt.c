@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:12:26 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/06 21:43:12 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/07 14:22:31 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	layout_prompt(t_prompt *prompt)
 		return ;//
 	}
 	ft_strlcpy(prompt->formatted, color_green, len);
+	printf("prompt->user = %s\n", prompt->user);
 	if (prompt->user)
 	{
 		ft_strlcat(prompt->formatted, prompt->user, len);
@@ -69,7 +70,7 @@ static	int	check_prompt_update(t_prompt *prompt, char *actual_cwd,
 	t_bool	need_change;
 
 	need_change = false;
-	if (ft_strcmp(prompt->cwd, actual_cwd) != 0)
+	if (!actual_cwd || ft_strcmp(prompt->cwd, actual_cwd) != 0)
 	{
 		free(prompt->cwd);
 		prompt->cwd = ft_strdup(actual_cwd);
@@ -77,14 +78,15 @@ static	int	check_prompt_update(t_prompt *prompt, char *actual_cwd,
 			perror("check prompt update (user)");
 		need_change = true;
 	}
-	if (ft_strcmp(prompt->user, actual_user) != 0)
+	if (!actual_user || !prompt->user || ft_strcmp(prompt->user, actual_user) != 0)
 	{
 		free(prompt->user);
 		prompt->user = ft_strdup(actual_user);
-		if (!prompt->user)
+		if (!prompt->user && actual_user)
 			perror("check prompt update (user)");
 		need_change = true;
 	}
+
 	return (need_change);
 }
 /*
@@ -98,6 +100,7 @@ t_prompt	*get_prompt(t_env **env, t_prompt *prompt)
 	t_bool	need_change;
 
 	user = get_value_t_env(env, "USER");
+	printf("actual user = %s\n", user);
 	cwd = NULL;
 	cwd = getcwd(NULL, 0);
 	if (!prompt)
@@ -106,10 +109,8 @@ t_prompt	*get_prompt(t_env **env, t_prompt *prompt)
 	{
 		need_change = check_prompt_update(prompt, cwd, user);
 		if (need_change == true)
-		//	printf("prompt->user = %s\n, prompt->cwd = %s\n", prompt->user, prompt->cwd);
 			layout_prompt(prompt);
 	}
-	printf("prompt->user = %s\n, prompt->cwd = %s\n", prompt->user, prompt->cwd);
 	if (cwd)
 		free(cwd);
 	return (prompt);
