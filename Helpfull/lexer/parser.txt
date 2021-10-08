@@ -1,0 +1,66 @@
+REDIRECTIONS:
+
+... [redirection] [filename] ...
+
+if < > << >> ALWAYS filename after
+TOUJOURS le filename apres les redirections.
+retourne toujours retour erreur de l'access ?
+
+apres les redirections peuvent etre placées n'importe ou dans l'ensemble de la cmd
+(avant la commande apres la commande...)
+> fileout < filein1 cmd <filein2
+
+
+
+multi > file1 > file2 > file3
+tous les fichiers sont creer s'ils ne le sont pas mais seul 
+le dernier sera stdout.
+les fichiers intermediaires sont vides
+multi < file1 < file2 ...
+va ouvrir chaque file mais n'utiliser que le dernier.
+donc si un file n'existe pas (open failed) la commande s'arrete.
+
+
+lesredirections ecrasent les pipes
+cmd < filename | cmd2   == (cmd < filename) | cmd2
+
+cmd > filename | cmd2  == (cmd > filemane) | cmd2
+ici filename contiendra cmd pipe sera vides
+
+cat < file1 | cat < file2 == cat file 1 | (cat < file2)
+ici stdin du deuxieme cat sera file2 et non le pipe.
+
+
+while line
+	token->next = get_next_token
+
+//get next token
+while isspace 
+	line++
+if (not eof)
+	get_this_token
+return token
+
+
+// if metacharacter : 
+static char	all metacharacter
+
+while c !=metacharacter
+	meta++
+return metacaracter
+or return 0;
+
+
+//get this token
+if  *line ismetacharacter
+	len = t_fonction gettokenmetacharacter[metacaracter](*line, &token)
+	*line += len;
+return token;
+
+
+
+
+//// parsing
+
+if get_this_cmd[token->type](actual token, command)
+	

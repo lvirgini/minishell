@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 16:24:41 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/06 13:55:30 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/07 21:24:38 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@
 # include "minishell_command.h"
 # include "minishell_error.h"
 # include "minishell_terminal.h"
+# include "minishell_token.h"
 
 int			make_terminal(t_env	**env);
 

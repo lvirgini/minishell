@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:12:26 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/07 14:22:31 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/07 21:22:30 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,13 @@ void	layout_prompt(t_prompt *prompt)
 		return ;//
 	}
 	ft_strlcpy(prompt->formatted, color_green, len);
-	printf("prompt->user = %s\n", prompt->user);
-	if (prompt->user)
+	if (prompt->user && *prompt->user)//
 	{
 		ft_strlcat(prompt->formatted, prompt->user, len);
 		ft_strlcat(prompt->formatted, minishell, len);
 	}
 	else
-		ft_strlcat(prompt->formatted, minishell + 1, len);
+		ft_strlcat(prompt->formatted, &(minishell[1]), len);
 	ft_strlcat(prompt->formatted, prompt->cwd, len);
 	ft_strlcat(prompt->formatted, end, len);
 }
@@ -100,7 +99,6 @@ t_prompt	*get_prompt(t_env **env, t_prompt *prompt)
 	t_bool	need_change;
 
 	user = get_value_t_env(env, "USER");
-	printf("actual user = %s\n", user);
 	cwd = NULL;
 	cwd = getcwd(NULL, 0);
 	if (!prompt)

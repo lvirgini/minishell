@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 16:25:24 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/07 14:22:47 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/07 19:46:23 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int		main(int argc, char *argv[], char *env[])
 	t_env	**minishell_env;
 
 	minishell_env = recover_complete_env(env, argv[0]);
-	edit_or_add_t_env(minishell_env, "USER", "prout");
+	//edit_or_add_t_env(minishell_env, "USER", "prout");
 //	testing_env(minishell_env);
 //	testing_prompt(minishell_env);
 	make_terminal(minishell_env);
