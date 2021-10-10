@@ -6,7 +6,7 @@
 #    By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 17:38:13 by lvirgini          #+#    #+#              #
-#    Updated: 2021/10/06 14:47:02 by lvirgini         ###   ########.fr        #
+#    Updated: 2021/10/10 15:55:54 by lvirgini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,18 @@ NAME =		minishell
 OBJ_DIR =	obj/
 LIB_DIR =	libft/ 
 INC_DIR =	includes/	libft/includes/
-SRC_DIR =	srcs			\
+
+SRC_DIR_TEST = srcs/testing 
+
+SRC_DIR =	$(SRC_DIR_TEST) \
+			srcs			\
 			srcs/env		\
 			srcs/prompt		\
 			srcs/terminal	\
+			srcs/lexer		\
+			srcs/lexer/ft_get_token_by_type \
+			srcs/lexer/init_token \
+			
 
 
 #SRC_DIR =	$(shell find srcs -type d)

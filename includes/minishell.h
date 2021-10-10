@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 16:24:41 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/07 21:24:38 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/10 15:53:13 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@
 */
 
 # include "libft.h"
-# include "test_minishell.h" //
 # include "minishell_define.h"
 # include "minishell_env.h"
 # include "minishell_command.h"
 # include "minishell_error.h"
 # include "minishell_terminal.h"
 # include "minishell_token.h"
+# include "test_minishell.h" //
 
 int			make_terminal(t_env	**env);
 

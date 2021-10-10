@@ -1,12 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   truc.c                                             :+:      :+:    :+:   */
+/*   printer.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mini <mini@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/09 18:02:40 by mini              #+#    #+#             */
-/*   Updated: 2021/10/09 18:02:44 by mini             ###   ########.fr       */
+/*   Created: 2021/10/10 15:50:28 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/10/10 15:50:37 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "minishell.h"
+
+void	print_token(t_token *token)
+{
+	if (token)
+	{
+		printf("token->type = %d\n", token->type);
+		printf("token->word = %s\n", token->word);
+		printf("token->len = %ld\n\n", token->len);
+	}
+}

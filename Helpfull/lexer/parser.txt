@@ -54,6 +54,7 @@ or return 0;
 //get this token
 if  *line ismetacharacter
 	len = t_fonction gettokenmetacharacter[metacaracter](*line, &token)
+else get word
 	*line += len;
 return token;
 

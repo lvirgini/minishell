@@ -3,15 +3,65 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_token.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mini <mini@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 21:24:00 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/09 19:39:38 by mini             ###   ########.fr       */
+/*   Updated: 2021/10/10 14:43:42 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_TOKEN_H
 # define MINISHELL_TOKEN_H
+
+# define NB_TOKEN	9
+# define NB_METACHARACTER	6
+
+//// META_  ou CHAR_  ???
+# define META_SIMPE_QUOTE 	'\''
+# define META_DOUBLE_QUOTE 	'\"'
+# define META_PIPE			'|'
+# define META_TILD_LEFT		'<'
+# define META_TILD_RIGHT	'>'
+# define META_DOLLAR		'$'
+/* UNUSED FOR MINISHELL
+# define META_AND			'&'
+# define META_SEMICOLON		';'
+# define META_PARENTH_LEFT	'('
+# define META PARENTH_RIGHT	')'
+*/
+
+/*
+** enum for matching metacharacter and ft_get_token by type.
+*/
+
+enum e_ft_get_token
+{
+	FT_WORD,
+	FT_SIMPLE_QUOTE,
+	FT_DOUBLE_QUOTE,
+	FT_PIPE,
+	FT_TILD_LEFT,
+	FT_TILD_RIGHT,
+	FT_DOLLAR,
+};
+
+/*
+** token type for parsing.
+*/
+
+enum e_token_type
+{
+	SIMPLE_QUOTE,			//	'
+	DOUBLE_QUOTE,			//	"
+	PIPE,					//	|
+	INPUT_REDIRECTION,		//	<
+	OUTPUT_REDIRECTION,		//	>
+	EXIT_STATUS,			//	$?
+	VARIABLE,				// 	$VARIABLE
+	WORD,					//  all not metacharacter
+	HERE_DOC,				//	<<
+	APPEND,					//	>>
+};
 
 /*
 ** Struct token : for lexer.
@@ -21,8 +71,6 @@
 **	len is the lenght of word (for malloc easilly in parsing and get next token)
 **	token prev and next for easy way to create t_cmd in parsing.
 */
-
-
 
 typedef struct s_token	t_token;
 struct s_token
@@ -40,25 +88,19 @@ struct s_token
 
 typedef	int	(*t_func)(t_token *, char *);
 
-int	get_token_word(t_token *token, char *line);
-int	get_token_metacharacter(t_token *token, char *line);
-int	get_token_simple_quote(t_token *token, char *line);
-int	get_token_double_quote(t_token *token, char *line);
-int	get_token_special_param(t_token *token, char *line);
+int			get_token_word(t_token *token, char *line);
+int			get_token_simple_quote(t_token *token, char *line);
+int			get_token_double_quote(t_token *token, char *line);
+int			get_token_special_param(t_token *token, char *line);
+int			get_token_pipe(t_token *token, char *line);
+int			get_token_tild_left(t_token *token, char *line);
+int			get_token_tild_right(t_token *token, char *line);
 
-# define NB_TOKEN	9
-enum e_token_type
-{
-	WORD,					// not special type
-	SIMPLE_QUOTE,			//	'
-	DOUBLE_QUOTE,			//	"
-	PIPE,					//	|
-	INPUT_REDIRECTION,		//	<
-	OUTPUT_REDIRECTION,		//	>
-	HERE_DOC,				//	<<
-	APPEND,					//	>>
-	SPECIAL_PARAMETER,		//	$
-};
+/*
+** Lexer functions
+*/
+
+t_token		*add_next_token(char *line, t_token *token_prev, t_func *get_token);
 
 /*
 ** structures token and utils malloc and free
@@ -69,8 +111,11 @@ void		free_this_token(t_token *token);
 void		free_all_token(t_token **token);
 void		remove_this_token(t_token *token);
 
+/*
+** usefull
+*/
 
-
+int			is_metacharacter(char c);
 
 
 

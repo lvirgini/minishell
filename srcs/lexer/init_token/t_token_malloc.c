@@ -1,35 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_command.h                                :+:      :+:    :+:   */
+/*   t_token_malloc.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/05 22:25:50 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/09 21:41:08 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/10/09 17:50:07 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/10/09 21:42:48 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_COMMAND_H
-# define MINISHELL_COMMAND_H
+#include "minishell.h"
 
-# include "minishell.h"
+/*
+** malloc empty t_token
+*/
 
-typedef struct s_cmd	t_cmd;
-struct		s_cmd
+t_token	*malloc_token(void)
 {
-	char	*path;
-	char	**argv;
-	int		type;
-	int		pipe[2];
-	char	*input;
-	char	*output;
-	pid_t	pid;
-	int		exit_status;
-	t_cmd	*next;
-	t_cmd	*prev;
-};
+	t_token	*token;
 
-int	command_split(t_env *env, char *input);//
-
-#endif
+	token = (t_token *)malloc(sizeof(t_token));
+	if (!token)
+	{
+		perror("malloc_token ()");
+		return (NULL);
+	}
+	ft_memset(token, 0, sizeof(t_token));
+	return (token);
+}

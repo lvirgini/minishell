@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:37:30 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/05/18 11:15:19 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/10 15:43:28 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,29 @@
 
 # include "minishell.h"
 
+/*
+** ALL TEST FUNCTIONS
+*/
+
+void		testing_lexer(void);
+void		testing_ft_get_token(void);
+void		testing_env(t_env **env);
+void		testing_prompt(t_env **env);
+
+
+/*
+** ALL PRINTER FOR EASY VISUALISATION
+*/
+
+void	print_token(t_token *token);
+void	print_all_token(t_token **token);
+
+
+
+
+
+
+/* OLD
 void	test_wait_fork(void);
 void	test_waitpid(void);
 void	test_get_cwd(void);
@@ -27,11 +50,11 @@ void	test_stat(void);
 void	test_opendir(void);
 void	test_isatty(void);
 void	test_all_termcaps(void);
-
+int		test_prompt(void);
+*/
 /*
 **  test function from minishell
 */
 
-int		test_prompt(void);
 
 #endif

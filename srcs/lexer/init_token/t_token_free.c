@@ -1,34 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_t_token.c                                     :+:      :+:    :+:   */
+/*   t_token_free.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mini <mini@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/09 17:50:07 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/09 18:47:41 by mini             ###   ########.fr       */
+/*   Created: 2021/10/09 21:42:29 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/10/09 21:43:01 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*
-** malloc empty t_token
-*/
-
-t_token	*malloc_token(void)
-{
-	t_token	*token;
-
-	token = (t_token *)malloc(sizeof(t_token));
-	if (!token)
-	{
-		perror("malloc_token ()");
-		return (NULL);
-	}
-	ft_memset(token, 0, sizeof(t_token));
-	return (token);
-}
 
 /*
 ** free t_token and inside it

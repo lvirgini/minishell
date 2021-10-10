@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_lexer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mini <mini@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 18:18:56 by mini              #+#    #+#             */
-/*   Updated: 2021/10/09 20:33:14 by mini             ###   ########.fr       */
+/*   Updated: 2021/10/10 14:20:24 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@
 ** a special fonction for malloc t_token ** and his first element
 */
 
-t_token	**malloc_first_token(line)
+t_token	**malloc_first_token(char *line, t_func *get_token)
 {
 	t_token		**token;
 
 	token = (t_token **)malloc(sizeof(t_token **));
 	if (!token)
 		return (NULL);
-	*token = get_next_token(line, NULL);
+	*token = add_next_token(line, NULL, get_token);
 	if (*token)
 	{
 		free_all_token(token);
@@ -32,39 +32,20 @@ t_token	**malloc_first_token(line)
 	return (token);
 }
 
-
-static void		set_fonction_get_token(t_func ft_token[NB_TOKEN])
-{
-	ft_token[WORD] = &get_token_word;
-	ft_token[SIMPLE_QUOTE] = &get_token_simple_quote;
-	ft_token[DOUBLE_QUOTE] = &get_token_double_quote;
-	ft_token[SPECIAL_PARAMETER] = &get_token_special_param;
-	ft_token[PIPE] = &get_token_metacharacter;
-	ft_token[INPUT_REDIRECTION] = &get_token_metacharacter;
-	ft_token[OUTPUT_REDIRECTION] = &get_token_metacharacter;
-	ft_token[HERE_DOC] = &get_token_metacharacter;
-	ft_token[APPEND] = &get_token_metacharacter;
-}
-
+//a mettre en bon anglais:
 /*
-** get next token from line
+** set up functions for get in the good way all token by their type.
 */
 
-t_token	*get_next_token(char *line, t_token *token_prev, t_func get_token[NB_TOKEN])
+static void		set_functions_get_token(t_func ft_token[NB_TOKEN])
 {
-	t_token			*token;
-	int				syntax_error;
-
-	get_token = get_fonction_token();
-	token = malloc_token();
-	if (!token)
-		return (NULL);
-	while (*line)
-	{
-		token->type = get_token_type(line);
-		syntax_error = get_token[token->type](token, line);
-	}
-	token	
+	ft_token[FT_SIMPLE_QUOTE] = &get_token_simple_quote;
+	ft_token[FT_DOUBLE_QUOTE] = &get_token_double_quote;
+	ft_token[FT_PIPE] = &get_token_pipe;
+	ft_token[FT_TILD_LEFT] = &get_token_tild_left;
+	ft_token[FT_TILD_RIGHT] = &get_token_tild_right;
+	ft_token[FT_DOLLAR] = &get_token_special_param;
+	ft_token[FT_WORD] = &get_token_word;
 }
 
 /*
@@ -78,9 +59,9 @@ t_token	**lexer_minishell(char *line)
 {
 	t_token		**token;
 	t_token		*current;
-	t_func		get_token[NB_TOKEN];
+	t_func		get_token[NB_METACHARACTER];
 
-	set_functions_get_token();
+	set_functions_get_token(get_token);
 	token = malloc_first_token(line, get_token);
 	if (!token)
 		return (NULL);
@@ -92,7 +73,7 @@ t_token	**lexer_minishell(char *line)
 			line++;
 		else
 		{
-			current->next = get_next_token(line, current, get_token);
+			current->next = add_next_token(line, current, get_token);
 			current = current->next;
 			if (!current)
 			{
