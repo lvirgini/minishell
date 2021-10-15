@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 16:25:24 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/10 15:54:51 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/11 15:25:02 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,14 @@ int		main(int argc, char *argv[], char *env[])
 {
 	(void)argc;
 
+//	testing_convert_double_quote();
+//	exit(0);
 
 	t_env	**minishell_env;
 
-	testing_ft_get_token();
-	//testing_lexer();
-	exit(0);
+//	testing_ft_get_token();
+//	testing_lexer();
+//	exit(0);
 
 
 

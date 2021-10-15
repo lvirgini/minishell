@@ -64,4 +64,59 @@ return token;
 //// parsing
 
 if get_this_cmd[token->type](actual token, command)
-	
+
+
+
+
+if < > >> : io_file		< > >>	WORD(filename)
+
+
+if << : io_here			<<	WORD(delimiter)
+
+
+if WORD :  if first WORD = cmd name
+			else COMD_ARGS
+
+if PIPE : cmd prev = PIPE
+
+
+
+
+
+
+
+Grammaire : 
+
+pipe : pipe sequence
+
+pipe sequence: 	cmd	
+				pipe sequence | linebreak cmd
+
+cmd:			simple_cmd
+
+simple_cmd	:	cmd_prefix cmd_word cmd_suffix
+				cmd_prefix cmd_word
+				cmd_prefix
+				cmd_name cmd_suffix
+				cmd_name
+
+cmd_name : 		WORD    (the first word)
+
+cmd_word : 		WORD	not first word
+
+cmd_prefix		IO_REDIRECT
+				cmd_prefix IO_REDIRECT
+				ASSIGNEMENT_WORD
+
+redirection		IO_REDIRECT
+				redirect_list IO_REDIRECT
+
+IO_REDIRECT : 	iofile
+				ionumber iofile
+				iohere
+				ionumber iohere
+
+iofile			< > << >> + filename
+
+filename		WORD
+

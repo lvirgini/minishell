@@ -206,3 +206,12 @@ Command execution  3.7.3
 * --------------------------	*
 
 	1	the shell’s open files, plus any modifications and additions specified by redirections to the command
+
+
+BUILTIN : 
+
+attention a export : 
+changer PWD = change l
+
+mini@debian:~/42/minishell$ export PWD=/dev
+mini@debian:/dev$ 
