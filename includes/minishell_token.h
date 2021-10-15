@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 21:24:00 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/10 14:43:42 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/15 13:08:44 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,14 @@ enum e_token_type
 };
 
 /*
+	DLESS <<
+	DGREAT >>
+	LESSAND <&
+	GREATAND >&
+	LESSGREAT <>
+*/
+
+/*
 ** Struct token : for lexer.
 **
 **	type is enum of metacharacters or redirections
@@ -100,6 +108,7 @@ int			get_token_tild_right(t_token *token, char *line);
 ** Lexer functions
 */
 
+t_token		**lexer_minishell(char *line);
 t_token		*add_next_token(char *line, t_token *token_prev, t_func *get_token);
 
 /*
@@ -114,7 +123,7 @@ void		remove_this_token(t_token *token);
 /*
 ** usefull
 */
-
+char		*convert_double_quote(char *s);
 int			is_metacharacter(char c);
 
 

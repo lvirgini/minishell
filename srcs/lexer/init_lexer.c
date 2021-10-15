@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 18:18:56 by mini              #+#    #+#             */
-/*   Updated: 2021/10/10 14:20:24 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/15 13:20:27 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_token	**malloc_first_token(char *line, t_func *get_token)
 	if (!token)
 		return (NULL);
 	*token = add_next_token(line, NULL, get_token);
-	if (*token)
+	if (!*token)
 	{
 		free_all_token(token);
 		return (NULL);
@@ -37,7 +37,7 @@ t_token	**malloc_first_token(char *line, t_func *get_token)
 ** set up functions for get in the good way all token by their type.
 */
 
-static void		set_functions_get_token(t_func ft_token[NB_TOKEN])
+static void	set_functions_get_token(t_func ft_token[NB_TOKEN])
 {
 	ft_token[FT_SIMPLE_QUOTE] = &get_token_simple_quote;
 	ft_token[FT_DOUBLE_QUOTE] = &get_token_double_quote;
@@ -69,19 +69,16 @@ t_token	**lexer_minishell(char *line)
 	line += current->len;
 	while (*line)
 	{
-		if (ft_isspace(*line))
+		while (ft_isspace(*line))
 			line++;
-		else
+		current->next = add_next_token(line, current, get_token);
+		current = current->next;
+		if (!current && *line)
 		{
-			current->next = add_next_token(line, current, get_token);
-			current = current->next;
-			if (!current)
-			{
-				free_all_token(token);
-				return (NULL);
-			}
-			line += current->len;
+			free_all_token(token);
+			return (NULL);
 		}
+		line += current->len;
 	}
 	return (token);
 }

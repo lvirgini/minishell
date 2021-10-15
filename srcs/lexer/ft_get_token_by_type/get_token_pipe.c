@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 13:29:35 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/10 14:54:43 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/10 16:26:00 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 **
 ** for minishell basic only '|'
 ** for minishell bonus : '||', '|'
-** in bash there is : '|', '||',  '|&',  
+** in bash there is : '|', '||',  '|&',  ...
 */
 
 int	get_token_pipe(t_token *token, char *line)

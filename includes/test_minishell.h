@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:37:30 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/10 15:43:28 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/11 15:13:53 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void		testing_lexer(void);
 void		testing_ft_get_token(void);
 void		testing_env(t_env **env);
 void		testing_prompt(t_env **env);
-
+void		testing_convert_double_quote(void);
 
 /*
 ** ALL PRINTER FOR EASY VISUALISATION

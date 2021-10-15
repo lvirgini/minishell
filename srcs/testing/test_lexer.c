@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 15:43:59 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/10 15:56:32 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/15 13:08:07 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,19 @@ void	testing_ft_get_token(void)
 	char	*append = ">>sdfsdf";
 	char	*here_doc = "<<ssdfsf";
 
-//	char	*simple_quote = "bla bla bla bla \\\'" JE NE SAIS PAS COMMENT LE TESTER LA
-//	char	*double_quote = "\"word quote and escape char \\\n'\" trtrtrt";
-//	token = add_next_token(double_quote, NULL, ft_get_token);
-//	print_token(token);
+	char	*simple_quote = "\'bla bla bla bla \\\' \\a$?"; //JE NE SAIS PAS COMMENT LE TESTER LA
+	token = add_next_token(simple_quote, NULL, ft_get_token);
+	print_token(token);
+	for (int i = 0; simple_quote[i]; i++)
+		printf("%c ", simple_quote[i]);
+	printf("\n");
+
+	return ;
+
+	char	*double_quote = "\"word\" trtrtrt";
+	token = add_next_token(double_quote, NULL, ft_get_token);
+	print_token(token);
+	return ;
 	token = add_next_token(word, NULL, ft_get_token);
 	print_token(token);
 	token = add_next_token(pipe, NULL, ft_get_token);
@@ -79,4 +88,40 @@ void	testing_ft_get_token(void)
 	print_token(token);
 	token = add_next_token(append, NULL, ft_get_token);
 	print_token(token);
+}
+
+
+void	testing_lexer(void)
+{
+	t_token **token;
+
+/*	char 	*test1 = "cmd1 -arg1 -arg2 | cmd2 arg2";
+	token = lexer_minishell(test1);
+	print_all_token(token);
+	free_all_token(token);*/
+
+	/*char	*test2 = "<infile cmd1 arg1 | cmd2 >outfile";
+	token = lexer_minishell(test2);
+	print_all_token(token);
+	free_all_token(token);*/
+
+
+	char	*test3 = "\"test.txt\" cmd1 arg1 || cmd2 >\'outfile.txt\' >>`outfile2' ";
+	token = lexer_minishell(test3);
+	print_all_token(token);
+	free_all_token(token);
+
+}
+
+/*
+void	testing_parser(void)*/
+
+
+void	testing_convert_double_quote(void)
+{
+	char *test1 = "\\\\";  // == "\\" in real minishell
+	char *result;
+
+	result = convert_double_quote(test1);
+	printf("result = |%s|\n", result);
 }

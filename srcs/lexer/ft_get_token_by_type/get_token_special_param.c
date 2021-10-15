@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 13:32:11 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/10 14:56:49 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/10 16:24:44 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 int	get_token_special_param(t_token *token, char *line)
 {
-	size_t  len;
+	size_t	len;
 
 	len = 1;
 	if ((line[len]) == '?')
@@ -42,7 +42,10 @@ int	get_token_special_param(t_token *token, char *line)
 		return (FAILURE); //
 	token->word = ft_strdup_max(line + 1, len - 1);
 	if (!token->word)
-		return (FAILURE); //
+	{
+		perror("malloc get_token_special_param()");
+		return (FAILURE);
+	}	
 	token->len = len;
 	return (SUCCESS);
 }
