@@ -6,14 +6,18 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 21:39:55 by mini              #+#    #+#             */
-/*   Updated: 2021/10/15 13:19:52 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/18 19:47:21 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
-** get next token from line
+** add next token from line
+**		malloc empty t_token
+**		check if it is metacharacter or word
+**		sends to corresponding functions (t_func) get_token
+**		check the syntax
 */
 
 t_token	*add_next_token(char *line, t_token *token_prev, t_func *get_token)
@@ -29,7 +33,7 @@ t_token	*add_next_token(char *line, t_token *token_prev, t_func *get_token)
 		return (NULL);
 	token->prev = token_prev;
 	meta = is_metacharacter(*line);
-	syntax = get_token[meta](token, line); // line + 1 ?
+	syntax = get_token[meta](token, line);
 	if (syntax == FAILURE)
 		return (NULL); /// print error
 	return (token);

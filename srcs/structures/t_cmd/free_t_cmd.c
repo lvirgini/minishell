@@ -1,43 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_token_free.c                                     :+:      :+:    :+:   */
+/*   free_t_cmd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/09 21:42:29 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/18 19:48:09 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/10/15 19:15:52 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/10/18 16:35:35 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
-** free t_token and inside it
+** free all insider t_cmd and free it
 */
 
-void	free_this_token(t_token *token)
+void	free_t_cmd(t_cmd *cmd)
 {
-	if (token->word)
-		free(token->word);
-	free(token);
+/*	if (!cmd)
+		return ;
+	if (cmd->path)
+		free(cmd->path);
+	if (cmd->argv)
+		free_double_tab(cmd->argv);
+	if (cmd->input)
+		free_t_redir(cmd->input);
+	if (cmd->output)
+		free_t_redir(cmd->output);*/
+	free(cmd);
 }
 
 /*
-** free all t_token ** 
+** Free list of t_cmd
 */
 
-void	free_list_token(t_token **token)
+void	free_list_t_cmd(t_cmd **cmd)
 {
-	t_token	*current;
-	t_token	*next;
+	t_cmd	*current;
+	t_cmd	*next;
 
-	current = *token;
+	if (!cmd)
+		return ;
+	current = *cmd; 
 	while (current)
 	{
 		next = current->next;
-		free_this_token(current);
+		free_t_cmd(current);
 		current = next;
 	}
-	free(token);
+	free(cmd);
 }

@@ -80,7 +80,9 @@ if WORD :  if first WORD = cmd name
 if PIPE : cmd prev = PIPE
 
 
+	then if ' ' : not interpret \
 
+	if " " : interpret escape \" \\ \' \$  and $VARIABLE
 
 
 
@@ -120,3 +122,153 @@ iofile			< > << >> + filename
 
 filename		WORD
 
+
+
+
+
+
+/* CHECK error synthax
+
+DOUBLE QUOTE = %2
+SIMPLE_QUOTE = %2
+redirections need WORD after
+:
+
+HEREDOC
+OUVRE LES INPUT/OUTPUT  (ecrase le heredock ou les pipes)
+ESSAIE DE TROUVERLA COMMANDE
+
+<< tata cat < Makefile 
+> dfg
+> dfg
+> dfg
+> dfg
+> dfg
+> tata
+# **************************************************************************** #
+#                                                                              #
+(...)
+
+ << cat -e | iii < sdfsdfsdfsdf
+> cat
+bash: sdfsdfsdfsdf: Aucun fichier ou dossier de ce type
+bash: -e : commande introuvable
+
+
+< cat -e | sdfsdfsdfsdf
+bash: sdfsdfsdfsdf : commande introuvable
+bash: cat: Aucun fichier ou dossier de ce type
+
+< cat -e
+bash: cat: Aucun fichier ou dossier de ce type
+
+cat -e >
+bash: erreur de syntaxe près du symbole inattendu « newline »
+
+cat -e >> | echo hello
+bash: erreur de syntaxe près du symbole inattendu « | »
+
+HEREDOC need WORD DELIMITER after
+<< cat -e
+> cat -e
+> cat
+bash: -e : commande introuvable
+
+SPECIALPARAMETER need ?(=last exit status) or WORD after (= variable)
+ if WORD is no others needed cité au dessus, its a command
+ all WORD after command is arguments.
+
+struct cmd_status
+{
+	double_quote = nb
+	simple_quote = nb
+	pipe_with_nothing_after / before =
+	redirection_with_no_word_after = 
+
+
+}*/
+
+/* ALL : NOT REQUIRED FOR MINISHELL
+enum e_token_type
+{
+	WORD,					// not special type
+	STRING,					// inside quotes
+	SEQUENCE,				//	;
+	GROUP_LEFT,				//	(
+	GROUP_RIGHT,			//	)
+	PIPE,					//	|
+	OR,						// 	||
+	BACKGROUND,				//	&
+	AND, 					//	&&
+	INPUT_REDIRECTION,		//	<
+	OUTPUT_REDIRECTION,		//	>
+	HERE_DOC,				//	<<
+	APPEND,					//	>>
+	SIMPE_QUOTE,			//	'
+	DOUBLE_QUOTE,			//	"
+	SPECIAL_PARAMETER,		//	$
+};
+*/
+
+/*
+t_token	*lexer_line(char *line)
+{
+	split_line = split_minishell_line()
+	if (line)
+		return NULL;
+	t_token all_token = malloc token();
+	if (!token)
+		return NULL;
+	token = get_all_token(split_line);
+	free_double_tab(line);
+	if (!token)
+		return NULL
+	return token;
+}
+
+get_next token(**token)
+NEED: 	
+		new token = malloc
+		len = 0
+		token type = getmetacharacter(line);
+		token value = get_token value(line, &len)
+		line += len;
+		if (*token == NULL)
+			*token = new_token;
+		else
+			token->next = new_token;
+		return (len);
+
+
+t_token **create_lexer_token_minishell(char *line)
+{
+	token = malloc **token;
+
+	len = get_next_token(token, line)
+	line += token->len
+	while (*line)
+	{
+		if (lineisspace)
+			line++;
+		else
+			token->next = get_next_token(line)
+			line += token->len
+			token = token next;
+	}
+}
+
+
+CMD PARSER
+
+
+
+parsing
+
+token **t;
+
+while *t
+{
+	cmd = get_next_cmd(token, &cmd_status)
+}
+
+*/

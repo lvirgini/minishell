@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 12:51:17 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/06 16:16:15 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/15 15:19:48 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,9 @@
 
 # include "minishell.h"
 
-//# define BUFFER_MAX		256
-
 # define FAILURE		0
 # define SUCCESS		1
 # define EXIT			2
-
-/*
-** PROMPT : 
-**	like standard shell bash : "$USER@minishell:pwd$ "
-**
-**	with colors : 
-**	STR_COLOR_GREEN $USER STR_COLOR_STD : STR_COLOR_BLUE pwd STR_COLOR_STD $
-**
-**	if $USER don't exist : "minishell:pwd$ "
-**
-*/
-
-# define S_COLOR_GREEN			"\33[32m"
-# define S_COLOR_BLUE			"\33[94m"
-# define S_COLOR_WHITE			"\33[0m"
 
 typedef int	t_bool;
 

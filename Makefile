@@ -6,7 +6,7 @@
 #    By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 17:38:13 by lvirgini          #+#    #+#              #
-#    Updated: 2021/10/11 15:03:33 by lvirgini         ###   ########.fr        #
+#    Updated: 2021/10/18 22:00:10 by lvirgini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ INC_DIR =	includes/	libft/includes/
 
 SRC_DIR_TEST = srcs/testing 
 
+# CI DESSOUS METTRE TOUS LES DOSSIER CONTENANT DES SOURCES !!!!!!!
 SRC_DIR =	$(SRC_DIR_TEST) \
 			srcs			\
 			srcs/env		\
@@ -30,7 +31,11 @@ SRC_DIR =	$(SRC_DIR_TEST) \
 			srcs/lexer		\
 			srcs/lexer/ft_get_token_by_type \
 			srcs/lexer/init_token \
-			srcs/parser \
+	
+	
+#		srcs/parser \
+#		srcs/parser/parse_redirections \
+#		srcs/structures/t_cmd
 			
 
 

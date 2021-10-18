@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 15:43:59 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/15 13:08:07 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/18 21:55:29 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ static void		set_functions_get_token(t_func ft_token[NB_TOKEN])
 
 void	testing_is_metacharacter(void)
 {
-	char	meta[NB_METACHARACTER + 1] = { META_SIMPE_QUOTE, META_DOUBLE_QUOTE,
-	META_PIPE, META_TILD_LEFT, META_TILD_RIGHT, META_DOLLAR, ' '};
+	char	meta[NB_METACHARACTER + 1] = { CHAR_SIMPE_QUOTE, CHAR_DOUBLE_QUOTE,
+	CHAR_PIPE, CHAR_TILD_LEFT, CHAR_TILD_RIGHT, CHAR_DOLLAR, ' '};
 	int		i;
 
 	i = -1;
@@ -109,7 +109,7 @@ void	testing_lexer(void)
 	char	*test3 = "\"test.txt\" cmd1 arg1 || cmd2 >\'outfile.txt\' >>`outfile2' ";
 	token = lexer_minishell(test3);
 	print_all_token(token);
-	free_all_token(token);
+	free_list_token(token);
 
 }
 
@@ -119,9 +119,9 @@ void	testing_parser(void)*/
 
 void	testing_convert_double_quote(void)
 {
-	char *test1 = "\\\\";  // == "\\" in real minishell
-	char *result;
+	//char *test1 = "\\\\";  // == "\\" in real minishell
+	//char *result;
 
-	result = convert_double_quote(test1);
-	printf("result = |%s|\n", result);
+//	result = convert_double_quote(test1);
+//	printf("result = |%s|\n", result);
 }

@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 13:32:11 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/10 16:24:44 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/18 21:58:19 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,11 @@ int	get_token_special_param(t_token *token, char *line)
 	{
 		token->type = VARIABLE;
 		len++;
-		while (ft_isalnum(line[len])) // check si c'est bien nimporte quelle lettre/nombre
+		while (ft_isalnum(line[len])) // check si c'est bien nimporte quel lettre/nombre
 			len++;
 	}
 	else
-		return (FAILURE); //
+		return (FAILURE); // ERROR SYNTAX
 	token->word = ft_strdup_max(line + 1, len - 1);
 	if (!token->word)
 	{

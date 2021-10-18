@@ -1,36 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   printer.c                                          :+:      :+:    :+:   */
+/*   parse_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/10 15:50:28 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/18 16:41:23 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/10/15 22:38:17 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/10/18 21:53:42 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_token(t_token *token)
+/*
+** check if syntax for input is correct
+**	parse input
+*/
+
+int	parse_input(t_cmd *cmd, t_token *token)
 {
-	if (token)
-	{
-		printf("token->type = %d\n", token->type);
-		if (token->word)
-			printf("token->word = %s\n", token->word);
-		printf("token->len = %ld\n\n", token->len);
-	}
+	if (!cmd->input)
+		cmd->input = parse_redir(token);
+	else
+		add_back_t_redir(cmd->input, parse_redir(token));
+	return (1); ////
 }
 
-void	print_all_token(t_token **token)
-{
-	t_token	*current;
 
-	current = *token;
-	while (current)
-	{
-		print_token(current);
-		current = current->next;
-	}
+test_builtin_echo()
+{
+	t_cmd;
+
+	cmd->path = "/bin/echo";
 }

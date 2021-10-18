@@ -6,11 +6,38 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 11:53:06 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/15 13:19:17 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/18 16:10:12 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+** PARSING : 
+*/
+
+// creer la liste de cmd. 
+// creer chaque cmd par rapport au token. ( pour minishell pas de notion de priorité
+// du coup c'est linéaire mais sinon il faudrait eventuellement faire des multi_cmd
+// et les organiser selon leur priorité.
+
+t_cmd	**parser_minishell(t_env **env, t_token **token)
+{
+	(void)env;
+	t_cmd **list_cmd;
+
+	list_cmd = malloc_list_t_cmd();
+	if (!list_cmd)
+		return (NULL);
+	*list_cmd = get_next_cmd(NULL, token);
+	// tant que cmd existe on boucle avec list_cmd->next
+	
+	
+	
+	return (list_cmd);
+}
+
+
 
 /*
 parsing 
