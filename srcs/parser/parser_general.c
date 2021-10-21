@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 11:53:06 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/20 16:45:42 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/21 18:54:34 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,28 @@ t_cmd	**parser_minishell(t_env **env, t_token **token)
 {
 	(void)env;
 	t_cmd **list_cmd;
+	t_cmd	*current;
 
 	list_cmd = malloc_list_cmd();
 	if (!list_cmd)
 		return (NULL);
 	*list_cmd = get_next_cmd(NULL, token);
-	// tant que cmd existe on boucle avec list_cmd->next
-	
-	
-	
+	if (!*list_cmd)
+	{
+		free_list_cmd(list_cmd);
+		return (NULL);
+	}
+	current = *list_cmd;
+	while (*token)
+	{
+		current->next = get_next_cmd(current, token);
+		current = current->next;
+		if (!current)
+		{
+			free_list_cmd(list_cmd);
+			return (NULL);
+		}
+	}
 	return (list_cmd);
 }
 

@@ -6,11 +6,28 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/18 22:04:51 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/21 19:06:38 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+** il faut trouver un bon nom pour cette fonction...
+*/
+
+void	make_shell(char *line)
+{
+	t_token		**token;
+	t_cmd		**cmd;
+
+	token = lexer_minishell(line);
+	cmd = parser_minishell(NULL, token);
+	print_list_cmd(cmd);
+	free_list_token(token);
+	free_list_cmd(cmd);
+}
+
 
 /*
 ** premier appel : get_prompt va creer t_prompt via l'environnement récuperé
@@ -23,7 +40,6 @@ int	make_terminal(t_env **env)
 {
 	char		*line;
 	t_prompt	*prompt;
-	t_token		**token;
 
 	prompt = get_prompt(env, NULL);
 	while (1)
@@ -35,9 +51,8 @@ int	make_terminal(t_env **env)
 			if(*line)
 			{
 				add_history(line);
-
+				make_shell(line);
 				// ici pour récupéré line ecrite dans minishell
-				
 			}
 		prompt = get_prompt(env, prompt);
 		free(line);

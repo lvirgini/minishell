@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 11:32:01 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/21 16:00:53 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/21 17:38:12 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,24 @@ int	syntax_error_redirection(t_token *token)
 	return (SUCCESS);
 }
 
-int	parse_all_redirection(t_cmd *cmd, t_token **all_token)
+int	parse_all_redirection(t_cmd *cmd, t_token **list_token)
 {
 	t_token	*token;
 	int		syntax;
 
-	token = *all_token;
+	token = *list_token;
 	while (token && is_token_control_operator(token->type) == false)
 	{
 		syntax = SUCCESS;
 		if (token->type == INPUT_REDIRECTION || token->type == HERE_DOC)
 		{
 			syntax = parse_input(cmd, token);
-			token = remove_multi_token(all_token, token, 2);
+			token = remove_multi_token(list_token, token, 2);
 		}	
 		else if (token->type == OUTPUT_REDIRECTION || token->type == APPEND)
 		{
 			syntax = parse_output(cmd, token);
-			token = remove_multi_token(all_token, token, 2);
+			token = remove_multi_token(list_token, token, 2);
 		}
 		else
 			token = token->next;

@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 19:30:39 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/21 16:17:54 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/21 19:36:36 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,13 @@ t_cmd	*create_cmd(t_cmd *prev, t_token **token)
 	cmd = malloc_cmd(prev);
 	if (!cmd)
 		return (NULL);
-	if (parse_all_redirection(cmd, token) == FAILURE)
+	if (parse_all_redirection(cmd, token) == FAILURE
+	|| parse_cmd_argv(cmd, token) == FAILURE
+	|| parse_control_operator(cmd, token) == FAILURE)
 	{
 		free_cmd(cmd);
 		return (NULL);
 	}
-//	parse_cmd_argv(token);
 	return (cmd);
 }
 /*
@@ -71,11 +72,9 @@ t_cmd *get_next_cmd(t_cmd *prev, t_token **token)
 //	static t_ft_parser	ft_parser[NB_TOKEN];
 
 //	set_functions_parse_token(ft_parser);
-	if (!token && !*token) // a check ?
+	if (!token || !*token) // a check ?
 		return (NULL);
-	while (*token && is_token_control_operator((*token)->type) == false)
-	{
-		cmd = create_cmd(prev, token);
-	}
+	cmd = create_cmd(prev, token);
+
 	return (cmd);
 }

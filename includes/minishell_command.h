@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 22:25:50 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/21 14:31:57 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/21 18:51:05 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,9 @@ void		free_list_cmd(t_cmd **cmd);
 
 t_cmd		*get_next_cmd(t_cmd *prev, t_token **token);
 int			parse_all_redirection(t_cmd *cmd, t_token **all_token);
-
+int			parse_cmd_argv(t_cmd *cmd, t_token **list_token);
+int			parse_control_operator(t_cmd *cmd, t_token **list_token);
+t_cmd		**parser_minishell(t_env **env, t_token **token);
 /*
 **
 */

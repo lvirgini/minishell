@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 16:34:27 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/21 15:46:58 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/21 19:28:37 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,32 @@ void	test_redir_2(void)
 void	testing_redir(void)
 {
 	test_redir_1(); // OK
-	test_redir_2();
+	test_redir_2(); // OK
+}
 
+void	testing_get_next_cmd(void) // OK
+{
+	t_cmd *cmd;
+	t_token **token;
 
-/*	t_cmd *cmd;
-	t_token	**token = lexer_minishell("> outfile");
+	token = lexer_minishell(" cmd1 -argv1 \" argv2 \" <infile1 <infile2 >outfile3 >$test");
+	cmd = get_next_cmd(NULL, token);
+	print_cmd(cmd);
 
+	free_list_token(token);
+	free_cmd(cmd);
+}
 
-	cmd = malloc_cmd(NULL);
-	cmd->input = malloc_redir(*token);
-	print_cmd(cmd);*/
+void	testing_parser(void)
+{
+	t_cmd **cmd;
+	t_token **token;
 
+//	token = lexer_minishell(" cmd1 <infile -av1 av2 -av3 <infile2 >outfile1 >> \"outfile 2\" | >$OUTFILE2.1 <<infile2.2 cmd2 >outfile2.3 >> outfile2.4");
+	token = lexer_minishell("|");
+	cmd = parser_minishell(NULL, token);
+	print_list_cmd(cmd);
+
+	free_list_token(token);
+	free_list_cmd(cmd);
 }
