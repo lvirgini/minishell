@@ -6,7 +6,7 @@
 #    By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 17:38:13 by lvirgini          #+#    #+#              #
-#    Updated: 2021/10/18 22:00:10 by lvirgini         ###   ########.fr        #
+#    Updated: 2021/10/21 15:51:44 by lvirgini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,11 +31,13 @@ SRC_DIR =	$(SRC_DIR_TEST) \
 			srcs/lexer		\
 			srcs/lexer/ft_get_token_by_type \
 			srcs/lexer/init_token \
-	
-	
-#		srcs/parser \
-#		srcs/parser/parse_redirections \
-#		srcs/structures/t_cmd
+			srcs/error \
+			srcs/structures/t_cmd \
+			srcs/structures/t_redir \
+			srcs/structures/t_token \
+		
+#			srcs/parser \
+#			srcs/parser/parse_redirections \
 			
 
 

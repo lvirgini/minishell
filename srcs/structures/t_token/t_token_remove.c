@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 19:47:34 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/18 21:57:21 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/21 14:56:32 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	remove_this_token(t_token *token)
 **	next->NEXT	free			free
 */
 
-t_token	*remove_multi_token(t_token *token, int nb)
+t_token	*remove_multi_token(t_token **list_token, t_token *token, int nb)
 {
 	t_token		*prev;
 	t_token		*next;
@@ -51,13 +51,16 @@ t_token	*remove_multi_token(t_token *token, int nb)
 	{
 		next = token->next;
 		free_this_token(token);
+		token = NULL;
 		token = next;
 		nb--;
 	}
-	if (!token)
-		return (NULL);
 	if (prev)
 		prev->next = token;
+	else
+		*list_token = token;
+	if (!token)
+		return (NULL);
 	token->prev = prev;
 	return (token);
 }

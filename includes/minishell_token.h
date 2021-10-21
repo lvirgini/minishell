@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 21:24:00 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/18 22:08:58 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/21 15:46:44 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ struct s_token
 
 /*
 ** token type for parsing.
-**	'	"	|	<	>	<<	>>
+**	'	"	|	<	>	<<	>>	$?	$VAR	{all rest = WORD}
 */
 
 enum e_token_type
@@ -90,7 +90,6 @@ enum e_ft_get_token
 	FT_PIPE,
 	FT_TILD_LEFT,
 	FT_TILD_RIGHT,
-	FT_DOLLAR,
 };
 
 /*
@@ -100,12 +99,11 @@ enum e_ft_get_token
 ** correctly retrieve each token according to its type
 */
 
-typedef int	(*t_func)(t_token *, char *);
+typedef int	(*t_func_get_token)(t_token *, char *);
 
 int			get_token_word(t_token *token, char *line);
 int			get_token_simple_quote(t_token *token, char *line);
 int			get_token_double_quote(t_token *token, char *line);
-int			get_token_special_param(t_token *token, char *line); ///
 int			get_token_pipe(t_token *token, char *line);
 int			get_token_tild_left(t_token *token, char *line);
 int			get_token_tild_right(t_token *token, char *line);
@@ -115,7 +113,7 @@ int			get_token_tild_right(t_token *token, char *line);
 */
 
 t_token		**lexer_minishell(char *line);
-t_token		*add_next_token(char *line, t_token *token_prev, t_func *get_token);
+t_token		*add_next_token(char *line, t_token *token_prev, t_func_get_token *get_token);
 
 /*
 ** structures token and utils malloc and free
@@ -125,13 +123,15 @@ t_token		*malloc_token(void);
 void		free_this_token(t_token *token);
 void		free_list_token(t_token **token);
 void		remove_this_token(t_token *token);
-t_token		*remove_multi_token(t_token *token, int nb);
+t_token	*remove_multi_token(t_token **list_token, t_token *token, int nb);
 
 /*
 ** usefull
 */
 
+int			is_metacharacter(char c);
+int			is_operator(char c);
+
 char		*convert_double_quote(char *s); // A REFAIRE EXPANDER
-int			is_metacharacter(char c);	// A REFAIRE EXPANDER
 
 #endif

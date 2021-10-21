@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 13:32:11 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/18 21:58:19 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/21 15:47:23 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 **      $? = last exit status of last cmd
 **      $VARIABLE = get value of VARIABLE
 */
-
+/*
 int	get_token_special_param(t_token *token, char *line)
 {
 	size_t	len;
@@ -35,7 +35,8 @@ int	get_token_special_param(t_token *token, char *line)
 	{
 		token->type = VARIABLE;
 		len++;
-		while (ft_isalnum(line[len])) // check si c'est bien nimporte quel lettre/nombre
+		// check si c'est bien nimporte quel lettre/nombre
+		while (ft_isalnum(line[len])) 
 			len++;
 	}
 	else
@@ -49,3 +50,4 @@ int	get_token_special_param(t_token *token, char *line)
 	token->len = len;
 	return (SUCCESS);
 }
+*/

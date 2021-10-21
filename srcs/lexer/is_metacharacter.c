@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 21:52:35 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/18 19:43:47 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/21 15:48:26 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ int	is_metacharacter(char c)
 	[FT_DOUBLE_QUOTE] = CHAR_DOUBLE_QUOTE,
 	[FT_PIPE] = CHAR_PIPE,
 	[FT_TILD_LEFT] = CHAR_TILD_LEFT,
-	[FT_TILD_RIGHT] = CHAR_TILD_RIGHT,
-	[FT_DOLLAR] = CHAR_DOLLAR};
+	[FT_TILD_RIGHT] = CHAR_TILD_RIGHT};
 
 	i = 1;
 	while (i < NB_METACHARACTER + 1)
@@ -37,4 +36,19 @@ int	is_metacharacter(char c)
 		i++;
 	}
 	return (FT_WORD);
+}
+
+int	is_operator(char c)
+{
+	int			i;
+	static char	operator[2] = {'\n', CHAR_PIPE};
+
+	i = 0;
+	while (i < 2)
+	{
+		if (c == operator[i])
+			return (true);
+		i++;
+	}
+	return (false);
 }

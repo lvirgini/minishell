@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:37:30 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/18 22:01:09 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/21 14:37:31 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,13 @@
 */
 
 void	testing_lexer(void);
+void	testing_remove_token(void);
 void	testing_ft_get_token(void);
 void	testing_env(t_env **env);
 void	testing_prompt(t_env **env);
 void	testing_convert_double_quote(void);
+void	testing_redir(void);
+void	testing_parse_redir(void);
 
 /*
 ** ALL PRINTER FOR EASY VISUALISATION
@@ -31,5 +34,7 @@ void	testing_convert_double_quote(void);
 
 void	print_token(t_token *token);
 void	print_all_token(t_token **token);
-
+void	print_redir(t_redir *redir);
+void	print_cmd(t_cmd *cmd);
+void	print_list_cmd(t_cmd **cmd);
 #endif

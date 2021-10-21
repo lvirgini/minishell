@@ -6,21 +6,20 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 15:43:59 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/18 21:55:29 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/21 15:47:03 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 //COPY OF STATIC FUNCTION CAREFULL
-static void		set_functions_get_token(t_func ft_token[NB_TOKEN])
+static void		set_functions_get_token(t_func_get_token ft_token[NB_TOKEN])
 {
 	ft_token[FT_SIMPLE_QUOTE] = &get_token_simple_quote;
 	ft_token[FT_DOUBLE_QUOTE] = &get_token_double_quote;
 	ft_token[FT_PIPE] = &get_token_pipe;
 	ft_token[FT_TILD_LEFT] = &get_token_tild_left;
 	ft_token[FT_TILD_RIGHT] = &get_token_tild_right;
-	ft_token[FT_DOLLAR] = &get_token_special_param;
 	ft_token[FT_WORD] = &get_token_word;
 }
 
@@ -46,7 +45,7 @@ void	testing_is_metacharacter(void)
 void	testing_ft_get_token(void)
 {
 	t_token	*token;
-	t_func ft_get_token[NB_METACHARACTER + 1];
+	t_func_get_token ft_get_token[NB_METACHARACTER + 1];
 
 	set_functions_get_token(ft_get_token);
 	
@@ -90,27 +89,110 @@ void	testing_ft_get_token(void)
 	print_token(token);
 }
 
+void	testing_remove_token(void)
+{
+	t_token **token;
+	t_token *current;
+	char	*test = {"	 cmd1  -argv1 \"argv 2\" < inputfile1 <inputfile2 | cmd2 > outputfile2 "};
+
+	token = lexer_minishell(test);
+
+	//	TEST REMOVE FIRST ELEMENT	
+
+/*	*token = remove_multi_token(token, *token, 1);
+	print_all_token(token);*/
+	
+
+ /*	//	TEST REMOVE ECOND AND ALL REST ELEMENT
+	current = (*token)->next;
+	remove_multi_token(token, current, 16);
+	print_all_token(token);*/
+	
+/*	// TEST REMOVE ONLY SECOND
+	current = (*token)->next;
+	remove_multi_token(token, current, 1);
+	print_all_token(token);*/
+
+
+	// TEST REMOVE ALL ELEMENT
+/*	*token = remove_multi_token(token, *token, 16);
+	print_all_token(token);*/
+	
+
+	//TEST REMOVE LAST ELEMENT
+	for (current = *token; current->next; current = current->next)
+	;
+	current = remove_multi_token(token, current, 16);
+	print_all_token(token);
+	
+
+	free_list_token(token);
+}
+
+void	testing_parse_redir(void)
+{
+	t_cmd *cmd;
+	t_token **token;
+	char *line = "<< infile1	cmd1 -argv1 <\"infile2 \" \"argv2\" >outfile1 >>outfile1.2 	| <infile2 >outfile2";
+
+	cmd = malloc_cmd(NULL);
+	if (!cmd)
+		return ;
+	token = lexer_minishell(line);
+	if (!token)
+		return ;
+	parse_all_redirection(cmd, token);
+	print_cmd(cmd);
+	free_cmd(cmd);
+	print_all_token(token);
+	free_list_token(token);
+//	free_list_token(token);
+}
 
 void	testing_lexer(void)
 {
 	t_token **token;
 
-/*	char 	*test1 = "cmd1 -arg1 -arg2 | cmd2 arg2";
-	token = lexer_minishell(test1);
-	print_all_token(token);
-	free_all_token(token);*/
+	static char	*test[4] = {
+		"     cmd arg1 -arg2 -arg3",
+		"cmd | cmd",
+		"< \"fileinput.txt\" cmd1 | cmd2 > 'output2'",
+		"            	",
+	};
 
-	/*char	*test2 = "<infile cmd1 arg1 | cmd2 >outfile";
-	token = lexer_minishell(test2);
-	print_all_token(token);
-	free_all_token(token);*/
+	for (int i = 0; i < 4; i++)
+	{
+		token = lexer_minishell(test[i]);
+		if (token)
+			print_all_token(token);
+		else
+			printf("for |%s| token is NULL\n", test[i]);
+		free_list_token(token);
+	}
+}
 
+void	testing_syntax_error(void)
+{
+	t_token **token;
 
-	char	*test3 = "\"test.txt\" cmd1 arg1 || cmd2 >\'outfile.txt\' >>`outfile2' ";
-	token = lexer_minishell(test3);
-	print_all_token(token);
-	free_list_token(token);
+	static char	*test[] = {
+		"||",
+		"|", // NO CMD
+		">|", //
+		"< \"fileinput.txt\" cmd1 | cmd2 > output2'",
+		"            	",
+	};
 
+	for (int i = 0; i < 4; i++)
+	{
+		printf("for %s\n", test[i]);
+		token = lexer_minishell(test[i]);
+		if (token)
+			print_all_token(token);
+		else
+			printf("token is NULL\n");
+		free_list_token(token);
+	}
 }
 
 /*

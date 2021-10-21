@@ -1,32 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_error.h                                  :+:      :+:    :+:   */
+/*   t_token_free.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/13 19:47:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/20 20:15:56 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/10/09 21:42:29 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/10/21 15:02:10 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_ERROR_H
-# define MINISHELL_ERROR_H
+#include "minishell.h"
 
-# define NB_ERR_SYNTAX 2
+/*
+** free t_token and inside it
+*/
 
-enum	e_error
+void	free_this_token(t_token *token)
 {
-	ERR_SYMBOL,
-	ERR_QUOTES_NOT_CLOSED,
-};
+	if (token->word)
+		free(token->word);
+	free(token);
+}
 
-enum	e_reason_cmd_not_work
+/*
+** free all t_token ** 
+*/
+
+void	free_list_token(t_token **token)
 {
-	NOT_FOUND,
-};
+	t_token	*current;
+	t_token	*next;
 
-//void		display_command_error(t_env *env, char *cmd, int reason);
-int		print_syntax_error(int err, char char_data, char *str_data);
-int		syntax_error_redirection(t_token *token);
-#endif
+	if (!token)
+		return ;
+	current = *token;
+	while (current)
+	{
+		next = current->next;
+		free_this_token(current);
+		current = next;
+	}
+	free(token);
+}

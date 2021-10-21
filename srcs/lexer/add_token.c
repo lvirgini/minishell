@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 21:39:55 by mini              #+#    #+#             */
-/*   Updated: 2021/10/18 19:47:21 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/20 11:10:43 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 **		check the syntax
 */
 
-t_token	*add_next_token(char *line, t_token *token_prev, t_func *get_token)
+t_token	*add_next_token(char *line, t_token *token_prev, t_func_get_token *get_token)
 {
 	t_token			*token;
 	int				meta;

@@ -1,43 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_token_free.c                                     :+:      :+:    :+:   */
+/*   free_t_redir.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/09 21:42:29 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/18 19:48:09 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/10/20 17:00:14 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/10/21 15:52:57 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-** free t_token and inside it
-*/
-
-void	free_this_token(t_token *token)
+void	free_this_redir(t_redir *redir)
 {
-	if (token->word)
-		free(token->word);
-	free(token);
+	if (redir)
+	{
+		if (redir->filename)
+			free(redir->filename);
+		free(redir);
+	}
 }
 
-/*
-** free all t_token ** 
-*/
-
-void	free_list_token(t_token **token)
+void	free_list_redir(t_redir *redir)
 {
-	t_token	*current;
-	t_token	*next;
+	t_redir	*next;
 
-	current = *token;
-	while (current)
+	while (redir)
 	{
-		next = current->next;
-		free_this_token(current);
-		current = next;
+		next = redir->next;
+		free_this_redir(redir);
+		redir = next;
 	}
-	free(token);
 }
