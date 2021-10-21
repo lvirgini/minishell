@@ -6,7 +6,7 @@
 #    By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 17:38:13 by lvirgini          #+#    #+#              #
-#    Updated: 2021/10/21 15:57:33 by lvirgini         ###   ########.fr        #
+#    Updated: 2021/10/21 16:17:29 by lvirgini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ INC_DIR =	includes/	libft/includes/
 SRC_DIR_TEST = srcs/testing 
 
 # CI DESSOUS METTRE TOUS LES DOSSIER CONTENANT DES SOURCES !!!!!!!
-SRC_DIR =	$(SRC_DIR_TEST) \
+#SRC_DIR =	$(SRC_DIR_TEST) \
 			srcs			\
 			srcs/env		\
 			srcs/prompt		\
@@ -37,10 +37,10 @@ SRC_DIR =	$(SRC_DIR_TEST) \
 			srcs/structures/t_token \
 			srcs/parser \
 			srcs/parser/parse_redirections \
-			
+#			
 
 
-#SRC_DIR =	$(shell find srcs -type d)
+SRC_DIR =	$(shell find srcs -type d)
 #INC_DIR = 	$(shell find includes -type d) libft/includes 
 
 LIB		=	ft ncurses readline
