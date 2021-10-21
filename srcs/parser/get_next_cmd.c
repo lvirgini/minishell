@@ -6,25 +6,11 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 19:30:39 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/18 19:54:05 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/21 16:06:36 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*
-** 	check if token type is a control operator ( for separate cmd)
-**
-**	static int	control_operator[NB_OPERATOR] = {PIPE, AND, ...}
-**	in minishell only PIPE is used.
-*/
-
-int	is_token_control_operator(int token_type)
-{
-	if (token_type == PIPE)
-		return (true);
-	return (false);
-}
 
 t_redir *add_t_redir(t_token *token)
 {
@@ -49,11 +35,20 @@ void	add_back_t_redir(t_redir *redirection, t_redir *to_add)
 	redirection->next = to_add;
 }
 
-t_cmd	create_cmd(t_token **token)
+t_cmd	*create_cmd(t_cmd *prev, t_token **token)
 {
-	t_cmd cmd;
+	t_cmd	*cmd;
 
-	parse_all_redirection(&cmd, token);
+	cmd = malloc_cmd(prev);
+	if (!cmd)
+		return (NULL);
+	if (parse_all_redirection(&cmd, token) == FAILURE)
+	{
+		free_cmd(cmd);
+		return (NULL);
+	}
+//	parse_cmd_argv(token);
+	return (cmd);
 }
 /*
 static void	set_functions_parse_token(t_ft_parser ft_token[NB_TOKEN])
@@ -67,20 +62,20 @@ static void	set_functions_parse_token(t_ft_parser ft_token[NB_TOKEN])
 //	ft_token[FT_WORD] = &parse_token_word;
 }
 */
+
+// PEUT ETRE FUSIONNER GET NEXT CMD ET CREATE CMD ...
+
 t_cmd *get_next_cmd(t_cmd *prev, t_token **token)
 {
-	t_cmd		*cmd;
+	t_cmd *cmd;
 //	static t_ft_parser	ft_parser[NB_TOKEN];
 
 //	set_functions_parse_token(ft_parser);
 	if (!token && !*token) // a check ?
 		return (NULL);
-	cmd = malloc_t_cmd(prev);
-	if (!cmd)
-		return (NULL);
 	while (*token && is_token_control_operator((*token)->type) == false)
 	{
-		*cmd = create_cmd(token);
-
+		cmd = create_cmd(prev, oken);
 	}
+	return (cmd);
 }
