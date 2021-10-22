@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 18:40:55 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/21 15:52:27 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/22 13:21:38 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** malloc a t_cmd
 */
 
-t_cmd	*malloc_cmd(t_cmd *prev)
+t_cmd	*malloc_cmd(void)
 {
 	t_cmd	*cmd;
 
@@ -24,7 +24,6 @@ t_cmd	*malloc_cmd(t_cmd *prev)
 	if (!cmd)
 		return (NULL);
 	ft_memset(cmd, 0, sizeof(t_cmd));
-	cmd->prev = prev;
 	return (cmd);
 }
 
@@ -34,10 +33,14 @@ t_cmd	*malloc_cmd(t_cmd *prev)
 
 t_cmd	**malloc_list_cmd(void)
 {
-	t_cmd	**cmd;
+	t_cmd	**list_cmd;
 
-	cmd = (t_cmd **)malloc(sizeof(t_cmd *));
-	if (!cmd)
+	list_cmd = (t_cmd **)malloc(sizeof(t_cmd *));
+	if (!list_cmd)
+	{
+		perror("malloc_list_cmd()");
 		return (NULL);
-	return (cmd);
+	}
+	*list_cmd = NULL;
+	return (list_cmd);
 }

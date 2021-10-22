@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_redir.h                                  :+:      :+:    :+:   */
+/*   minishell_struct_redir.h                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:29:00 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/21 14:37:04 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/22 11:16:49 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_REDIR_H
-# define MINISHELL_REDIR_H
+#ifndef MINISHELL_STRUCT_REDIR_H
+# define MINISHELL_STRUCT_REDIR_H
 
 # include "minishell.h"
 
@@ -41,6 +41,6 @@ void		free_this_redir(t_redir *redir); // static ?
 */
 
 void		add_back_redir(t_redir *redirection, t_redir *to_add);
-t_redir		*add_redir(t_token *token);
+t_redir		*create_redir(int type, char *filename);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 17:28:28 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/20 17:36:37 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/22 13:30:05 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,8 @@
 
 t_bool	is_token_words(int type)
 {
-	static int	filename_type[3] = {WORD, SIMPLE_QUOTE, DOUBLE_QUOTE}; // VARIABLE...
-
-	int	i;
+	static int	filename_type[3] = {WORD, SIMPLE_QUOTE, DOUBLE_QUOTE};
+	size_t		i;
 
 	i = 0;
 	while (i < 3)

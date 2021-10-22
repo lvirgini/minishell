@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 11:32:01 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/21 17:38:12 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/22 10:26:47 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@ int	syntax_error_redirection(t_token *token)
 	}
 	return (SUCCESS);
 }
+
+/*
+** Parser of all redirection for minishell : < << > >>
+** check the syntax of each redirection
+** remove used tokens
+*/
 
 int	parse_all_redirection(t_cmd *cmd, t_token **list_token)
 {

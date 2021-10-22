@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/21 19:06:38 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/22 13:24:09 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	make_shell(char *line)
 	t_cmd		**cmd;
 
 	token = lexer_minishell(line);
-	cmd = parser_minishell(NULL, token);
+	cmd = parser_minishell(token);
 	print_list_cmd(cmd);
 	free_list_token(token);
 	free_list_cmd(cmd);

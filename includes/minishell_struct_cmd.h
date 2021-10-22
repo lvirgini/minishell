@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_command.h                                :+:      :+:    :+:   */
+/*   minishell_struct_cmd.h                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 22:25:50 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/21 18:51:05 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/22 13:31:30 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_COMMAND_H
-# define MINISHELL_COMMAND_H
+#ifndef MINISHELL_STRUCT_CMD_H
+# define MINISHELL_STRUCT_CMD_H
 
 # include "minishell.h"
 
@@ -29,8 +29,8 @@
 typedef struct s_cmd	t_cmd;
 struct		s_cmd
 {
-	char	*path;		// echo
-	char	**argv; 	// -e
+	char	*path;
+	char	**argv;
 	int		type;
 	int		pipe[2];
 	t_redir	*input;
@@ -51,37 +51,10 @@ enum e_cmd_type
 ** Setup structure t_cmd : free and malloc
 */
 
-t_cmd		*malloc_cmd(t_cmd *prev);
+t_cmd		*malloc_cmd(void);
 t_cmd		**malloc_list_cmd(void);
 void		free_cmd(t_cmd *cmd);
 void		free_list_cmd(t_cmd **cmd);
-
-/*
-**
-*/
-
-t_cmd		*get_next_cmd(t_cmd *prev, t_token **token);
-int			parse_all_redirection(t_cmd *cmd, t_token **all_token);
-int			parse_cmd_argv(t_cmd *cmd, t_token **list_token);
-int			parse_control_operator(t_cmd *cmd, t_token **list_token);
-t_cmd		**parser_minishell(t_env **env, t_token **token);
-/*
-**
-*/
-
-t_bool		is_token_control_operator(int token_type);
-t_bool		is_token_words(int token_type);
-
-/*
-** t_funnction parse_token
-*/
-
-typedef int	(*t_ft_parser)(t_cmd *, t_token *);
-
-int			parse_pipe(t_cmd *cmd, t_token *token);
-int			parse_input(t_cmd *cmd, t_token *token);
-int			parse_output(t_cmd *cmd, t_token *token);
-int			parse_here_doc(t_cmd *cmd, t_token *token);
-int			parse_append(t_cmd *cmd, t_token *token);
+void		add_back_cmd(t_cmd **list_cmd, t_cmd *to_add);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 15:43:59 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/21 15:47:03 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/22 13:34:21 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ void	testing_parse_redir(void)
 	t_token **token;
 	char *line = "<< infile1	cmd1 -argv1 <\"infile2 \" \"argv2\" >outfile1 >>outfile1.2 	| <infile2 >outfile2";
 
-	cmd = malloc_cmd(NULL);
+	cmd = malloc_cmd();
 	if (!cmd)
 		return ;
 	token = lexer_minishell(line);

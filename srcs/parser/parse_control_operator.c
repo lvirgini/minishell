@@ -6,24 +6,23 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 18:41:46 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/21 19:30:09 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/22 10:49:37 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-
-static int	cmd_can_be_pipe(t_cmd *cmd)
+static t_bool	cmd_can_be_pipe(t_cmd *cmd)
 {
 	if (cmd->argv || cmd->input || cmd->output)
 		return (true);
 	return (false);
 }
 /*
-** For Minishell only PIPE can be control operator.
-** if | and nothing after : syntax error
-** if nothing before | syntax error.
-** else
+** For Minishell only PIPE and newline can be control operator.
+** if no token exist : it's newline.
+** if PIPE and nothing after : syntax error
+** if nothing before PIPE (cmd is empty) syntax error.
 */
 
 int	parse_control_operator(t_cmd *cmd, t_token **list_token)

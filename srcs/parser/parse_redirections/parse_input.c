@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 22:38:17 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/21 15:59:13 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/22 10:52:36 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	parse_input(t_cmd *cmd, t_token *token)
 
 	if (syntax_error_redirection(token) == SYNTAX_ERROR)
 		return (SYNTAX_ERROR);
-	input = add_redir(token);
+	input = create_redir(token->type, token->next->word);
 	if (!input)
 		return (FAILURE);
 	if (!cmd->input)
