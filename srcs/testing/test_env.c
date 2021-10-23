@@ -5,40 +5,45 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/10 15:51:46 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/10 15:56:10 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/10/22 15:29:10 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/10/23 16:57:34 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void		testing_env(t_env **env)
+void	testing_get_env_value(char **env)
 {
+	char	*ptr;
 
-	// test edit / remove / 
-	print_this_env(get_this_env(env, "USER"));
-	/*edit_or_add_t_env(env, "USER", "prout");
-	print_this_env(get_this_env(env, "USER"));
-	remove_t_env(env, "USER");
-	print_this_env(get_this_env(env, "USER"));*/
+//// ATTENTION CA SEGFAULT SI NULL EST RETOURNE
+//	printf("%s\n", get_env_value(env, "USER")); 
 
-	// test print all env
-/*	print_all_env(env);*/
+	ptr = get_env_value(env, "USER");
+	ft_putstr(ptr);
 
-	// test print all env / remove
-/*	print_all_env(env);
-	remove_t_env(env, "USER");*/
+	ptr = get_env_value(env, "PATH");
+	ft_putstr(ptr);
 
-	// test add NULL or empty value
-/*	print_this_env(get_this_env(env, "USER"));
-	edit_or_add_t_env(env, "USER", NULL);
-	print_this_env(get_this_env(env, "USER"));
-	edit_or_add_t_env(env, "USER", "");
-	print_this_env(get_this_env(env, "USER"));*/
+	ptr = get_env_value(env, "");
+	ft_putstr(ptr);
 
-	// test remove
-/*	remove_t_env(env, "PATH");
-	print_all_env(env);
-	print_this_env(get_this_env(env, "PATH"));*/
+	ptr = get_env_value(env, "       ");
+	ft_putstr(ptr);
+}
 
+void	testing_env(char **env)
+{
+	char **myenv;
+
+	myenv = make_minishell_env(env);
+	testing_get_env_value(myenv);
+//	print_list_env(env);
+	print_this_env(myenv[get_env_index(myenv, "USER")]);
+	myenv = add_env(myenv, "TEST", "test");
+	print_this_env(myenv[get_env_index(myenv, "TEST")]);
+	myenv = add_env(myenv, "TEST", "deuxieme");
+	print_this_env(myenv[get_env_index(myenv, "TEST")]);
+
+	free_list_env(myenv);
 }

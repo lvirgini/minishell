@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 16:24:41 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/22 13:34:01 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/22 16:01:37 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,12 @@
 # include "minishell_error.h"
 # include "minishell_terminal.h"
 # include "test_minishell.h" //
+
+/*
+** utils
+*/
+
+void	free_n_list_str(char **list_str, size_t nb);
+void	free_list_str(char **list_str);
 
 #endif

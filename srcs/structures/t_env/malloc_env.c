@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   malloc_free_t_env.c                                :+:      :+:    :+:   */
+/*   malloc_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 14:40:27 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/05 21:30:56 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/23 16:36:03 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,65 +16,36 @@
 ** Malloc t_env and set all inside to NULL.
 */
 
-t_env	*malloc_t_env(void)
+char	**malloc_list_env(int env_size)
 {
-	t_env	*res;
+	char **env;
 
-	res = (t_env *)malloc(sizeof(t_env));
-	if (res == NULL)
+	env = (char **)malloc(sizeof(char *) * (env_size + 1));
+	if (!env)
 	{
 		perror("malloc_env()");
 		return (NULL);
 	}
-	res->key = NULL;
-	res->value = NULL;
-	res->next = NULL;
-	return (res);
+	env[env_size] = NULL;
+	return (env);
 }
 
-/*
-** free all inside a t_env
-*/
-
-static void	destroy_this_env(t_env *env)
+char	*create_new_env(char *key, char *value)
 {
-	if (env)
+	size_t	len;
+	char	*new_env;
+
+	if (!key || !value)
+		return (NULL);
+	len = ft_strlen(key) + ft_strlen(value) + 2;
+	new_env = (char *)malloc(sizeof(char) * (len));
+	if (!new_env)
 	{
-		if (env->key)
-			free(env->key);
-		if (env->value)
-			free(env->value);
+		perror("malloc create_new_env()");
+		return (NULL);
 	}
-}
-
-/*
-** free only this t_env
-*/
-
-void	free_this_env(t_env *env)
-{
-	if (env)
-	{
-		destroy_this_env(env);
-		free(env);
-	}
-}
-
-/*
-** free all t_env
-*/
-
-void	free_all_t_env(t_env **env)
-{
-	t_env	*next;
-	t_env	*current;
-
-	current = *env;
-	while (current)
-	{
-		next = current->next;
-		free_this_env(current);
-		current = next;
-	}
-	free(env);
+	ft_strlcpy(new_env, key, len);
+	ft_strlcat(new_env, "=", len);
+	ft_strlcat(new_env, value, len);
+	return (new_env);
 }

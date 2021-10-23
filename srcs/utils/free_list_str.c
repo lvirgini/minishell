@@ -1,36 +1,54 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_env.c                                        :+:      :+:    :+:   */
+/*   free_list_str.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/16 14:11:58 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/23 17:27:08 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/10/22 15:35:32 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/10/22 16:01:33 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_this_env(char *env)
-{
-	if (env)
-	{
-		ft_putstr(env);
-		ft_putstr("\n");
-	}
-}
+/*
+** free all inside char **
+*/
 
-void	print_list_env(char **env)
+void	free_list_str(char **list_str)
 {
-	int	i;
+	size_t		i;
 
+	if (!list_str)
+		return ;
 	i = 0;
-	while (env && env[i])
+	while (list_str[i])
 	{
-		print_this_env(env[i]);
-		ft_putstr(env[i]);
-		ft_putstr("\n");
+		free(list_str[i]);
+		list_str[i] = NULL;
 		i++;
 	}
+	free(list_str);
+}
+
+/*
+** free char ** until nb
+** usefull for malloc error.
+*/
+
+void	free_n_list_str(char **list_str, size_t nb) 
+{
+	size_t		i;
+
+	if (!list_str)
+		return ;
+	i = 0;
+	while (i < nb)
+	{
+		free(list_str[i]);
+		list_str[i] = NULL;
+		i++;
+	}
+	free(list_str);
 }

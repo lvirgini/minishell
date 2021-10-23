@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:37:30 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/21 16:30:02 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/23 22:31:33 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 void	testing_lexer(void);
 void	testing_remove_token(void);
 void	testing_ft_get_token(void);
-void	testing_env(t_env **env);
-void	testing_prompt(t_env **env);
+void	testing_env(char **env);
+void	testing_prompt(char **env);
 void	testing_convert_double_quote(void);
 void	testing_redir(void);
 void	testing_parse_redir(void);

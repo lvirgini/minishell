@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 17:36:34 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/22 13:28:58 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/22 15:59:11 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,6 @@ static int	get_argc_for_next_cmd(t_token **list_token)
 	return (argc);
 }
 
-static void	free_uncomplete_double_tab(char **argv, size_t nb) //
-{
-	size_t	i;
-
-	i = 0;
-	while (i < nb)
-	{
-		free(argv[i]);
-		argv[i] = NULL;
-		i++;
-	}
-}
 
 /*
 ** strdup all token->word to cmd->argv.
@@ -58,7 +46,7 @@ static int	add_argv_from_token(char **argv, t_token *token, int argc)
 		argv[i] = ft_strdup(token->word);
 		if (!argv[i])
 		{
-			free_uncomplete_double_tab(argv, i);
+			free_n_list_str(argv, i);
 			perror("malloc() in add_cmd_arguments_from token");
 			return (FAILURE);
 		}

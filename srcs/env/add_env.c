@@ -6,92 +6,55 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 11:55:27 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/07 19:48:05 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/23 17:30:46 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-** Puts the key and value in env
-** 		-	key can't be empty
-**		-	value can
-*/
-
-static int	puts_in_env(t_env *res, char *key, char *value)
+static char	**add_new_env(char **old, char *to_add)
 {
-	if (!key)
-		return (FAILURE);
-	res->key = ft_strdup(key);
-	if (res->key == NULL)
+	char	**new_list_env;
+	int		env_size;
+
+	env_size = get_list_env_size(old) + 1;
+	new_list_env = malloc_list_env(env_size);
+	if (!new_list_env)
 	{
-		perror("puts_in_env");
-		return (FAILURE);
+		free_list_env(old);
+		return (NULL);
+		// si malloc fail retourner l'ancien env ou tout quitter ?
 	}
-	res->value = ft_strdup(value);
-	if (res->value == NULL && value != NULL)
-	{
-		perror("puts_in_env");
-		free(res->key);
-		return (FAILURE);
-	}
+	moving_env(new_list_env, old, env_size);
+	new_list_env[env_size - 1] = to_add;
+	new_list_env[env_size] = NULL;
+	free(old);
+	return (new_list_env);
+}
+
+static int	edit_env(char **env, int index, char *to_edit)
+{
+	free(env[index]);
+	env[index] = to_edit;
 	return (SUCCESS);
 }
 
 /*
-** malloc new env and puts inside key and value
-** CARREFULL : don't use this function directly : use edit_or_add_t_env
-** because we can't have two same key env
+** Si env "KEY" existe modifié l'index (edit env) sinon ajouter un nouvel element
 */
 
-t_env	*add_new_env(char *key, char *value)
+char	**add_env(char **env, char *key, char *value)
 {
-	t_env	*res;
+	int		index;
+	char	*to_add;
 
-	res = malloc_t_env();
-	if (res != NULL)
-	{
-		if (puts_in_env(res, key, value) == FAILURE)
-		{
-			free(res);
-			return (NULL);
-		}
-	}
-	return (res);
-}
-
-/*
-** add this env to front of all env
-** return the front of env.
-*/
-
-static void	add_front_env(t_env **env, t_env *to_add)
-{
-	if (to_add)
-	{
-		to_add->next = *env;
-		*env = to_add;
-	}
-}
-
-/*
-** Edit existing env or add it if no exist
-*/
-
-int	edit_or_add_t_env(t_env **env, char *key, char *value)
-{
-	t_env	*to_edit;
-
-	to_edit = get_this_env(env, key);
-	if (to_edit == NULL)
-		add_front_env(env, add_new_env(key, value));
+	to_add = create_new_env(key, value);
+	if (!to_add)
+		return (env);
+	index = get_env_index(env, key);
+	if (index == -1)
+		env = add_new_env(env, to_add);
 	else
-	{
-		free(to_edit->value);
-		to_edit->value = ft_strdup(value);
-		if (to_edit->value == NULL && value != NULL)
-			return (FAILURE);
-	}
-
-	return (SUCCESS);
+		edit_env(env, index, to_add);
+	return (env);
 }

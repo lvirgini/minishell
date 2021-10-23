@@ -6,58 +6,43 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 11:56:22 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/05 22:29:37 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/23 22:31:13 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_ENV_H
 # define MINISHELL_ENV_H
 
-typedef struct s_env	t_env;
-
-struct		s_env
-{
-	char	*key;
-	char	*value;
-	t_env	*next;
-};
-
 /*
-** malloc, free, add, remove
+** init env
 */
 
-t_env		*malloc_t_env(void);
-void		free_this_env(t_env *env);
-void		free_all_t_env(t_env **env);
-void		remove_t_env(t_env **env, char *key);
+char	**malloc_list_env(int env_size);
+char	*create_new_env(char *key, char *value);
+void	free_list_env(char **env);
 
 /*
-** manipulate t_env
-** don't use add new env ! use edit_or_add_t_env
+** get env
 */
 
-t_env		*add_new_env(char *key, char *value);
-int			edit_or_add_t_env(t_env **env, char *key, char *value);
+char	*get_env_value(char **env, char *key);
+int		get_env_index(char **env, char *key);
+int		get_list_env_size(char **env);
 
 /*
-** get data in t_env
+** create minishell env
 */
 
-char		*get_value_t_env(t_env **env, char *key);
-t_env		*get_this_env(t_env **env, char *key);
+char	**make_minishell_env(char *env[]);
+char	**add_env(char **env, char *key, char *value);
+int		duplicate_env(char **env, char **old, int size);
+int		moving_env(char **env, char **old, int size);
 
 /*
-**	edit value of env
+** Print env
 */
 
-t_env		**recover_complete_env(char *env[], char *shell_name);
-int			check_and_set_minimum_t_env(t_env **env, char *shell_name);
-
-/*
-** others get datas
-*/
-
-void		print_all_env(t_env **env);
-void		print_this_env(t_env *env);
+void	print_list_env(char **env);
+void	print_this_env(char *env);
 
 #endif

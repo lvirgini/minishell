@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 16:25:24 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/21 19:43:18 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/23 22:33:40 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,14 @@ int		main(int argc, char *argv[], char *env[])
 {
 	(void)argc;
 
-	t_env	**minishell_env;
+	char	**minishell_env;
 	
 	// a voir pour garder la structure t_env ou directement le env du main
-	minishell_env = recover_complete_env(env, argv[0]);
+	minishell_env = make_minishell_env(env);
 
-	//testing_parser();
-
+	//testing_env(env);
 	make_terminal(minishell_env);
-	free_all_t_env(minishell_env);
+	free_list_env(env);
 
 	return (0);
 }

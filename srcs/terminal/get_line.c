@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/22 13:24:09 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/23 22:33:48 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	make_shell(char *line)
 
 	token = lexer_minishell(line);
 	cmd = parser_minishell(token);
-	print_list_cmd(cmd);
 	free_list_token(token);
+	print_list_cmd(cmd);
 	free_list_cmd(cmd);
 }
 
@@ -36,7 +36,7 @@ void	make_shell(char *line)
 ** si la ligne n'est pas vide on la rajoute a l'historique (cmd de readline)
 */
 
-int	make_terminal(t_env **env)
+int	make_terminal(char **env)
 {
 	char		*line;
 	t_prompt	*prompt;
@@ -52,7 +52,7 @@ int	make_terminal(t_env **env)
 			{
 				add_history(line);
 				make_shell(line);
-				// ici pour récupéré line ecrite dans minishell
+				// ici pour récupérer line ecrite dans minishell
 			}
 		prompt = get_prompt(env, prompt);
 		free(line);
