@@ -1,45 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_token_malloc.c                                   :+:      :+:    :+:   */
+/*   need_expand.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/09 17:50:07 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/25 19:19:25 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/10/25 16:34:18 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/10/25 16:43:38 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-** malloc empty t_token
-*/
-
-t_token	*malloc_token(void)
+t_bool	need_expand_str(char *str)
 {
-	t_token	*token;
-
-	token = (t_token *)malloc(sizeof(t_token));
-	if (!token)
+	if (str)
 	{
-		perror("malloc_token ()");
-		return (NULL);
+		if (str[0] == CHAR_DOUBLE_QUOTE
+			|| str[0] == CHAR_SIMPE_QUOTE
+			|| str[0] == CHAR_DOLLAR)
+			return (true);
 	}
-	ft_memset(token, 0, sizeof(t_token));
-	return (token);
+	return (false);
 }
 
-t_token	**malloc_list_token(void)
+t_bool	need_expand_argv(char **argv)
 {
-	t_token		**token;
+	size_t	i;
 
-	token = (t_token **)malloc(sizeof(t_token *)); 
-	if (!token)
+	if (!argv)
+		return (false);
+	i = 0;
+	while (argv[i])
 	{
-		perror("malloc_list_token()");
-		return (NULL);
+		if (need_expand_str(argv[i]))
+			return (true);
+		i++;
 	}
-	*token = NULL;
-	return (token);
+	return (false);
 }

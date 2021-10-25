@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/23 22:33:48 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/25 17:04:13 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	make_shell(char *line)
 	cmd = parser_minishell(token);
 	free_list_token(token);
 	print_list_cmd(cmd);
+	if (cmd)
+		printf("NEED_EXPAND = %d\n", need_expand_argv((*cmd)->argv));
 	free_list_cmd(cmd);
 }
 

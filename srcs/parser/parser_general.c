@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 11:53:06 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/22 13:27:51 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/25 19:28:20 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ t_cmd	**parser_minishell(t_token **token)
 	t_cmd	**list_cmd;
 	t_cmd	*new_cmd;
 
+	if (!token)
+		return (NULL);
 	list_cmd = malloc_list_cmd();
 	if (!list_cmd)
 		return (NULL);

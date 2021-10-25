@@ -1,42 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_variable.c                                  :+:      :+:    :+:   */
+/*   t_token_add_back.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/23 23:15:32 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/25 16:41:42 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/10/25 19:13:14 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/10/25 19:20:55 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-** expand variable.
-**
-*/
-/*
-char	*expand_variable(char **env, char *key)
+int	add_back_token(t_token **list_token, t_token *to_add)
 {
-	char	*value;
-	char	*result;
+	t_token *current;
 
-	value = get_env_value(env, key + 1);
-	if (!value) //// A TESTER
+	if (!list_token)
+		return (FAILURE);
+	current = *list_token;
+	while (current)
 	{
-		result = (char *)malloc(sizeof(char));
-		if (result)
-			*result = "\0";
-	}	
-	else
-		result = ft_strdup(value);
-	free(key);
-	if (!result)
-	{
-		perror("malloc in expand_variable()");
-		return (NULL);
+		if (!current->next)
+		{
+			current->next = to_add;
+			to_add->prev = current;
+			return (SUCCESS);
+		}
+		current = current->next;
 	}
-	return (result);
+	*list_token = to_add;
+	return (SUCCESS);
 }
-*/

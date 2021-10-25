@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 10:54:51 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/22 13:31:50 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/25 19:21:12 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,7 @@ int			get_token_tild_right(t_token *token, char *line);
 */
 
 t_token		**lexer_minishell(char *line);
-t_token		*add_next_token(char *line, t_token *token_prev,
-				t_func_get_token *get_token);
+t_token		*add_next_token(char *line, t_func_get_token *get_token);
 
 /*
 ** usefull

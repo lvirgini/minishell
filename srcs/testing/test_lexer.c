@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 15:43:59 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/22 13:34:21 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/25 19:21:49 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	testing_ft_get_token(void)
 	char	*here_doc = "<<ssdfsf";
 
 	char	*simple_quote = "\'bla bla bla bla \\\' \\a$?"; //JE NE SAIS PAS COMMENT LE TESTER LA
-	token = add_next_token(simple_quote, NULL, ft_get_token);
+	token = add_next_token(simple_quote, ft_get_token);
 	print_token(token);
 	for (int i = 0; simple_quote[i]; i++)
 		printf("%c ", simple_quote[i]);
@@ -68,24 +68,24 @@ void	testing_ft_get_token(void)
 	return ;
 
 	char	*double_quote = "\"word\" trtrtrt";
-	token = add_next_token(double_quote, NULL, ft_get_token);
+	token = add_next_token(double_quote, ft_get_token);
 	print_token(token);
 	return ;
-	token = add_next_token(word, NULL, ft_get_token);
+	token = add_next_token(word, ft_get_token);
 	print_token(token);
-	token = add_next_token(pipe, NULL, ft_get_token);
+	token = add_next_token(pipe, ft_get_token);
 	print_token(token);
-	token = add_next_token(exit_status, NULL, ft_get_token);
+	token = add_next_token(exit_status, ft_get_token);
 	print_token(token);
-	token = add_next_token(variable, NULL, ft_get_token);
+	token = add_next_token(variable, ft_get_token);
 	print_token(token);
-	token = add_next_token(input, NULL, ft_get_token);
+	token = add_next_token(input, ft_get_token);
 	print_token(token);
-	token = add_next_token(output, NULL, ft_get_token);
+	token = add_next_token(output, ft_get_token);
 	print_token(token);
-	token = add_next_token(here_doc, NULL, ft_get_token);
+	token = add_next_token(here_doc, ft_get_token);
 	print_token(token);
-	token = add_next_token(append, NULL, ft_get_token);
+	token = add_next_token(append, ft_get_token);
 	print_token(token);
 }
 

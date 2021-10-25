@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 21:24:00 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/22 13:35:16 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/25 19:17:47 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,10 @@ enum e_token_type
 */
 
 t_token		*malloc_token(void);
+t_token		**malloc_list_token(void);
 void		free_this_token(t_token *token);
 void		free_list_token(t_token **token);
 void		remove_this_token(t_token *token);
 t_token		*remove_multi_token(t_token **list_token, t_token *token, int nb);
-
+int			add_back_token(t_token **list_token, t_token *to_add);
 #endif

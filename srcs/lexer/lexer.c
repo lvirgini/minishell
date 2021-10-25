@@ -1,36 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   start_lexer.c                                      :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 18:18:56 by mini              #+#    #+#             */
-/*   Updated: 2021/10/21 15:46:36 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/25 19:23:04 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*
-** a special fonction for malloc t_token ** and his first element
-*/
-
-static t_token	**malloc_first_token(char *line, t_func_get_token *get_token)
-{
-	t_token		**token;
-
-	token = (t_token **)malloc(sizeof(t_token *)); //
-	if (!token)
-		return (NULL);
-	*token = add_next_token(line, NULL, get_token);
-	if (!*token)
-	{
-		free_list_token(token);
-		return (NULL);
-	}
-	return (token);
-}
 
 /*
 **	implementation of the functions get_token()
@@ -75,27 +55,25 @@ static char	*move_line_for_next_token(char *line, t_token *current)
 
 t_token	**lexer_minishell(char *line)
 {
-	t_token					**token;
-	t_token					*current;
+	t_token					**list_token;
+	t_token					*new_token;
 	static t_func_get_token	get_token[NB_METACHARACTER];
 
 	set_functions_get_token(get_token);
-	line = pass_spaces_in_line(line);
-	token = malloc_first_token(line, get_token);
-	if (!token)
+	list_token = malloc_list_token();
+	if (!list_token)
 		return (NULL);
-	current = *token;
-	line = move_line_for_next_token(line, current);
+	line = pass_spaces_in_line(line);
 	while (*line)
 	{
-		current->next = add_next_token(line, current, get_token);
-		current = current->next;
-		if (!current && *line)
+		new_token = add_next_token(line, get_token);
+		if (!new_token && *line)
 		{
-			free_list_token(token);
+			free_list_token(list_token);
 			return (NULL);
 		}
-		line = move_line_for_next_token(line, current);
+		add_back_token(list_token, new_token);
+		line = move_line_for_next_token(line, new_token);
 	}
-	return (token);
+	return (list_token);
 }

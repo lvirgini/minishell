@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 19:15:52 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/21 15:52:20 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/25 19:28:02 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	free_list_cmd(t_cmd **cmd)
 	t_cmd	*current;
 	t_cmd	*next;
 
-	if (!cmd)
+	if (!cmd || !*cmd)
 		return ;
 	current = *cmd;
 	while (current)
