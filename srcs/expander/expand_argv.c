@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 11:09:02 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/26 14:53:51 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/26 16:27:08 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static char	**redesign_expansion_argv(char **old_argv, int index,
 	char	**new_argv;
 
 	old_len = list_strlen(old_argv);
-	expand_len = expansion_len(expansion);
+	expand_len = struct_len(expansion);
 	new_argv = (char **)malloc(sizeof(char *) * (old_len + expand_len + 1));
 	if (!new_argv)
 		return (NULL);

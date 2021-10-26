@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 17:50:07 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/25 19:19:25 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/26 16:22:46 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_token	**malloc_list_token(void)
 {
 	t_token		**token;
 
-	token = (t_token **)malloc(sizeof(t_token *)); 
+	token = (t_token **)malloc(sizeof(t_token *));
 	if (!token)
 	{
 		perror("malloc_list_token()");

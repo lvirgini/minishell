@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 15:07:51 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/26 16:01:11 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/26 16:26:19 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ struct	s_struct
 
 void	struct_add_back(void *structure, void *to_add);
 void	struct_list_add_back(void *void_list, void *void_to_add);
+size_t	struct_len(void *struct_first);
 
 /*
 ** list str utils

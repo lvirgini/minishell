@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 21:39:55 by mini              #+#    #+#             */
-/*   Updated: 2021/10/25 19:12:50 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/26 16:21:21 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ t_token	*add_next_token(char *line, t_func_get_token *get_token)
 	if (syntax == FAILURE)
 	{
 		free(token);
-		printf("syntax = %d\n", syntax);
-		return (NULL); /// print error
+		return (NULL);
 	}	
 	return (token);
 }

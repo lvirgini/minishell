@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 21:24:00 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/26 15:47:38 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/26 16:15:22 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ struct s_token
 {
 	t_token	*next;
 	t_token	*prev;
-	int		type;
 	char	*word;
+	int		type;
 	size_t	len;
 };
 
@@ -71,5 +71,5 @@ void		free_this_token(t_token *token);
 void		free_list_token(t_token **token);
 void		remove_this_token(t_token *token);
 t_token		*remove_multi_token(t_token **list_token, t_token *token, int nb);
-int			add_back_token(t_token **list_token, t_token *to_add);
+
 #endif

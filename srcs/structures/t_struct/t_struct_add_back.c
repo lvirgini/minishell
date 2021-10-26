@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 15:07:17 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/26 16:03:29 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/26 16:22:34 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	struct_add_back(void *void_struct, void *void_to_add)
 
 void	struct_list_add_back(void *void_list, void *void_to_add)
 {
-	t_struct **list;
-	t_struct *to_add;
+	t_struct	**list;
+	t_struct	*to_add;
 	t_struct	*last;
 
 	list = (t_struct **)void_list;

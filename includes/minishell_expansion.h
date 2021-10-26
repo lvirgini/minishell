@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 16:38:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/26 14:36:20 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/26 16:26:58 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,5 @@ char		**expand_argv(char **argv, char **env);
 
 t_bool		need_expand_str(char *str);
 t_bool		need_expand_argv(char **argv);
-size_t		expansion_len(t_expansion *expansion);
 
 #endif
