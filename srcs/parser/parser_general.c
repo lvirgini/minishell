@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 11:53:06 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/25 19:28:20 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/26 15:47:25 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_cmd	**parser_minishell(t_token **token)
 			free_list_cmd(list_cmd);
 			return (NULL);
 		}
-		add_back_cmd(list_cmd, new_cmd);
+		struct_list_add_back(list_cmd, new_cmd);
 	}
 	return (list_cmd);
 }

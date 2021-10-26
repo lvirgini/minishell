@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 22:38:17 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/22 10:52:36 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/26 15:27:45 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ int	parse_input(t_cmd *cmd, t_token *token)
 	if (!cmd->input)
 		cmd->input = input;
 	else
-		add_back_redir(cmd->input, input);
+		struct_add_back((t_struct *)cmd->input, (t_struct *)input);
 	return (SUCCESS);
 }

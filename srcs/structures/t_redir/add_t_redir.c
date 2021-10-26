@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 19:54:42 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/22 10:51:58 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/26 15:25:26 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,4 @@ t_redir	*create_redir(int type, char *filename)
 	redirection->filename = ft_strdup(filename);
 	redirection->type = type;
 	return (redirection);
-}
-
-void	add_back_redir(t_redir *redirection, t_redir *to_add)
-{
-	while (redirection->next)
-		redirection = redirection->next;
-	redirection->next = to_add;
 }

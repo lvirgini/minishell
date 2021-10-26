@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 21:24:00 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/25 19:17:47 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/26 15:47:38 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,11 @@
 typedef struct s_token	t_token;
 struct s_token
 {
+	t_token	*next;
+	t_token	*prev;
 	int		type;
 	char	*word;
 	size_t	len;
-	t_token	*prev;
-	t_token	*next;
 };
 
 /*

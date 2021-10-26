@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 14:11:58 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/23 17:27:08 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/26 15:03:52 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	print_list_env(char **env)
 	i = 0;
 	while (env && env[i])
 	{
-		print_this_env(env[i]);
 		ft_putstr(env[i]);
 		ft_putstr("\n");
 		i++;

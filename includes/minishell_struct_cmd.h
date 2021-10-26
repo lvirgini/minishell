@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 22:25:50 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/22 13:31:30 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/26 15:39:47 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@
 typedef struct s_cmd	t_cmd;
 struct		s_cmd
 {
+	t_cmd	*next;
+	t_cmd	*prev;
 	char	*path;
 	char	**argv;
 	int		type;
@@ -37,8 +39,6 @@ struct		s_cmd
 	t_redir	*output;
 	pid_t	pid;
 	int		exit_status;
-	t_cmd	*next;
-	t_cmd	*prev;
 };
 
 enum e_cmd_type
@@ -55,6 +55,5 @@ t_cmd		*malloc_cmd(void);
 t_cmd		**malloc_list_cmd(void);
 void		free_cmd(t_cmd *cmd);
 void		free_list_cmd(t_cmd **cmd);
-void		add_back_cmd(t_cmd **list_cmd, t_cmd *to_add);
 
 #endif

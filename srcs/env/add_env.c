@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 11:55:27 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/26 14:54:19 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/26 15:05:19 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char	**add_new_env(char **old, char *to_add)
 	char	**new_list_env;
 	int		env_size;
 
-	env_size = get_list_env_size(old) + 1;
+	env_size = list_strlen(old) + 1;
 	new_list_env = malloc_list(env_size);
 	if (!new_list_env)
 	{
@@ -37,6 +37,26 @@ static int	edit_env(char **env, int index, char *to_edit)
 	free(env[index]);
 	env[index] = to_edit;
 	return (SUCCESS);
+}
+
+static char	*create_new_env(char *key, char *value)
+{
+	size_t	len;
+	char	*new_env;
+
+	if (!key || !value)
+		return (NULL);
+	len = ft_strlen(key) + ft_strlen(value) + 2;
+	new_env = (char *)malloc(sizeof(char) * (len));
+	if (!new_env)
+	{
+		perror("malloc create_new_env()");
+		return (NULL);
+	}
+	ft_strlcpy(new_env, key, len);
+	ft_strlcat(new_env, "=", len);
+	ft_strlcat(new_env, value, len);
+	return (new_env);
 }
 
 /*

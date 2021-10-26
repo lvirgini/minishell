@@ -6,18 +6,12 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 11:56:22 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/26 14:50:55 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/26 15:05:47 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_ENV_H
 # define MINISHELL_ENV_H
-
-/*
-** init env
-*/
-
-char	*create_new_env(char *key, char *value);
 
 /*
 ** get env
@@ -33,8 +27,6 @@ int		get_list_env_size(char **env);
 
 char	**make_minishell_env(char *env[]);
 char	**add_env(char **env, char *key, char *value);
-//int		duplicate_env(char **env, char **old, int size);
-//int		moving_env(char **env, char **old, int size);
 
 /*
 ** Print env

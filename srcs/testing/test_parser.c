@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 16:34:27 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/22 13:34:14 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/26 15:27:11 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static void	test_redir_1(void)
 	token.word = "file";
 	r = create_redir(APPEND, token.word);
 	token.word = "file2";
-	add_back_redir(r, create_redir(INPUT_REDIRECTION, token.word));
+	struct_add_back((t_struct *)r, (t_struct *)create_redir(INPUT_REDIRECTION, token.word));
 	token.word = "file3";
-	add_back_redir(r, create_redir(OUTPUT_REDIRECTION, token.word));
+	struct_add_back((t_struct *)r, (t_struct *)create_redir(OUTPUT_REDIRECTION, token.word));
 	print_redir(r);
 	free_list_redir(r);
 }

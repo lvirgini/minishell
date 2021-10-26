@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:29:00 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/22 11:16:49 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/26 15:25:03 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 typedef struct s_redirection	t_redir;
 struct s_redirection
 {
+	t_redir	*next;
 	char	*filename;
 	int		type;
-	t_redir	*next;
 };
 
 /*
@@ -40,7 +40,6 @@ void		free_this_redir(t_redir *redir); // static ?
 **	management t_redir
 */
 
-void		add_back_redir(t_redir *redirection, t_redir *to_add);
 t_redir		*create_redir(int type, char *filename);
 
 #endif
