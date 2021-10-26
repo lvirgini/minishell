@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_env.c                                         :+:      :+:    :+:   */
+/*   t_list_duplicate.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/23 14:48:32 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/23 14:51:26 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/10/26 14:44:17 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/10/26 14:51:49 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_list_env(char **env)
+int	duplicate_list(char **list, char **old_list, int max)
 {
-	size_t	i;
+	int		i;
 
 	i = 0;
-	if (env)
+	while (i < max)
 	{
-		while (env[i])
+		list[i] = ft_strdup(old_list[i]);
+		if (!list[i])
 		{
-			free(env[i]);
-			i++;
+			perror("malloc in duplicate_list()");
+			free_n_list(list, i);
+			return (FAILURE);
 		}
-		free(env);
+		i++;
 	}
+	list[i] = NULL;
+	return (SUCCESS);
 }

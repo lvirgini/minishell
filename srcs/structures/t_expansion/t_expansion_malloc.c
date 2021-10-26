@@ -1,33 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   malloc_env.c                                       :+:      :+:    :+:   */
+/*   t_expansion_malloc.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/05 14:40:27 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/26 14:40:03 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/10/25 21:12:49 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/10/26 10:14:36 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*create_new_env(char *key, char *value)
+t_expansion	*malloc_expansion(void)
 {
-	size_t	len;
-	char	*new_env;
+	t_expansion	*expansion;
 
-	if (!key || !value)
-		return (NULL);
-	len = ft_strlen(key) + ft_strlen(value) + 2;
-	new_env = (char *)malloc(sizeof(char) * (len));
-	if (!new_env)
+	expansion = (t_expansion *)malloc(sizeof(t_expansion));
+	if (!expansion)
 	{
-		perror("malloc create_new_env()");
+		perror("malloc_expansion()");
 		return (NULL);
 	}
-	ft_strlcpy(new_env, key, len);
-	ft_strlcat(new_env, "=", len);
-	ft_strlcat(new_env, value, len);
-	return (new_env);
+	ft_memset(expansion, 0, sizeof(t_expansion));
+	return (expansion);
 }

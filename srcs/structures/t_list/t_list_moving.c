@@ -1,42 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_variable.c                                  :+:      :+:    :+:   */
+/*   t_list_moving.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/23 23:15:32 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/25 16:41:42 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/10/26 10:22:12 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/10/26 14:53:29 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
-** expand variable.
-**
+** recupere les pointeurs des char *env de OLD pour les mettre dans env
 */
-/*
-char	*expand_variable(char **env, char *key)
-{
-	char	*value;
-	char	*result;
 
-	value = get_env_value(env, key + 1);
-	if (!value) //// A TESTER
+int	moving_list(char **list, char **old_list, int max)
+{
+	int		i;
+
+	i = 0;
+	while (i < max && old_list[i])
 	{
-		result = (char *)malloc(sizeof(char));
-		if (result)
-			*result = "\0";
-	}	
-	else
-		result = ft_strdup(value);
-	free(key);
-	if (!result)
-	{
-		perror("malloc in expand_variable()");
-		return (NULL);
+		list[i] = old_list[i];
+		i++;
 	}
-	return (result);
+	return (i);
 }
-*/

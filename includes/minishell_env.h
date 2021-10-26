@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 11:56:22 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/23 22:31:13 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/26 14:50:55 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@
 ** init env
 */
 
-char	**malloc_list_env(int env_size);
 char	*create_new_env(char *key, char *value);
-void	free_list_env(char **env);
 
 /*
 ** get env
@@ -35,8 +33,8 @@ int		get_list_env_size(char **env);
 
 char	**make_minishell_env(char *env[]);
 char	**add_env(char **env, char *key, char *value);
-int		duplicate_env(char **env, char **old, int size);
-int		moving_env(char **env, char **old, int size);
+//int		duplicate_env(char **env, char **old, int size);
+//int		moving_env(char **env, char **old, int size);
 
 /*
 ** Print env

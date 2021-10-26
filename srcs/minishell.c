@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 16:25:24 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/25 17:04:01 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/26 14:48:38 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,15 @@ int		main(int argc, char *argv[], char *env[])
 
 	char	**minishell_env;
 	
+//testing_structure();
+//	exit(0);
+
+
 	// a voir pour garder la structure t_env ou directement le env du main
 	minishell_env = make_minishell_env(env);
 
 	make_terminal(minishell_env);
-	free_list_env(env);
+	free_list(env);
 
 	return (0);
 }

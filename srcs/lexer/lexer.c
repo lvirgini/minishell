@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 18:18:56 by mini              #+#    #+#             */
-/*   Updated: 2021/10/25 19:23:04 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/26 12:11:41 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,22 +27,12 @@ static void	set_functions_get_token(t_func_get_token ft_token[NB_METACHARACTER])
 	ft_token[FT_WORD] = &get_token_word;
 }
 
-/*
-** pass the spaces in the line and return the ptr.
-*/
-
-static char	*pass_spaces_in_line(char *line)
-{
-	while (*line && ft_isspace(*line))
-		line++;
-	return (line);
-}
 
 static char	*move_line_for_next_token(char *line, t_token *current)
 {
 	if (current)
 		line += current->len;
-	return (pass_spaces_in_line(line));
+	return (pass_str_spaces(line));
 }
 
 /*
@@ -63,7 +53,7 @@ t_token	**lexer_minishell(char *line)
 	list_token = malloc_list_token();
 	if (!list_token)
 		return (NULL);
-	line = pass_spaces_in_line(line);
+	line = pass_str_spaces(line);
 	while (*line)
 	{
 		new_token = add_next_token(line, get_token);

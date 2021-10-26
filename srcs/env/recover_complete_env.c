@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 13:28:18 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/23 17:28:05 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/26 14:54:27 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ char	**make_minishell_env(char *env[])
 	int		env_size;
 
 	env_size = get_list_env_size(env);
-	minishell_env = malloc_list_env(env_size);
+	minishell_env = malloc_list(env_size);
 	if (!minishell_env)
 		return (NULL);
-	if (duplicate_env(minishell_env, env, env_size) == FAILURE)
+	if (duplicate_list(minishell_env, env, env_size) == FAILURE)
 		return (NULL);
 	return (minishell_env);
 // add SHELL : shellname

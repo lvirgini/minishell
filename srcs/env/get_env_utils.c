@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 16:14:04 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/23 17:29:04 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/26 12:07:37 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*get_env_value(char **env, char *key)
 	return (value);
 }
 
-int	get_list_env_size(char **env)
+int	get_list_env_size(char **env) //
 {
 	int		count;
 

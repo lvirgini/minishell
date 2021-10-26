@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 15:18:43 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/23 17:24:00 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/26 14:49:41 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	duplicate_env(char **env, char **old, int size)
 		if (!env[i])
 		{
 			perror("malloc in duplicate_env()");
-			free_n_list_str(env, i);
+			free_n_list(env, i);
 			return (FAILURE);
 		}
 		i++;

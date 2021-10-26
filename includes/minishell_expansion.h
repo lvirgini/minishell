@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 16:38:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/25 19:27:17 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/26 14:36:20 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,31 @@
 typedef struct s_expansion	t_expansion;
 struct s_expansion
 {
-	char		*value;
 	t_expansion	*next;
+	char		*value;
 };
 
+/*
+** init and free t_expansion
+*/
+
+t_expansion	*malloc_expansion(void);
+void		free_expansion(t_expansion	*expansion);
+void		free_list_expansion(t_expansion *expansion);
+
+/*
+** expansing functions
+*/
+
+int			expanser(t_cmd **list_cmd, char **env);
+char		**expand_argv(char **argv, char **env);
+
+/*
+** Useful functions for t_expansion
+*/
+
+t_bool		need_expand_str(char *str);
 t_bool		need_expand_argv(char **argv);
+size_t		expansion_len(t_expansion *expansion);
 
 #endif
