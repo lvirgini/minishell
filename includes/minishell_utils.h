@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 15:07:51 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/26 16:26:19 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/26 16:49:43 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,12 @@ void	free_n_list(char **list, size_t nb);
 size_t	list_strlen(char **list);
 int		moving_list(char **list, char **old_list, int max);
 int		duplicate_list(char **list, char **old_list, int max);
+void	print_list(char **list);
 
 /*
 ** str utils
 */
-
+void	print_str(char *str);
 char	*pass_str_spaces(char *line);
 
 #endif

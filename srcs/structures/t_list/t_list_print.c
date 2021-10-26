@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_env.c                                        :+:      :+:    :+:   */
+/*   t_list_print.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/16 14:11:58 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/26 15:03:52 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/10/26 16:48:40 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/10/26 16:49:02 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_this_env(char *env)
+void	print_str(char *str)
 {
-	if (env)
+	if (str)
 	{
-		ft_putstr(env);
+		ft_putstr(str);
 		ft_putstr("\n");
 	}
 }
 
-void	print_list_env(char **env)
+void	print_list(char **list)
 {
 	int	i;
 
 	i = 0;
-	while (env && env[i])
+	while (list && list[i])
 	{
-		ft_putstr(env[i]);
+		ft_putstr(list[i]);
 		ft_putstr("\n");
 		i++;
 	}

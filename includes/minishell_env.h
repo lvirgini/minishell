@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 11:56:22 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/26 15:05:47 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/26 16:49:17 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,5 @@ int		get_list_env_size(char **env);
 
 char	**make_minishell_env(char *env[]);
 char	**add_env(char **env, char *key, char *value);
-
-/*
-** Print env
-*/
-
-void	print_list_env(char **env);
-void	print_this_env(char *env);
 
 #endif
