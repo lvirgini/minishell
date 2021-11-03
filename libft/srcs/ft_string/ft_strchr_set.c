@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/13 15:29:07 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/06/21 18:39:51 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/03 15:26:35 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,4 +27,20 @@ char	*ft_strchr_set(const char *s, const char *set)
 			return ((char *)s);
 	}
 	return (NULL);
+}
+
+size_t	ft_strchr_set_len(const char *s, const char *set)
+{
+	size_t	i;
+
+	if (!s || !set || !set[0])
+		return (-1);
+	i = 0;
+	while (s[i])
+	{
+		if (ft_strchr(set, s[i]))
+			return (i);
+		i++;
+	}
+	return (-1);
 }

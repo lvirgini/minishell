@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/23 23:15:32 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/26 14:34:59 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/03 15:36:13 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,26 @@
 ** expand dolar
 */
 
-t_expansion		*expand_dollar(char *str, char **env)
-{
-	t_expansion *expansion;
-	char		*value;
-	size_t		i;
 
-	expansion = malloc_expansion();
+char	*literal_value_of_dollar(char *str, char **env)
+{
+	return (get_env_value(env, str + 1));
+}
+
+char	**expand_dollar(char *str, char **env)
+{
+	char 		**split_expansion;
+//	char		*value;
+
+	//value = literal_value_of_dollar(str, env);
+	split_expansion = ft_split_set(str, STR_ESCAPE);
+	return(split_expansion);
+	
+/*	if (!value)
+		expansion->value = NULL; // a verifier pour affichage multi null value
+	expansion = 
 	if (!expansion)
 		return (NULL);
-	value = get_env_value(env, str + 1);
-	if (!value)
-		expansion->value = NULL; // a verifier pour affichage multi null value
 	while (str)
 	{
 		value = NULL;//
@@ -41,6 +49,7 @@ t_expansion		*expand_dollar(char *str, char **env)
 	//	add_back_expansion(expansion, value);
 	}
 	return (expansion);
+*/
 }
 
 

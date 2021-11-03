@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 17:36:34 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/26 14:50:11 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/10/26 16:55:42 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ static int	get_argc_for_next_cmd(t_token **list_token)
 	}
 	return (argc);
 }
-
 
 /*
 ** strdup all token->word to cmd->argv.

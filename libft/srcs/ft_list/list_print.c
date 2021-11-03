@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   recover_complete_env.c                             :+:      :+:    :+:   */
+/*   t_list_print.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/16 13:28:18 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/03 15:38:58 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/10/26 16:48:40 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/10/28 11:26:22 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-
-char	**make_minishell_env(char *env[])
+void	print_str(char *str)
 {
-	char	**minishell_env;
-	int		env_size;
+	if (str)
+	{
+		ft_putstr(str);
+		ft_putstr("\n");
+	}
+}
 
-	env_size = listlen(env);
-	//minishell_env = malloc_list(env_size);
-	minishell_env = list_dup(env);
-	if (!minishell_env)
-		return (NULL);
-//	if (list_ndup(minishell_env, env, env_size) == FAILURE)//
-//		return (NULL);
-	return (minishell_env);
-// add SHELL : shellname
+void	print_list(char **list)
+{
+	int	i;
+
+	i = 0;
+	while (list && list[i])
+	{
+		ft_putstr(list[i]);
+		ft_putstr("\n");
+		i++;
+	}
 }

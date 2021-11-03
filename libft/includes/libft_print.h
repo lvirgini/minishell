@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_list_moving.c                                    :+:      :+:    :+:   */
+/*   libft_print.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/26 10:22:12 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/26 14:53:29 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/10/28 11:28:09 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/10/28 11:33:52 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef LIBFT_PRINT_H
+# define LIBFT_PRINT_H
+
+# include "libft.h"
 
 /*
-** recupere les pointeurs des char *env de OLD pour les mettre dans env
+** Fonctions d'impression
 */
 
-int	moving_list(char **list, char **old_list, int max)
-{
-	int		i;
+void		ft_putchar(char c);
+void		ft_putchar_fd(char c, int fd);
+void		ft_putendl(char *s);
+void		ft_putendl_fd(char *s, int fd);
+void		ft_putnbr(int n);
+void		ft_putnbr_fd(int n, int fd);
+void		ft_putnbr_base_fd(int nbr, char *base, int fd);
+void		ft_putstr(char *s);
+void		ft_putstr_fd(char *s, int fd);
 
-	i = 0;
-	while (i < max && old_list[i])
-	{
-		list[i] = old_list[i];
-		i++;
-	}
-	return (i);
-}
+#endif

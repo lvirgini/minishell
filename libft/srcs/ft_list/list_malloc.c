@@ -1,30 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   recover_complete_env.c                             :+:      :+:    :+:   */
+/*   list_malloc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/16 13:28:18 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/03 15:38:58 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/10/26 14:39:01 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/11/03 15:10:28 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
+/*
+** Malloc t_list and set all inside to NULL.
+*/
 
-char	**make_minishell_env(char *env[])
+char	**malloc_list(int size)
 {
-	char	**minishell_env;
-	int		env_size;
+	char	**list;
 
-	env_size = listlen(env);
-	//minishell_env = malloc_list(env_size);
-	minishell_env = list_dup(env);
-	if (!minishell_env)
+	if (size < 0)
 		return (NULL);
-//	if (list_ndup(minishell_env, env, env_size) == FAILURE)//
-//		return (NULL);
-	return (minishell_env);
-// add SHELL : shellname
+	list = (char **)malloc(sizeof(char *) * (size + 1));
+	if (!list)
+		return (NULL);
+	list[size] = NULL;
+	return (list);
 }

@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/07 14:01:05 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/06/21 18:33:17 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/03 15:21:10 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 int	ft_strchr_len(const char *s, int c)
 {
-	size_t	i;
+	int		i;
 
 	i = 0;
 	while (s && s[i])

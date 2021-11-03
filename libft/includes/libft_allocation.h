@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_list_malloc.c                                    :+:      :+:    :+:   */
+/*   libft_allocation.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/26 14:39:01 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/26 14:53:20 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/10/28 11:28:09 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/10/28 11:35:18 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef LIBFT_ALLOCATION_H
+# define LIBFT_ALLOCATION_H
+
+# include "libft.h"
 
 /*
-** Malloc t_list and set all inside to NULL.
+** Fonction dl'allocation de mémoire
 */
 
-char	**malloc_list(int size)
-{
-	char	**list;
+void			*ft_calloc(size_t count, size_t size);
 
-	list = (char **)malloc(sizeof(char *) * (size + 1));
-	if (!list)
-	{
-		perror("malloc_list()");
-		return (NULL);
-	}
-	list[size] = NULL;
-	return (list);
-}
+#endif

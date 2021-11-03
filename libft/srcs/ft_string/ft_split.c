@@ -6,76 +6,79 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/01 10:26:59 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/09/21 14:43:17 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/03 15:22:14 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	**free_split_exit(char **tab)
+void	free_list(char **list)
 {
 	size_t	i;
 
 	i = 0;
-	while (tab[i])
-		free(tab[i++]);
-	free(tab);
-	return (NULL);
+	while (list[i])
+		free(list[i++]);
+	free(list);
 }
 
-static size_t	count_nb_tab(const char *s, char c)
+static size_t	count_nb_list(const char *s, char c)
 {
-	size_t	nb_tab;
+	size_t	nb_list;
 
-	nb_tab = 0;
+	nb_list = 0;
 	while (*s)
 	{
 		if (*s != c)
 		{
-			nb_tab++;
+			nb_list++;
 			while (*s && *s != c)
 				s++;
 		}
 		else
 			s++;
 	}
-	return (nb_tab);
+	return (nb_list);
 }
 
-static char	**make_split(const char *s, char c, char **tab, size_t nb_tab)
+static char	**make_split(const char *s, char c, char **list, size_t nb_list)
 {
-	int	len_tab;
+	int	len_list;
 
 	while (*s)
 	{
 		if (*s != c)
 		{
-			len_tab = ft_strchr_len(s, c);
-			if (len_tab == -1)
-				len_tab = ft_strlen(s);
-			*tab = ft_strdup_max(s, len_tab);
-			if (!*tab)
-				return (free_split_exit(tab));
-			tab++;
-			s += len_tab;
+			len_list = ft_strchr_len(s, c);
+			if (len_list == -1)
+				len_list = ft_strlen(s);
+			*list = ft_strdup_max(s, len_list);
+			if (!*list)
+			{
+				free_list(list);
+				return (NULL);
+			}
+			list++;
+			s += len_list;
 		}
 		else
 			s++;
 	}
-	*tab = NULL;
-	return (tab - nb_tab);
+	*list = NULL;
+	return (list - nb_list);
 }
 
 char	**ft_split(const char *s, const char c)
 {
-	size_t	nb_tab;
-	char	**tab;
+	size_t	nb_list;
+	char	**list;
 
 	if (!s)
 		return (NULL);
-	nb_tab = count_nb_tab(s, c);
-	tab = (char **)malloc(sizeof(char *) * (nb_tab + 1));
-	if (!tab)
+	nb_list = count_nb_list(s, c);
+	list = (char **)malloc(sizeof(char *) * (nb_list + 1));
+	if (!list)
 		return (NULL);
-	return (make_split(s, c, tab, nb_tab));
+	make_split(s, c, list, nb_list);
+	return (list);
 }

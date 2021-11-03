@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 11:55:27 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/26 15:05:19 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/03 15:39:21 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char	**add_new_env(char **old, char *to_add)
 	char	**new_list_env;
 	int		env_size;
 
-	env_size = list_strlen(old) + 1;
+	env_size = listlen(old) + 1;
 	new_list_env = malloc_list(env_size);
 	if (!new_list_env)
 	{
@@ -25,7 +25,7 @@ static char	**add_new_env(char **old, char *to_add)
 		return (NULL);
 		// si malloc fail retourner l'ancien env ou tout quitter ?
 	}
-	moving_list(new_list_env, old, env_size);
+	list_nmove(new_list_env, old, env_size); //
 	new_list_env[env_size - 1] = to_add;
 	new_list_env[env_size] = NULL;
 	free(old);

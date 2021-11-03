@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 16:25:24 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/26 14:48:38 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/03 15:31:24 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@
 int		main(int argc, char *argv[], char *env[])
 {
 	(void)argc;
+    (void)argv;
 
-	char	**minishell_env;
+char	**minishell_env;
+	
 	
 //testing_structure();
 //	exit(0);

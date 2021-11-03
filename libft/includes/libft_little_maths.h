@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_list_duplicate.c                                 :+:      :+:    :+:   */
+/*   libft_little_maths.h                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/26 14:44:17 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/26 14:51:49 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/10/28 11:28:09 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/10/28 11:37:01 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef LIBFT_LITTLE_MATHS_H
+# define LIBFT_LITTLE_MATHS_H
 
-int	duplicate_list(char **list, char **old_list, int max)
-{
-	int		i;
+# include "libft.h"
 
-	i = 0;
-	while (i < max)
-	{
-		list[i] = ft_strdup(old_list[i]);
-		if (!list[i])
-		{
-			perror("malloc in duplicate_list()");
-			free_n_list(list, i);
-			return (FAILURE);
-		}
-		i++;
-	}
-	list[i] = NULL;
-	return (SUCCESS);
-}
+/*
+** little maths
+*/
+
+int			ft_abs(int n);
+long		ft_labs(long n);
+long long	ft_llabs(long long n);
+
+#endif
