@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/25 17:04:13 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/04 16:50:35 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,22 @@ void	make_shell(char *line)
 ** readline renvoi la ligne saisie
 ** si la ligne n'est pas vide on la rajoute a l'historique (cmd de readline)
 */
+
+#include <errno.h>
+#include <getopt.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <signal.h>
+#include <readline/readline.h>
+#include <readline/history.h>
+
+void handle_signals(int signo) {
+  if (signo == SIGINT) {
+    printf("You pressed Ctrl+C\n");
+  }
+}
+
 
 int	make_terminal(char **env)
 {
