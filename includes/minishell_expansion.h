@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 16:38:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/28 09:45:34 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/04 11:04:37 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void		free_list_expansion(t_expansion *expansion);
 */
 
 int			expanser(t_cmd **list_cmd, char **env);
+char		**expand(char *str, char **env);
 char		**expand_argv(char **argv, char **env);
 
 /*

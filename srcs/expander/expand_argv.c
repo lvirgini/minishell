@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 11:09:02 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/03 15:37:10 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/04 12:20:21 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,21 @@
 */
 
 static char	**redesign_expansion_argv(char **old_argv, int index,
-			t_expansion *expansion)
+			char **expansion)
 {
 	size_t	old_len;
 	size_t	expand_len;
 	char	**new_argv;
 
 	old_len = listlen(old_argv);
-	expand_len = struct_len(expansion);
-	new_argv = (char **)malloc(sizeof(char *) * (old_len + expand_len + 1));
+	expand_len = listlen(expansion);
+	new_argv = malloc_list(old_len + expand_len);
 	if (!new_argv)
 		return (NULL);
-	list_nmove(new_argv, old_argv, index);//
+	list_nmove(new_argv, old_argv, index);
+	list_move(new_argv + index, expansion);
+	list_move(new_argv + index + expand_len, old_argv + index + 1);
 	free(old_argv[index]);
-	while (expansion)
-	{
-		new_argv[index++] = expansion->value;
-		expansion = expansion->next;
-	}
 	free(old_argv);
 	return (new_argv);
 }
@@ -51,10 +48,11 @@ char	**expand_argv(char **argv, char **env)
 		if (need_expand_str(argv[i]))
 		{
 			expansion = NULL;
-		//	expansion = expand(argv[i], env);
+			expansion = expand(argv[i], env);
 			argv = redesign_expansion_argv(argv, i, expansion);
 			if (!argv)
 				return (NULL);
+			print_list(argv);
 		}
 		else
 			i++;
