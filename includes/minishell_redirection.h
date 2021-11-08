@@ -1,34 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell_error.h                                  :+:      :+:    :+:   */
+/*   minishell_redirection.h                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/13 19:47:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/08 17:32:25 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/11/08 15:53:59 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/11/08 17:20:53 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_ERROR_H
-# define MINISHELL_ERROR_H
+#ifndef MINISHELL_REDIRECTION_H
+# define MINISHELL_REDIRECTION_H
 
-# define NB_ERR_SYNTAX 2
-# define NB_ERROR 2
-enum	e_error_syntax
+# include "minishell.h"
+
+enum	e_stdio
 {
-	ERR_SYMBOL,
-	ERR_QUOTES_NOT_CLOSED,
+	IN,
+	OUT,
 };
 
-enum	e_reason_cmd_not_work
-{
-	ERR_CMD_NOT_FOUND,
-	ERR_CMD_NOT_EXECUTABLE
-};
+/*
+** setup input / output
+*/
 
-//void		display_command_error(t_env *env, char *cmd, int reason);
-int		print_syntax_error(int err, char char_data, char *str_data);
-int		syntax_error_redirection(t_token *token);
+int			setup_redirections(t_cmd *cmd);
+int			set_up_output(char *output, int type);
+int			set_up_input(char *input);
+void		save_std_io(int std_io[2]);
+void		get_back_std_io(int std_io[2]);
+
+/*
+** Here doc
+*/
 
 #endif

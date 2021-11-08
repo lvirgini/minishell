@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 16:24:41 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/26 15:10:08 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/08 17:22:03 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # include <curses.h>
 # include <term.h>
 # include <termios.h>
+# include <errno.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
@@ -47,6 +48,8 @@
 # include "minishell_parser.h"
 # include "minishell_expansion.h"
 # include "minishell_error.h"
+# include "minishell_redirection.h"
+# include "minishell_execution.h"
 # include "minishell_terminal.h"
 # include "test_minishell.h" //
 

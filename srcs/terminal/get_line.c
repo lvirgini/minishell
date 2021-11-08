@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/08 14:21:14 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/08 16:01:43 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	make_shell(char *line, char **env)
 	if (cmd)
 		printf("NEED_EXPAND = %d\n", need_expand_argv((*cmd)->argv));
 	expanser(cmd, env);
+	executer(cmd, env);
 	free_list_cmd(cmd);
 }
 

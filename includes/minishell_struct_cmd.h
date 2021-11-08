@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 22:25:50 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/26 15:39:47 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/08 15:44:24 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ struct		s_cmd
 	int		pipe[2];
 	t_redir	*input;
 	t_redir	*output;
+	t_redir *heredoc; // T_redir ou autres ? avec type pour savoir si c'est le dernier ou pas
 	pid_t	pid;
 	int		exit_status;
 };
