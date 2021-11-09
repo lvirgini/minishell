@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:32:30 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/09 10:01:44 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/09 10:53:35 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,15 @@ int	setup_inputs(t_cmd *cmd)
 
 /*
 ** 	change standard output by outfile (create if not exist)
+** flags:
 **		O_CREAT with all option needed : -rw-r--r--
-** 		O_TRUNC : if exist 
-**	display error and exit.
+** 		O_WRONLY : write and read
+**
+** for OUTPUT REDIRECTION > :
+**		O_TRUNC : clear file if he exist.
+** for APPEND >> :
+		O_APPEND : for write at the end of the file.
+**	display error if open problem.
 */
 
 static int	open_output(char *output, int type)
@@ -75,8 +81,8 @@ static int	open_output(char *output, int type)
 		fd = open(output, O_CREAT | O_TRUNC | O_WRONLY | O_SYNC,
 				S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 	else
-		fd = open(output, O_CREAT | O_WRONLY | O_SYNC,
-				S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH); // A VERIFIER
+		fd = open(output, O_CREAT | O_APPEND | O_WRONLY | O_SYNC,
+				S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 	if (fd == -1)
 		perror(output);
 	else if (dup2(fd, OUT) == -1)
