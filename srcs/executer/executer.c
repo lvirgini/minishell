@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:27:42 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/09 10:08:11 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/09 14:37:07 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	print_error(t_cmd *cmd, int error)////////////////// A REFAIRE EN MI
 		": permission denied\n"};
 	static int	error_exit[NB_ERROR] = {127, 126};
 
-	write(2, "minishell: ", 8);  // getenv nom du shell
+	write(2, "minishell: ", 12);  // getenv nom du shell
 	if (cmd->argv && cmd->argv[0])
 		write(2, cmd->argv[0], ft_strlen(cmd->argv[0]));
 	write(2, str_error[error], ft_strlen(str_error[error]));

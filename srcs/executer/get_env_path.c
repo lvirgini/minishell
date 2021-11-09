@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 11:34:17 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/08 17:37:06 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/09 16:48:03 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,36 @@ char	**split_env(char *env)
 	return (split);
 }
 
+
+static t_bool	is_absolute_path(char **argv)
+{
+	if (!ft_strncmp(argv[0], "./", 2) || argv[0][0] == '/')
+	{
+		if (access(argv[0], F_OK) == 0)
+			return (true);
+	}
+	return (false);
+}
+
+char	* find_good_path(char **path_env, char *cmd_name)
+{
+	size_t	i;
+	char	*cmd_path;
+
+	i = 0;
+	while (path_env[i])
+	{
+		cmd_path = ft_strjoin(path_env[i], cmd_name);
+		if (access(cmd_path, F_OK) == 0)
+			return (cmd_path);
+		free(cmd_path);
+		i++;
+	}
+	return (NULL);
+}
+
+
+
 /*
 ** path of command is needed for execve
 ** 	check access in absolute path else
@@ -38,11 +68,10 @@ char	**split_env(char *env)
 
 char	*get_path_for_command(t_cmd *cmd, char *path_env[])
 {
-	size_t	i;
 	char	*slash_cmd;
+	char	*path_cmd;
 
-	//if (check_absolute_path(cmd->argv[0] == SUCCESS)
-	if (access(cmd->argv[0], F_OK) == 0 || path_env == NULL)
+	if (path_env == NULL || is_absolute_path(cmd->argv))
 		return (ft_strdup(cmd->argv[0]));
 	slash_cmd = ft_strjoin("/", cmd->argv[0]);
 	if (!slash_cmd)
@@ -50,20 +79,9 @@ char	*get_path_for_command(t_cmd *cmd, char *path_env[])
 		perror("malloc ft_strjoin in get_env");
 		return (NULL);
 	}
-	i = 0;
-	while (path_env[i])
-	{
-		cmd->path = ft_strjoin(path_env[i], slash_cmd);
-		if (access(cmd->path, F_OK) == 0)
-		{
-			free(slash_cmd);
-			return (cmd->path);
-		}
-		free(cmd->path);
-		i++;
-	}
+	path_cmd = find_good_path(path_env, slash_cmd);
 	free(slash_cmd);
-	return (NULL);
+	return (path_cmd);
 }
 
 /*
