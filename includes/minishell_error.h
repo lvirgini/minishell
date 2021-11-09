@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 19:47:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/08 17:32:25 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/08 18:21:21 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # define NB_ERR_SYNTAX 2
 # define NB_ERROR 2
+
 enum	e_error_syntax
 {
 	ERR_SYMBOL,

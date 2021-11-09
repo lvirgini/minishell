@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:27:42 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/08 17:32:29 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/09 10:08:11 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,14 +98,14 @@ int	executer(t_cmd **list_cmd, char **env)
 	save_std_io(std_io);
 	while (cmd)
 	{
-		if (setup_redirections(cmd) == SUCCESS && 
-			is_command_executable(cmd) == SUCCESS)
+		if (setup_redirections(cmd) == SUCCESS && cmd->argv
+			&& is_command_executable(cmd) == SUCCESS)
 		{
 			execute_this_cmd(cmd, env);
 		}
-		get_back_std_io(std_io);
+		if (get_back_std_io(std_io) == FAILURE)
+			return (FAILURE);
 		cmd = cmd->next;
 	}
 	return (wait_all_process(*list_cmd));//
-	return (SUCCESS);
 }

@@ -6,11 +6,12 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:32:30 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/08 16:03:50 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/09 10:01:44 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 /*
 **	INFILE		PIPE 1			PIPE 2			PIPE 3			OUTFILE
 **	 --0	1-----------0	1-----------0	1-----------0	1-----
@@ -26,7 +27,7 @@
 ** 	if open can't find infile, display error.
 */
 
-int	set_up_input(char *input)
+static int	open_input(char *input)
 {
 	int	fd;
 
@@ -43,6 +44,22 @@ int	set_up_input(char *input)
 	return (FAILURE);
 }
 
+int	setup_inputs(t_cmd *cmd)
+{
+	t_redir	*input;
+
+	input = cmd->input;
+	while (input)
+	{
+		if (open_input(input->filename) == FAILURE)
+			return (FAILURE);
+		if (input->next)
+			close(IN);
+		input = input->next;
+	}
+	return (SUCCESS);
+}
+
 /*
 ** 	change standard output by outfile (create if not exist)
 **		O_CREAT with all option needed : -rw-r--r--
@@ -50,7 +67,7 @@ int	set_up_input(char *input)
 **	display error and exit.
 */
 
-int	set_up_output(char *output, int type)
+static int	open_output(char *output, int type)
 {
 	int		fd;
 
@@ -58,7 +75,7 @@ int	set_up_output(char *output, int type)
 		fd = open(output, O_CREAT | O_TRUNC | O_WRONLY | O_SYNC,
 				S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 	else
-		fd =  open(output, O_CREAT | O_WRONLY | O_SYNC,
+		fd = open(output, O_CREAT | O_WRONLY | O_SYNC,
 				S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH); // A VERIFIER
 	if (fd == -1)
 		perror(output);
@@ -67,4 +84,20 @@ int	set_up_output(char *output, int type)
 	else
 		return (SUCCESS);
 	return (FAILURE);
+}
+
+int	setup_outputs(t_cmd *cmd)
+{
+	t_redir	*output;
+
+	output = cmd->output;
+	while (output)
+	{
+		if (open_output(output->filename, output->type) == FAILURE)
+			return (FAILURE);
+		if (output->next)
+			close(OUT);
+		output = output->next;
+	}
+	return (SUCCESS);
 }
