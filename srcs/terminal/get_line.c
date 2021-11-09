@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/25 17:04:13 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/08 18:29:04 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** il faut trouver un bon nom pour cette fonction...
 */
 
-void	make_shell(char *line)
+void	make_shell(char *line, char **env)
 {
 	t_token		**token;
 	t_cmd		**cmd;
@@ -24,9 +24,11 @@ void	make_shell(char *line)
 	token = lexer_minishell(line);
 	cmd = parser_minishell(token);
 	free_list_token(token);
-	print_list_cmd(cmd);
-	if (cmd)
-		printf("NEED_EXPAND = %d\n", need_expand_argv((*cmd)->argv));
+	//print_list_cmd(cmd);
+	//if (cmd)
+	//	printf("NEED_EXPAND = %d\n", need_expand_argv((*cmd)->argv));
+	expanser(cmd, env);
+	executer(cmd, env);
 	free_list_cmd(cmd);
 }
 
@@ -53,7 +55,7 @@ int	make_terminal(char **env)
 			if(*line)
 			{
 				add_history(line);
-				make_shell(line);
+				make_shell(line, env);
 				// ici pour récupérer line ecrite dans minishell
 			}
 		prompt = get_prompt(env, prompt);

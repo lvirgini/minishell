@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 19:47:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/22 11:14:02 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/08 18:21:21 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 # define MINISHELL_ERROR_H
 
 # define NB_ERR_SYNTAX 2
+# define NB_ERROR 2
 
-enum	e_error
+enum	e_error_syntax
 {
 	ERR_SYMBOL,
 	ERR_QUOTES_NOT_CLOSED,
@@ -23,7 +24,8 @@ enum	e_error
 
 enum	e_reason_cmd_not_work
 {
-	NOT_FOUND,
+	ERR_CMD_NOT_FOUND,
+	ERR_CMD_NOT_EXECUTABLE
 };
 
 //void		display_command_error(t_env *env, char *cmd, int reason);

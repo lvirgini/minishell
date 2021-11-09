@@ -6,16 +6,16 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 15:07:51 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/26 16:49:43 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/09 10:09:45 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_UTILS_H
 # define MINISHELL_UTILS_H
 
-#include "minishell.h"
+# include "minishell.h"
 
-typedef	struct s_struct	t_struct;
+typedef struct s_struct	t_struct;
 struct	s_struct
 {
 	t_struct	*next;
@@ -42,6 +42,7 @@ void	print_list(char **list);
 /*
 ** str utils
 */
+
 void	print_str(char *str);
 char	*pass_str_spaces(char *line);
 

@@ -1,30 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   recover_complete_env.c                             :+:      :+:    :+:   */
+/*   minishell_redirection.h                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/16 13:28:18 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/05 08:09:22 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/11/08 15:53:59 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/11/09 10:02:45 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef MINISHELL_REDIRECTION_H
+# define MINISHELL_REDIRECTION_H
 
+# include "minishell.h"
 
-char	**make_minishell_env(char *env[])
+enum	e_stdio
 {
-	char	**minishell_env;
-//	int		env_size;
+	IN,
+	OUT,
+};
 
-	//env_size = listlen(env);
-	//minishell_env = malloc_list(env_size);
-	minishell_env = list_dup(env);
-	if (!minishell_env)
-		return (NULL);
-//	if (list_ndup(minishell_env, env, env_size) == FAILURE)//
-//		return (NULL);
-	return (minishell_env);
-// add SHELL : shellname
-}
+/*
+** setup input / output
+*/
+
+int			setup_redirections(t_cmd *cmd);
+int			make_pipe_redirection(t_cmd *cmd);
+int			setup_inputs(t_cmd *cmd);
+int			setup_outputs(t_cmd *cmd);
+void		save_std_io(int std_io[2]);
+int			get_back_std_io(int std_io[2]);
+
+/*
+** Here doc
+*/
+
+#endif
