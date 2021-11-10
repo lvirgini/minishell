@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/08 18:29:04 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/10 16:59:32 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ void	make_shell(char *line, char **env)
 	token = lexer_minishell(line);
 	cmd = parser_minishell(token);
 	free_list_token(token);
-	//print_list_cmd(cmd);
-	//if (cmd)
-	//	printf("NEED_EXPAND = %d\n", need_expand_argv((*cmd)->argv));
 	expanser(cmd, env);
-	executer(cmd, env);
+	if (cmd)
+	{
+		if (executer(cmd, env) == FAILURE)
+			exit_minishell(cmd, env);
+	}
 	free_list_cmd(cmd);
 }
-
 
 /*
 ** premier appel : get_prompt va creer t_prompt via l'environnement récuperé
@@ -52,14 +52,13 @@ int	make_terminal(char **env)
 		line = readline(prompt->formatted);
 		if (line)
 		{
-			if(*line)
+			if (*line)
 			{
 				add_history(line);
 				make_shell(line, env);
-				// ici pour récupérer line ecrite dans minishell
 			}
-		prompt = get_prompt(env, prompt);
-		free(line);
+			prompt = get_prompt(env, prompt);
+			free(line);
 		}
 		else
 			printf("\n");
