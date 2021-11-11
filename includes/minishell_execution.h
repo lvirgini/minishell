@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 15:51:54 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/08 17:30:08 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/10 15:46:06 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,12 @@
 int		executer(t_cmd **cmd, char *env[]);
 int		add_path_for_all_cmd(t_cmd *cmd, char *env[]);
 pid_t	create_child_process(t_cmd *cmd, char *env[]);
+
+/*
+** find path for execve.
+*/
+
+int		setup_cmd_path(t_cmd *cmd, char **env);
+int		get_cmd_path_from_path_env(t_cmd *cmd, char *path_env[]);
 
 #endif

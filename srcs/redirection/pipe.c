@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:43:30 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/09 10:02:58 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/10 15:17:29 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,12 @@
 **	|	CD1		|		CD2		|		CD3		|		CD4		|
 **
 */
+
+void	close_pipe(int pipe[2])
+{
+	close(pipe[IN]);
+	close(pipe[OUT]);
+}
 
 /*
 **	change standard input by pipe[IN] of cmd prev

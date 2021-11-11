@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:12:26 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/23 22:34:44 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/10 16:58:42 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static	size_t	get_prompt_len(t_prompt *prompt)
 
 void	layout_prompt(t_prompt *prompt)
 {
-	static char *color_green = "\33[32m";
+	static char	*color_green = "\33[32m";
 	static char	*minishell = "@minishell\33[0m:\33[94m";
 	static char	*end = "\33[0m$ ";
 	size_t		len;
@@ -42,10 +42,10 @@ void	layout_prompt(t_prompt *prompt)
 	if (prompt->formatted == NULL)
 	{
 		perror("layout_prompt malloc()");
-		return ;//
+		return ; //
 	}
 	ft_strlcpy(prompt->formatted, color_green, len);
-	if (prompt->user && *prompt->user)//
+	if (prompt->user && *prompt->user) //
 	{
 		ft_strlcat(prompt->formatted, prompt->user, len);
 		ft_strlcat(prompt->formatted, minishell, len);
@@ -77,7 +77,8 @@ static	int	check_prompt_update(t_prompt *prompt, char *actual_cwd,
 			perror("check prompt update (user)");
 		need_change = true;
 	}
-	if (!actual_user || !prompt->user || ft_strcmp(prompt->user, actual_user) != 0)
+	if (!actual_user || !prompt->user
+		|| ft_strcmp(prompt->user, actual_user) != 0)
 	{
 		free(prompt->user);
 		prompt->user = ft_strdup(actual_user);
@@ -85,9 +86,9 @@ static	int	check_prompt_update(t_prompt *prompt, char *actual_cwd,
 			perror("check prompt update (user)");
 		need_change = true;
 	}
-
 	return (need_change);
 }
+
 /*
 ** getcwd : in this way returns a malloc char *
 */

@@ -6,18 +6,11 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:32:30 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/09 10:53:35 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/10 17:01:26 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*
-**	INFILE		PIPE 1			PIPE 2			PIPE 3			OUTFILE
-**	 --0	1-----------0	1-----------0	1-----------0	1-----
-**	|	CD1		|		CD2		|		CD3		|		CD4		|
-**
-*/
 
 /*
 **	input is eclusive for <. not << HERE DOC
@@ -31,30 +24,22 @@ static int	open_input(char *input)
 {
 	int	fd;
 
-	fd = open(input, O_RDONLY | O_CLOEXEC);
+	fd = open(input, O_RDONLY | __O_CLOEXEC);
 	if (fd == -1)
 		perror(input);
 	else if (dup2(fd, IN) == -1)
 		perror("dup2 set up input");
 	else
-	{
-//		close(cmd->pipe[IN]);
 		return (SUCCESS);
-	}
 	return (FAILURE);
 }
 
-int	setup_inputs(t_cmd *cmd)
+int	setup_inputs(t_redir *input)
 {
-	t_redir	*input;
-
-	input = cmd->input;
 	while (input)
 	{
 		if (open_input(input->filename) == FAILURE)
 			return (FAILURE);
-		if (input->next)
-			close(IN);
 		input = input->next;
 	}
 	return (SUCCESS);
@@ -92,17 +77,12 @@ static int	open_output(char *output, int type)
 	return (FAILURE);
 }
 
-int	setup_outputs(t_cmd *cmd)
+int	setup_outputs(t_redir *output)
 {
-	t_redir	*output;
-
-	output = cmd->output;
 	while (output)
 	{
 		if (open_output(output->filename, output->type) == FAILURE)
 			return (FAILURE);
-		if (output->next)
-			close(OUT);
 		output = output->next;
 	}
 	return (SUCCESS);
