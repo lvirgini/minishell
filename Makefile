@@ -6,7 +6,7 @@
 #    By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 17:38:13 by lvirgini          #+#    #+#              #
-#    Updated: 2021/10/28 13:22:56 by lvirgini         ###   ########.fr        #
+#    Updated: 2021/11/09 10:03:24 by lvirgini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -85,10 +85,10 @@ LFLAG 	=	$(foreach lib, $(LIB), -l $(lib) ) $(foreach dir, $(LIB_DIR), -L $(dir)
 $(OBJ_DIR)%.o: %.c $(HEADERS)
 			@mkdir -p $(OBJ_DIR)
 			@echo "\033[32mCompilation de ... $(foreach file, $< , $(notdir $<))"
-			$(CC) $(CFLAG) $(IFLAG) -o $@ -c $< 
+			@$(CC) $(CFLAG) $(IFLAG) -o $@ -c $< 
 
 $(NAME):	install $(OBJ)
-			$(CC) $(CFLAG) $(IFLAG) $(OBJ) $(LFLAG) -o $@
+			@$(CC) $(CFLAG) $(IFLAG) $(OBJ) $(LFLAG) -o $@
 			@echo "\n*     Compilation $(NAME)     *\t   \033[32;1m--> \033[4;5mComplete\033[0m"
 
 all:		$(NAME)
