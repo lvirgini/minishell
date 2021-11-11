@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_builtin.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 12:24:39 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/05/18 11:17:50 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/11 16:41:13 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,13 @@ enum	e_env
 	CMD_ENV,
 	CMD_EXIT,
 };
+
+typedef struct s_built_ins
+{
+	int	cmd;
+	int	error;
+}				t_bi;
+
+int	is_built_in(char **env, t_cmd *cmd, t_bi *bi);
 
 #endif

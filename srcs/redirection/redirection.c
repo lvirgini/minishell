@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:32:30 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/10 17:01:26 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/11 16:26:41 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	open_input(char *input)
 {
 	int	fd;
 
-	fd = open(input, O_RDONLY | __O_CLOEXEC);
+	fd = open(input, O_RDONLY);
 	if (fd == -1)
 		perror(input);
 	else if (dup2(fd, IN) == -1)
