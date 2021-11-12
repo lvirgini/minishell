@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 11:09:02 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/04 12:20:21 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/12 12:28:14 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static char	**redesign_expansion_argv(char **old_argv, int index,
 	list_nmove(new_argv, old_argv, index);
 	list_move(new_argv + index, expansion);
 	list_move(new_argv + index + expand_len, old_argv + index + 1);
+	new_argv[old_len + expand_len - 1] = NULL;
 	free(old_argv[index]);
 	free(old_argv);
 	return (new_argv);
@@ -54,8 +55,7 @@ char	**expand_argv(char **argv, char **env)
 				return (NULL);
 			print_list(argv);
 		}
-		else
-			i++;
+		i++;
 	}
 	return (argv);
 }
