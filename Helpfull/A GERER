@@ -1,0 +1,95 @@
+mini@minishell:/home/mini/42/minishell$ <|
+minishell: syntax error pres du symbole inattendu « newline »
+Erreur de segmentation
+
+
+/*
+//// si "ls -l" ou 'ls -l' meme 'ls ' "ls "
+considéré comme un ensemble  "ls -l"  'ls ' commande introuvable
+
+convert simplequote :
+convert $variable
+*/
+
+
+isatty(STDOUT_FILENO)
+si true tu affiche ton prompt
+
+
+t_expansion	
+	char 		*value
+	t_expansion *next
+
+char redesign(char **argv, char *expansion, int	index)
+	char **new_argv
+	int	size_to_add_with_expansion
+
+	new_argv = malloc(sizeof(char *) * size_initial_argv + size_to_add_expansion)
+	while (i < index)
+		new_arg[i] = argv[i]
+	while (i < total &&) expansion)
+		new_arg[i++] = ft_strdup(expansion.value)
+		expansion = next;	
+	}
+	free(argv[index])
+	index++;
+	while i < total && argv[index]
+		new_argv[i] = argv[index]
+		i++		index++
+
+char **expand char **argv
+	char *expansion
+	
+	while (argv[i])
+		if (need_expand)
+			expansion = expand(argv[i])
+			argv = redesign argv, i expansion
+			if (!argv)
+				return NULL
+		else
+			i++;
+
+
+int	need_expand_argv(char ** argv)
+
+	while (argv[i])
+		if (need_expand_char(char *argv[i])
+			return true
+		i++
+	return false
+
+
+int	need_expand_redir(t_redir *redir)
+
+	while redir
+		if (need_expand(char *redir->filename))
+			return true
+		redir->next
+	return false
+
+
+
+
+//// fonctions communes pour les structures : 
+
+	struct	truc
+	{
+		struct truc *next; // en premier pour toute
+		...
+	};
+
+	void *addback(void *truc)
+	{
+		void *next;
+		 
+		 next = void *truc->next;
+	}
+
+	...
+
+
+
+
+	git branch <nom de la branche> // creer une nouvelle branche nommée <nom de la branche>
+	git checkout <nom de la branche> // aller sur la branche 
+	git checkout master ou main // retourner sur la branche principale

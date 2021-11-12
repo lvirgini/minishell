@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/23 23:15:41 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/26 13:22:14 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/05 08:09:02 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,16 @@ int	expand_redirection(t_redir *redir)
 }
 
 */
-t_expansion	*expand(char *str, char **env)
+char	**expand(char *str, char **env)
 {
 	if (str)
 	{
-	/*	if (str[0] == CHAR_DOUBLE_QUOTE)
+		if (*str == CHAR_DOLLAR)
+			return (expand_dollar(str, env));
+	/*	else if (*str == CHAR_DOUBLE_QUOTE)
 			return (expand_double_quote(str));
-		else if (str[0] == CHAR_SIMPE_QUOTE)
-			return (expand_simple_quote(str));
-		else if (str[0] == CHAR_DOLLAR)
-			return (expand_dollar(str));*/
+		else if (*str == CHAR_SIMPE_QUOTE)
+			return (expand_simple_quote(str));*/
 	}
 	return (NULL);
 }

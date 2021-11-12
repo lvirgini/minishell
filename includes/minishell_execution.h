@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   recover_complete_env.c                             :+:      :+:    :+:   */
+/*   minishell_execution.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/16 13:28:18 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/05 08:09:22 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/11/08 15:51:54 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/11/10 15:46:06 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef MINISHELL_EXECUTION_H
+# define MINISHELL_EXECUTION_H
 
+# include "minishell.h"
 
-char	**make_minishell_env(char *env[])
-{
-	char	**minishell_env;
-//	int		env_size;
+int		executer(t_cmd **cmd, char *env[]);
+int		add_path_for_all_cmd(t_cmd *cmd, char *env[]);
+pid_t	create_child_process(t_cmd *cmd, char *env[]);
 
-	//env_size = listlen(env);
-	//minishell_env = malloc_list(env_size);
-	minishell_env = list_dup(env);
-	if (!minishell_env)
-		return (NULL);
-//	if (list_ndup(minishell_env, env, env_size) == FAILURE)//
-//		return (NULL);
-	return (minishell_env);
-// add SHELL : shellname
-}
+/*
+** find path for execve.
+*/
+
+int		setup_cmd_path(t_cmd *cmd, char **env);
+int		get_cmd_path_from_path_env(t_cmd *cmd, char *path_env[]);
+
+#endif

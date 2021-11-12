@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 16:14:04 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/26 15:03:16 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/08 16:18:13 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@ int	get_env_index(char **env, char *key)
 	}
 	return (-1);
 }
+
+/*
+** 	like getenv
+**	return ptr corresponding to the value of key from env without key and '='.
+*/
 
 char	*get_env_value(char **env, char *key)
 {
