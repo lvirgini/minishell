@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:27:42 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/11 17:01:18 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/15 17:25:37 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,11 @@ int	executer(t_cmd **list_cmd, char **env)
 		if (setup_redirections(cmd) == SUCCESS && cmd->argv)
 		{
 		// check si cest un build in sinon
-			if (is_built_in(env, cmd, &bi) == 1)
-				printf("C'est le built-in no:%d\n", bi.cmd);
+			if (is_built_in(env, cmd, &bi) == SUCCESS)
+			{
+				if (exec_built_in(env, cmd, &bi) == FAILURE)
+					return (FAILURE);
+			}
 			else if (setup_cmd_path(cmd, env) == SUCCESS && cmd->path)
 			{
 				if (execute_this_cmd(cmd, env) == FAILURE)

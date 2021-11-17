@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 12:24:39 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/11 16:41:13 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/15 18:32:45 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,10 @@ typedef struct s_built_ins
 {
 	int	cmd;
 	int	error;
+	const char *words[7];
 }				t_bi;
 
 int	is_built_in(char **env, t_cmd *cmd, t_bi *bi);
+int	exec_built_in(char **env, t_cmd *cmd, t_bi *bi);
 
 #endif

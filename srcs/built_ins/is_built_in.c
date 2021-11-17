@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 16:21:39 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/11 17:00:45 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/15 18:34:01 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,13 @@ void	init_built_ins(t_bi *bi)
 {
 	bi->cmd = -1;
 	bi->error = -1;
+	bi->words[CMD_ECHO] = S_ECHO;
+	bi->words[CMD_CD] = S_CD;
+	bi->words[CMD_PWD] = S_PWD;
+	bi->words[CMD_EXPORT] = S_EXPORT;
+	bi->words[CMD_UNSET] = S_UNSET;
+	bi->words[CMD_ENV] = S_ENV;
+	bi->words[CMD_EXIT] = S_EXIT;
 }
 
 int	is_built_in(char **env, t_cmd *cmd, t_bi *bi)
@@ -76,6 +83,6 @@ int	is_built_in(char **env, t_cmd *cmd, t_bi *bi)
 			bi->cmd = CMD_EXIT;
 	}
 	if (bi->cmd != -1)
-		return (1);
-	return (0);
+		return (SUCCESS);
+	return (FAILURE);
 }
