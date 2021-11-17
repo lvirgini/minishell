@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_execution.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 15:51:54 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/10 15:46:06 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/17 16:34:31 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 
 # include "minishell.h"
 
-int		executer(t_cmd **cmd, char *env[]);
+typedef struct s_builtin t_builtin;
+
+int		executer(t_cmd **cmd, char *env[], t_builtin *bi);
 int		add_path_for_all_cmd(t_cmd *cmd, char *env[]);
 pid_t	create_child_process(t_cmd *cmd, char *env[]);
 

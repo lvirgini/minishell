@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:27:42 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/15 17:25:37 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/17 16:42:01 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,9 @@ int	execute_this_cmd(t_cmd *cmd, char **env)
 	return (SUCCESS);
 }
 
-int	executer(t_cmd **list_cmd, char **env)
+int	executer(t_cmd **list_cmd, char **env, t_builtin *bi)
 {
 	t_cmd	*cmd;
-	t_bi	bi;
 	int		std_io[2];
 
 	cmd = *list_cmd;
@@ -62,11 +61,8 @@ int	executer(t_cmd **list_cmd, char **env)
 		if (setup_redirections(cmd) == SUCCESS && cmd->argv)
 		{
 		// check si cest un build in sinon
-			if (is_built_in(env, cmd, &bi) == SUCCESS)
-			{
-				if (exec_built_in(env, cmd, &bi) == FAILURE)
-					return (FAILURE);
-			}
+			if (is_builtin(cmd->argv[0], bi) == SUCCESS)
+				exec_builtin[bi->cmd](cmd->argv, env, bi);
 			else if (setup_cmd_path(cmd, env) == SUCCESS && cmd->path)
 			{
 				if (execute_this_cmd(cmd, env) == FAILURE)

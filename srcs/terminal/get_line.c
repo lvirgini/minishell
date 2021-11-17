@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/15 18:28:20 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/17 16:22:48 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** il faut trouver un bon nom pour cette fonction...
 */
 
-void	make_shell(char *line, char **env)
+void	make_shell(char *line, char **env, t_builtin *bi)
 {
 	t_token		**token;
 	t_cmd		**cmd;
@@ -27,7 +27,7 @@ void	make_shell(char *line, char **env)
 	expanser(cmd, env);
 	if (cmd)
 	{
-		if (executer(cmd, env) == FAILURE)
+		if (executer(cmd, env, bi) == FAILURE)
 			exit_minishell(cmd, env);
 	}
 	free_list_cmd(cmd);
@@ -40,15 +40,14 @@ void	make_shell(char *line, char **env)
 ** si la ligne n'est pas vide on la rajoute a l'historique (cmd de readline)
 */
 
-//getenv
-//exit
-
 int	make_terminal(char **env)
 {
 	char		*line;
 	t_prompt	*prompt;
+	t_builtin		bi;
 
 	prompt = get_prompt(env, NULL);
+	bi = (t_builtin){-1, -1, -1, NULL, NULL};
 	while (1)
 	{
 		line = NULL;
@@ -58,7 +57,7 @@ int	make_terminal(char **env)
 			if (*line)
 			{
 				add_history(line);
-				make_shell(line, env);
+				make_shell(line, env, &bi);
 			}
 			prompt = get_prompt(env, prompt);
 			free(line);
