@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:27:42 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/10 16:53:30 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/18 16:57:40 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	executer(t_cmd **list_cmd, char **env)
 	save_std_io(std_io);
 	while (cmd)
 	{
-		if (setup_redirections(cmd) == SUCCESS && cmd->argv)
+		if (setup_all_redirections(cmd, env) == SUCCESS && cmd->argv)
 		{
 		// check si cest un build in sinon
 			if (setup_cmd_path(cmd, env) == SUCCESS && cmd->path)

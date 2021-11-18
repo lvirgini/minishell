@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:32:30 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/10 17:01:26 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/18 16:55:18 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,8 @@ static int	open_input(char *input)
 
 int	setup_inputs(t_redir *input)
 {
-	while (input)
-	{
-		if (open_input(input->filename) == FAILURE)
-			return (FAILURE);
-		input = input->next;
-	}
+	if (open_input(input->filename) == FAILURE)
+		return (FAILURE);
 	return (SUCCESS);
 }
 
@@ -79,11 +75,27 @@ static int	open_output(char *output, int type)
 
 int	setup_outputs(t_redir *output)
 {
-	while (output)
+
+	if (open_output(output->filename, output->type) == FAILURE)
+		return (FAILURE);
+	return (SUCCESS);
+}
+
+int	setup_redirection(t_cmd *cmd, char **env)
+{
+	t_redir	*redir;
+
+	redir = cmd->redir;
+	while (redir)
 	{
-		if (open_output(output->filename, output->type) == FAILURE)
+		if (expand_redirection(redir, env) == FAILURE)
 			return (FAILURE);
-		output = output->next;
+		if (redir->type == INPUT_REDIRECTION
+			&& setup_inputs(redir) == FAILURE)
+			return (FAILURE); // voir si pas de leajs
+		else if (setup_outputs(redir) == FAILURE)
+			return (FAILURE);
+		redir = redir->next;
 	}
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 22:25:50 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/09 10:10:13 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/18 14:34:46 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@ struct		s_cmd
 	char	**argv;
 	int		type;
 	int		pipe[2];
-	t_redir	*input;
-	t_redir	*output;
+	t_redir	*redir;
+	t_redir	*input; // A SUPPRIMER
+	t_redir	*output;// A SUPPRIMER
 	t_redir	*heredoc; // T_redir ou autres ? avec type pour savoir si c'est le dernier ou pas
 	pid_t	pid;
 	int		exit_status;
