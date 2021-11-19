@@ -41,12 +41,42 @@ int	expand_redirection(t_redir *redir)
 	return (SUCCESS);
 }
 
+int		word_expand_len(char *str)
+{
+	return (ft_strlen_set(str, STR_ESCAPE));
+}
+
+char	*fusion_expand(char *str, int index, char **expansion)
+{
+	char	*fusion;
+	int		size_word_expand;
+	int		size_fusion;
+	int		size_expansion;
+
+	size_word_expand = word_expand_len(str + index);
+	size_expansion = ft_strlen(*expansion);
+	size_fusion = ft_strlen(str) - size_word_expand + size_expansion;
+	fusion = (char *)malloc(sizeof(char) * size_fusion + 1);
+	if (!fusion)
+	{
+		free(str);
+		return (NULL);
+	}
+	ft_strncpy(fusion, str, index);
+	ft_strncpy(fusion + index, *expansion, size_expansion);
+	ft_strncpy(fusion + index + size_expansion, str + index + size_word_expand);
+	return (fusion);
+}
 char	**expand(char *str, char **env)
 {
-	if (str)
+	size_t	i;
+	char	*expansion;
+
+	i = 0;
+	while (str[i])
 	{
 		if (*str == CHAR_DOLLAR)
-			return (expand_dollar(str, env));
+			str = fusion_extansion(str, i, expand_dollar(str + i, env));
 	/*	else if (*str == CHAR_DOUBLE_QUOTE)
 			return (expand_double_quote(str));
 		else if (*str == CHAR_SIMPE_QUOTE)
