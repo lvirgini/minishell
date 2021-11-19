@@ -11,21 +11,25 @@
 /* ************************************************************************** */
 
 #include "minishell.h"
+
 /*
-t_expansion	*expand(char *str)
+
+SI "" puis dollar : prend aussi les espace
 {
-	if (str)
-	{
-		if (str[0] == CHAR_DOUBLE_QUOTE)
-			return (expand_double_quote(str));
-		if (str[0] == CHAR_SIMPE_QUOTE)
-			return (expand_simple_quote(str));
-		if (str[0] == CHAR_DOLLAR)
-			return (expand_dollar(str));
-	}
-	return (str);
+	dqutes dollar = literal value
+	// Unquoted implicit null arguments, resulting from the expansion of
+	 parameters that have no values, are removed.
 }
 
+SI dollar : escape space
+MAIS SI il y a des chaine null "" ou '' elles sont supprimée 
+
+mini@debian:~$ export TEST=-d''""test
+mini@debian:~$ echo $TEST 
+-dtest
+
+
+*/
 int	expand_redirection(t_redir *redir)
 {
 	while (redir)
@@ -37,7 +41,6 @@ int	expand_redirection(t_redir *redir)
 	return (SUCCESS);
 }
 
-*/
 char	**expand(char *str, char **env)
 {
 	if (str)
