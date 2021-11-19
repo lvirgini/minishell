@@ -19,7 +19,7 @@ int	expand_redirection(t_redir *redir, char **env)
 	char		**expansion;
 
 	expansion = NULL;
-	expansion = expand(redir->filename, env);
+	expansion = expand_str(redir->filename, env);
 	if (listlen(expansion) != 1)
 	{
 		display_error(ERR_AMBIGUOUS, redir->filename);

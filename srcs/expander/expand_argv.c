@@ -37,6 +37,21 @@ static char	**redesign_expansion_argv(char **old_argv, int index,
 	return (new_argv);
 }
 
+
+char	**expand_list(char *str, char **env)
+{
+	if (str)
+	{
+		if (*str == CHAR_DOLLAR)
+			return(expand_dollar(str, env));
+	/*	else if (*str == CHAR_DOUBLE_QUOTE)
+			return (expand_double_quote(str));
+		else if (*str == CHAR_SIMPE_QUOTE)
+			return (expand_simple_quote(str));*/
+	}
+	return (NULL);
+}
+
 char	**expand_argv(char **argv, char **env)
 {
 	size_t		i;
@@ -48,7 +63,7 @@ char	**expand_argv(char **argv, char **env)
 		if (need_expand_str(argv[i]))
 		{
 			expansion = NULL;
-			expansion = expand(argv[i], env);
+			expansion = expand_list(argv[i], env);
 			argv = redesign_expansion_argv(argv, i, expansion);
 			if (!argv)
 				return (NULL);

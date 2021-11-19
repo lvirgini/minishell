@@ -39,6 +39,7 @@ void		free_list_expansion(t_expansion *expansion);
 int			expanser(t_cmd **list_cmd, char **env);
 char		**expand(char *str, char **env);
 char		**expand_argv(char **argv, char **env);
+char		**expand_str(char *str, char **env);
 int			expand_redirection(t_redir *redir, char **env);
 char		**expand_dollar(char *str, char **env);
 /*

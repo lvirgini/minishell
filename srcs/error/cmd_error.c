@@ -18,8 +18,8 @@ int	display_error(int error, char *object)
 		"\n",
 		" : command not found\n",
 		" : permission denied\n",
-		" : aucun fichier ou dossier de ce type\n", // a mettre en anglais : ex: "/ls"
-		" : redirection ambigue\n" // export TEST="truc bidule" puis ls > $TEST
+		" : No such file or directory\n",
+		" : ambiguous redirect\n"
 	};
 	static int	errno_nb[NB_ERROR] = {1, 127, 126, 127};
 

@@ -29,7 +29,6 @@ mini@debian:~$ echo $TEST
 -dtest
 
 
-*/
 int	expand_redirection(t_redir *redir)
 {
 	while (redir)
@@ -39,7 +38,7 @@ int	expand_redirection(t_redir *redir)
 		redir = redir->next;
 	}
 	return (SUCCESS);
-}
+}*/
 
 int		word_expand_len(char *str)
 {
@@ -64,28 +63,30 @@ char	*fusion_expand(char *str, int index, char **expansion)
 	}
 	ft_strncpy(fusion, str, index);
 	ft_strncpy(fusion + index, *expansion, size_expansion);
-	ft_strncpy(fusion + index + size_expansion, str + index + size_word_expand);
+	ft_strncpy(fusion + index + size_expansion, str + index + size_word_expand, size_fusion);
 	return (fusion);
 }
-char	**expand(char *str, char **env)
+
+char	**expand_str(char *str, char **env)
 {
 	size_t	i;
-	char	*expansion;
+	char	**expansion;
 
 	i = 0;
 	while (str[i])
 	{
-		if (*str == CHAR_DOLLAR)
-			str = fusion_extansion(str, i, expand_dollar(str + i, env));
+		if (str[i] == CHAR_DOLLAR)
+			str = fusion_expand(str, i, expand_dollar(str + i, env));
 	/*	else if (*str == CHAR_DOUBLE_QUOTE)
 			return (expand_double_quote(str));
 		else if (*str == CHAR_SIMPE_QUOTE)
 			return (expand_simple_quote(str));*/
+		if (!str)
+			return (NULL);
+		i++;
 	}
 	return (NULL);
 }
-
-
 int	expanser(t_cmd **list_cmd, char **env)
 {
 	t_cmd *cmd;
