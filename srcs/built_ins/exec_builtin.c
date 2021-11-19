@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 17:37:21 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/19 17:28:22 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/19 17:38:19 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	exec_exit(char **arg, char **env, t_builtin *builtin)
 	(void)arg;
 }
 
-int	exec_builtin(t_cmd *cmd, char **env, t_builtin *builtin)
+int	exec_builtin(t_cmd *cmd, char **env, t_builtin *builtin) // comment expand_argv line 55 to hide list of args
 {
 	int						std_io[2];
 	static const t_callback	f_builtin[7] = {exec_echo, exec_cd, exec_pwd,
