@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/23 23:15:41 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/05 08:09:02 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/18 16:55:45 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,24 +62,12 @@ int	expanser(t_cmd **list_cmd, char **env)
 	cmd = *list_cmd;
 	while (cmd)
 	{
-		if (need_expand_argv(cmd->argv) == true)
+		if (cmd->argv)
 		{
 			cmd->argv = expand_argv(cmd->argv, env);
 			if (!cmd->argv)
 				return (FAILURE);
 		}
-	/*	if (need_expand_redirection(cmd->input))
-		{
-			cmd->input = expand_redirection(cmd->input);
-			if (!cmd->input)
-				return (FAILURE);
-		}
-		if (need_expand_redirection(cmd->output))
-		{
-			cmd->input = expand_redirection(cmd->input);
-			if (!cmd->input)
-				return (FAILURE);
-		}*/
 		cmd = cmd->next;
 	}
 	return (SUCCESS);

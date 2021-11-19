@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/27 15:13:46 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/03 15:42:20 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/12 12:35:29 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ void	complete_the_list(char *s, char *set, char **list)
 {
 	int	len;
 
+	if (!*s)
+		*list = NULL;
 	while (*s)
 	{
 		if (!ft_strchr(set, *s))
@@ -51,6 +53,7 @@ void	complete_the_list(char *s, char *set, char **list)
 				return ;
 			}	
 			s += len;
+			list++;
 		}
 		else
 			s++;
@@ -69,5 +72,6 @@ char	**ft_split_set(const char *s, const char *set)
 	if (!list)
 		return (NULL);
 	complete_the_list((char *)s, (char *)set, list);
+	list[count_list] = NULL;
 	return (list);
 }

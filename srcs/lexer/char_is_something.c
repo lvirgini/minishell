@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_metacharacter.c                                 :+:      :+:    :+:   */
+/*   char_is_something.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 21:52:35 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/21 15:48:26 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/18 16:05:42 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,26 @@
 ** metacharacters are useful to separate different tokens in the lexer.
 */
 
+int	is_metacharacter(char c)
+{
+	int			i;
+	static char	metacharacter[NB_METACHARACTER + 1] = {
+	[FT_WORD] = ' ',
+	[FT_PIPE] = CHAR_PIPE,
+	[FT_TILD_LEFT] = CHAR_TILD_LEFT,
+	[FT_TILD_RIGHT] = CHAR_TILD_RIGHT};
+
+	i = 1;
+	while (i < NB_METACHARACTER + 1)
+	{
+		if (c == metacharacter[i])
+			return (i);
+		i++;
+	}
+	return (FT_WORD);
+}
+
+/*
 int	is_metacharacter(char c)
 {
 	int			i;
@@ -36,7 +56,7 @@ int	is_metacharacter(char c)
 		i++;
 	}
 	return (FT_WORD);
-}
+}*/
 
 int	is_operator(char c)
 {

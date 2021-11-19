@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 13:24:38 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/10 16:55:53 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/18 10:46:56 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	display_error(int error, char *object)
 		" : command not found\n",
 		" : permission denied\n",
 		" : aucun fichier ou dossier de ce type\n", // a mettre en anglais : ex: "/ls"
+		" : redirection ambigue\n" // export TEST="truc bidule" puis ls > $TEST
 	};
 	static int	errno_nb[NB_ERROR] = {1, 127, 126, 127};
 
