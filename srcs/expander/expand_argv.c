@@ -43,7 +43,7 @@ char	**expand_list(char *str, char **env)
 	if (str)
 	{
 		if (*str == CHAR_DOLLAR)
-			return(expand_dollar(str, env));
+			return (expand_dollar(str, env));
 	/*	else if (*str == CHAR_DOUBLE_QUOTE)
 			return (expand_double_quote(str));
 		else if (*str == CHAR_SIMPE_QUOTE)
@@ -67,7 +67,7 @@ char	**expand_argv(char **argv, char **env)
 			argv = redesign_expansion_argv(argv, i, expansion);
 			if (!argv)
 				return (NULL);
-			print_list(argv);
+		//	print_list(argv);
 			free(expansion);
 		}
 		i++;
