@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:27:42 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/17 16:42:01 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/19 13:08:47 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,10 @@ int	execute_this_cmd(t_cmd *cmd, char **env)
 
 int	executer(t_cmd **list_cmd, char **env, t_builtin *bi)
 {
-	t_cmd	*cmd;
-	int		std_io[2];
+	t_cmd					*cmd;
+	int						std_io[2];
+	static const t_callback	exec_builtin[7] = {exec_echo, exec_cd, exec_pwd,
+		exec_export, exec_unset, exec_env, exec_exit};
 
 	cmd = *list_cmd;
 	save_std_io(std_io);

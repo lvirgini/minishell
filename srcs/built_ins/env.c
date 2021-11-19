@@ -1,34 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_builtin.c                                     :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/15 17:37:21 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/19 12:48:52 by eassouli         ###   ########.fr       */
+/*   Created: 2021/11/19 12:31:30 by eassouli          #+#    #+#             */
+/*   Updated: 2021/11/19 13:34:10 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exec_export(char **arg, char **env, t_builtin *bi)
+static void	env_error(int error)
 {
-	(void)env;
-	(void)bi;
-	(void)arg;
+	if (error == TOO_MANY_ARGS)
+		printf("env: %s\n", S_TOO_MANY_ARGS);
 }
 
-void	exec_unset(char **arg, char **env, t_builtin *bi)
+void	exec_env(char **arg, char **env, t_builtin *bi)
 {
-	(void)env;
 	(void)bi;
-	(void)arg;
-}
+	int	i;
 
-void	exec_exit(char **arg, char **env, t_builtin *bi)
-{
-	(void)env;
-	(void)bi;
-	(void)arg;
+	i = 0;
+	if (arg[1] != NULL)
+	{
+		env_error(TOO_MANY_ARGS);
+		return ;
+	}
+	while (env && env[i])
+	{
+		printf("%s\n", env[i]);
+		i++;
+	}
 }

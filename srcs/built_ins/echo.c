@@ -1,34 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_builtin.c                                     :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/15 17:37:21 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/19 12:48:52 by eassouli         ###   ########.fr       */
+/*   Created: 2021/11/19 12:37:45 by eassouli          #+#    #+#             */
+/*   Updated: 2021/11/19 13:24:48 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exec_export(char **arg, char **env, t_builtin *bi)
+void	exec_echo(char **arg, char **env, t_builtin *bi)
 {
+	int	trail;
+	int	i;
 	(void)env;
 	(void)bi;
-	(void)arg;
-}
 
-void	exec_unset(char **arg, char **env, t_builtin *bi)
-{
-	(void)env;
-	(void)bi;
-	(void)arg;
-}
-
-void	exec_exit(char **arg, char **env, t_builtin *bi)
-{
-	(void)env;
-	(void)bi;
-	(void)arg;
+	trail = 0;
+	i = 1;
+	if (arg[1] == NULL)
+	{
+		printf("\n");
+		return ;
+	}
+	else if (arg[i] && strcmp(arg[i++], "-n") == 0)
+		trail = 1;
+	while (arg[i])
+	{
+		printf("%s", arg[i]);
+		if (arg[i + 1] != NULL)
+			printf(" ");
+		i++;
+	}
 }
