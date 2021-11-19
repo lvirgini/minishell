@@ -12,7 +12,6 @@
 
 #include "minishell.h"
 
-// 
 /*
 ** add expansion and keep argv already good 
 */
@@ -60,25 +59,3 @@ char	**expand_argv(char **argv, char **env)
 	}
 	return (argv);
 }
-
-
-/*
-
-SI "" puis dollar : prend aussi les espace
-{
-	dqutes dollar = literal value
-	// Unquoted implicit null arguments, resulting from the expansion of parameters that have no values, are removed.
-}
-
-
-
-
-SI dollar : escape space
-MAIS SI il y a des chaine null "" ou '' elles sont supprimée 
-
-mini@debian:~$ export TEST=-d''""test
-mini@debian:~$ echo $TEST 
--dtest
-
-
-*/
