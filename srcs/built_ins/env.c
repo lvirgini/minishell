@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:31:30 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/19 13:34:10 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/19 16:05:35 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ static void	env_error(int error)
 		printf("env: %s\n", S_TOO_MANY_ARGS);
 }
 
-void	exec_env(char **arg, char **env, t_builtin *bi)
+void	exec_env(char **arg, char **env, t_builtin *builtin)
 {
-	(void)bi;
+	(void)builtin;
 	int	i;
 
 	i = 0;

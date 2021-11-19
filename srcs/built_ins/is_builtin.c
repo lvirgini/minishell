@@ -6,27 +6,28 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 16:21:39 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/19 13:37:56 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/19 16:11:33 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	is_builtin(char *cmd, t_builtin *bi)
+int	is_builtin(char *cmd, t_builtin *builtin)
 {
-	static char	*str_cmd[7] = {S_ECHO, S_CD, S_PWD, S_EXPORT, S_UNSET, S_ENV, S_EXIT};
-	int	i;
+	static char	*str_cmd[7] = {S_ECHO, S_CD, S_PWD, S_EXPORT, S_UNSET, S_ENV,
+		S_EXIT};
+	int			i;
 
-	init_builtin(bi); // deplacer
-	reset_builtin(bi);
+	init_builtin(builtin); // deplacer
+	reset_builtin(builtin);
 	i = 0;
 	while (i < 7)
 	{
 		if (ft_strcmp(cmd, str_cmd[i]) == 0)
-			bi->cmd = i;
+			builtin->cmd = i;
 		i++;
 	}
-	if (bi->cmd != -1)
+	if (builtin->cmd != -1)
 		return (SUCCESS);
 	return (FAILURE);
 }

@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 15:51:54 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/17 16:34:31 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/19 16:03:04 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 typedef struct s_builtin t_builtin;
 
-int		executer(t_cmd **cmd, char *env[], t_builtin *bi);
+int		executer(t_cmd **cmd, char *env[], t_builtin *builtin);
 int		add_path_for_all_cmd(t_cmd *cmd, char *env[]);
 pid_t	create_child_process(t_cmd *cmd, char *env[]);
 

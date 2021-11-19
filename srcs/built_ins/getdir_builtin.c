@@ -6,13 +6,13 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 15:45:34 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/17 15:46:00 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/19 14:59:58 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*get_home_dir()
+char	*get_home_dir(void)
 {
 	char	*home;
 	
