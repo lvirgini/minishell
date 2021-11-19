@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 11:32:01 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/22 10:26:47 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/18 16:07:42 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,82 @@ int	syntax_error_redirection(t_token *token)
 	return (SUCCESS);
 }
 
+void	change_heredoc_position(t_redir *redir, int	type)
+{
+	if (type == INPUT_REDIRECTION || type == HERE_DOC)
+	{
+		while (redir)
+		{
+			redir->type = 0;
+			redir = redir->next;
+		}
+	}
+}
+
+int	parse_redirection(t_cmd *cmd, t_token *token)
+{
+	t_redir	*redir;
+
+	if (syntax_error_redirection(token) == SYNTAX_ERROR)
+		return (SYNTAX_ERROR);
+	redir = create_redir(token->type, token->next->word);
+	if (!redir)
+		return (FAILURE);
+	change_heredoc_position(cmd->heredoc, redir->type);
+	if (redir->type == HERE_DOC)
+	{
+		if (!cmd->heredoc)
+			cmd->heredoc = redir;
+		else
+			struct_add_back(cmd->heredoc, redir);
+	}
+	else
+	{
+		if (!cmd->redir)
+			cmd->redir = redir;
+		else
+			struct_add_back(cmd->redir, redir);
+	}
+	return (SUCCESS);
+}
+
+t_bool	is_token_redirection(int type)
+{
+	if (type == APPEND || type == INPUT_REDIRECTION
+		|| type == OUTPUT_REDIRECTION || type == HERE_DOC)
+		return (true);
+	return (false);
+}
+
 /*
 ** Parser of all redirection for minishell : < << > >>
 ** check the syntax of each redirection
 ** remove used tokens
 */
 
+int	parse_all_redirection(t_cmd *cmd, t_token **list_token)
+{
+	t_token	*token;
+	int		syntax;
+
+	token = *list_token;
+	while (token && is_token_control_operator(token->type) == false)
+	{
+		syntax = SUCCESS;
+		if (is_token_redirection(token->type) == true)
+		{
+			syntax = parse_redirection(cmd, token);
+			token = remove_multi_token(list_token, token, 2);
+		}
+		else
+			token = token->next;
+		if (syntax != SUCCESS)
+			return (FAILURE);
+	}
+	return (SUCCESS);
+}
+
+/*
 int	parse_all_redirection(t_cmd *cmd, t_token **list_token)
 {
 	t_token	*token;
@@ -66,3 +136,4 @@ int	parse_all_redirection(t_cmd *cmd, t_token **list_token)
 	}
 	return (SUCCESS);
 }
+*/

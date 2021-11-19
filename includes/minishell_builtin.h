@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 12:24:39 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/19 16:03:01 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/19 17:28:32 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	reset_builtin(t_builtin *builtin);
 
 char	*get_home_dir(void);
 char	*get_current_dir(char *last_dir);
+
+int		exec_builtin(t_cmd *cmd, char **env, t_builtin *builtin);
 
 void	exec_echo(char **arg, char **env, t_builtin *builtin);
 void	exec_cd(char **arg, char **env, t_builtin *builtin);

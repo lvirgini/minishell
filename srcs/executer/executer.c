@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:27:42 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/19 16:04:47 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/19 17:28:59 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,25 +53,28 @@ int	executer(t_cmd **list_cmd, char **env, t_builtin *builtin)
 {
 	t_cmd					*cmd;
 	int						std_io[2];
-	static const t_callback	exec_builtin[7] = {exec_echo, exec_cd, exec_pwd,
-		exec_export, exec_unset, exec_env, exec_exit};
 
 	cmd = *list_cmd;
-	save_std_io(std_io);
+	//save_std_io(std_io);
 	while (cmd)
 	{
-		if (setup_redirections(cmd) == SUCCESS && cmd->argv)
+		// if (setup_redirections(cmd) == SUCCESS && cmd->argv)
+		// {
+			// else if (setup_cmd_path(cmd, env) == SUCCESS && cmd->path)
+			// {
+		if (is_builtin(cmd->argv[0], builtin) == SUCCESS)
 		{
-			if (is_builtin(cmd->argv[0], builtin) == SUCCESS)
-				exec_builtin[builtin->cmd](cmd->argv, env, builtin);
-			else if (setup_cmd_path(cmd, env) == SUCCESS && cmd->path)
-			{
-				if (execute_this_cmd(cmd, env) == FAILURE)
-					return (FAILURE);
-			}	
+			if (exec_builtin(cmd, env, builtin) == FAILURE)
+				return (FAILURE);
+			save_std_io(std_io);
+
 		}
-		if (get_back_std_io(std_io) == FAILURE)
+		else if (execute_this_cmd(cmd, env) == FAILURE)
 			return (FAILURE);
+		//	}	
+	//	}
+	//	if (get_back_std_io(std_io) == FAILURE)
+		//	return (FAILURE);
 		cmd = cmd->next;
 	}
 	wait_all_process(*list_cmd);

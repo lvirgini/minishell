@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 16:38:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/09 10:12:57 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/18 16:55:02 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,12 @@ void		free_list_expansion(t_expansion *expansion);
 int			expanser(t_cmd **list_cmd, char **env);
 char		**expand(char *str, char **env);
 char		**expand_argv(char **argv, char **env);
+int			expand_redirection(t_redir *redir, char **env);
 char		**expand_dollar(char *str, char **env);
-
 /*
 ** Useful functions for t_expansion
 */
 
 t_bool		need_expand_str(char *str);
-t_bool		need_expand_argv(char **argv);
 
 #endif

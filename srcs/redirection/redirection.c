@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:32:30 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/11 16:26:41 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/19 17:25:10 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,8 @@ static int	open_input(char *input)
 
 int	setup_inputs(t_redir *input)
 {
-	while (input)
-	{
-		if (open_input(input->filename) == FAILURE)
-			return (FAILURE);
-		input = input->next;
-	}
+	if (open_input(input->filename) == FAILURE)
+		return (FAILURE);
 	return (SUCCESS);
 }
 
@@ -79,11 +75,29 @@ static int	open_output(char *output, int type)
 
 int	setup_outputs(t_redir *output)
 {
-	while (output)
+
+	if (open_output(output->filename, output->type) == FAILURE)
+		return (FAILURE);
+	return (SUCCESS);
+}
+
+int	setup_redirection(t_cmd *cmd, char **env)
+{
+	t_redir	*redir;
+
+	redir = cmd->redir;
+	while (redir)
 	{
-		if (open_output(output->filename, output->type) == FAILURE)
+		if (expand_redirection(redir, env) == FAILURE)
 			return (FAILURE);
-		output = output->next;
+		if (redir->type == INPUT_REDIRECTION)
+		{
+			if (setup_inputs(redir) == FAILURE)
+				return (FAILURE); // voir si pas de leaks
+		}		
+		else if (setup_outputs(redir) == FAILURE)
+			return (FAILURE);
+		redir = redir->next;
 	}
 	return (SUCCESS);
 }

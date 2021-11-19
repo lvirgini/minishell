@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/19 16:04:30 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/19 17:00:54 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ void	make_shell(char *line, char **env, t_builtin *builtin)
 	token = lexer_minishell(line);
 	cmd = parser_minishell(token);
 	free_list_token(token);
-	expanser(cmd, env);
-	if (cmd)
+	if (expanser(cmd, env) && cmd)
 	{
 		if (executer(cmd, env, builtin) == FAILURE)
 			exit_minishell(cmd, env);

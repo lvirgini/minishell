@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   need_expand.c                                      :+:      :+:    :+:   */
+/*   expand_redirection.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/25 16:34:18 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/25 16:43:38 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/11/17 15:19:24 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/11/18 16:54:40 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_bool	need_expand_str(char *str)
+// redirection ambigue : si $TEST="plusieurs elements"
+
+int	expand_redirection(t_redir *redir, char **env)
 {
-	if (str)
+	char		**expansion;
+
+	expansion = NULL;
+	expansion = expand(redir->filename, env);
+	if (listlen(expansion) != 1)
 	{
-		if (str[0] == CHAR_DOUBLE_QUOTE
-			|| str[0] == CHAR_SIMPE_QUOTE
-			|| str[0] == CHAR_DOLLAR)
-			return (true);
+		display_error(ERR_AMBIGUOUS, redir->filename);
+		free_list(expansion);
+		return (FAILURE);
 	}
-	return (false);
+	free(redir->filename);
+	redir->filename = *expansion;
+	free(expansion);
+	return (SUCCESS);
 }

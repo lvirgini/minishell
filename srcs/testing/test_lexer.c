@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 15:43:59 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/25 19:21:49 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/18 16:30:49 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 //COPY OF STATIC FUNCTION CAREFULL
 static void		set_functions_get_token(t_func_get_token ft_token[NB_TOKEN])
 {
-	ft_token[FT_SIMPLE_QUOTE] = &get_token_simple_quote;
-	ft_token[FT_DOUBLE_QUOTE] = &get_token_double_quote;
+//	ft_token[FT_SIMPLE_QUOTE] = &get_token_simple_quote;
+//	ft_token[FT_DOUBLE_QUOTE] = &get_token_double_quote;
 	ft_token[FT_PIPE] = &get_token_pipe;
 	ft_token[FT_TILD_LEFT] = &get_token_tild_left;
 	ft_token[FT_TILD_RIGHT] = &get_token_tild_right;
@@ -29,8 +29,7 @@ static void		set_functions_get_token(t_func_get_token ft_token[NB_TOKEN])
 
 void	testing_is_metacharacter(void)
 {
-	char	meta[NB_METACHARACTER + 1] = { CHAR_SIMPE_QUOTE, CHAR_DOUBLE_QUOTE,
-	CHAR_PIPE, CHAR_TILD_LEFT, CHAR_TILD_RIGHT, CHAR_DOLLAR, ' '};
+	char	meta[NB_METACHARACTER + 1] = {CHAR_PIPE, CHAR_TILD_LEFT, CHAR_TILD_RIGHT, ' '};
 	int		i;
 
 	i = -1;

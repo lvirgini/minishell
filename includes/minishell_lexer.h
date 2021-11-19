@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 10:54:51 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/25 19:21:12 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/18 16:04:50 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 ** NB_METACHARACTER : 
 */
 
-# define NB_METACHARACTER	6
+# define NB_METACHARACTER	4
 
 /*
 ** Define used for the lexer :
@@ -41,8 +41,6 @@
 enum e_ft_get_token
 {
 	FT_WORD,
-	FT_SIMPLE_QUOTE,
-	FT_DOUBLE_QUOTE,
 	FT_PIPE,
 	FT_TILD_LEFT,
 	FT_TILD_RIGHT,

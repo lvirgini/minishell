@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 17:19:13 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/10 16:49:08 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/18 17:16:04 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ pid_t	create_child_process(t_cmd *cmd, char *env[])
 		return (-1);
 	}
 	else if (pid == 0)
-		return (execve_this_command(cmd, env));
+	{
+		if (setup_all_redirections(cmd, env) == SUCCESS && cmd->argv
+			&& setup_cmd_path(cmd, env) == SUCCESS && cmd->path)
+			return (execve_this_command(cmd, env));
+		return (-1);
+	}
 	return (pid);
 }
