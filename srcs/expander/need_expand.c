@@ -23,19 +23,3 @@ t_bool	need_expand_str(char *str)
 	}
 	return (false);
 }
-
-t_bool	need_expand_argv(char **argv)
-{
-	size_t	i;
-
-	if (!argv)
-		return (false);
-	i = 0;
-	while (argv[i])
-	{
-		if (need_expand_str(argv[i]))
-			return (true);
-		i++;
-	}
-	return (false);
-}

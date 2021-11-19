@@ -18,7 +18,7 @@
 
 char	**expand_dollar(char *str, char **env)
 {
-	char 		**split_expansion;
+	char		**split_expansion;
 	char		*value;
 
 	if (str[1] == '\0')
