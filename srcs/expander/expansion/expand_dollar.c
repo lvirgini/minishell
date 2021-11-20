@@ -6,91 +6,82 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/23 23:15:32 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/20 15:21:57 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/20 19:34:08 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
-** expand dollar
-   name   A  word  consisting  only  of alphanumeric characters and under‐
-          scores, and beginning with an alphabetic character or an  under‐
-          score.  Also referred to as an identifier.
+** complete expansion : it is solo "$".
 */
 
-size_t	dollar_len(char *s)
+void	dollar_is_dollar(t_expansion *expansion)
 {
-	size_t	i;
-
-	i = 0;
-	while (s[i] && (ft_isalnum(s[i] || s[i] == '_')))
-		i++;
-	return (i);
+	expansion->size_to_remove = 1;
+	expansion->value = ft_split_set("$", STR_ESCAPE);
 }
 
-char	isolate_key(char *s, t_expansion *expansion)
-{
-	int		len;
-	char	end_of_key;
+/*
+** in minishell we don't expand $[0-9], we just pass throw.
+*/
 
-	len = dollar_len(s);
-	expansion->size_to_remove = len + 1;
-	end_of_key = s[len];
-	s[len] = '\0';
-	return (end_of_key);
+void	dollar_is_digits(t_expansion *expansion)
+{
+	expansion->size_to_remove = 2;
+	expansion->value = NULL;
 }
+
+/*
+**	Complete expansion with exit status
+*/
+
+void	dollar_is_exit_status(t_expansion *expansion)
+{
+	(void)expansion;
+	// TO DO
+}
+
+/*
+** Complete expansion and get value in env.
+*/
+
+void	dollar_is_env_value(t_expansion *expansion, char *s, char **env)
+{
+	char		*value;
+	char		end_of_key;
+
+	end_of_key = isolate_key(s + 1, expansion);
+	printf("expansion dollar = %s\n", s);
+	value = get_env_value(env, s + 1);
+	if (value)
+		expansion->value = ft_split_set(value, STR_ESCAPE);
+	s[expansion->size_to_remove] = end_of_key;
+}
+
+/*
+**	return expansion of dollar : it can be :
+**
+**	$		is "$"
+**	$? 		exit status
+**	$[0-9]	
+**	$[WORD]	env value whith WORD as key
+*/
 
 t_expansion	*expand_dollar(char *s, char **env)
 {
-	printf("expand dollar : %s\n", s);
-
 	t_expansion	*expansion;
-	char		*value;
-	char		end_of_key;
 
 	expansion = malloc_expansion();
 	if (!expansion)
 		return (NULL);
 	if (s[1] == '\0')
-	{
-		expansion->size_to_remove = 1;
-		expansion->value = ft_split_set(s, STR_ESCAPE);
-	}
-	if (ft_isalnum(s[1]))
-	{
-		expansion->size_to_remove = 2;
-		expansion->value = ft_split_set("", STR_ESCAPE);
-	}
-	// if s[1] == "?"
+		dollar_is_dollar(expansion);
+	else if (ft_isdigit(s[1]))
+		dollar_is_digits(expansion);
+	else if (s[1] == '?')
+		dollar_is_exit_status(expansion);
 	else
-	{
-		end_of_key = isolate_key(s + 1, expansion);
-		value = get_env_value(env, s + 1);
-		if (!value)
-			expansion->value = ft_split_set("", STR_ESCAPE); // a verifier pour affichage multi null value
-		else
-			expansion->value = ft_split_set(value, STR_ESCAPE);
-		s[expansion->size_to_remove] = end_of_key;
-	}
+		dollar_is_env_value(expansion, s, env);
 	return (expansion);
 }
-/*
-char	**expand_dollar(char *str, char **env)
-{
-	char		**split_expansion;
-	char		*value;
-
-	if (str[1] == '\0')
-		split_expansion = ft_split_set(str, STR_ESCAPE);
-	else
-	{
-		value = get_env_value(env, str + 1);
-		if (!value)
-			split_expansion = ft_split_set("", STR_ESCAPE); // a verifier pour affichage multi null value
-		else
-			split_expansion = ft_split_set(value, STR_ESCAPE);
-	}
-	return (split_expansion);
-}
-*/

@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_simple_quotes.c                             :+:      :+:    :+:   */
+/*   t_expansion_add_back.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/20 11:52:32 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/20 18:22:18 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/11/20 19:48:19 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/11/20 19:58:19 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_expansion	*expand_simple_quote(char *s, char **env)
+t_expansion	*add_back_expansion(t_expansion *first, t_expansion *to_add)
 {
-	(void)env;
-	printf("expand simple quotes : %s\n", s);
-	return (NULL);
+	if (!first)
+		return (to_add);
+	struct_add_back(first, to_add);
+	return (first);
 }

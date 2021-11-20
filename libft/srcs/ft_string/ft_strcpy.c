@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_simple_quotes.c                             :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/20 11:52:32 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/20 18:22:18 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/11/20 16:06:32 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/11/20 16:55:32 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-t_expansion	*expand_simple_quote(char *s, char **env)
+char	*ft_strcpy(char *dst, const char *src)
 {
-	(void)env;
-	printf("expand simple quotes : %s\n", s);
-	return (NULL);
+	size_t	i;
+
+	if (!src)
+		return (dst);
+	i = 0;
+	while (src[i])
+	{
+		dst[i] = src[i];
+		i++;
+	}
+	return (dst);
 }

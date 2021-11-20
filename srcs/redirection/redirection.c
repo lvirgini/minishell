@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:32:30 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/18 21:24:11 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/20 20:03:35 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	setup_inputs(t_redir *input)
 ** for OUTPUT REDIRECTION > :
 **		O_TRUNC : clear file if he exist.
 ** for APPEND >> :
-		O_APPEND : for write at the end of the file.
+**		O_APPEND : for write at the end of the file.
 **	display error if open problem.
 */
 
@@ -90,13 +90,13 @@ int	setup_redirection(t_cmd *cmd, char **env)
 	{
 		if (expand_redirection(redir, env) == FAILURE)
 			return (FAILURE);
-		if (redir->type == INPUT_REDIRECTION)
+	/*	if (redir->type == INPUT_REDIRECTION)
 		{
 			if (setup_inputs(redir) == FAILURE)
 				return (FAILURE); // voir si pas de leaks
 		}		
 		else if (setup_outputs(redir) == FAILURE)
-			return (FAILURE);
+			return (FAILURE);*/
 		redir = redir->next;
 	}
 	return (SUCCESS);
