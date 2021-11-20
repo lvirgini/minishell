@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/19 17:00:54 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/20 17:48:28 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	make_terminal(char **env)
 	t_builtin	builtin;
 
 	prompt = get_prompt(env, NULL);
-	builtin = (t_builtin){-1, -1, -1, NULL, NULL};
+	builtin = (t_builtin){-1, -1, NULL, NULL};
 	while (1)
 	{
 		line = NULL;

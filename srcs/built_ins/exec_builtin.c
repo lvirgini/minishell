@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 17:37:21 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/19 17:38:19 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/20 17:37:14 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,5 @@ int	exec_builtin(t_cmd *cmd, char **env, t_builtin *builtin) // comment expand_a
 		f_builtin[builtin->cmd](cmd->argv, env, builtin);
 	else
 		return (get_back_std_io(std_io));
-	return(get_back_std_io(std_io));
+	return (get_back_std_io(std_io));
 }

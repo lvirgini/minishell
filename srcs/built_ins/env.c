@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:31:30 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/19 16:05:35 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/20 17:36:51 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static void	env_error(int error)
 
 void	exec_env(char **arg, char **env, t_builtin *builtin)
 {
-	(void)builtin;
 	int	i;
 
+	(void)builtin;
 	i = 0;
 	if (arg[1] != NULL)
 	{

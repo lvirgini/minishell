@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 12:24:39 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/19 17:28:32 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/20 17:48:10 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ enum	e_env
 
 typedef struct s_builtin
 {
-	int		set; //remove ?
 	int		cmd;
 	int		error;
 	char	*home; //free a la fin NULL fatal ?
