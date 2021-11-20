@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/23 23:15:41 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/18 16:55:45 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/20 14:33:17 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*fusion_expand(char *str, int index, char **expansion)
 	ft_strncpy(fusion + index + size_expansion, str + index + size_word_expand, size_fusion);
 	return (fusion);
 }
-
+/*
 char	**expand_str(char *str, char **env)
 {
 	size_t	i;
@@ -77,16 +77,17 @@ char	**expand_str(char *str, char **env)
 	{
 		if (str[i] == CHAR_DOLLAR)
 			str = fusion_expand(str, i, expand_dollar(str + i, env));
-	/*	else if (*str == CHAR_DOUBLE_QUOTE)
-			return (expand_double_quote(str));
+	*//*	else if (*str == CHAR_DOUBLE_QUOTE)
+		return (expand_double_quote(str));
 		else if (*str == CHAR_SIMPE_QUOTE)
-			return (expand_simple_quote(str));*/
+			return (expand_simple_quote(str));
 		if (!str)
 			return (NULL);
 		i++;
 	}
 	return (NULL);
-}
+}*/
+
 int	expanser(t_cmd **list_cmd, char **env)
 {
 	t_cmd *cmd;
@@ -96,6 +97,7 @@ int	expanser(t_cmd **list_cmd, char **env)
 	cmd = *list_cmd;
 	while (cmd)
 	{
+	//	if (need_expand(cmd->argv))
 		if (cmd->argv)
 		{
 			cmd->argv = expand_argv(cmd->argv, env);

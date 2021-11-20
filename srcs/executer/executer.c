@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:27:42 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/18 17:17:59 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/20 13:15:22 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	execute_this_cmd(t_cmd *cmd, char **env)
 int	executer(t_cmd **list_cmd, char **env)
 {
 	t_cmd	*cmd;
-	int		std_io[2];
+//	int		std_io[2];
 
 	cmd = *list_cmd;
 	//save_std_io(std_io);
