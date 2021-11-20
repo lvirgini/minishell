@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 21:30:53 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/26 10:20:07 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/20 15:25:16 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,10 @@ void	free_list_expansion(t_expansion *expansion)
 {
 	t_expansion	*next;
 
-	if (expansion)
+	while (expansion)
 	{
-		while (expansion)
-		{
-			next = expansion->next;
-			free_expansion(expansion);
-			expansion = next;
-		}
+		next = expansion->next;
+		free_expansion(expansion);
+		expansion = next;
 	}
 }
