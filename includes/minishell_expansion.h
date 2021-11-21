@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 16:38:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/21 20:30:28 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/21 23:07:12 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "minishell.h"
 
 # define STR_ESCAPE	" \t\n"
+# define BACKSLASH	'\\'
 # define NB_EXPANDER	3
 
 typedef struct s_expansion	t_expansion;

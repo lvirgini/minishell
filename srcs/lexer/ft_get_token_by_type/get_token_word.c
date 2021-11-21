@@ -6,17 +6,17 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 21:17:03 by mini              #+#    #+#             */
-/*   Updated: 2021/11/21 20:31:00 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/21 23:06:40 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	strlen_quote(char *line, int len, char quote_type)
+static int	strlen_simple_quote(char *line, int len)
 {
 	int	quotes_len;
 
-	quotes_len = ft_strchr_len(line + len + 1, quote_type);
+	quotes_len = ft_strchr_len(line + len + 1, CHAR_SIMPLE_QUOTE);
 	if (quotes_len == -1)
 	{
 		print_syntax_error(ERR_QUOTES_NOT_CLOSED, 0, line);
@@ -24,12 +24,22 @@ int	strlen_quote(char *line, int len, char quote_type)
 	}
 	return (len + quotes_len + 2);
 }
-
-t_bool	is_quotes(char c)
+static int	strlen_double_quote(char *line, int len)
 {
-	if (c == CHAR_SIMPLE_QUOTE || c == CHAR_DOUBLE_QUOTE)
-		return (true);
-	return (false);
+	int	quotes_len;
+	int	next_quotes;
+
+	quotes_len = 1;
+	while (line[len + quotes_len])
+	{
+		if (line[len + quotes_len] == CHAR_DOUBLE_QUOTE)
+			return (len + quotes_len + 1);
+		if (line[len + quotes_len] == BACKSLASH)
+			quotes_len++;
+		quotes_len++;
+	}
+	print_syntax_error(ERR_QUOTES_NOT_CLOSED, 0, line);
+	return (-1);
 }
 
 int	get_token_word_len(char *line)
@@ -37,18 +47,21 @@ int	get_token_word_len(char *line)
 	int	len;
 
 	len = 0;
-	while (line[len])
+	while (line[len] && !is_metacharacter(line[len]) && !ft_isspace(line[len]))
 	{
-		if (is_quotes(line[len]))
+		if (line[len] == CHAR_SIMPLE_QUOTE)
 		{
-			len = strlen_quote(line, len, line[len]);
+			len = strlen_simple_quote(line, len);
 			if (len == -1)
 				return (-1);
 		}
-		else if (!is_metacharacter(line[len]) && !ft_isspace(line[len]))
-			len++;
-		else
-			return (len);
+		else if (line[len] == CHAR_DOUBLE_QUOTE)
+		{
+			len = strlen_double_quote(line, len);
+			if (len == -1)
+				return (-1);
+		}
+		len++;
 	}
 	return (len);
 }
