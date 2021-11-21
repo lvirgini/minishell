@@ -6,65 +6,12 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 11:09:02 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/21 12:30:23 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/21 19:20:33 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-** add expansion and keep argv already good 
-*/
-/*
-char	**expand_argv(char **argv, char **env)
-{
-	size_t		i;
-	char		**expansion;
-
-	i = 0;
-	while (argv[i])
-	{
-		if (need_expand_str(argv[i]))
-		{
-			expansion = NULL;
-			expansion = expand_list(argv[i], env);
-			argv = redesign_expansion_argv(argv, i, expansion);
-			if (!argv)
-				return (NULL);
-		//	print_list(argv);
-			free(expansion);
-		}
-		i++;
-	}
-	return (argv);
-}
-*/
-
-char	**expand_argv(char **argv, char **env)
-{
-	char 	**new_argv;
-	size_t	i;
-	t_expansion *expansion;
-
-	i = 0;
-	while (argv[i])
-	{
-		if (need_expand(argv[i]))
-		{
-			expansion = expand_str(argv[i], env);
-			if (!expansion)
-				return (NULL);
-			new_argv = redesign_argv(argv, expansion, &i);
-			free_expansion(expansion);
-			argv = new_argv;
-			if (!argv)
-				return (NULL);
-		}
-		else
-			i++;
-	}
-	return (argv);
-}
 
 /// argv = t$TEST"a" NULL
 //		l	$TEST "a"
@@ -72,15 +19,16 @@ char	**expand_argv(char **argv, char **env)
 //			[l|s] [-l|a]
 
 
-t_bool	add_argv_expansion(char **new, char *old_arg, t_expansion *expansion, size_t *i)
+static t_bool	fusion_argv_expansion(char **new, char *old_arg, t_expansion *expansion,
+	int *i)
 {
 	char	**value;
-	size_t	j;
+	int		j;
 
 	j = 0;
 	while (expansion)
 	{
-		new[*i] = ft_strnjoin(new[*i], old_arg + j, expansion->start_of_the_expand - j);
+		new[*i] = ft_strnjoin_free(new[*i], old_arg + j, expansion->start_of_the_expand - j);
 		if (!new[*i])
 			return (FAILURE);
 		value = expansion->value;
@@ -106,6 +54,82 @@ t_bool	add_argv_expansion(char **new, char *old_arg, t_expansion *expansion, siz
 ** add all expansion and redesign new argv with split argument.
 */
 
+static t_bool	redesign_argv(char **new, char **old, t_expansion *expansion, int *index)
+{
+	int	i;
+
+	list_nmove(new, old, *index);
+	i = *index;
+	new[i] = NULL;
+	if (fusion_argv_expansion(new, old[*index], expansion, &i) == FAILURE)
+		return (FAILURE);
+	new[i] = NULL;
+	list_move(new + i, old + *index + 1);
+	*index = i;
+	return (SUCCESS);
+}
+
+static void	free_unused_old_argv(t_cmd *cmd, int index_to_remove)
+{
+	free(cmd->argv[index_to_remove]);
+	cmd->argv[index_to_remove] = NULL;
+	free(cmd->argv);
+}
+/*
+** add expansion and keep argv already good 
+*/
+
+void	get_new_argv_with_expansion(t_cmd *cmd, int *i, t_expansion *expansion)
+{
+	char		**new_argv;
+	int			index_to_remove;
+
+	new_argv = malloc_list((int)(listlen(cmd->argv) + count_expansion_split(expansion)) + 1);
+	printf("%d\n",(int)(listlen(cmd->argv) + count_expansion_split(expansion)) + 1);
+	if (new_argv)
+	{
+		index_to_remove = *i;
+		if (redesign_argv(new_argv, cmd->argv, expansion, i) == FAILURE)
+		{
+			free_n_list(new_argv, *i);
+			new_argv = NULL;
+		}
+		else
+			free_unused_old_argv(cmd, index_to_remove);
+	}
+	else
+		free_list(cmd->argv);
+	cmd->argv = new_argv;
+}
+
+void	expand_argv(t_cmd *cmd, char **env)
+{
+	int		i;
+	t_expansion *expansion;
+	
+	i = 0;
+	while (cmd->argv[i])
+	{
+		if (need_expand(cmd->argv[i]))
+		{
+			expansion = expand_str(cmd->argv[i], env);
+			if (!expansion)
+			{
+				free_list(cmd->argv);
+				cmd->argv = NULL;
+				return ;
+			}
+			get_new_argv_with_expansion(cmd, &i, expansion);
+			free_list_expansion(expansion);
+			if (!cmd->argv)
+				return ;
+		}
+		else
+			i++;
+	}
+}
+
+/*OLD
 char	**redesign_argv(char **old, t_expansion *expansion, size_t *index)
 {
 	char	**new;
@@ -113,7 +137,10 @@ char	**redesign_argv(char **old, t_expansion *expansion, size_t *index)
 
 	new = malloc_list(listlen(old) + count_expansion_split(expansion) + 1);
 	if (!new)
+	{
+		free_list(old);
 		return (NULL);
+	}
 	list_nmove(new, old, *index);
 	i = *index;
 	new[i] = NULL;
@@ -129,7 +156,7 @@ char	**redesign_argv(char **old, t_expansion *expansion, size_t *index)
 	free(old);
 	*index = i;
 	return (new);
-}
+}*/
 /*
 static char	**redesign_expansion_argv(char **old_argv, int index,
 			char **expansion)

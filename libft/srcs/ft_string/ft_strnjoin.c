@@ -6,11 +6,20 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 22:10:50 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/21 11:17:21 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/21 19:29:26 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+static char	*if_str_is_null(char const *s1, char const *s2, size_t n)
+{
+	if (!s1 && s2)
+		return (ft_strdup_max(s2, n));
+	if (s1 && !s2)
+		return (ft_strdup(s1));
+	return (NULL);
+}
 
 char	*ft_strnjoin(char const *s1, char const *s2, size_t n)
 {
@@ -19,10 +28,9 @@ char	*ft_strnjoin(char const *s1, char const *s2, size_t n)
 	size_t		j;
 	char		*dest;
 
-	if (!s2)
-		return (ft_strdup(s1));
-	else if (!s1)
-		return (ft_strdup_max(s2, n));
+	dest = if_str_is_null(s1, s2, n);
+	if (dest)
+		return (dest);
 	len = ft_strlen(s1) + n;
 	dest = (char *)malloc(sizeof(*dest) * (len + 1));
 	if (dest == NULL)
@@ -38,4 +46,15 @@ char	*ft_strnjoin(char const *s1, char const *s2, size_t n)
 		dest[j] = '\0';
 	dest[j] = '\0';
 	return (dest);
+}
+
+char	*ft_strnjoin_free(char *s1, char const *s2, size_t n)
+{
+	char *dst;
+
+	dst = ft_strnjoin(s1, s2, n);
+	if (s1)
+		free(s1);
+	s1 = NULL;
+	return (dst);
 }

@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:12:26 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/10 16:58:42 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/21 14:11:29 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,13 @@ t_prompt	*get_prompt(char **env, t_prompt *prompt)
 	char	*user;
 	char	*cwd;
 	t_bool	need_change;
+	t_prompt	*new;
 
 	user = get_env_value(env, "USER");
 	cwd = NULL;
 	cwd = getcwd(NULL, 0);
 	if (!prompt)
-		prompt = init_prompt(user, cwd);
+		new = init_prompt(user, cwd);
 	else
 	{
 		need_change = check_prompt_update(prompt, cwd, user);
@@ -112,5 +113,7 @@ t_prompt	*get_prompt(char **env, t_prompt *prompt)
 	}
 	if (cwd)
 		free(cwd);
-	return (prompt);
+	if (prompt)
+		return (prompt);
+	return (new);
 }

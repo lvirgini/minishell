@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 13:44:54 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/21 11:02:32 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/21 14:53:42 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 static int	which_expansion(char c)
 {
 	static char	expand_char[NB_EXPANDER + 1] = {
-		CHAR_DOLLAR, CHAR_DOUBLE_QUOTE, CHAR_SIMPE_QUOTE, '\0'};
+		CHAR_DOLLAR, CHAR_DOUBLE_QUOTE, CHAR_SIMPLE_QUOTE, '\0'};
 
 	return (ft_strchr_len(expand_char, c));
 }

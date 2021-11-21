@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/23 23:15:32 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/20 20:08:04 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/21 17:53:30 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ static void	dollar_is_env_value(t_expansion *expansion, char *s, char **env)
 **	$[WORD]	env value whith WORD as key
 */
 
+
 t_expansion	*expand_dollar(char *s, char **env)
 {
 	t_expansion	*expansion;
@@ -77,11 +78,16 @@ t_expansion	*expand_dollar(char *s, char **env)
 		return (NULL);
 	if (s[1] == '\0')
 		dollar_is_dollar(expansion);
-	else if (ft_isdigit(s[1]))
-		dollar_is_digits(expansion);
-	else if (s[1] == '?')
-		dollar_is_exit_status(expansion);
 	else
-		dollar_is_env_value(expansion, s, env);
+	{
+		if (is_dollar_env_value_syntax(s[1]))
+			dollar_is_env_value(expansion, s, env);
+		else if (ft_isdigit(s[1]))
+			dollar_is_digits(expansion);
+		else if (s[1] == '?')
+			dollar_is_exit_status(expansion);
+		else
+			dollar_is_dollar(expansion);
+	}
 	return (expansion);
 }

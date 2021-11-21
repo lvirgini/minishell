@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 10:54:51 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/18 16:04:50 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/21 14:54:14 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 ** for all split, if one of this char is found, stop the token.
 */
 
-# define CHAR_SIMPE_QUOTE 	'\''
+# define CHAR_SIMPLE_QUOTE 	'\''
 # define CHAR_DOUBLE_QUOTE 	'\"'
 # define CHAR_PIPE			'|'
 # define CHAR_TILD_LEFT		'<'
@@ -56,8 +56,6 @@ enum e_ft_get_token
 typedef int	(*t_func_get_token)(t_token *, char *);
 
 int			get_token_word(t_token *token, char *line);
-int			get_token_simple_quote(t_token *token, char *line);
-int			get_token_double_quote(t_token *token, char *line);
 int			get_token_pipe(t_token *token, char *line);
 int			get_token_tild_left(t_token *token, char *line);
 int			get_token_tild_right(t_token *token, char *line);
@@ -75,6 +73,6 @@ t_token		*add_next_token(char *line, t_func_get_token *get_token);
 
 int			is_metacharacter(char c);
 int			is_operator(char c);
-char		*convert_double_quote(char *s); // A REFAIRE EXPANDER
+int			strlen_quote(char *line, int len, char quote_type);
 
 #endif

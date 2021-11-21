@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 19:31:22 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/20 19:33:27 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/21 17:52:07 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,13 @@ size_t	dollar_len(char *s)
 		&& (ft_isalnum(s[i]) || s[i] == '_' ))
 		i++;
 	return (i);
+}
+
+t_bool	is_dollar_env_value_syntax(char c)
+{
+	if (ft_isalpha(c) || c == '_' )
+		return (true);
+	return (false);
 }
 
 char	isolate_key(char *s, t_expansion *expansion)

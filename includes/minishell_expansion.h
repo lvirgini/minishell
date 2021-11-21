@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 16:38:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/21 11:01:48 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/21 17:49:10 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ typedef t_expansion *(*t_ft_expand)(char *s, char **env);
 */
 
 t_expansion	*malloc_expansion(void);
-void		free_expansion(t_expansion	*expansion);
 void		free_list_expansion(t_expansion *expansion);
 t_expansion	*add_back_expansion(t_expansion *first, t_expansion *to_add);
 
@@ -57,8 +56,7 @@ t_expansion *expand_double_quote(char *s, char **env);
 t_expansion *expand_dollar(char *s, char **env);
 
 //char		**expand(char *str, char **env);
-char		**expand_argv(char **argv, char **env);
-char		**redesign_argv(char **old, t_expansion *expansion, size_t *index);
+void		expand_argv(t_cmd *cmd, char **env);
 
 
 int			expand_redirection(t_redir *redir, char **env);
@@ -72,6 +70,7 @@ t_bool		is_expansion(char c);
 t_bool		need_expand(char *s);
 size_t		get_expand_removed_len(t_expansion *expansion);
 size_t		dollar_len(char *s);
+t_bool		is_dollar_env_value_syntax(char c);
 char		isolate_key(char *s, t_expansion *expansion);
 size_t		count_expansion_split(t_expansion *expansion);
 
