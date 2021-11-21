@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 16:35:37 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/06/21 21:41:50 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/21 10:43:14 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,35 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (s2[i])
 		dest[j++] = s2[i++];
 	dest[j] = '\0';
+	return (dest);
+}
+
+/*
+** strjoin avec free(s1);
+*/
+
+char	*ft_strjoin_free(char *s1, char const *s2)
+{
+	int		len;
+	int		i;
+	int		j;
+	char	*dest;
+
+	if (!s1 || !s2)
+		return (NULL);
+	len = ft_strlen(s1) + ft_strlen(s2);
+	dest = (char *)malloc(sizeof(*dest) * (len + 1));
+	if (dest == NULL)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (s1[i])
+		dest[j++] = s1[i++];
+	i = 0;
+	while (s2[i])
+		dest[j++] = s2[i++];
+	dest[j] = '\0';
+	free(s1);
+	s1 = NULL;
 	return (dest);
 }

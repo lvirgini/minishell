@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 16:38:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/20 19:58:49 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/21 11:01:48 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@ t_expansion *expand_dollar(char *s, char **env);
 
 //char		**expand(char *str, char **env);
 char		**expand_argv(char **argv, char **env);
+char		**redesign_argv(char **old, t_expansion *expansion, size_t *index);
+
+
 int			expand_redirection(t_redir *redir, char **env);
 char		*fusion_str_expansion(char *old_s, t_expansion *expansion);
 
@@ -70,5 +73,7 @@ t_bool		need_expand(char *s);
 size_t		get_expand_removed_len(t_expansion *expansion);
 size_t		dollar_len(char *s);
 char		isolate_key(char *s, t_expansion *expansion);
+size_t		count_expansion_split(t_expansion *expansion);
+
 
 #endif

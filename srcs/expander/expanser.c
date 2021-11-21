@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/23 23:15:41 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/20 19:54:52 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/21 12:30:40 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ int	expanser(t_cmd **list_cmd, char **env)
 			cmd->argv = expand_argv(cmd->argv, env);
 			if (!cmd->argv)
 				return (FAILURE);
+			print_cmd(cmd);
 		}
 		cmd = cmd->next;
 	}

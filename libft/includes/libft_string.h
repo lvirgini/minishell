@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 11:28:09 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/20 16:09:50 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/21 10:43:41 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ size_t	ft_strlcat(char *dst, const char *src, size_t size);
 char	*ft_strcut(char *s, size_t n);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin_free(char *s1, char const *s2);
+char	*ft_strnjoin(char const *s1, char const *s2, size_t n);
 char	**ft_split(char const *s, const char c);
 char	**ft_split_set(const char *s, const char *set);
 void	free_list_exit(char **list);

@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 13:44:54 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/20 19:54:13 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/21 11:02:32 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,26 @@ t_bool	is_expansion(char c)
 	if (which_expansion(c) != -1)
 		return (true);
 	return (false);
+}
+
+/*
+**	For argv : count nb split for expand argv
+**	if expand->value is multiple : it must be split in 
+**	multiple argument.
+*/
+
+size_t	count_expansion_split(t_expansion *expansion)
+{
+	size_t	count;
+	size_t	split;
+
+	count = 0;
+	while (expansion)
+	{
+		split = listlen(expansion->value);
+		if (split > 1)
+			count += split - 1;
+		expansion = expansion->next;
+	}
+	return (count);
 }

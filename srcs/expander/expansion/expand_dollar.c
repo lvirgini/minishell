@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/23 23:15:32 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/20 19:34:08 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/20 20:08:04 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** complete expansion : it is solo "$".
 */
 
-void	dollar_is_dollar(t_expansion *expansion)
+static void	dollar_is_dollar(t_expansion *expansion)
 {
 	expansion->size_to_remove = 1;
 	expansion->value = ft_split_set("$", STR_ESCAPE);
@@ -26,7 +26,7 @@ void	dollar_is_dollar(t_expansion *expansion)
 ** in minishell we don't expand $[0-9], we just pass throw.
 */
 
-void	dollar_is_digits(t_expansion *expansion)
+static void	dollar_is_digits(t_expansion *expansion)
 {
 	expansion->size_to_remove = 2;
 	expansion->value = NULL;
@@ -36,7 +36,7 @@ void	dollar_is_digits(t_expansion *expansion)
 **	Complete expansion with exit status
 */
 
-void	dollar_is_exit_status(t_expansion *expansion)
+static void	dollar_is_exit_status(t_expansion *expansion)
 {
 	(void)expansion;
 	// TO DO
@@ -46,7 +46,7 @@ void	dollar_is_exit_status(t_expansion *expansion)
 ** Complete expansion and get value in env.
 */
 
-void	dollar_is_env_value(t_expansion *expansion, char *s, char **env)
+static void	dollar_is_env_value(t_expansion *expansion, char *s, char **env)
 {
 	char		*value;
 	char		end_of_key;
