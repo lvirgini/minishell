@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 11:32:01 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/18 16:07:42 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/21 20:36:12 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	syntax_error_redirection(t_token *token)
 	return (SUCCESS);
 }
 
-void	change_heredoc_position(t_redir *redir, int	type)
+void	change_heredoc_position(t_redir *redir, int type)
 {
 	if (type == INPUT_REDIRECTION || type == HERE_DOC)
 	{

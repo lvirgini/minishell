@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 18:18:56 by mini              #+#    #+#             */
-/*   Updated: 2021/11/21 19:24:38 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/21 20:32:35 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static void	set_functions_get_token(t_func_get_token ft_token[NB_METACHARACTER])
 	ft_token[FT_TILD_RIGHT] = &get_token_tild_right;
 	ft_token[FT_WORD] = &get_token_word;
 }
-
 
 static char	*move_line_for_next_token(char *line, t_token *current)
 {

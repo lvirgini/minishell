@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 11:52:32 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/21 15:00:16 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/21 20:12:31 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 t_expansion	*expand_simple_quote(char *s, char **env)
 {
-	(void)env;
-	printf("expand simple quotes : %s\n", s);
-	t_expansion *expansion;
+	t_expansion	*expansion;
 	int			quotes_len;
 
+	(void)env;
+	printf("expand simple quotes : %s\n", s); //
 	expansion = malloc_expansion();
 	if (!expansion)
 		return (NULL);
@@ -30,14 +30,13 @@ t_expansion	*expand_simple_quote(char *s, char **env)
 		free(expansion);
 		return (NULL);
 	}
-	expansion->value[0]	= ft_strdup_max(s + 1, quotes_len - 2);
+	expansion->value[0] = ft_strdup_max(s + 1, quotes_len - 2);
 	if (!expansion->value[0] && quotes_len - 2 > 0)
 	{
 		perror("malloc expand_simple_quotes()");
-		free(expansion->value);
 		free(expansion);
 		return (NULL);
 	}
 	expansion->size_to_remove = quotes_len;
-	return (expansion);	
+	return (expansion);
 }

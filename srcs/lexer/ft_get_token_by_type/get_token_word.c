@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 21:17:03 by mini              #+#    #+#             */
-/*   Updated: 2021/11/21 19:25:48 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/21 20:31:00 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	strlen_quote(char *line, int len, char quote_type)
 	}
 	return (len + quotes_len + 2);
 }
-
 
 t_bool	is_quotes(char c)
 {

@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/23 23:15:32 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/21 17:53:30 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/21 20:12:51 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ static void	dollar_is_env_value(t_expansion *expansion, char *s, char **env)
 **	$[0-9]	
 **	$[WORD]	env value whith WORD as key
 */
-
 
 t_expansion	*expand_dollar(char *s, char **env)
 {

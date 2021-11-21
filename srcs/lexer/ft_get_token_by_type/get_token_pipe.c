@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 13:29:35 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/21 19:32:00 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/21 20:31:39 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 int	get_token_pipe(t_token *token, char *line)
 {
-	token->word = ft_strdup_max(line, 1); // est ce qu'on a vraiment besoin de dup ca ?
+	token->word = ft_strdup_max(line, 1);
 	if (!token->word)
 	{
 		perror("malloc get_token_pipe()");

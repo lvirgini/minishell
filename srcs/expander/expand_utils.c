@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 13:44:54 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/21 14:53:42 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/21 20:25:23 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,24 @@ size_t	count_expansion_split(t_expansion *expansion)
 		expansion = expansion->next;
 	}
 	return (count);
+}
+
+/*
+** return true or false if string need an expansion
+*/
+
+t_bool	need_expand(char *s)
+{
+	size_t	i;
+
+	if (!s)
+		return (false);
+	i = 0;
+	while (s[i])
+	{
+		if (is_expansion(s[i]))
+			return (true);
+		i++;
+	}
+	return (false);
 }

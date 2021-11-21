@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 13:15:45 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/21 14:14:57 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/21 20:12:59 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,3 @@ t_expansion	*expand_str(char *str, char **env)
 	}
 	return (first);
 }
-

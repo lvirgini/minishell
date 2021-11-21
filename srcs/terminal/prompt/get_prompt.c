@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:12:26 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/21 14:11:29 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/21 21:18:12 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	layout_prompt(t_prompt *prompt)
 		return ; //
 	}
 	ft_strlcpy(prompt->formatted, color_green, len);
-	if (prompt->user && *prompt->user) //
+	if (prompt->user && *prompt->user)
 	{
 		ft_strlcat(prompt->formatted, prompt->user, len);
 		ft_strlcat(prompt->formatted, minishell, len);

@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 19:31:22 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/21 17:52:07 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/21 19:54:31 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 size_t	dollar_len(char *s)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (s[i] && !is_expansion(s[i])

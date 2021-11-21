@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 11:34:17 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/21 19:22:45 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/21 21:16:58 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static char	**split_path_env(char *env)
 		perror("split env");
 	return (split);
 }
+
 /*
 ** check with access X_OK (executable) if file is well executable
 */
@@ -78,7 +79,6 @@ t_bool	argv_is_empty(char **argv)
 		return (true);
 	}
 	return (false);
-
 }
 
 int	setup_cmd_path(t_cmd *cmd, char **env)

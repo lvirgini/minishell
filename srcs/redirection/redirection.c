@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:32:30 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/20 20:03:35 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/21 20:37:03 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ static int	open_output(char *output, int type)
 
 int	setup_outputs(t_redir *output)
 {
-
 	if (open_output(output->filename, output->type) == FAILURE)
 		return (FAILURE);
 	return (SUCCESS);
@@ -90,13 +89,13 @@ int	setup_redirection(t_cmd *cmd, char **env)
 	{
 		if (expand_redirection(redir, env) == FAILURE)
 			return (FAILURE);
-	/*	if (redir->type == INPUT_REDIRECTION)
+		if (redir->type == INPUT_REDIRECTION)
 		{
 			if (setup_inputs(redir) == FAILURE)
 				return (FAILURE); // voir si pas de leaks
 		}		
 		else if (setup_outputs(redir) == FAILURE)
-			return (FAILURE);*/
+			return (FAILURE);
 		redir = redir->next;
 	}
 	return (SUCCESS);

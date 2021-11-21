@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/21 19:27:16 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/21 20:04:16 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,12 @@ int	make_terminal(char **env)
 		{
 			if (*line)
 			{
-				if (ft_strcmp(line, "exit") == 0)
+				if (ft_strcmp(line, "exit") == 0) // EXIT PROVISOIRE POUR VOIR LES LEAKS
 				{
 					free(line);
-					exit_minishell(NULL, env);
+					free_t_prompt(prompt);
+					rl_clear_history();
+					return (SUCCESS);
 				}
 				add_history(line);
 				make_shell(line, env);
