@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:37:45 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/20 17:36:35 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/22 17:29:31 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,9 @@ void	echo_print(char **arg, int i)
 	}
 }
 
-void	exec_echo(char **arg, char **env, t_builtin *builtin)
+void	exec_echo(char **arg, char **env)
 {
 	int	trail;
-	(void)env;
-	(void)builtin;
 	
 	trail = 0;
 	if (arg[1] == NULL)
