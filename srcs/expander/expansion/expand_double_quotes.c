@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 11:51:41 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/21 23:07:36 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/22 22:30:53 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ char	*removed_and_expand_double_quotes(char *s, int	*len, char **env)
 {
 	static char	escape_quotes[] = {CHAR_DOLLAR, CHAR_DOUBLE_QUOTE, BACKSLASH,
 					GRAVE_ACCENT, '\0'};
-	size_t		i;
-	size_t		j;
+	int			i;
+	int			j;
 	char		*result;
 	t_expansion	*expansion;
 
@@ -48,7 +48,9 @@ char	*removed_and_expand_double_quotes(char *s, int	*len, char **env)
 		expansion = expand_dollar_in_double_quotes(s, env, len);
 		if (!expansion)
 			return (NULL);
-	}	
+	}
+	else
+		*len = strlen_without_double_quotes(s, escape_quotes);
 
 	result = (char *)malloc(sizeof(char) * (*len + 1));
 //		* (strlen_without_double_quotes(s, escape_quotes) + 1));
@@ -60,20 +62,21 @@ char	*removed_and_expand_double_quotes(char *s, int	*len, char **env)
 
 	i = 1;
 	j = 0;
-	while (s[i + 1])
+	while (s[i + 1] && j < *len)
 	{
 		if (s[i] == '$')
 		{
 			ft_strcpy(result + j, expansion->value[0]);
 			i += expansion->size_to_remove;
 			j = ft_strlen(expansion->value[0]);
+			expansion = expansion->next;
 		}
-		if (s[i] == BACKSLASH && ft_strchr(escape_quotes, s[i + 1]))
+		else 
 		{
-			i++;
-		}
-		else
+			if (s[i] == BACKSLASH && ft_strchr(escape_quotes, s[i + 1]))
+				i++;
 			result[j++] = s[i++];
+		}
 	}
 	result[j] = '\0';
 	return (result);
@@ -104,6 +107,6 @@ t_expansion	*expand_double_quote(char *s, char **env)
 		free(expansion);
 		return (NULL);
 	}
-	expansion->size_to_remove = strlen_double_quote(s, 0);
+	expansion->size_to_remove = quotes_len;
 	return (expansion);
 }
