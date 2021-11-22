@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 10:59:10 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/22 14:21:54 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/22 17:28:31 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,9 @@ void	print_export(char **env)
 	}
 }
 
-void	exec_export(char **arg, char **env, t_builtin *builtin) //faire SHLVL incrementer a chaque fois qu'on rentre dans un shell (des le debut) ou reset a 0 si introuvable
+void	exec_export(char **arg, char **env) //faire SHLVL incrementer a chaque fois qu'on rentre dans un shell (des le debut) ou reset a 0 si introuvable
 {
+	// check si arg[0] == cd alors changer old
 	// int	i;
 	// (void)builtin;
 

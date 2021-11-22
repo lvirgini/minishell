@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:31:30 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/22 11:26:22 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/22 17:30:06 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	env_error(int error)
 		ft_putstr_fd(S_NO_FILE, STDERR_FILENO);
 }
 
-int		is_key_value(char *str)
+int	is_key_value(char *str)
 {
 	int	i;
 
@@ -35,11 +35,10 @@ int		is_key_value(char *str)
 	return (0);
 }
 
-void	exec_env(char **arg, char **env, t_builtin *builtin)
+void	exec_env(char **arg, char **env)
 {
 	int	i;
 
-	(void)builtin;
 	i = 0;
 	if (arg[1] != NULL)
 	{

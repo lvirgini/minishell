@@ -6,26 +6,26 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:31:33 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/22 14:43:09 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/22 17:31:52 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	cd_errors(int error, char **arg, char *path)
+static void	cd_errors(int error, char *arg, char *path)
 {
 	ft_putstr_fd("cd: ", STDERR_FILENO);
 	if (error == TOO_MANY_ARGS)
 		ft_putstr_fd(S_TOO_MANY_ARGS, STDERR_FILENO);
 	else if (errno == EACCES)
 	{
-		ft_putstr_fd(arg[1], STDERR_FILENO);
+		ft_putstr_fd(arg, STDERR_FILENO);
 		ft_putstr_fd(S_PERM, STDERR_FILENO);
 	}
 	else if (errno == ENOENT) // Autres erreurs ?
 	{
 		if (path == NULL)
-			ft_putstr_fd(arg[1], STDERR_FILENO);
+			ft_putstr_fd(arg, STDERR_FILENO);
 		else
 			ft_putstr_fd(path, STDERR_FILENO);
 		ft_putstr_fd(S_NO_FILE, STDERR_FILENO);
@@ -33,82 +33,77 @@ static void	cd_errors(int error, char **arg, char *path)
 	else if (errno == ENOTDIR)
 	{
 		if (path == NULL)
-			ft_putstr_fd(arg[1], STDERR_FILENO);
+			ft_putstr_fd(arg, STDERR_FILENO);
 		else
 			ft_putstr_fd(path, STDERR_FILENO);
 		ft_putstr_fd(S_NO_DIR, STDERR_FILENO);
 	}
 }
 
-void	cd_home(char **arg, t_builtin *builtin) //recheck home a chaque fois
+void	cd_home(char **arg, char **env)
 {
 	char	*path;
+	char	*home;
 
 	path = NULL;
-	if (builtin->home == NULL)
-		return ;
-	builtin->old = get_current_dir(builtin->old);
-	
-	if (arg[1] == NULL || ft_strcmp(arg[1], "~") == 0)
+	home = get_home_dir(env);
+	if (home && arg[1] == NULL || ft_strcmp(arg[1], "~") == 0)
 	{
-		if (chdir(builtin->home) == -1)
-			cd_errors(0, arg, path); //check si marche
+		if (chdir(home) == -1)
+			cd_errors(0, arg[1], path); //check si marche
 		return ;
 	}
 	else if (arg[1][1] == '/')
 	{
-		path = ft_strjoin(builtin->home, arg[1] + 2);
+		path = ft_strjoin(home, arg[1] + 2);
 		if (chdir(path) == -1)
-			cd_errors(0, arg, path); //check si marche
+			cd_errors(0, arg[1], path);
 		if (path)
 			free (path);
 		return ;
 	}
 	else if (chdir(arg[1]) == -1) // revoir le comportement
-		cd_errors(0, arg, path); //check si marche
+		cd_errors(0, arg[1], NULL);
 }
 
-void	cd_old(char **arg, t_builtin *builtin) //Faire avec export
+void	cd_old(char **arg, char **env)
 {
-	char	*cwd;
+	char	*new_old;
+	char	*old;
 
-	cwd = NULL;
-	cwd = get_current_dir(cwd);
-	if (builtin->old && chdir(builtin->old) == -1)
-		cd_errors(0, arg, NULL);
-	if (builtin->old)
+	new_old = get_current_dir();
+	old = get_old_dir(env);
+	if (old && chdir(old) == -1)
 	{
-		printf("%s\n", builtin->old);
-		free(builtin->old);
+		cd_errors(0, arg[1], NULL);
+		printf("%s\n", old);
+		exec_export(&new_old, env);
 	}
-	else if (cwd)
-		printf("%s\n", cwd);
-	builtin->old = ft_strdup(cwd);
-	if (cwd)
-		free(cwd);
 }
 
-void	cd_path(char **arg, t_builtin *builtin)
+void	cd_path(char **arg, char **env)
 {
-	builtin->old = get_current_dir(builtin->old);
+	char	*old;
+
+	old = get_current_dir();
+	exec_export(&old, env); //change oldpwd
 	if (chdir(arg[1]) == -1)
-		cd_errors(0, arg, NULL);
+		cd_errors(0, arg[1], NULL);
 }
 
-void	exec_cd(char **arg, char **env, t_builtin *builtin)
+void	exec_cd(char **arg, char **env)
 {
-	(void)env; // remove
 	if (arg[1] == NULL)
-		cd_home(arg, builtin);
+		cd_home(arg, env);
 	else if (arg[1] && arg[2] == NULL)
 	{
 		if (arg[1][0] == '~')
-			cd_home(arg, builtin);
+			cd_home(arg, env);
 		else if (ft_strcmp(arg[1], "-") == 0)
-			cd_old(arg, builtin);
+			cd_old(arg, env);
 		else
-			cd_path(arg, builtin);
+			cd_path(arg, env);
 	}
 	else if (arg[2])
-		cd_errors(TOO_MANY_ARGS, arg, NULL);
+		cd_errors(TOO_MANY_ARGS, arg[1], NULL);
 }

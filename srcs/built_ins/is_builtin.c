@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/11 16:21:39 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/22 15:02:09 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/22 17:30:24 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ int	is_builtin(char *cmd)
 		S_EXIT};
 	int			i;
 
-	// init_builtin(builtin); // deplacer
-	// reset_builtin(builtin);
 	i = 0;
 	while (i < 7)
 	{

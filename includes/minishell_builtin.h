@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 12:24:39 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/22 15:01:45 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/22 17:27:26 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # define S_NO_DIR ": Not a directory\n"
 # define S_PERM ": Permission denied\n"
 # define S_NOT_ID "\': not a valid identifier\n"
+# define S_NO_HOME "cd: HOME not set\n"
+# define S_NO_OLDPWD "cd: OLDPWD not set\n"
 # define SHLVL "SHLVL=1"
 # define NOT_BUILTIN -1
 # define TOO_MANY_ARGS -2
@@ -45,24 +47,14 @@ enum	e_env
 	CMD_EXIT,
 };
 
-// typedef struct s_builtin
-// {
-// 	int		cmd;
-// 	// char	*home; //free a la fin NULL fatal ?
-// 	// char	*old; //free a la fin NULL fatal ?
-// }				t_builtin;
-
 typedef void	(*t_callback)(char **arg, char **env);
 
 int		is_builtin(char *cmd);
 
-// void	init_builtin(t_builtin *builtin);
-// void	reset_builtin(t_builtin *builtin);
-
 int		exec_builtin(int builtin, char **env, t_cmd *cmd);
 
 char	*get_home_dir(char **env);
-char	*get_current_dir(char *last_dir);
+char	*get_current_dir(void);
 char	*get_old_dir(char **env);
 
 void	exec_echo(char **arg, char **env);
