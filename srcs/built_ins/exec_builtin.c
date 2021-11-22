@@ -6,18 +6,11 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 17:37:21 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/20 17:37:14 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/22 10:59:25 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	exec_export(char **arg, char **env, t_builtin *builtin)
-{
-	(void)env;
-	(void)builtin;
-	(void)arg;
-}
 
 void	exec_unset(char **arg, char **env, t_builtin *builtin)
 {

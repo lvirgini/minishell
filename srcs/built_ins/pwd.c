@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:31:16 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/19 16:11:20 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/22 10:43:45 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 static void	pwd_error(int error)
 {
+	ft_putstr_fd("pwd: ", STDERR_FILENO);
 	if (error == TOO_MANY_ARGS)
-		printf("pwd: %s\n", S_TOO_MANY_ARGS);
+		ft_putstr_fd(S_TOO_MANY_ARGS, STDERR_FILENO);
 }
 
 void	exec_pwd(char **arg, char **env, t_builtin *builtin)

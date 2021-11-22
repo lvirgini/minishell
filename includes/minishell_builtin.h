@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 12:24:39 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/20 17:48:10 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/22 11:02:59 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,13 @@
 
 # include "minishell.h"
 
-# define S_TOO_MANY_ARGS "too many arguments"
+# define S_TOO_MANY_ARGS "too many arguments\n"
+# define S_NO_FILE ": No such file or directory\n"
+# define S_NO_DIR ": Not a directory\n"
+# define S_NOT_ID "\': not a valid identifier\n"
 # define TOO_MANY_ARGS -2
+# define NO_FILE -3
+# define NOT_ID -4
 
 # define S_ECHO		"echo"
 # define S_CD		"cd"
@@ -42,7 +47,7 @@ typedef struct s_builtin
 	int		cmd;
 	int		error;
 	char	*home; //free a la fin NULL fatal ?
-	char	*last; //free a la fin NULL fatal ?
+	char	*old; //free a la fin NULL fatal ?
 }				t_builtin;
 
 typedef void	(*t_callback)(char **arg, char **env, t_builtin *builtin);
