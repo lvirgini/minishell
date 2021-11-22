@@ -28,6 +28,7 @@ t_prompt	*init_prompt(char *user, char *pwd)
 		perror("malloc init_prompt())");
 		return (NULL);
 	}
+	ft_memset(prompt, 0,  sizeof(t_prompt));
 	if (user)
 	{
 		prompt->user = ft_strdup(user);

@@ -47,6 +47,7 @@ int	make_terminal(char **env)
 	t_prompt	*prompt;
 
 	prompt = get_prompt(env, NULL);
+
 	while (1)
 	{
 		line = NULL;

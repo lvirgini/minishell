@@ -22,7 +22,7 @@ t_expansion	*expand_simple_quote(char *s, char **env)
 	expansion = malloc_expansion();
 	if (!expansion)
 		return (NULL);
-	quotes_len = strlen_quote(s, 0, CHAR_SIMPLE_QUOTE);
+	quotes_len = strlen_simple_quote(s, 0);
 	expansion->value = malloc_list(1);
 	if (!expansion->value)
 	{

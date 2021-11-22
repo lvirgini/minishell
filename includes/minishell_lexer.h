@@ -26,12 +26,12 @@
 ** for all split, if one of this char is found, stop the token.
 */
 
-# define CHAR_SIMPLE_QUOTE 	'\''
-# define CHAR_DOUBLE_QUOTE 	'\"'
 # define CHAR_PIPE			'|'
 # define CHAR_TILD_LEFT		'<'
 # define CHAR_TILD_RIGHT	'>'
 # define CHAR_DOLLAR		'$'
+# define CHAR_SIMPLE_QUOTE 	'\''
+# define CHAR_DOUBLE_QUOTE 	'\"'
 
 /*
 ** enum for matching metacharacter and all functions defined in ft_get_token 
@@ -71,6 +71,8 @@ t_token		*add_next_token(char *line, t_func_get_token *get_token);
 ** usefull
 */
 
+int			strlen_simple_quote(char *line, int len);
+int			strlen_double_quote(char *line, int len);
 int			is_metacharacter(char c);
 int			is_operator(char c);
 int			strlen_quote(char *line, int len, char quote_type);

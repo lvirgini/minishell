@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-static int	strlen_simple_quote(char *line, int len)
+int	strlen_simple_quote(char *line, int len)
 {
 	int	quotes_len;
 
@@ -24,7 +24,7 @@ static int	strlen_simple_quote(char *line, int len)
 	}
 	return (len + quotes_len + 2);
 }
-static int	strlen_double_quote(char *line, int len)
+int	strlen_double_quote(char *line, int len)
 {
 	int	quotes_len;
 	int	next_quotes;
