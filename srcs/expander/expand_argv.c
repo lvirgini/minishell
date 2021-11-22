@@ -29,7 +29,7 @@ void	get_new_argv_with_expansion(t_cmd *cmd, int *i, t_expansion *expansion)
 	int			index_to_remove;
 
 	new_argv = malloc_list((int)(listlen(cmd->argv)
-				+ count_expansion_split(expansion)) + 1);
+				+ (int)count_expansion_split(expansion)));
 	if (new_argv)
 	{
 		index_to_remove = *i;

@@ -31,7 +31,7 @@ static int	which_expansion(char c)
 t_expansion	*get_expansion(char *s, char **env)
 {
 	static const t_ft_expand	func[NB_EXPANDER] = {
-		expand_dollar, expand_double_quote, expand_simple_quote};
+		expand_dollar_in_argv, expand_double_quote, expand_simple_quote};
 
 	return (func[which_expansion(*s)](s, env));
 }

@@ -48,3 +48,27 @@ char	isolate_key(char *s, t_expansion *expansion)
 	s[len] = '\0';
 	return (end_of_key);
 }
+
+t_expansion	*expand_dollar_in_argv(char *s, char **env)
+{
+	return (expand_dollar(s, env, false));
+}
+
+t_expansion *expand_dollar_in_double_quotes(char *s, char **env)
+{
+	t_expansion	*expansion;
+	size_t		i;
+	
+	i = 1;
+	expansion = NULL;
+	while (s[i])
+	{
+		if (s[i] == CHAR_DOLLAR && s[i - 1] != BACKSLASH)
+		{
+			expansion = add_back_expansion(expansion, expand_dollar(s, env, true);
+			expansion->size_to_remove = i;
+
+		} 
+	}
+	return (expand_dollar(s, env, true));
+}

@@ -24,7 +24,7 @@ size_t	strlen_without_double_quotes(char *s, char *escape_quotes)
 	len = 0;
 	while (s[len])
 	{
-		if (s[len] == BACKSLASH && ft_strchr(escape_quotes, [len + 1])
+		if (s[len] == BACKSLASH && ft_strchr(escape_quotes, s[len + 1]))
 			len++;
 		len++;
 	}
@@ -33,28 +33,38 @@ size_t	strlen_without_double_quotes(char *s, char *escape_quotes)
 }
 
 
-char	*removed_and_expand_double_quotes(char *s, int	quotes_len)
+char	*removed_and_expand_double_quotes(char *s, int	quotes_len, char **env)
 {
-	static char	escapes_quotes[] = {CHAR_DOLLAR, CHAR_DOUBLE_QUOTE, BACKSLASH,
+	static char	escape_quotes[] = {CHAR_DOLLAR, CHAR_DOUBLE_QUOTE, BACKSLASH,
 					GRAVE_ACCENT, '\0'};
 	size_t		i;
 	size_t		j;
 	char		*result;
+	t_expansion	*expansion;
 
 	result = (char *)malloc(sizeof(char) 
 		* (strlen_without_double_quotes(s, escape_quotes) + 1));
 	if (!result)
 		return (NULL);
-	i = 0;
+		expansion = expand_dollar_in_double_quotes(s, env);
+	i = 1;
 	j = 0;
-	while (s[i])
+	while (s[i + 1])
 	{
-		if (s[i] == BACKSLASH && ft_strchr(escape_quotes, [i + 1])
+		if (s[i] == '$')
+		{
+			s = ft_strjoin_free(expand_dollar_in_double_quotes(s, )
+		}
+		if (s[i] == BACKSLASH && ft_strchr(escape_quotes, s[i + 1]))
+		{
 			i++;
-		result[j++] = s[i++];
+		}
+
+		else
+			result[j++] = s[i++];
 	}
 	result[j] = '\0';
-	reurn (result);
+	return (result);
 }
 
 t_expansion	*expand_double_quote(char *s, char **env)
@@ -75,7 +85,7 @@ t_expansion	*expand_double_quote(char *s, char **env)
 		free(expansion);
 		return (NULL);
 	}
-	expansion->value = removed_and_expand_double_quotes(s, quotes_len);
+	expansion->value[0] = removed_and_expand_double_quotes(s, quotes_len);
 	if (!expansion->value[0] && quotes_len - 2 > 0)
 	{
 		perror("malloc expand_sdouble_quotes()");
@@ -83,5 +93,5 @@ t_expansion	*expand_double_quote(char *s, char **env)
 		return (NULL);
 	}
 	expansion->size_to_remove = strlen_double_quote(s, 0);
-	return (NULL);
+	return (expansion);
 }

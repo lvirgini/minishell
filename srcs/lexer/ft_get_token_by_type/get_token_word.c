@@ -32,10 +32,8 @@ int	strlen_double_quote(char *line, int len)
 	quotes_len = 1;
 	while (line[len + quotes_len])
 	{
-		if (line[len + quotes_len] == CHAR_DOUBLE_QUOTE)
+		if (line[len + quotes_len] == CHAR_DOUBLE_QUOTE && line[len - 1] != BACKSLASH)
 			return (len + quotes_len + 1);
-		if (line[len + quotes_len] == BACKSLASH)
-			quotes_len++;
 		quotes_len++;
 	}
 	print_syntax_error(ERR_QUOTES_NOT_CLOSED, 0, line);
@@ -61,7 +59,8 @@ int	get_token_word_len(char *line)
 			if (len == -1)
 				return (-1);
 		}
-		len++;
+		else
+			len++;
 	}
 	return (len);
 }

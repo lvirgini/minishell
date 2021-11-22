@@ -17,6 +17,7 @@
 
 # define STR_ESCAPE	" \t\n"
 # define BACKSLASH	'\\'
+# define GRAVE_ACCENT '`'
 # define NB_EXPANDER	3
 
 typedef struct s_expansion	t_expansion;
@@ -57,7 +58,9 @@ t_expansion	*expand_str(char *s, char **env);
 t_expansion	*get_expansion(char *s, char **env);
 t_expansion	*expand_simple_quote(char *s, char **env);
 t_expansion	*expand_double_quote(char *s, char **env);
-t_expansion	*expand_dollar(char *s, char **env);
+t_expansion	*expand_dollar(char *s, char **env, int is_in_double_quotes);
+t_expansion *expand_dollar_in_double_quotes(char *s, char **env);
+t_expansion	*expand_dollar_in_argv(char *s, char **env);
 
 /*
 ** Useful functions for t_expansion

@@ -46,7 +46,7 @@ static void	dollar_is_exit_status(t_expansion *expansion)
 ** Complete expansion and get value in env.
 */
 
-static void	dollar_is_env_value(t_expansion *expansion, char *s, char **env)
+static void	dollar_is_env_value_split(t_expansion *expansion, char *s, char **env)
 {
 	char		*value;
 	char		end_of_key;
@@ -59,6 +59,20 @@ static void	dollar_is_env_value(t_expansion *expansion, char *s, char **env)
 	s[expansion->size_to_remove] = end_of_key;
 }
 
+
+static void	dollar_is_env_value_literal(t_expansion *expansion, char *s, char **env)
+{
+	char		*value;
+	char		end_of_key;
+
+	end_of_key = isolate_key(s + 1, expansion);
+	printf("expansion dollar = %s\n", s);
+	value = get_env_value(env, s + 1);
+	if (value)
+		expansion->value = ft_split_set(value, "");
+	s[expansion->size_to_remove] = end_of_key;
+}
+
 /*
 **	return expansion of dollar : it can be :
 **
@@ -68,7 +82,7 @@ static void	dollar_is_env_value(t_expansion *expansion, char *s, char **env)
 **	$[WORD]	env value whith WORD as key
 */
 
-t_expansion	*expand_dollar(char *s, char **env)
+t_expansion	*expand_dollar(char *s, char **env, int is_in_double_quotes)
 {
 	t_expansion	*expansion;
 
@@ -80,7 +94,12 @@ t_expansion	*expand_dollar(char *s, char **env)
 	else
 	{
 		if (is_dollar_env_value_syntax(s[1]))
-			dollar_is_env_value(expansion, s, env);
+		{
+			if (is_in_double_quotes)
+				dollar_is_env_value_literal(expansion, s, env);
+			else
+				dollar_is_env_value_split(expansion, s, env);
+		}
 		else if (ft_isdigit(s[1]))
 			dollar_is_digits(expansion);
 		else if (s[1] == '?')
