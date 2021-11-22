@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/20 17:48:28 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/22 15:01:02 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** il faut trouver un bon nom pour cette fonction...
 */
 
-void	make_shell(char *line, char **env, t_builtin *builtin)
+void	make_shell(char *line, char **env)
 {
 	t_token		**token;
 	t_cmd		**cmd;
@@ -26,7 +26,7 @@ void	make_shell(char *line, char **env, t_builtin *builtin)
 	free_list_token(token);
 	if (expanser(cmd, env) && cmd)
 	{
-		if (executer(cmd, env, builtin) == FAILURE)
+		if (executer(cmd, env) == FAILURE)
 			exit_minishell(cmd, env);
 	}
 	free_list_cmd(cmd);
@@ -43,10 +43,8 @@ int	make_terminal(char **env)
 {
 	char		*line;
 	t_prompt	*prompt;
-	t_builtin	builtin;
 
 	prompt = get_prompt(env, NULL);
-	builtin = (t_builtin){-1, -1, NULL, NULL};
 	while (1)
 	{
 		line = NULL;
@@ -56,7 +54,7 @@ int	make_terminal(char **env)
 			if (*line)
 			{
 				add_history(line);
-				make_shell(line, env, &builtin);
+				make_shell(line, env);
 			}
 			prompt = get_prompt(env, prompt);
 			free(line);

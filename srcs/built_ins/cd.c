@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:31:33 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/22 10:57:48 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/22 14:43:09 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ static void	cd_errors(int error, char **arg, char *path)
 	ft_putstr_fd("cd: ", STDERR_FILENO);
 	if (error == TOO_MANY_ARGS)
 		ft_putstr_fd(S_TOO_MANY_ARGS, STDERR_FILENO);
+	else if (errno == EACCES)
+	{
+		ft_putstr_fd(arg[1], STDERR_FILENO);
+		ft_putstr_fd(S_PERM, STDERR_FILENO);
+	}
 	else if (errno == ENOENT) // Autres erreurs ?
 	{
 		if (path == NULL)
@@ -35,7 +40,7 @@ static void	cd_errors(int error, char **arg, char *path)
 	}
 }
 
-void	cd_home(char **arg, t_builtin *builtin)
+void	cd_home(char **arg, t_builtin *builtin) //recheck home a chaque fois
 {
 	char	*path;
 
@@ -43,6 +48,7 @@ void	cd_home(char **arg, t_builtin *builtin)
 	if (builtin->home == NULL)
 		return ;
 	builtin->old = get_current_dir(builtin->old);
+	
 	if (arg[1] == NULL || ft_strcmp(arg[1], "~") == 0)
 	{
 		if (chdir(builtin->home) == -1)

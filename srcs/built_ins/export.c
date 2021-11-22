@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 10:59:10 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/22 11:24:49 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/22 14:21:54 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,22 +23,46 @@ void	export_error(char *arg, int error)
 	}
 }
 
-// void	print_export(char **env, int order)
+// void	export_shlvl(char **env, t_builtin *builtin)
 // {
-// 	int	i;
-// 	(void)order;
+// 	int		i;
+// 	char	shlvl;
 
 // 	i = 0;
-// 	while (env && env[i])
+// 	shlvl = get_env_value(env, "SHLVL");
+// 	if (env == NULL)
+// 		exec_export(&SHLVL, env, builtin);
+// 	else
 // 	{
 		
 // 	}
 // }
 
-void	exec_export(char **arg, char **env, t_builtin *builtin)
+void	print_export(char **env)
 {
-	(void)env;
-	(void)builtin;
-	(void)arg;
-	// if (arg[])
+	int	i;
+
+	i = 0;
+	while (env && env[i])
+	{
+		printf("%s\n", env[i]);
+		i++;
+	}
+}
+
+void	exec_export(char **arg, char **env, t_builtin *builtin) //faire SHLVL incrementer a chaque fois qu'on rentre dans un shell (des le debut) ou reset a 0 si introuvable
+{
+	// int	i;
+	// (void)builtin;
+
+	// i = 0; // verifier premier char
+	// if (arg[1] == NULL)
+	// 	print_export(env);
+	// else
+	// {
+	// 	while ()
+	// 	{
+
+	// 	}
+	// }
 }
