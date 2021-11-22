@@ -59,7 +59,7 @@ t_expansion	*get_expansion(char *s, char **env);
 t_expansion	*expand_simple_quote(char *s, char **env);
 t_expansion	*expand_double_quote(char *s, char **env);
 t_expansion	*expand_dollar(char *s, char **env, int is_in_double_quotes);
-t_expansion *expand_dollar_in_double_quotes(char *s, char **env);
+t_expansion *expand_dollar_in_double_quotes(char *s, char **env, int *len);
 t_expansion	*expand_dollar_in_argv(char *s, char **env);
 
 /*

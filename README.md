@@ -33,3 +33,5 @@ ls"" -l
 mini@debian:~$ export TEST=-d''""test
 mini@debian:~$ echo $TEST 
 -dtest
+
+ "$USER $ $SDFSDFSDFDFSDF $$"

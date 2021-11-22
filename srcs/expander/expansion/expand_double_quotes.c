@@ -33,7 +33,7 @@ size_t	strlen_without_double_quotes(char *s, char *escape_quotes)
 }
 
 
-char	*removed_and_expand_double_quotes(char *s, int	quotes_len, char **env)
+char	*removed_and_expand_double_quotes(char *s, int	*len, char **env)
 {
 	static char	escape_quotes[] = {CHAR_DOLLAR, CHAR_DOUBLE_QUOTE, BACKSLASH,
 					GRAVE_ACCENT, '\0'};
@@ -42,24 +42,36 @@ char	*removed_and_expand_double_quotes(char *s, int	quotes_len, char **env)
 	char		*result;
 	t_expansion	*expansion;
 
-	result = (char *)malloc(sizeof(char) 
-		* (strlen_without_double_quotes(s, escape_quotes) + 1));
+	expansion = NULL;
+	if (ft_strchr(s, CHAR_DOLLAR))
+	{
+		expansion = expand_dollar_in_double_quotes(s, env, len);
+		if (!expansion)
+			return (NULL);
+	}	
+
+	result = (char *)malloc(sizeof(char) * (*len + 1));
+//		* (strlen_without_double_quotes(s, escape_quotes) + 1));
 	if (!result)
+	{
+		free_list_expansion(expansion);
 		return (NULL);
-		expansion = expand_dollar_in_double_quotes(s, env);
+	}
+
 	i = 1;
 	j = 0;
 	while (s[i + 1])
 	{
 		if (s[i] == '$')
 		{
-			s = ft_strjoin_free(expand_dollar_in_double_quotes(s, )
+			ft_strcpy(result + j, expansion->value[0]);
+			i += expansion->size_to_remove;
+			j = ft_strlen(expansion->value[0]);
 		}
 		if (s[i] == BACKSLASH && ft_strchr(escape_quotes, s[i + 1]))
 		{
 			i++;
 		}
-
 		else
 			result[j++] = s[i++];
 	}
@@ -77,7 +89,7 @@ t_expansion	*expand_double_quote(char *s, char **env)
 	expansion = malloc_expansion();
 	if (!expansion)
 		return (NULL);
-	quotes_len = strlen_double_quote(s, 0);
+	quotes_len = 0;
 	expansion->value = malloc_list(1);
 	if (!expansion->value)
 	{
@@ -85,8 +97,8 @@ t_expansion	*expand_double_quote(char *s, char **env)
 		free(expansion);
 		return (NULL);
 	}
-	expansion->value[0] = removed_and_expand_double_quotes(s, quotes_len);
-	if (!expansion->value[0] && quotes_len - 2 > 0)
+	expansion->value[0] = removed_and_expand_double_quotes(s, &quotes_len, env);
+	if (!expansion->value[0] && quotes_len > 0)
 	{
 		perror("malloc expand_sdouble_quotes()");
 		free(expansion);

@@ -54,9 +54,10 @@ t_expansion	*expand_dollar_in_argv(char *s, char **env)
 	return (expand_dollar(s, env, false));
 }
 
-t_expansion *expand_dollar_in_double_quotes(char *s, char **env)
+t_expansion *expand_dollar_in_double_quotes(char *s, char **env, int *len)
 {
 	t_expansion	*expansion;
+	t_expansion	*to_add;
 	size_t		i;
 	
 	i = 1;
@@ -65,10 +66,22 @@ t_expansion *expand_dollar_in_double_quotes(char *s, char **env)
 	{
 		if (s[i] == CHAR_DOLLAR && s[i - 1] != BACKSLASH)
 		{
-			expansion = add_back_expansion(expansion, expand_dollar(s, env, true);
-			expansion->size_to_remove = i;
-
-		} 
+			to_add = expand_dollar(s + i, env, true);
+			if (!to_add)
+			{
+				free_list_expansion(expansion);
+				return (NULL);
+			}			
+			to_add->start_of_the_expand = i;
+			i += to_add->size_to_remove;
+			*len += ft_strlen(to_add->value[0] - to_add->size_to_remove);
+			expansion = add_back_expansion(expansion, to_add);
+		}
+		else
+		{
+			*len += 1;
+			i++;
+		}
 	}
-	return (expand_dollar(s, env, true));
+	return (expansion);
 }
