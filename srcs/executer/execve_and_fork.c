@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 17:19:13 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/21 18:41:19 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/23 16:45:34 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 **	print execve error return -1 for exit minishell
 */
 
-int	execve_this_command(t_cmd *cmd, char *env[])
+static int	execve_this_command(t_cmd *cmd, char *env[])
 {
 	int	ret;
 
@@ -28,6 +28,15 @@ int	execve_this_command(t_cmd *cmd, char *env[])
 	return (-1);
 }
 
+int	create_pipe(t_cmd *cmd)
+{
+	if (pipe(cmd->pipe) == -1)
+	{
+		perror ("pipe in make_pipe_redirection()");
+		return (FAILURE);
+	}
+	return (SUCCESS);
+}
 /*
 ** create a child processus with fork()
 ** in CHILD : 
@@ -40,6 +49,8 @@ pid_t	create_child_process(t_cmd *cmd, char *env[])
 {
 	pid_t	pid;
 
+	if (cmd->type == PIPE && create_pipe(cmd) == FAILURE)
+		return (-1);
 	pid = fork();
 	if (pid == -1)
 	{

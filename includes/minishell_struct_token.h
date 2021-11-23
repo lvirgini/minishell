@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 21:24:00 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/26 16:15:22 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/23 16:34:10 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,16 @@ struct s_token
 **	'	"	|	<	>	<<	>>	{all rest = WORD}
 */
 
-// CONSIDERE COMME UN MOT
-//	EXIT_STATUS,			//	$?
-//	VARIABLE,				// 	$VARIABLE 
-
 enum e_token_type
 {
-	SIMPLE_QUOTE,			//	'
-	DOUBLE_QUOTE,			//	"
-	PIPE,					//	|
-	INPUT_REDIRECTION,		//	<
-	OUTPUT_REDIRECTION,		//	>
-	WORD,					//  all not metacharacter
-	HERE_DOC,				//	<<
-	APPEND,					//	>>
+	SIMPLE_QUOTE,
+	DOUBLE_QUOTE,
+	PIPE,
+	INPUT_REDIRECTION,
+	OUTPUT_REDIRECTION,
+	WORD,
+	HERE_DOC,
+	APPEND,
 };
 
 /*

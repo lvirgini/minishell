@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 21:12:49 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/26 10:14:36 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/23 16:39:02 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_expansion	*malloc_expansion(void)
 	return (expansion);
 }
 
-t_expansion	*malloc_expansion_and_value(int	size)
+t_expansion	*malloc_expansion_and_value(int size)
 {
 	t_expansion	*expansion;
 

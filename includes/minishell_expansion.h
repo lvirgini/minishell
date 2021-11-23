@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 16:38:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/21 23:07:12 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/23 16:28:04 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ struct s_expansion
 */
 
 t_expansion	*malloc_expansion(void);
-t_expansion	*malloc_expansion_and_value(int	size);
+t_expansion	*malloc_expansion_and_value(int size);
 void		free_list_expansion(t_expansion *expansion);
 t_expansion	*add_back_expansion(t_expansion *first, t_expansion *to_add);
 
@@ -61,8 +61,9 @@ t_expansion	*get_expansion(char *s, char **env);
 t_expansion	*expand_simple_quote(char *s, char **env);
 t_expansion	*expand_double_quote(char *s, char **env);
 t_expansion	*expand_dollar(char *s, char **env, int is_in_double_quotes);
-t_expansion *expand_dollar_in_double_quotes(char *s, char **env, int max);
+t_expansion	*expand_dollar_in_double_quotes(char *s, char **env, int max);
 t_expansion	*expand_dollar_in_argv(char *s, char **env);
+void		dollar_is_dollar(t_expansion *expansion);
 
 /*
 ** Useful functions for t_expansion

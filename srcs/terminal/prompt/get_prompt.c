@@ -95,9 +95,9 @@ static	int	check_prompt_update(t_prompt *prompt, char *actual_cwd,
 
 t_prompt	*get_prompt(char **env, t_prompt *prompt)
 {	
-	char	*user;
-	char	*cwd;
-	t_bool	need_change;
+	char		*user;
+	char		*cwd;
+	t_bool		need_change;
 	t_prompt	*new;
 
 	user = get_env_value(env, "USER");

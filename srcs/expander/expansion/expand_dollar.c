@@ -6,21 +6,11 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/23 23:15:32 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/21 20:12:51 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/23 16:25:42 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*
-** complete expansion : it is solo "$" on minishell
-*/
-
-static void	dollar_is_dollar(t_expansion *expansion)
-{
-	expansion->size_to_remove = 1;
-	expansion->value = ft_split_set("$", STR_ESCAPE);
-}
 
 /*
 ** in minishell we don't expand $[0-9], we just pass throw.

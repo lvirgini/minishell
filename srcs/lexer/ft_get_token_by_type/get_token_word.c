@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 21:17:03 by mini              #+#    #+#             */
-/*   Updated: 2021/11/21 23:06:40 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/23 16:37:20 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ int	strlen_simple_quote(char *line, int len)
 	}
 	return (len + quotes_len + 2);
 }
+
 int	strlen_double_quote(char *line, int len)
 {
 	int	quotes_len;
@@ -34,7 +35,6 @@ int	strlen_double_quote(char *line, int len)
 		if (line[len + quotes_len] == BACKSLASH)
 			quotes_len++;
 		else if (line[len + quotes_len] == CHAR_DOUBLE_QUOTE)
-	//		&& line[len + quotes_len - 1] != BACKSLASH )
 			return (len + quotes_len + 1);
 		quotes_len++;
 	}

@@ -1,35 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_output.c                                     :+:      :+:    :+:   */
+/*   dollar_is_dollar.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/15 22:42:46 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/26 16:51:29 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/11/23 16:25:17 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/11/23 16:26:13 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
-** check if syntax for output is correct
-**	parse output to t_redir *
-**	place in cmd.
+** complete expansion : it is solo "$" on minishell
 */
 
-int	parse_output(t_cmd *cmd, t_token *token)
+void	dollar_is_dollar(t_expansion *expansion)
 {
-	t_redir	*output;
-
-	if (syntax_error_redirection(token) == SYNTAX_ERROR)
-		return (SYNTAX_ERROR);
-	output = create_redir(token->type, token->next->word);
-	if (!output)
-		return (FAILURE);
-	if (!cmd->output)
-		cmd->output = output;
-	else
-		struct_add_back(cmd->output, output);
-	return (SUCCESS);
+	expansion->size_to_remove = 1;
+	expansion->value = ft_split_set("$", STR_ESCAPE);
 }
