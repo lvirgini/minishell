@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 22:25:50 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/18 14:34:46 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/23 16:30:53 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,9 @@ struct		s_cmd
 	char	*path;
 	char	**argv;
 	int		type;
-	int		pipe[2];
+	int		pipe[2]; // mettre a -1 ?
 	t_redir	*redir;
-	t_redir	*input; // A SUPPRIMER
-	t_redir	*output;// A SUPPRIMER
-	t_redir	*heredoc; // T_redir ou autres ? avec type pour savoir si c'est le dernier ou pas
+	t_redir	*heredoc;
 	pid_t	pid;
 	int		exit_status;
 };

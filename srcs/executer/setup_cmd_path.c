@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 11:34:17 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/10 16:07:43 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/21 21:16:58 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static char	**split_path_env(char *env)
 		perror("split env");
 	return (split);
 }
+
 /*
 ** check with access X_OK (executable) if file is well executable
 */
@@ -70,12 +71,22 @@ static t_bool	get_absolute_path(t_cmd *cmd, char *argv)
 ** 	- check if executable file has permission to be executed.
 */
 
+t_bool	argv_is_empty(char **argv)
+{
+	if (argv[0][0] == '\0')
+	{
+		display_error(ERR_CMD_NOT_FOUND, argv[0]);
+		return (true);
+	}
+	return (false);
+}
+
 int	setup_cmd_path(t_cmd *cmd, char **env)
 {
 	char	**path_env;
 
-	if (!cmd->argv || !cmd->argv[0])
-		return (SUCCESS);
+	if (!cmd->argv || !cmd->argv[0] || argv_is_empty(cmd->argv))
+		return (FAILURE);
 	if (is_absolute_path(cmd->argv[0]) == true)
 	{
 		if (get_absolute_path(cmd, cmd->argv[0]) == FAILURE)

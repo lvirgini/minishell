@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_redirection.c                                :+:      :+:    :+:   */
+/*   setup_redirection.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:33:20 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/18 16:27:56 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/23 16:41:35 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	save_std_io(int std_io[2])
 
 int	get_back_std_io(int std_io[2])
 {
-	close(IN);
-	close(OUT);
+//	close(IN);
+//	close(OUT);
 	if (dup2(std_io[IN], IN) == -1)
 	{
 		perror ("dup2() in get_back_std_io()");

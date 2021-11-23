@@ -1,33 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expanser.c                                         :+:      :+:    :+:   */
+/*   t_struct_add_front.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/23 23:15:41 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/23 16:47:35 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/11/20 14:35:20 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/11/21 21:14:10 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	expanser(t_cmd **list_cmd, char **env)
+void	*struct_add_front(void *void_struct, void *void_to_add)
 {
-	t_cmd	*cmd;
+	t_struct	*structure;
+	t_struct	*to_add;
 
-	if (!list_cmd)
-		return (FAILURE);
-	cmd = *list_cmd;
-	while (cmd)
-	{
-		if (cmd->argv)
-		{
-			expand_argv(cmd, env);
-			if (!cmd->argv)
-				return (FAILURE);
-		}
-		cmd = cmd->next;
-	}
-	return (SUCCESS);
+	structure = (t_struct *)void_struct;
+	to_add = (t_struct *)void_to_add;
+	to_add->next = structure;
+	return ((void *)to_add);
 }

@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/18 11:30:32 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/21 20:04:16 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ void	make_shell(char *line, char **env)
 	t_token		**token;
 	t_cmd		**cmd;
 
+	token = NULL;
+	cmd = NULL;
 	token = lexer_minishell(line);
 	cmd = parser_minishell(token);
 	free_list_token(token);
@@ -45,6 +47,7 @@ int	make_terminal(char **env)
 	t_prompt	*prompt;
 
 	prompt = get_prompt(env, NULL);
+
 	while (1)
 	{
 		line = NULL;
@@ -53,6 +56,13 @@ int	make_terminal(char **env)
 		{
 			if (*line)
 			{
+				if (ft_strcmp(line, "exit") == 0) // EXIT PROVISOIRE POUR VOIR LES LEAKS
+				{
+					free(line);
+					free_t_prompt(prompt);
+					rl_clear_history();
+					return (SUCCESS);
+				}
 				add_history(line);
 				make_shell(line, env);
 			}

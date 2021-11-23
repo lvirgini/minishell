@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:32:30 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/18 21:24:11 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/21 20:37:03 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	setup_inputs(t_redir *input)
 ** for OUTPUT REDIRECTION > :
 **		O_TRUNC : clear file if he exist.
 ** for APPEND >> :
-		O_APPEND : for write at the end of the file.
+**		O_APPEND : for write at the end of the file.
 **	display error if open problem.
 */
 
@@ -75,7 +75,6 @@ static int	open_output(char *output, int type)
 
 int	setup_outputs(t_redir *output)
 {
-
 	if (open_output(output->filename, output->type) == FAILURE)
 		return (FAILURE);
 	return (SUCCESS);

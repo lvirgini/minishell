@@ -1,35 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_dollar.c                                    :+:      :+:    :+:   */
+/*   t_expansion_add_back.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/23 23:15:32 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/12 12:33:44 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/11/20 19:48:19 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/11/20 19:58:19 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-** expand dollar
-*/
-
-char	**expand_dollar(char *str, char **env)
+t_expansion	*add_back_expansion(t_expansion *first, t_expansion *to_add)
 {
-	char		**split_expansion;
-	char		*value;
-
-	if (str[1] == '\0')
-		split_expansion = ft_split_set(str, STR_ESCAPE);
-	else
-	{
-		value = get_env_value(env, str + 1);
-		if (!value)
-			split_expansion = ft_split_set("", STR_ESCAPE); // a verifier pour affichage multi null value
-		else
-			split_expansion = ft_split_set(value, STR_ESCAPE);
-	}
-	return (split_expansion);
+	if (!first)
+		return (to_add);
+	struct_add_back(first, to_add);
+	return (first);
 }

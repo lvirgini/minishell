@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expanser.c                                         :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/23 23:15:41 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/23 16:47:35 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/11/20 16:06:32 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/11/20 16:55:32 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	expanser(t_cmd **list_cmd, char **env)
+char	*ft_strcpy(char *dst, const char *src)
 {
-	t_cmd	*cmd;
+	size_t	i;
 
-	if (!list_cmd)
-		return (FAILURE);
-	cmd = *list_cmd;
-	while (cmd)
+	if (!src)
+		return (dst);
+	i = 0;
+	while (src[i])
 	{
-		if (cmd->argv)
-		{
-			expand_argv(cmd, env);
-			if (!cmd->argv)
-				return (FAILURE);
-		}
-		cmd = cmd->next;
+		dst[i] = src[i];
+		i++;
 	}
-	return (SUCCESS);
+	return (dst);
 }

@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 17:36:34 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/26 16:55:42 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/21 20:36:24 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	parse_cmd_argv(t_cmd *cmd, t_token **list_token)
 
 	token = *list_token;
 	if (!token)
-		return (SUCCESS); // IL FAUDRA CHECK SI CMD->ARGV EXISTE POUR LANCER LA CMD
+		return (SUCCESS);
 	argc = get_argc_for_next_cmd(list_token);
 	if (argc == 0)
 		return (SUCCESS);

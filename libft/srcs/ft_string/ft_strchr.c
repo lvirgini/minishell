@@ -25,3 +25,17 @@ char	*ft_strchr(const char *s, int c)
 		return (NULL);
 	return ((char *)s);
 }
+
+char	*ft_strnchr(const char *s, int c, int len_max)
+{
+	int		i;
+
+	i = 0;
+	while (i < len_max && s[i])
+	{
+		if (s[i] == c)
+			return ((char *)(s + i));
+		i++;
+	}
+	return (NULL);
+}

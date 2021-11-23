@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 19:15:52 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/10 16:46:25 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/23 16:30:39 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,12 @@ void	free_cmd(t_cmd *cmd)
 		free(cmd->path);
 	if (cmd->argv)
 		free_list(cmd->argv);
-	if (cmd->input)
-		free_list_redir(cmd->input);
-	if (cmd->output)
-		free_list_redir(cmd->output);
+	if (cmd->redir)
+		free_list_redir(cmd->redir);
+	if (cmd->heredoc)
+		free_list_redir(cmd->heredoc);
+	if (cmd->type == PIPE)
+		close_pipe(cmd->pipe);
 	free(cmd);
 }
 
