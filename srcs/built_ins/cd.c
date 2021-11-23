@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:31:33 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/22 17:31:52 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/23 09:01:27 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ void	cd_home(char **arg, char **env)
 
 	path = NULL;
 	home = get_home_dir(env);
-	if (home && arg[1] == NULL || ft_strcmp(arg[1], "~") == 0)
+	if (home && (arg[1] == NULL || ft_strcmp(arg[1], "~") == 0))
 	{
 		if (chdir(home) == -1)
 			cd_errors(0, arg[1], path); //check si marche
 		return ;
 	}
-	else if (arg[1][1] == '/')
+	else if (home && arg[1][1] == '/')
 	{
 		path = ft_strjoin(home, arg[1] + 2);
 		if (chdir(path) == -1)
@@ -76,9 +76,10 @@ void	cd_old(char **arg, char **env)
 	if (old && chdir(old) == -1)
 	{
 		cd_errors(0, arg[1], NULL);
-		printf("%s\n", old);
-		exec_export(&new_old, env);
+		return ;
 	}
+	printf("%s\n", old);
+	exec_export(&new_old, env);
 }
 
 void	cd_path(char **arg, char **env)

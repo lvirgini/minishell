@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:31:16 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/22 17:31:21 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/23 08:53:35 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ static void	pwd_error(int error)
 void	exec_pwd(char **arg, char **env)
 {
 	char	*cwd;
+	(void)env;
 
 	if (arg[1] != NULL)
 	{

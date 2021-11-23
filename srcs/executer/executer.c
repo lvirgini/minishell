@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:27:42 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/22 15:01:32 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/23 08:55:35 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ int	executer(t_cmd **list_cmd, char **env)
 		builtin = is_builtin(cmd->argv[0]);
 		if (builtin != NOT_BUILTIN)
 		{
-			if (exec_builtin(builtin, cmd, env) == FAILURE)
+			if (exec_builtin(builtin, env, cmd) == FAILURE)
 				return (FAILURE);
 			save_std_io(std_io);
 
