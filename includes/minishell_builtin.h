@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 12:24:39 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/22 17:27:26 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/23 16:42:39 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@
 # define S_NOT_ID "\': not a valid identifier\n"
 # define S_NO_HOME "cd: HOME not set\n"
 # define S_NO_OLDPWD "cd: OLDPWD not set\n"
-# define SHLVL "SHLVL=1"
+# define S_SHLVL "SHLVL"
+# define S_SHLVL0 "SHLVL=0"
 # define NOT_BUILTIN -1
 # define TOO_MANY_ARGS -2
 # define NO_FILE -3
@@ -64,5 +65,10 @@ void	exec_export(char **arg, char **env);
 void	exec_unset(char **arg, char **env);
 void	exec_env(char **arg, char **env);
 void	exec_exit(char **arg, char **env);
+
+int		is_key_value(char *str, char c);
+char	**list_cdup(char **src, char c);
+size_t	listclen(char **list, char c);
+int		list_ccpy(char **dst, char **src, char c);
 
 #endif
