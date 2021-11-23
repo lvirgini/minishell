@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 15:53:59 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/18 16:57:31 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/23 21:57:14 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int			setup_redirection(t_cmd *cmd, char **env);
 void		save_std_io(int std_io[2]);
 int			get_back_std_io(int std_io[2]);
 void		close_pipe(int pipe[2]);
+void		close_fd(int fd);
 
 /*
 ** Here doc

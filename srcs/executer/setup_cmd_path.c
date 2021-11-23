@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 11:34:17 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/21 21:16:58 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/23 21:42:45 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,6 @@ static char	**split_path_env(char *env)
 	if (!split)
 		perror("split env");
 	return (split);
-}
-
-/*
-** check with access X_OK (executable) if file is well executable
-*/
-
-static t_bool	is_command_executable(t_cmd *cmd)
-{
-	if (access(cmd->path, X_OK) == 0)
-		return (true);
-	display_error(ERR_CMD_NOT_EXECUTABLE, cmd->argv[0]);
-	return (false);
 }
 
 /*

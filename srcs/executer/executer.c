@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:27:42 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/21 21:17:28 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/23 21:50:48 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	wait_all_process(t_cmd *cmd)
 	{
 		last_status = 0;
 		waitpid(cmd->pid, &last_status, 0);
-		//close_pipe(cmd->pipe); je crois qu'il faudra check if CMD type == PIPE.
+		close_pipe(cmd->pipe);
 		cmd = cmd->next;
 	}
 	return (WEXITSTATUS(last_status));
@@ -35,9 +35,9 @@ int	wait_all_process(t_cmd *cmd)
 void	close_parent_pipe(t_cmd *cmd)
 {
 	if (cmd->prev && cmd->prev->type == PIPE)
-		close(cmd->prev->pipe[IN]);
+		close_fd(cmd->prev->pipe[IN]);
 	if (cmd->next && cmd->type == PIPE)
-		close(cmd->pipe[OUT]);
+		close_fd(cmd->pipe[OUT]);
 }
 
 int	execute_this_cmd(t_cmd *cmd, char **env)
