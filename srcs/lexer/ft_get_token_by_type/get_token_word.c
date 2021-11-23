@@ -27,12 +27,14 @@ int	strlen_simple_quote(char *line, int len)
 int	strlen_double_quote(char *line, int len)
 {
 	int	quotes_len;
-	int	next_quotes;
 
 	quotes_len = 1;
 	while (line[len + quotes_len])
 	{
-		if (line[len + quotes_len] == CHAR_DOUBLE_QUOTE && line[len - 1] != BACKSLASH)
+		if (line[len + quotes_len] == BACKSLASH)
+			quotes_len++;
+		else if (line[len + quotes_len] == CHAR_DOUBLE_QUOTE)
+	//		&& line[len + quotes_len - 1] != BACKSLASH )
 			return (len + quotes_len + 1);
 		quotes_len++;
 	}

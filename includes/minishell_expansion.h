@@ -16,6 +16,7 @@
 # include "minishell.h"
 
 # define STR_ESCAPE	" \t\n"
+# define STR_ESCAPE_IN_DQUOTES "$\"\\`"
 # define BACKSLASH	'\\'
 # define GRAVE_ACCENT '`'
 # define NB_EXPANDER	3
@@ -36,6 +37,7 @@ struct s_expansion
 */
 
 t_expansion	*malloc_expansion(void);
+t_expansion	*malloc_expansion_and_value(int	size);
 void		free_list_expansion(t_expansion *expansion);
 t_expansion	*add_back_expansion(t_expansion *first, t_expansion *to_add);
 
@@ -59,7 +61,7 @@ t_expansion	*get_expansion(char *s, char **env);
 t_expansion	*expand_simple_quote(char *s, char **env);
 t_expansion	*expand_double_quote(char *s, char **env);
 t_expansion	*expand_dollar(char *s, char **env, int is_in_double_quotes);
-t_expansion *expand_dollar_in_double_quotes(char *s, char **env, int *len);
+t_expansion *expand_dollar_in_double_quotes(char *s, char **env, int max);
 t_expansion	*expand_dollar_in_argv(char *s, char **env);
 
 /*

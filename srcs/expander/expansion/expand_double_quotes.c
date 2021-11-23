@@ -15,98 +15,137 @@
 /*
 **	The backslash retains its special meaning only when followed by one of the 
 **	following characters: ‘$’, ‘`’, ‘"’, ‘\’, or newline
+**	"$USER$$$$$\\\`\"""""""""""""$USER$OK""""   "
 */
 
-size_t	strlen_without_double_quotes(char *s, char *escape_quotes)
+static size_t	strlen_without_double_quotes(char *s, size_t s_len,
+		t_expansion *sub_expansion)
 {
-	size_t	len;
+	static char	*escape_quotes = STR_ESCAPE_IN_DQUOTES;
+	size_t		len;
+	size_t		i;
 
 	len = 0;
-	while (s[len])
+	i = 1;
+	while (s[i] && i + 1 < s_len)
 	{
-		if (s[len] == BACKSLASH && ft_strchr(escape_quotes, s[len + 1]))
+		if (sub_expansion && sub_expansion->value
+			&& i == sub_expansion->start_of_the_expand)
+		{
+			i += sub_expansion->size_to_remove;
+			len += ft_strlen(sub_expansion->value[0]);
+			sub_expansion++;
+		}
+		else
+		{
+			if (s[i] == BACKSLASH && ft_strchr(escape_quotes, s[i + 1]))
+				i++;
 			len++;
-		len++;
+			i++;
+		}
 	}
 	return (len);
-
 }
 
+/*
+**
+**	static char	escape_quotes[] = {CHAR_DOLLAR, CHAR_DOUBLE_QUOTE, BACKSLASH,
+**					GRAVE_ACCENT, '\0'};
+*/
 
-char	*removed_and_expand_double_quotes(char *s, int	*len, char **env)
+size_t	strcpy_sub_expansion_double_quotes(char *result,
+		t_expansion *sub_expansion)
 {
-	static char	escape_quotes[] = {CHAR_DOLLAR, CHAR_DOUBLE_QUOTE, BACKSLASH,
-					GRAVE_ACCENT, '\0'};
-	int			i;
-	int			j;
-	char		*result;
+	if (sub_expansion->value && sub_expansion->value[0])
+	{
+		ft_strcpy(result, sub_expansion->value[0]);
+		return (ft_strlen(sub_expansion->value[0]));
+	}	
+	return (0);
+}
+
+static void	strcpy_double_quotes_expand(char *result,
+		t_expansion *sub_expansion, char *s, size_t max_len)
+{
+	static char	*escape_quotes = STR_ESCAPE_IN_DQUOTES;
+	size_t		len_expand;
+	size_t		i;
+
+	i = 1;
+	len_expand = 0;
+	while (s[i] && i + 1 < max_len)
+	{
+		if (sub_expansion && i == sub_expansion->start_of_the_expand)
+		{
+			len_expand = strcpy_sub_expansion_double_quotes(
+					result + len_expand, sub_expansion);
+			i += sub_expansion->size_to_remove;
+			sub_expansion = sub_expansion->next;
+		}
+		else
+		{
+			if (s[i] == BACKSLASH && ft_strchr(escape_quotes, s[i + 1]))
+				i++;
+			result[len_expand++] = s[i++];
+		}
+	}
+	result[len_expand] = '\0';
+}
+
+static t_expansion	*removed_and_expand_double_quotes(char *s,
+		t_expansion *sub_expansion, size_t max_len)
+{
 	t_expansion	*expansion;
 
-	expansion = NULL;
-	if (ft_strchr(s, CHAR_DOLLAR))
-	{
-		expansion = expand_dollar_in_double_quotes(s, env, len);
-		if (!expansion)
-			return (NULL);
-	}
-	else
-		*len = strlen_without_double_quotes(s, escape_quotes);
-
-	result = (char *)malloc(sizeof(char) * (*len + 1));
-//		* (strlen_without_double_quotes(s, escape_quotes) + 1));
-	if (!result)
+	expansion = malloc_expansion_and_value(1);
+	if (!expansion)
+		return (NULL);
+	expansion->size_to_remove = max_len;
+	expansion->value[0] = (char *)malloc(sizeof(char)
+			* (1 + strlen_without_double_quotes(s, max_len, sub_expansion)));
+	if (!expansion->value[0])
 	{
 		free_list_expansion(expansion);
 		return (NULL);
 	}
-
-	i = 1;
-	j = 0;
-	while (s[i + 1] && j < *len)
-	{
-		if (s[i] == '$')
-		{
-			ft_strcpy(result + j, expansion->value[0]);
-			i += expansion->size_to_remove;
-			j = ft_strlen(expansion->value[0]);
-			expansion = expansion->next;
-		}
-		else 
-		{
-			if (s[i] == BACKSLASH && ft_strchr(escape_quotes, s[i + 1]))
-				i++;
-			result[j++] = s[i++];
-		}
-	}
-	result[j] = '\0';
-	return (result);
+	strcpy_double_quotes_expand(expansion->value[0], sub_expansion, s, max_len);
+	return (expansion);
 }
+
+/*
+**	expand double quotes :
+**
+**	get strlen des doubles quotes a retirer (l'ensemble)
+**	get les dollars sub_expansions si il y en a
+**	expandre la chaine finale a mettre dans expansion
+**	get strlen final sans les \escapes et la size to remove
+**		de toutes les expansion dollar
+**
+*/
 
 t_expansion	*expand_double_quote(char *s, char **env)
 {
-	int			quotes_len;
+	size_t		size_to_remove;
 	t_expansion	*expansion;
+	t_expansion	*sub_expansion;
 
-	(void)env;
 	printf("expand double quotes : %s\n", s);
-	expansion = malloc_expansion();
+	size_to_remove = strlen_double_quote(s, 0);
+	sub_expansion = NULL;
+	if (ft_strnchr(s, CHAR_DOLLAR, size_to_remove))
+	{
+		sub_expansion = expand_dollar_in_double_quotes(s, env, size_to_remove);
+		if (!sub_expansion)
+			return (NULL);
+	}
+	expansion = removed_and_expand_double_quotes(s, sub_expansion,
+			size_to_remove);
 	if (!expansion)
-		return (NULL);
-	quotes_len = 0;
-	expansion->value = malloc_list(1);
-	if (!expansion->value)
 	{
 		perror("malloc expand_simple_quotes()");
-		free(expansion);
+		free_list_expansion(sub_expansion);
 		return (NULL);
 	}
-	expansion->value[0] = removed_and_expand_double_quotes(s, &quotes_len, env);
-	if (!expansion->value[0] && quotes_len > 0)
-	{
-		perror("malloc expand_sdouble_quotes()");
-		free(expansion);
-		return (NULL);
-	}
-	expansion->size_to_remove = quotes_len;
+	free_list_expansion(sub_expansion);
 	return (expansion);
 }

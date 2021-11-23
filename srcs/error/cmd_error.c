@@ -16,15 +16,15 @@ int	display_error(int error, char *object)
 {
 	static char	*str_error[NB_ERROR] = {
 		"\n",
-		" : command not found\n",
-		" : permission denied\n",
-		" : No such file or directory\n",
-		" : ambiguous redirect\n"
+		": command not found\n",
+		": permission denied\n",
+		": No such file or directory\n",
+		": ambiguous redirect\n"
 	};
 	static int	errno_nb[NB_ERROR] = {1, 127, 126, 127};
 
 	ft_putstr("minishell: ");
-	ft_putstr(object);
+	ft_putstr(object); // sur STDERR
 	if (error < NB_ERROR)
 	{
 		ft_putstr(str_error[error]);

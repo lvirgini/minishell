@@ -25,6 +25,7 @@ size_t	ft_strchr_set_len(const char *s, const char *set);
 int		ft_strchr_len(const char *s, int c);
 char	*ft_strchr_set(const char *s, const char *set);
 char	*ft_strchr(const char *s, int c);
+char	*ft_strnchr(const char *s, int c, int len_max);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strnstr(const char *s1, const char *s2, size_t len);
 char	*ft_strdup(const char *s);

@@ -75,6 +75,5 @@ char	*fusion_str_expansion(char *old_s, t_expansion *expansion)
 	}
 	strcpy_expansion(fusion, old_s, expansion);
 	fusion[total_len] = '\0';
-	printf("%s\n", fusion);//
 	return (fusion);
 }

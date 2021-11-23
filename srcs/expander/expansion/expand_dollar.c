@@ -13,7 +13,7 @@
 #include "minishell.h"
 
 /*
-** complete expansion : it is solo "$".
+** complete expansion : it is solo "$" on minishell
 */
 
 static void	dollar_is_dollar(t_expansion *expansion)
@@ -46,7 +46,8 @@ static void	dollar_is_exit_status(t_expansion *expansion)
 ** Complete expansion and get value in env.
 */
 
-static void	dollar_is_env_value_split(t_expansion *expansion, char *s, char **env)
+static void	dollar_is_env_value_split(t_expansion *expansion, char *s,
+		char **env)
 {
 	char		*value;
 	char		end_of_key;
@@ -55,12 +56,19 @@ static void	dollar_is_env_value_split(t_expansion *expansion, char *s, char **en
 	printf("expansion dollar = %s\n", s);
 	value = get_env_value(env, s + 1);
 	if (value)
+	{
 		expansion->value = ft_split_set(value, STR_ESCAPE);
+		if (!expansion->value)
+		{
+			free_list_expansion(expansion);
+			return ;
+		}
+	}	
 	s[expansion->size_to_remove] = end_of_key;
 }
 
-
-static void	dollar_is_env_value_literal(t_expansion *expansion, char *s, char **env)
+static void	dollar_is_env_value_literal(t_expansion *expansion, char *s,
+		char **env)
 {
 	char		*value;
 	char		end_of_key;
@@ -69,7 +77,14 @@ static void	dollar_is_env_value_literal(t_expansion *expansion, char *s, char **
 	printf("expansion dollar = %s\n", s);
 	value = get_env_value(env, s + 1);
 	if (value)
+	{
 		expansion->value = ft_split_set(value, "");
+		if (!expansion->value)
+		{
+			free_list_expansion(expansion);
+			return ;
+		}
+	}	
 	s[expansion->size_to_remove] = end_of_key;
 }
 
