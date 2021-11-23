@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:31:30 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/22 17:30:06 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/23 19:04:23 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,6 @@ static void	env_error(int error)
 		ft_putstr_fd(S_TOO_MANY_ARGS, STDERR_FILENO);
 	if (error == NO_FILE)
 		ft_putstr_fd(S_NO_FILE, STDERR_FILENO);
-}
-
-int	is_key_value(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str && str[i])
-	{
-		if (str[i] == '=')
-			return (1);
-		i++;
-	}
-	return (0);
 }
 
 void	exec_env(char **arg, char **env)
@@ -49,7 +35,7 @@ void	exec_env(char **arg, char **env)
 		env_error(NO_FILE);
 	while (env && env[i])
 	{
-		if (is_key_value(env[i]) == 1)
+		if (ft_strchr(env[i], '='))
 			printf("%s\n", env[i]);
 		i++;
 	}

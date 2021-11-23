@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:31:33 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/23 09:01:27 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/23 17:11:19 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,11 @@ void	cd_old(char **arg, char **env)
 		cd_errors(0, arg[1], NULL);
 		return ;
 	}
-	printf("%s\n", old);
-	exec_export(&new_old, env);
+	else if (old)
+	{
+		printf("%s\n", old);
+		exec_export(&new_old, env);
+	}
 }
 
 void	cd_path(char **arg, char **env)
