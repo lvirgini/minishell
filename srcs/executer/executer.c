@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:27:42 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/23 08:55:35 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/24 15:37:17 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	execute_this_cmd(t_cmd *cmd, char **env)
 	return (SUCCESS);
 }
 
-int	executer(t_cmd **list_cmd, char **env)
+int	executer(t_cmd **list_cmd, char ***env)
 {
 	t_cmd	*cmd;
 	int		std_io[2];
@@ -71,7 +71,7 @@ int	executer(t_cmd **list_cmd, char **env)
 			save_std_io(std_io);
 
 		}
-		else if (execute_this_cmd(cmd, env) == FAILURE)
+		else if (execute_this_cmd(cmd, *env) == FAILURE)
 			return (FAILURE);
 		//	}	
 	//	}
