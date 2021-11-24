@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 00:09:18 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/03 15:35:13 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/23 18:42:33 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 # ifndef SUCCESS
 #  define SUCCESS 1
 # endif
-
 
 /*
 ** INCLUDES STANDARD LIBRARY
