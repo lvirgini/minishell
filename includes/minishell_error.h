@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 19:47:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/18 11:03:51 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/24 19:02:29 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,5 +41,6 @@ int		print_syntax_error(int err, char char_data, char *str_data);
 int		syntax_error_redirection(t_token *token);
 int		display_error(int error, char *object);
 void	exit_minishell(t_cmd **list_cmd, char **env);
+void	display_heredoc_error(char *delimitor);
 
 #endif

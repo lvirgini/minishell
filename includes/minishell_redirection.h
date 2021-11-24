@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 15:53:59 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/24 17:33:41 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/24 19:47:04 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ void		close_pipe(int pipe[2]);
 ** Here doc
 */
 
-int			make_heredoc(t_hdoc *heredoc);
+int			make_heredoc(t_hdoc *heredoc, char **env);
 
 #endif
