@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 16:25:24 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/03 15:31:24 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/24 16:44:24 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		main(int argc, char *argv[], char *env[])
 	(void)argc;
     (void)argv;
 
-char	**minishell_env;
+	char	**minishell_env;
 	
 	
 //testing_structure();
@@ -33,7 +33,7 @@ char	**minishell_env;
 	// a voir pour garder la structure t_env ou directement le env du main
 	minishell_env = make_minishell_env(env);
 
-	make_terminal(minishell_env);
+	make_terminal(&minishell_env);
 	free_list(env);
 
 	return (0);
