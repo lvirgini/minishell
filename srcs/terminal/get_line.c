@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/22 15:01:02 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/24 19:43:38 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** il faut trouver un bon nom pour cette fonction...
 */
 
-void	make_shell(char *line, char **env)
+void	make_shell(char *line, char ***env)
 {
 	t_token		**token;
 	t_cmd		**cmd;
@@ -24,10 +24,10 @@ void	make_shell(char *line, char **env)
 	token = lexer_minishell(line);
 	cmd = parser_minishell(token);
 	free_list_token(token);
-	if (expanser(cmd, env) && cmd)
+	if (expanser(cmd, *env) && cmd)
 	{
 		if (executer(cmd, env) == FAILURE)
-			exit_minishell(cmd, env);
+			exit_minishell(cmd, *env);
 	}
 	free_list_cmd(cmd);
 }
@@ -39,12 +39,12 @@ void	make_shell(char *line, char **env)
 ** si la ligne n'est pas vide on la rajoute a l'historique (cmd de readline)
 */
 
-int	make_terminal(char **env)
+int	make_terminal(char ***env)
 {
 	char		*line;
 	t_prompt	*prompt;
 
-	prompt = get_prompt(env, NULL);
+	prompt = get_prompt(*env, NULL);
 	while (1)
 	{
 		line = NULL;
@@ -56,7 +56,7 @@ int	make_terminal(char **env)
 				add_history(line);
 				make_shell(line, env);
 			}
-			prompt = get_prompt(env, prompt);
+			prompt = get_prompt(*env, prompt);
 			free(line);
 		}
 		else
