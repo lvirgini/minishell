@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:31:16 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/23 08:53:35 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/24 15:38:26 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	pwd_error(int error)
 		ft_putstr_fd(S_TOO_MANY_ARGS, STDERR_FILENO);
 }
 
-void	exec_pwd(char **arg, char **env)
+void	exec_pwd(char **arg, char ***env)
 {
 	char	*cwd;
 	(void)env;
@@ -31,4 +31,5 @@ void	exec_pwd(char **arg, char **env)
 	}
 	cwd = get_current_dir();
 	printf("%s\n", cwd);
+	return ;
 }

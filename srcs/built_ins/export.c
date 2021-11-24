@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 10:59:10 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/23 18:55:16 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/24 19:29:00 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,17 @@ void	export_error(char *arg, int error)
 	}
 }
 
-// void	export_shlvl(char **env, t_builtin *builtin) //si introuvable set a 0 sinon +1
-// {
-// 	int		i;
-// 	char	shlvl;
+void	export_oldpwd(char *old, char ***env)
+{
+	static char	*oldpwd[3];
 
-// 	i = 0;
-// 	shlvl = get_env_value(env, "SHLVL");
-// 	if (shlvl == NULL)
-// 		exec_export(&S_SHLVL0, env);
-// 	else
-// 	{
-		
-// 	}
-// }
+	oldpwd[1] = ft_strjoin(OLDPWD, old);
+	if (oldpwd[1] == NULL)
+		return ;
+	oldpwd[2] = NULL;
+	exec_export(oldpwd, env);
+	free(oldpwd[1]);
+}
 
 void	print_export(char **env)
 {
@@ -45,7 +42,7 @@ void	print_export(char **env)
 	i = 0;
 	while (env && env[i])
 	{
-		printf("%s\n", env[i]);
+		printf("%s\n", env[i]); //print key="value"
 		i++;
 	}
 }
@@ -66,61 +63,27 @@ int	is_valid_key(char *str)
 	return (i);
 }
 
-static int	edit_env(char **env, int index, char *to_edit)
+void	exec_export(char **arg, char ***env)
 {
-	free(env[index]);
-	env[index] = to_edit;
-	return (SUCCESS);
-}
-
-static char	**add_new_env(char **old, char *to_add)
-{
-	char	**new_list_env;
-	int		env_size;
-
-	env_size = listlen(old) + 1;
-	new_list_env = malloc_list(env_size);
-	if (!new_list_env)
-	{
-		free_list(old);
-		return (NULL);
-		// si malloc fail retourner l'ancien env ou tout quitter ?
-	}
-	list_nmove(new_list_env, old, env_size); //
-	new_list_env[env_size - 1] = to_add;
-	new_list_env[env_size] = NULL;
-	free(old);
-	return (new_list_env);
-}
-
-void	exec_export(char **arg, char **env) //faire SHLVL incrementer a chaque fois qu'on rentre dans un shell (des le debut) ou reset a 0 si introuvable
-{
-	// verifier premier char seulement aA_
-	// verifier rester cle seulement aA_1
-	int		i;
+	int		a;
 	int		index_key;
-	int		size;
-	char	*key;
 
-	i = 1;
-	key = NULL;
-	if (arg[i] == NULL)
-		print_export(env);
-	// else if (ft_strchr(arg[0], S_CD) == 0)
-	// else if (ft_strchr(arg[0], S_SHLVL0) == 0)
-	while (arg[i])
+	a = 1;
+	if (arg[a] == NULL)
+		print_export(*env);
+	while (arg[a])
 	{
-		size = is_valid_key(arg[i]);
-		if (!size)
-			export_error(arg[i], NOT_ID);
+		index_key = is_valid_key(arg[a]);
+		if (index_key == 0)
+			export_error(arg[a], NOT_ID);
 		else
 		{
-			index_key = get_env_index(env, arg[i]);
-			if (index_key != -1 && arg[i] + size)
-				edit_env(env, index_key, arg[i]);
+			index_key = get_env_index(*env, arg[a]);
+			if (index_key != -1 && ft_strchr(arg[a], '='))
+				edit_env(*env, index_key, arg[a]);
 			else if (index_key == -1)
-				env = add_new_env(env, arg[i]);
+				add_new_env(env, arg[a]);
 		}
-		i++;
+		a++;
 	}
 }

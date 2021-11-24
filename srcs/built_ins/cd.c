@@ -6,13 +6,13 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:31:33 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/23 17:11:19 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/24 18:09:29 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	cd_errors(int error, char *arg, char *path)
+void	cd_errors(int error, char *arg, char *path)
 {
 	ft_putstr_fd("cd: ", STDERR_FILENO);
 	if (error == TOO_MANY_ARGS)
@@ -40,39 +40,13 @@ static void	cd_errors(int error, char *arg, char *path)
 	}
 }
 
-void	cd_home(char **arg, char **env)
-{
-	char	*path;
-	char	*home;
-
-	path = NULL;
-	home = get_home_dir(env);
-	if (home && (arg[1] == NULL || ft_strcmp(arg[1], "~") == 0))
-	{
-		if (chdir(home) == -1)
-			cd_errors(0, arg[1], path); //check si marche
-		return ;
-	}
-	else if (home && arg[1][1] == '/')
-	{
-		path = ft_strjoin(home, arg[1] + 2);
-		if (chdir(path) == -1)
-			cd_errors(0, arg[1], path);
-		if (path)
-			free (path);
-		return ;
-	}
-	else if (chdir(arg[1]) == -1) // revoir le comportement
-		cd_errors(0, arg[1], NULL);
-}
-
-void	cd_old(char **arg, char **env)
+void	cd_old(char **arg, char ***env)
 {
 	char	*new_old;
 	char	*old;
 
 	new_old = get_current_dir();
-	old = get_old_dir(env);
+	old = get_old_dir(*env);
 	if (old && chdir(old) == -1)
 	{
 		cd_errors(0, arg[1], NULL);
@@ -81,21 +55,22 @@ void	cd_old(char **arg, char **env)
 	else if (old)
 	{
 		printf("%s\n", old);
-		exec_export(&new_old, env);
+		export_oldpwd(new_old, env);
 	}
 }
 
-void	cd_path(char **arg, char **env)
+void	cd_path(char **arg, char ***env)
 {
 	char	*old;
 
 	old = get_current_dir();
-	exec_export(&old, env); //change oldpwd
 	if (chdir(arg[1]) == -1)
 		cd_errors(0, arg[1], NULL);
+	else
+		export_oldpwd(old, env);
 }
 
-void	exec_cd(char **arg, char **env)
+void	exec_cd(char **arg, char ***env)
 {
 	if (arg[1] == NULL)
 		cd_home(arg, env);
@@ -110,4 +85,5 @@ void	exec_cd(char **arg, char **env)
 	}
 	else if (arg[2])
 		cd_errors(TOO_MANY_ARGS, arg[1], NULL);
+	return ;
 }

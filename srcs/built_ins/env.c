@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:31:30 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/23 19:04:23 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/24 16:55:27 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,31 @@
 
 static void	env_error(int error)
 {
-	ft_putstr_fd("env :", STDERR_FILENO);
+	ft_putstr_fd("env", STDERR_FILENO);
 	if (error == TOO_MANY_ARGS)
 		ft_putstr_fd(S_TOO_MANY_ARGS, STDERR_FILENO);
 	if (error == NO_FILE)
 		ft_putstr_fd(S_NO_FILE, STDERR_FILENO);
 }
 
-void	exec_env(char **arg, char **env)
+void	exec_env(char **arg, char ***env)
 {
-	int	i;
+	int		i;
+	char	**envp;
 
 	i = 0;
+	envp = *env;
 	if (arg[1] != NULL)
 	{
 		env_error(TOO_MANY_ARGS);
 		return ;
 	}
-	if (env == NULL || env[i] == NULL)
+	if (envp == NULL || envp[i] == NULL)
 		env_error(NO_FILE);
-	while (env && env[i])
+	while (envp && envp[i])
 	{
-		if (ft_strchr(env[i], '='))
-			printf("%s\n", env[i]);
+		if (ft_strchr(envp[i], '='))
+			printf("%s\n", envp[i]);
 		i++;
 	}
 }
