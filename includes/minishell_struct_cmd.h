@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 22:25:50 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/23 16:30:53 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/24 17:10:33 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ struct		s_cmd
 	int		type;
 	int		pipe[2]; // mettre a -1 ?
 	t_redir	*redir;
-	t_redir	*heredoc;
+	t_hdoc	*heredoc;
 	pid_t	pid;
 	int		exit_status;
 };

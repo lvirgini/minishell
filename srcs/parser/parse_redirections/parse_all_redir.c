@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 11:32:01 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/21 20:36:12 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/24 17:16:12 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ int	syntax_error_redirection(t_token *token)
 	return (SUCCESS);
 }
 
-void	change_heredoc_position(t_redir *redir, int type)
+void	change_heredoc_priority(t_hdoc *heredoc, int type)
 {
 	if (type == INPUT_REDIRECTION || type == HERE_DOC)
 	{
-		while (redir)
+		while (heredoc)
 		{
-			redir->type = 0;
-			redir = redir->next;
+			heredoc->priority--;
+			heredoc = heredoc->next;
 		}
 	}
 }
@@ -55,21 +55,11 @@ int	parse_redirection(t_cmd *cmd, t_token *token)
 	redir = create_redir(token->type, token->next->word);
 	if (!redir)
 		return (FAILURE);
-	change_heredoc_position(cmd->heredoc, redir->type);
-	if (redir->type == HERE_DOC)
-	{
-		if (!cmd->heredoc)
-			cmd->heredoc = redir;
-		else
-			struct_add_back(cmd->heredoc, redir);
-	}
+	change_heredoc_priority(cmd->heredoc, redir->type);
+	if (!cmd->redir)
+		cmd->redir = redir;
 	else
-	{
-		if (!cmd->redir)
-			cmd->redir = redir;
-		else
-			struct_add_back(cmd->redir, redir);
-	}
+		struct_add_back(cmd->redir, redir);
 	return (SUCCESS);
 }
 
@@ -81,6 +71,23 @@ t_bool	is_token_redirection(int type)
 	return (false);
 }
 
+
+int	parse_heredoc(t_cmd *cmd, t_token *token)
+{
+	t_hdoc	*heredoc;
+
+	if (syntax_error_redirection(token) == SYNTAX_ERROR)
+		return (SYNTAX_ERROR);
+	heredoc = create_heredoc(token->next->word);
+	if (!heredoc)
+		return (FAILURE);
+	change_heredoc_priority(cmd->heredoc, HERE_DOC);
+	if (cmd->heredoc)
+		struct_add_back(cmd->heredoc, heredoc);
+	else
+		cmd->heredoc = heredoc;
+	return (SUCCESS);
+}
 /*
 ** Parser of all redirection for minishell : < << > >>
 ** check the syntax of each redirection
@@ -96,7 +103,12 @@ int	parse_all_redirection(t_cmd *cmd, t_token **list_token)
 	while (token && is_token_control_operator(token->type) == false)
 	{
 		syntax = SUCCESS;
-		if (is_token_redirection(token->type) == true)
+		if (token->type == HERE_DOC)
+		{
+			syntax = parse_heredoc(cmd, token);
+			token = remove_multi_token(list_token, token, 2);
+		}
+		else if (is_token_redirection(token->type) == true)
 		{
 			syntax = parse_redirection(cmd, token);
 			token = remove_multi_token(list_token, token, 2);
