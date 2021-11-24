@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup_cmd_path.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 11:34:17 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/21 21:16:58 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/24 12:10:25 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static t_bool	is_command_executable(t_cmd *cmd)
 
 static t_bool	is_absolute_path(char *argv)
 {
-	if (!ft_strncmp(argv, "./", 2) || argv[0] == '/')
+	if (argv[0] == '/')
 		return (true);
 	return (false);
 }
@@ -92,7 +92,7 @@ int	setup_cmd_path(t_cmd *cmd, char **env)
 		if (get_absolute_path(cmd, cmd->argv[0]) == FAILURE)
 			return (FAILURE);
 	}
-	else
+	else // checK CHEMIN relatif
 	{
 		path_env = split_path_env(get_env_value(env, "PATH"));
 		if (!path_env || get_cmd_path_from_path_env(cmd, path_env) == FAILURE)

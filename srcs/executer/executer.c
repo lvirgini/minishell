@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:27:42 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/24 11:48:01 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/24 12:37:05 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int	wait_all_process(t_cmd *cmd)
 
 void	close_parent_pipe(t_cmd *cmd)
 {
-	if (cmd->prev && cmd->prev->type == PIPE)
-		close(cmd->prev->pipe[IN]);
+	// if (cmd->prev && cmd->prev->type == PIPE)
+		// close_pipe(cmd->prev->pipe);
 	if (cmd->next && cmd->type == PIPE)
 		close(cmd->pipe[OUT]);
 }

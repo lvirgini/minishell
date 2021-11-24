@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:43:30 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/24 11:46:57 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/24 12:18:16 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static int	setup_pipe_input(t_cmd *cmd)
 
 static int	setup_pipe_output(t_cmd *cmd)
 {
-	fprintf(stderr, "PIPE: %d:%d\n", cmd->pipe[IN],cmd->pipe[OUT]);
+	//fprintf(stderr, "PIPE: %d:%d\n", cmd->pipe[IN],cmd->pipe[OUT]);
 	if (dup2(cmd->pipe[OUT], OUT) == -1)
 	{
 		perror ("dup2() in setup_pipe_output()");
