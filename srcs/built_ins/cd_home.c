@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 18:05:40 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/24 19:37:27 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/24 19:50:49 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,16 @@ void	cd_home_plus(char *home, char *new_old, char *arg, char ***env)
 
 	path = NULL;
 	path = ft_strjoin(home, arg + 2);
-		if (chdir(path) == -1)
-			cd_errors(0, arg, path);
-		else
-			export_oldpwd(new_old, env);
-		if (path)
-			free (path);
+	if (chdir(path) == -1)
+		cd_errors(0, arg, path);
+	else
+		export_oldpwd(new_old, env);
+	if (path)
+		free (path);
 }
 
 void	cd_home(char **arg, char ***env)
 {
-	
 	char	*home;
 	char	*new_old;
 
