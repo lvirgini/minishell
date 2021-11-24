@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:27:42 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/21 21:17:28 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/24 11:48:01 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int	wait_all_process(t_cmd *cmd)
 	while (cmd)
 	{
 		last_status = 0;
+		close_pipe(cmd->pipe); //je crois qu'il faudra check if CMD type == PIPE.
 		waitpid(cmd->pid, &last_status, 0);
-		//close_pipe(cmd->pipe); je crois qu'il faudra check if CMD type == PIPE.
 		cmd = cmd->next;
 	}
 	return (WEXITSTATUS(last_status));

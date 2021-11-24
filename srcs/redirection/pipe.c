@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:43:30 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/23 16:48:15 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/24 11:46:57 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,12 @@ void	close_pipe(int pipe[2])
 
 static int	setup_pipe_input(t_cmd *cmd)
 {
-	close (cmd->prev->pipe[OUT]);
 	if (dup2(cmd->prev->pipe[IN], IN) == -1)
 	{
 		perror ("dup2() in setup_pipe_input()");
 		return (FAILURE);
 	}
+	close(cmd->prev->pipe[OUT]);
 	return (SUCCESS);
 }
 
@@ -46,11 +46,13 @@ static int	setup_pipe_input(t_cmd *cmd)
 
 static int	setup_pipe_output(t_cmd *cmd)
 {
+	fprintf(stderr, "PIPE: %d:%d\n", cmd->pipe[IN],cmd->pipe[OUT]);
 	if (dup2(cmd->pipe[OUT], OUT) == -1)
 	{
 		perror ("dup2() in setup_pipe_output()");
 		return (FAILURE);
 	}
+	close(cmd->pipe[IN]);
 	return (SUCCESS);
 }
 
