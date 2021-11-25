@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_redirection.h                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 15:53:59 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/18 16:57:31 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/25 17:09:28 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ enum	e_stdio
 /*
 ** setup input / output
 */
-
+int			create_pipe(t_cmd *cmd);
 int			setup_all_redirections(t_cmd *cmd, char **env);
 int			make_pipe_redirection(t_cmd *cmd);
 int			setup_redirection(t_cmd *cmd, char **env);

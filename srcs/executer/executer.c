@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:27:42 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/25 10:21:11 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/25 18:51:09 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	wait_all_process(t_cmd *cmd)
 	{
 		last_status = 0;
 		waitpid(cmd->pid, &last_status, 0);
-		//close_pipe(cmd->pipe); je crois qu'il faudra check if CMD type == PIPE.
 		cmd = cmd->next;
 	}
 	return (WEXITSTATUS(last_status));
@@ -58,18 +57,25 @@ int	executer(t_cmd **list_cmd, char ***env)
 	cmd = *list_cmd;
 	while (cmd)
 	{
+		if (cmd->type == PIPE && create_pipe(cmd) == FAILURE)
+			return (-1);
 		builtin = is_builtin(cmd->argv[0]);
 		if (builtin != NOT_BUILTIN)
 		{
+			// save_std_io(std_io);
 			if (exec_builtin(builtin, env, cmd) == FAILURE)
 				return (FAILURE);
-			save_std_io(std_io);
-
+		//	close_parent_pipe(cmd);
+			// get_back_std_io(std_io);
+			// exit si dans pipe
 		}
 		else if (execute_this_cmd(cmd, *env) == FAILURE)
 			return (FAILURE);
 		cmd = cmd->next;
 	}
-	wait_all_process(*list_cmd);
+	if (builtin == NOT_BUILTIN)
+		set_exit_status((wait_all_process(*list_cmd)));
+	if (builtin != NOT_BUILTIN)
+		set_exit_status((wait_all_process(*list_cmd)));
 	return (SUCCESS);
 }

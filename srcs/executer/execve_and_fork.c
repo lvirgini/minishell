@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve_and_fork.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 17:19:13 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/23 16:45:34 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/25 15:36:13 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ pid_t	create_child_process(t_cmd *cmd, char *env[])
 {
 	pid_t	pid;
 
-	if (cmd->type == PIPE && create_pipe(cmd) == FAILURE)
-		return (-1);
 	pid = fork();
 	if (pid == -1)
 	{

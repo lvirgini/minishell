@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 13:24:38 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/18 10:46:56 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/25 18:19:05 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,5 +39,6 @@ void	exit_minishell(t_cmd **list_cmd, char **env)
 {
 	free_list_cmd(list_cmd);
 	free_list(env);
-	exit(errno);
+	// fprintf(2, "%d\n", get_exit_status());
+	exit(get_exit_status());
 }

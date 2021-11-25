@@ -1,36 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   minishell_return.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/19 12:31:16 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/25 18:02:41 by eassouli         ###   ########.fr       */
+/*   Created: 2021/11/25 15:55:36 by eassouli          #+#    #+#             */
+/*   Updated: 2021/11/25 16:59:55 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+# ifndef MINISHELL_RETURN
+# define MINISHELL
 
-static void	pwd_error(int error)
-{
-	ft_putstr_fd("pwd", STDERR_FILENO);
-	if (error == TOO_MANY_ARGS)
-		ft_putstr_fd(S_TOO_MANY_ARGS, STDERR_FILENO);
-	set_exit_status(1);
-}
+unsigned char	set_exit_status(int exit_status);
+unsigned char	set_exit_value(int exit_value);
+unsigned char	get_exit_status(void);
+unsigned char	get_exit_value(void);
 
-void	exec_pwd(char **arg, char ***env)
-{
-	char	*cwd;
-
-	(void)env;
-	set_exit_status(0);
-	if (arg[1] != NULL)
-	{
-		pwd_error(TOO_MANY_ARGS);
-		return ;
-	}
-	cwd = get_current_dir();
-	printf("%s\n", cwd);
-}
+#endif

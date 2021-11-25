@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:37:45 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/25 08:08:28 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/25 18:03:13 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void	exec_echo(char **arg, char ***env)
 	int	trail;
 
 	(void)env;
+	set_exit_status(0);
 	trail = 0;
 	if (arg[1] == NULL)
 	{

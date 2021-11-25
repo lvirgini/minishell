@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/25 10:13:05 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/25 18:10:24 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** il faut trouver un bon nom pour cette fonction...
 */
 
-void	make_shell(char *line, char ***env)
+void	make_shell(char *line, char ***env, t_prompt *prompt)
 {
 	t_token		**token;
 	t_cmd		**cmd;
@@ -29,7 +29,10 @@ void	make_shell(char *line, char ***env)
 	if (expanser(cmd, *env) && cmd)
 	{
 		if (executer(cmd, env) == FAILURE)
+		{
+			free_t_prompt(prompt);
 			exit_minishell(cmd, *env);
+		}
 	}
 	free_list_cmd(cmd);
 }
@@ -47,7 +50,7 @@ int	make_terminal(char ***env)
 	t_prompt	*prompt;
 
 	prompt = get_prompt(*env, NULL);
-	while (1)
+	while (line && get_exit_value() == 0)
 	{
 		line = NULL;
 		line = readline(prompt->formatted);
@@ -55,21 +58,18 @@ int	make_terminal(char ***env)
 		{
 			if (*line)
 			{
-				if (ft_strcmp(line, "exit") == 0) // EXIT PROVISOIRE POUR VOIR LES LEAKS
-				{
-					free(line);
-					free_t_prompt(prompt);
-					rl_clear_history();
-					return (SUCCESS);
-				}
 				add_history(line);
-				make_shell(line, env);
+				make_shell(line, env, prompt);
+				prompt = get_prompt(*env, prompt);
 			}
-			prompt = get_prompt(*env, prompt);
 			free(line);
 		}
 		else
-			printf("\n");
+			printf("exit\n");
 	}
+	if (get_exit_value() == 0)
+		;
 	free_t_prompt(prompt);
+	rl_clear_history();
+	return (SUCCESS);
 }

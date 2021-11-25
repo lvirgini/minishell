@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:31:33 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/25 10:25:22 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/25 18:02:19 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	cd_errors(int error, char *arg, char *path)
 			ft_putstr_fd(path, STDERR_FILENO);
 		ft_putstr_fd(S_NO_DIR, STDERR_FILENO);
 	}
+	set_exit_status(1);
 }
 
 void	cd_old(char **arg, char ***env)
@@ -72,6 +73,7 @@ void	cd_path(char **arg, char ***env)
 
 void	exec_cd(char **arg, char ***env)
 {
+	set_exit_status(0);
 	if (arg[1] == NULL)
 		cd_home(arg, env);
 	else if (arg[1] && arg[2] == NULL)

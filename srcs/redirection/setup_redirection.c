@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup_redirection.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:33:20 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/23 16:41:35 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/25 18:30:05 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ int	get_back_std_io(int std_io[2])
 //	close(OUT);
 	if (dup2(std_io[IN], IN) == -1)
 	{
-		perror ("dup2() in get_back_std_io()");
+		perror ("dup2(IN) in get_back_std_io()");
 		return (FAILURE);
 	}
 	if (dup2(std_io[OUT], OUT) == -1)
 	{
-		perror ("dup2() in get_back_std_io()");
+		perror ("dup2(OUT) in get_back_std_io()");
 		return (FAILURE);
 	}
 	return (SUCCESS);

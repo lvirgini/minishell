@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:31:30 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/24 16:55:27 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/25 18:05:31 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void	env_error(int error)
 		ft_putstr_fd(S_TOO_MANY_ARGS, STDERR_FILENO);
 	if (error == NO_FILE)
 		ft_putstr_fd(S_NO_FILE, STDERR_FILENO);
+	set_exit_status(1);
 }
 
 void	exec_env(char **arg, char ***env)
@@ -26,6 +27,7 @@ void	exec_env(char **arg, char ***env)
 	int		i;
 	char	**envp;
 
+	set_exit_status(0);
 	i = 0;
 	envp = *env;
 	if (arg[1] != NULL)
