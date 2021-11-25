@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:43:30 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/25 11:25:30 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/25 13:44:34 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,14 @@
 **
 */
 
-void	close_fd(int fd)
+int	create_pipe(t_cmd *cmd)
 {
-	if (fd != -1)
-		close(fd);
-}
-
-void	close_pipe(int pipe[2])
-{
-	close_fd(pipe[IN]);
-	close_fd(pipe[OUT]);
+	if (pipe(cmd->pipe) == -1)
+	{
+		perror ("pipe in make_pipe_redirection()");
+		return (FAILURE);
+	}
+	return (SUCCESS);
 }
 
 /*
@@ -52,7 +50,6 @@ static int	setup_pipe_input(t_cmd *cmd)
 
 static int	setup_pipe_output(t_cmd *cmd)
 {
-	//fprintf(stderr, "PIPE: %d:%d\n", cmd->pipe[IN],cmd->pipe[OUT]);
 	if (dup2(cmd->pipe[OUT], OUT) == -1)
 	{
 		perror ("dup2() in setup_pipe_output()");

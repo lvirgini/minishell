@@ -6,14 +6,14 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 17:05:09 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/24 18:14:54 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/25 14:17:04 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static void	remove_simple_quotes(char *res, char *s, size_t *s_len,
-        size_t *res_len)
+		size_t *res_len)
 {
 	(*s_len)++;
 	while (s[*s_len] != CHAR_SIMPLE_QUOTE)
@@ -22,10 +22,10 @@ static void	remove_simple_quotes(char *res, char *s, size_t *s_len,
 }
 
 static void	remove_double_quotes(char *res, char *s, size_t *s_len,
-        size_t *res_len)
+		size_t *res_len)
 {
 	static char	*escape_quotes = STR_ESCAPE_IN_DQUOTES;
-	
+
 	(*s_len)++;
 	while (s[*s_len] != CHAR_DOUBLE_QUOTE)
 	{
@@ -71,7 +71,7 @@ static t_bool	need_expand_delimitor(char *delimitor)
 	return (false);
 }
 
-t_hdoc     *create_heredoc(char *delimitor)
+t_hdoc	*create_heredoc(char *delimitor)
 {
 	t_hdoc	*heredoc;
 

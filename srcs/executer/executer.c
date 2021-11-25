@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:27:42 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/25 11:26:21 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/25 14:08:12 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	wait_all_process(t_cmd *cmd)
 	while (cmd)
 	{
 		last_status = 0;
-		close_pipe(cmd->pipe); //je crois qu'il faudra check if CMD type == PIPE.
+		close_pipe(cmd->pipe);
 		waitpid(cmd->pid, &last_status, 0);
 		cmd = cmd->next;
 	}
@@ -34,8 +34,6 @@ int	wait_all_process(t_cmd *cmd)
 
 void	close_parent_pipe(t_cmd *cmd)
 {
-	// if (cmd->prev && cmd->prev->type == PIPE)
-		// close_pipe(cmd->prev->pipe);
 	if (cmd->next && cmd->type == PIPE)
 		close_fd(cmd->pipe[OUT]);
 }
@@ -56,9 +54,10 @@ int	executer(t_cmd **list_cmd, char **env)
 	cmd = *list_cmd;
 	while (cmd)
 	{
-		make_heredoc(cmd->heredoc, env);
-	//	if (cmd->type == PIPE && create_pipe(cmd) == FAILURE)
-	//		return (FAILURE);
+		if (make_heredoc(cmd->heredoc, env) == FAILURE)
+			return (FAILURE);
+		if (cmd->type == PIPE && create_pipe(cmd) == FAILURE)
+			return (FAILURE);
 		if (execute_this_cmd(cmd, env) == FAILURE)
 			return (FAILURE);
 		cmd = cmd->next;

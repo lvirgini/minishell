@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:29:00 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/24 17:32:27 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/25 14:19:56 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ struct s_heredoc
 	t_bool	need_expand;
 	int		priority;
 	char	*delimitor;
-	char 	**data;
+	char	**data;
 };
 
 /*
@@ -51,8 +51,8 @@ void		free_this_redir(t_redir *redir); // static ?
 **	management heredoc : 
 */
 
-t_hdoc      *malloc_heredoc(void);
-t_hdoc     *create_heredoc(char *delimitor);
-void    	free_list_heredoc(t_hdoc *heredoc);
+t_hdoc		*malloc_heredoc(void);
+t_hdoc		*create_heredoc(char *delimitor);
+void		free_list_heredoc(t_hdoc *heredoc);
 
 #endif

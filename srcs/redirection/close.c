@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_hdoc_free.c                                      :+:      :+:    :+:   */
+/*   close.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 17:25:43 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/25 14:15:53 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/11/25 13:41:18 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/11/25 13:42:48 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	free_heredoc(t_hdoc *heredoc)
+void	close_fd(int fd)
 {
-	if (heredoc->delimitor)
-		free(heredoc->delimitor);
-	if (heredoc->data)
-		free_list(heredoc->data);
-	free(heredoc);
+	if (fd != -1)
+		close(fd);
 }
 
-void	free_list_heredoc(t_hdoc *heredoc)
+void	close_pipe(int pipe[2])
 {
-	t_hdoc		*next;
-
-	while (heredoc)
-	{
-		next = heredoc->next;
-		free_heredoc(heredoc);
-		heredoc = next;
-	}
+	close_fd(pipe[IN]);
+	close_fd(pipe[OUT]);
 }

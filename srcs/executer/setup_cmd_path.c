@@ -3,30 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   setup_cmd_path.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 11:34:17 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/24 12:10:25 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/25 13:39:31 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*
-** split of line env PATH with ':' as delimitor
-*/
-
-static char	**split_path_env(char *env)
-{
-	char	**split;
-
-	if (!env)
-		return (NULL);
-	split = ft_split(env, ':');
-	if (!split)
-		perror("split env");
-	return (split);
-}
 
 /*
 ** check with access X_OK (executable) if file is well executable
@@ -51,15 +35,11 @@ static t_bool	is_absolute_path(char *argv)
 	return (false);
 }
 
-static t_bool	get_absolute_path(t_cmd *cmd, char *argv)
+static t_bool	is_relative_path(char *argv)
 {
-	if (access(argv, F_OK) == 0)
-	{
-		cmd->path = ft_strdup(argv);
-		return (SUCCESS);
-	}
-	display_error(ERR_ABSOLUTE_PATH_NOT_FOUND, argv);
-	return (FAILURE);
+	if (ft_strchr(argv, BACKSLASH))
+		return (true);
+	return (false);
 }
 
 /*
@@ -83,24 +63,22 @@ t_bool	argv_is_empty(char **argv)
 
 int	setup_cmd_path(t_cmd *cmd, char **env)
 {
-	char	**path_env;
-
 	if (!cmd->argv || !cmd->argv[0] || argv_is_empty(cmd->argv))
 		return (FAILURE);
-	if (is_absolute_path(cmd->argv[0]) == true)
+	if (is_absolute_path(cmd->argv[0]))
 	{
-		if (get_absolute_path(cmd, cmd->argv[0]) == FAILURE)
+		if (add_absolute_path(cmd, cmd->argv[0]) == FAILURE)
 			return (FAILURE);
 	}
-	else // checK CHEMIN relatif
+	else if (is_relative_path(cmd->argv[0]))
 	{
-		path_env = split_path_env(get_env_value(env, "PATH"));
-		if (!path_env || get_cmd_path_from_path_env(cmd, path_env) == FAILURE)
-		{
-			free_list(path_env);
+		if (add_relative_path(cmd, cmd->argv[0]) == FAILURE)
 			return (FAILURE);
-		}	
-		free_list(path_env);
+	}
+	else
+	{
+		if (add_path_with_envpath(cmd, env) == FAILURE)
+			return (FAILURE);
 	}
 	if (is_command_executable(cmd) == true)
 		return (SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 15:53:59 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/25 11:25:58 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/25 13:42:34 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ enum	e_stdio
 ** setup input / output
 */
 
-int			setup_all_redirections(t_cmd *cmd, char **env);
+int			create_pipe(t_cmd *cmd);
 int			make_pipe_redirection(t_cmd *cmd);
+int			setup_all_redirections(t_cmd *cmd, char **env);
 int			setup_redirection(t_cmd *cmd, char **env);
 int			setup_heredoc_input(t_hdoc *heredoc);
 

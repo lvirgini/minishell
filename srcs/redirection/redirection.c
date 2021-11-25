@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:32:30 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/25 12:53:47 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/25 14:08:52 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	setup_redirection(t_cmd *cmd, char **env)
 		if (redir->type == INPUT_REDIRECTION)
 		{
 			if (setup_inputs(redir) == FAILURE)
-				return (FAILURE); // voir si pas de leaks
+				return (FAILURE);
 		}		
 		else if (setup_outputs(redir) == FAILURE)
 			return (FAILURE);

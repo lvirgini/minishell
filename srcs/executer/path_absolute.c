@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_hdoc_free.c                                      :+:      :+:    :+:   */
+/*   path_absolute.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 17:25:43 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/25 14:15:53 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/11/25 13:23:14 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/11/25 13:36:43 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	free_heredoc(t_hdoc *heredoc)
-{
-	if (heredoc->delimitor)
-		free(heredoc->delimitor);
-	if (heredoc->data)
-		free_list(heredoc->data);
-	free(heredoc);
-}
+/*
+** duplicate absolute path on cmd->path.
+*/
 
-void	free_list_heredoc(t_hdoc *heredoc)
+t_bool	add_absolute_path(t_cmd *cmd, char *argv)
 {
-	t_hdoc		*next;
-
-	while (heredoc)
+	if (access(argv, F_OK) == 0)
 	{
-		next = heredoc->next;
-		free_heredoc(heredoc);
-		heredoc = next;
+		cmd->path = ft_strdup(argv);
+		if (!cmd->path)
+		{
+			perror("malloc in add_absolute_path");
+			return (FAILURE);
+		}
+		return (SUCCESS);
 	}
+	display_error(ERR_ABSOLUTE_PATH_NOT_FOUND, argv);
+	return (FAILURE);
 }

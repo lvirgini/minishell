@@ -1,34 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_hdoc_free.c                                      :+:      :+:    :+:   */
+/*   path_relative.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 17:25:43 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/25 14:15:53 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/11/25 13:28:01 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/11/25 13:43:10 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	free_heredoc(t_hdoc *heredoc)
+t_bool	add_relative_path(t_cmd *cmd, char *argv)
 {
-	if (heredoc->delimitor)
-		free(heredoc->delimitor);
-	if (heredoc->data)
-		free_list(heredoc->data);
-	free(heredoc);
-}
-
-void	free_list_heredoc(t_hdoc *heredoc)
-{
-	t_hdoc		*next;
-
-	while (heredoc)
-	{
-		next = heredoc->next;
-		free_heredoc(heredoc);
-		heredoc = next;
-	}
+	(void)cmd;
+	(void)argv;
+	printf("RELATIVE PATH TO DO\n");//
+	return (FAILURE);
 }
