@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 13:24:38 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/25 12:47:47 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/25 16:15:01 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ int	display_error(int error, char *object)
 		": permission denied\n",
 		": No such file or directory\n",
 		": ambiguous redirect\n",
+		": Is a directory\n"
 	};
-	static int	errno_nb[NB_ERROR] = {1, 127, 126, 127};
+	static int	errno_nb[NB_ERROR] = {1, 127, 126, 127, 126};
 
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	ft_putstr_fd(object, STDERR_FILENO);
