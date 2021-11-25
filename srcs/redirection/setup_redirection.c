@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:33:20 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/24 19:47:40 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/25 11:13:32 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ int	setup_all_redirections(t_cmd *cmd, char **env)
 {
 	if (make_pipe_redirection(cmd) == FAILURE)
 		return (FAILURE);
-	if (make_heredoc(cmd->heredoc, env) == FAILURE)
-		return (FAILURE);
+	//if (make_heredoc(cmd->heredoc, env) == FAILURE)
+	//	return (FAILURE);
 	if (setup_redirection(cmd, env) == FAILURE)
 		return (FAILURE);
-	// if HEREDOC is last : here doc = input
-	// else close HEREDOC ?
+	if (setup_heredoc_input(cmd->heredoc) == FAILURE)
+		return (FAILURE);
 	return (SUCCESS);
 }

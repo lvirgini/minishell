@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 17:19:13 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/24 17:34:34 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/25 11:12:33 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	create_pipe(t_cmd *cmd)
 	}
 	return (SUCCESS);
 }
+
 /*
 ** create a child processus with fork()
 ** in CHILD : 

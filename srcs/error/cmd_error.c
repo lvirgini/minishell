@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 13:24:38 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/24 19:02:13 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/25 12:47:47 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	display_error(int error, char *object)
 	ft_putstr_fd(object, STDERR_FILENO);
 	if (error < NB_ERROR)
 	{
-		ft_putstr(str_error[error]);
+		ft_putstr_fd(str_error[error], STDERR_FILENO);
 		errno = errno_nb[error];
 	}
 	else
@@ -42,6 +42,7 @@ end-of-file (wanted `", STDERR_FILENO);
 	ft_putstr_fd(delimitor, STDERR_FILENO);
 	ft_putstr_fd("')\n", STDERR_FILENO);
 }
+
 void	exit_minishell(t_cmd **list_cmd, char **env)
 {
 	free_list_cmd(list_cmd);

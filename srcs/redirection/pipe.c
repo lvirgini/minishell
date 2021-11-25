@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:43:30 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/24 12:18:16 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/25 11:25:30 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,16 @@
 **
 */
 
+void	close_fd(int fd)
+{
+	if (fd != -1)
+		close(fd);
+}
+
 void	close_pipe(int pipe[2])
 {
-	close(pipe[IN]);
-	close(pipe[OUT]);
+	close_fd(pipe[IN]);
+	close_fd(pipe[OUT]);
 }
 
 /*
@@ -36,7 +42,7 @@ static int	setup_pipe_input(t_cmd *cmd)
 		perror ("dup2() in setup_pipe_input()");
 		return (FAILURE);
 	}
-	close(cmd->prev->pipe[OUT]);
+	close_fd(cmd->prev->pipe[OUT]);
 	return (SUCCESS);
 }
 
@@ -52,7 +58,7 @@ static int	setup_pipe_output(t_cmd *cmd)
 		perror ("dup2() in setup_pipe_output()");
 		return (FAILURE);
 	}
-	close(cmd->pipe[IN]);
+	close_fd(cmd->pipe[IN]);
 	return (SUCCESS);
 }
 
