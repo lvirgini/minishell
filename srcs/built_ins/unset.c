@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:26:09 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/24 19:32:24 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/25 09:26:26 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,9 @@ static void	unset_error(char *arg, int error)
 	} //set a 1 variable globale
 }
 
-
-
 void	exec_unset(char **arg, char ***env)
 {
-	// unset OLDPWD
-	// Recreer SHLVL si unset
+	// Recreer SHLVL a 1 si unset SHLVL
 	int		a;
 	int		len;
 	int		i;

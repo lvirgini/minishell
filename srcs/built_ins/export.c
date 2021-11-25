@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 10:59:10 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/24 19:29:00 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/25 09:08:49 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,28 +23,53 @@ void	export_error(char *arg, int error)
 	}
 }
 
-void	export_oldpwd(char *old, char ***env)
+char	**sort_export(char **env)
 {
-	static char	*oldpwd[3];
+	int		i;
+	int		j;
+	char	*tmp_key;
+	char	**sort_env;
 
-	oldpwd[1] = ft_strjoin(OLDPWD, old);
-	if (oldpwd[1] == NULL)
-		return ;
-	oldpwd[2] = NULL;
-	exec_export(oldpwd, env);
-	free(oldpwd[1]);
+	i = 0;
+	sort_env = list_dup(env);
+	if (sort_env == NULL)
+		return (NULL);
+	while (sort_env[i])
+	{
+		j = i;
+		while (j > 0 && ft_strcmp(sort_env[j], sort_env[j - 1]) < 0)
+		{
+			tmp_key = sort_env[j - 1];
+			sort_env[j - 1] = sort_env[j];
+			sort_env[j] = tmp_key;
+			j--;
+		}
+		i++;
+	}
+	return (sort_env);
 }
 
 void	print_export(char **env)
 {
-	int	i;
+	int		i;
+	int		len;
+	char	**sort_env;
 
 	i = 0;
-	while (env && env[i])
+	sort_env = sort_export(env);
+	while (sort_env && sort_env[i])
 	{
-		printf("%s\n", env[i]); //print key="value"
+		len = ft_strlen_set(sort_env[i], "=");
+		write(1, sort_env[i], len);
+		if (*(sort_env[i] + len) == '=')
+			printf("=\"%s\"\n", sort_env[i] + len + 1); //print key="value"
+		else
+			printf("\n");
 		i++;
 	}
+	if (sort_env)
+		free_list(sort_env);
+	sort_env = NULL;
 }
 
 int	is_valid_key(char *str)

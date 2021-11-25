@@ -6,13 +6,13 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:37:45 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/24 21:11:19 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/25 08:08:28 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	echo_print(char **arg, int i)
+void	print_echo(char **arg, int i)
 {
 	while (arg[i])
 	{
@@ -36,7 +36,7 @@ void	exec_echo(char **arg, char ***env)
 	}
 	else if (ft_strcmp(arg[1], "-n") == 0)
 		trail = 1;
-	echo_print(arg, 1 + trail);
+	print_echo(arg, 1 + trail);
 	if (trail == 0)
 		printf("\n");
 }

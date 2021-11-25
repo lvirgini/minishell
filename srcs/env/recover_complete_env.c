@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 13:28:18 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/24 17:18:44 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/25 09:21:41 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,9 @@ char	**make_minishell_env(char *env[])
 	if (!minishell_env)
 		return (NULL);
 	export_shlvl(&minishell_env);
+	export_shell(&minishell_env);
+	unset_oldpwd(&minishell_env);
 //	if (list_ndup(minishell_env, env, env_size) == FAILURE)//
 //		return (NULL);
 	return (minishell_env);
-// add SHELL : shellname
 }
