@@ -6,16 +6,16 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 19:37:22 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/25 13:04:47 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/25 16:45:19 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char    **ft_list_add_one(char **list, char *to_add)
+char	**ft_list_add_one(char **list, char *to_add)
 {
-  	char **result;
-	size_t  list_len;
+	char	**result;
+	size_t	list_len;
 
 	list_len = listlen(list) + 1;
 	result = malloc_list(list_len);

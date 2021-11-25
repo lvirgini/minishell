@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 11:28:09 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/24 19:49:24 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/25 16:34:07 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,6 @@ int		list_ncpy(char **dst, char **src, size_t max);
 int		list_move(char **dst, char **src);
 int		list_nmove(char **dst, char **src, size_t max);
 int		list_index_move(char **dst, char **src, size_t first, size_t last);
-char    **ft_list_add_one(char **list, char *to_add);
+char	**ft_list_add_one(char **list, char *to_add);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 11:34:17 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/25 13:39:31 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/25 15:17:52 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static t_bool	is_absolute_path(char *argv)
 
 static t_bool	is_relative_path(char *argv)
 {
-	if (ft_strchr(argv, BACKSLASH))
+	if (ft_strchr(argv, '/'))
 		return (true);
 	return (false);
 }
