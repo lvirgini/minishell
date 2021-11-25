@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 16:38:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/23 16:28:04 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/25 14:12:47 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,13 @@ void		expand_argv(t_cmd *cmd, char **env);
 t_bool		redesign_argv(char **new, char **old,
 				t_expansion *expansion, int *index);
 int			expand_redirection(t_redir *redir, char **env);
-char		*fusion_str_expansion(char *old_s, t_expansion *expansion);
+char		*expand_heredoc_line(char *line, char **env);
 
 /*
 ** get expansion
 */
 
+char		*fusion_str_expansion(char *old_s, t_expansion *expansion);
 t_expansion	*expand_str(char *s, char **env);
 t_expansion	*get_expansion(char *s, char **env);
 t_expansion	*expand_simple_quote(char *s, char **env);

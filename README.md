@@ -35,3 +35,15 @@ mini@debian:~$ echo $TEST
 -dtest
 
  "$USER $ $SDFSDFSDFDFSDF $$"
+
+
+ HEREDOC
+
+> creat << test  < inexist > dontcreat << test
+
+ << '' cat
+ << "" cat
+ << 't'e"est" cat
+ << " " cat
+  << "t"'e'st'' cat
+    $USER

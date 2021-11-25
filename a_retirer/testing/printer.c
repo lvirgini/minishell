@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 15:50:28 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/23 16:32:14 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/24 17:32:58 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	print_cmd(t_cmd *cmd)
 		printf("input :\n");
 		print_redir(cmd->redir);
 		printf("output :\n");
-		print_redir(cmd->heredoc);
+		//print_herdoc(cmd->heredoc);
 	}
 	printf("\n");
 }
