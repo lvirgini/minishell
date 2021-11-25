@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   t_expansion_free.c                                 :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/25 21:30:53 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/21 16:37:58 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/11/20 16:06:32 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/11/20 16:55:32 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-static void	free_expansion(t_expansion	*expansion)
+char	*ft_strcpy(char *dst, const char *src)
 {
-	if (expansion)
-	{
-		if (expansion->value)
-			free_list(expansion->value);
-		free(expansion);
-	}
-}
+	size_t	i;
 
-void	free_list_expansion(t_expansion *expansion)
-{
-	t_expansion	*next;
-
-	while (expansion)
+	if (!src)
+		return (dst);
+	i = 0;
+	while (src[i])
 	{
-		next = expansion->next;
-		free_expansion(expansion);
-		expansion = next;
+		dst[i] = src[i];
+		i++;
 	}
+	return (dst);
 }

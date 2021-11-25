@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   recover_complete_env.c                             :+:      :+:    :+:   */
+/*   t_struct_add_front.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/16 13:28:18 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/25 10:18:49 by eassouli         ###   ########.fr       */
+/*   Created: 2021/11/20 14:35:20 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/11/21 21:14:10 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**make_minishell_env(char *env[])
+void	*struct_add_front(void *void_struct, void *void_to_add)
 {
-	char	**minishell_env;
+	t_struct	*structure;
+	t_struct	*to_add;
 
-	minishell_env = list_cdup(env, '=');
-	if (!minishell_env)
-		return (NULL);
-	export_shell(&minishell_env);
-	export_shlvl(&minishell_env);
-	unset_oldpwd(&minishell_env);
-	return (minishell_env);
+	structure = (t_struct *)void_struct;
+	to_add = (t_struct *)void_to_add;
+	to_add->next = structure;
+	return ((void *)to_add);
 }

@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 15:07:51 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/09 10:09:45 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/20 19:55:15 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ struct	s_struct
 {
 	t_struct	*next;
 	t_struct	*prev;
-	char		*value;//
 };
 
+void	*struct_add_front(void *void_struct, void *void_to_add);
 void	struct_add_back(void *structure, void *to_add);
 void	struct_list_add_back(void *void_list, void *void_to_add);
 size_t	struct_len(void *struct_first);

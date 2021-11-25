@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:29:00 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/18 15:36:17 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/20 19:55:42 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,5 @@ void		free_this_redir(t_redir *redir); // static ?
 /*
 **	management t_redir
 */
-
 
 #endif

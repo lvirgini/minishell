@@ -6,56 +6,69 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 11:09:02 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/18 11:25:20 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/21 20:21:10 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static void	free_unused_old_argv(t_cmd *cmd, int index_to_remove)
+{
+	free(cmd->argv[index_to_remove]);
+	cmd->argv[index_to_remove] = NULL;
+	free(cmd->argv);
+}
+
 /*
 ** add expansion and keep argv already good 
 */
 
-static char	**redesign_expansion_argv(char **old_argv, int index,
-			char **expansion)
+void	get_new_argv_with_expansion(t_cmd *cmd, int *i, t_expansion *expansion)
 {
-	size_t	old_len;
-	size_t	expand_len;
-	char	**new_argv;
+	char		**new_argv;
+	int			index_to_remove;
 
-	old_len = listlen(old_argv);
-	expand_len = listlen(expansion);
-	new_argv = malloc_list(old_len + expand_len);
-	if (!new_argv)
-		return (NULL);
-	list_nmove(new_argv, old_argv, index);
-	list_move(new_argv + index, expansion);
-	list_move(new_argv + index + expand_len, old_argv + index + 1);
-	new_argv[old_len + expand_len - 1] = NULL;
-	free(old_argv[index]);
-	free(old_argv);
-	return (new_argv);
+	new_argv = malloc_list((int)(listlen(cmd->argv)
+				+ (int)count_expansion_split(expansion)));
+	if (new_argv)
+	{
+		index_to_remove = *i;
+		if (redesign_argv(new_argv, cmd->argv, expansion, i) == FAILURE)
+		{
+			free_n_list(new_argv, *i);
+			new_argv = NULL;
+		}
+		else
+			free_unused_old_argv(cmd, index_to_remove);
+	}
+	else
+		free_list(cmd->argv);
+	cmd->argv = new_argv;
 }
 
-char	**expand_argv(char **argv, char **env)
+void	expand_argv(t_cmd *cmd, char **env)
 {
-	size_t		i;
-	char		**expansion;
+	int			i;
+	t_expansion	*expansion;
 
 	i = 0;
-	while (argv[i])
+	while (cmd->argv[i])
 	{
-		if (need_expand_str(argv[i]))
+		if (need_expand(cmd->argv[i]))
 		{
-			expansion = NULL;
-			expansion = expand(argv[i], env);
-			argv = redesign_expansion_argv(argv, i, expansion);
-			if (!argv)
-				return (NULL);
-			print_list(argv);
-			free(expansion);
+			expansion = expand_str(cmd->argv[i], env);
+			if (!expansion)
+			{
+				free_list(cmd->argv);
+				cmd->argv = NULL;
+				return ;
+			}
+			get_new_argv_with_expansion(cmd, &i, expansion);
+			free_list_expansion(expansion);
+			if (!cmd->argv)
+				return ;
 		}
-		i++;
+		else
+			i++;
 	}
-	return (argv);
 }

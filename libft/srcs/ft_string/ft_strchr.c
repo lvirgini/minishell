@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 16:34:22 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/06/21 18:38:53 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/23 18:42:02 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,18 @@ char	*ft_strchr(const char *s, int c)
 	if ((char)c != *s)
 		return (NULL);
 	return ((char *)s);
+}
+
+char	*ft_strnchr(const char *s, int c, int len_max)
+{
+	int		i;
+
+	i = 0;
+	while (i < len_max && s[i])
+	{
+		if (s[i] == c)
+			return ((char *)(s + i));
+		i++;
+	}
+	return (NULL);
 }

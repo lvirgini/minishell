@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 16:25:24 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/24 16:44:24 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/25 10:14:07 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,18 @@
 
 /*	
 **	ATTENTION pas de doublon dans les variables d'environnements
-**	ATTENTION lors de l'affichage des valeurs NULL : peut etre plus judicieux de mettre "" que NULL ?
-**		a test echo $TRUC if TRUC= ""  ou TRUC = NULL;
+**	ATTENTION lors de l'affichage des valeurs NULL : peut etre plus judicieux 
+** de mettre "" que NULL ?
 */
 
-int		main(int argc, char *argv[], char *env[])
+int	main(int argc, char *argv[], char *env[])
 {
-	(void)argc;
-    (void)argv;
-
 	char	**minishell_env;
-	
-	
-//testing_structure();
-//	exit(0);
 
-
-	// a voir pour garder la structure t_env ou directement le env du main
+	(void)argc;
+	(void)argv;
 	minishell_env = make_minishell_env(env);
-
 	make_terminal(&minishell_env);
-	free_list(env);
-
-	return (0);
+	free_list(minishell_env);
+	return (0); // EXIT STATUS
 }

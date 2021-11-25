@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:27:42 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/24 15:37:17 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/25 10:21:11 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,8 @@ int	executer(t_cmd **list_cmd, char ***env)
 	int		builtin;
 
 	cmd = *list_cmd;
-	//save_std_io(std_io);
 	while (cmd)
 	{
-		// if (setup_redirections(cmd) == SUCCESS && cmd->argv)
-		// {
-			// else if (setup_cmd_path(cmd, env) == SUCCESS && cmd->path)
-			// {
 		builtin = is_builtin(cmd->argv[0]);
 		if (builtin != NOT_BUILTIN)
 		{
@@ -73,10 +68,6 @@ int	executer(t_cmd **list_cmd, char ***env)
 		}
 		else if (execute_this_cmd(cmd, *env) == FAILURE)
 			return (FAILURE);
-		//	}	
-	//	}
-	//	if (get_back_std_io(std_io) == FAILURE)
-		//	return (FAILURE);
 		cmd = cmd->next;
 	}
 	wait_all_process(*list_cmd);

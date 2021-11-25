@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 11:28:09 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/03 15:23:16 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/21 17:19:28 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,23 @@ size_t	ft_strchr_set_len(const char *s, const char *set);
 int		ft_strchr_len(const char *s, int c);
 char	*ft_strchr_set(const char *s, const char *set);
 char	*ft_strchr(const char *s, int c);
+char	*ft_strnchr(const char *s, int c, int len_max);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strnstr(const char *s1, const char *s2, size_t len);
 char	*ft_strdup(const char *s);
 char	*ft_strdup_max(const char *s, size_t max);
 int		ft_strcmp(const char *s1, const char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
+char	*ft_strcpy(char *dst, const char *src);
 char	*ft_strncpy(char *dst, const char *src, size_t n);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 char	*ft_strcut(char *s, size_t n);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_strjoin_free(char *s1, char const *s2);
+char	*ft_strnjoin(char const *s1, char const *s2, size_t n);
+char	*ft_strnjoin_free(char *s1, char const *s2, size_t n);
 char	**ft_split(char const *s, const char c);
 char	**ft_split_set(const char *s, const char *set);
 void	free_list_exit(char **list);

@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 10:04:02 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/25 16:47:28 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/21 21:17:48 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 int	print_syntax_error(int err, char char_data, char *str_data)
 {
 	static char	*syntax[NB_ERR_SYNTAX] = {
-	"syntax error pres du symbole inattendu", /// a mettre en anglais
-	"syntax error quotes are not closed"};
+		"syntax error pres du symbole inattendu", /// a mettre en anglais
+		"syntax error quotes are not closed"};
 
 	if (err == 0)
 	{
