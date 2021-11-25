@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 12:24:39 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/25 09:59:34 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/25 10:25:46 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "minishell.h"
 
 # define S_TOO_MANY_ARGS ": too many arguments\n"
+# define S_TOO_MANY_ARGS_CD "too many arguments\n"
 # define S_NO_FILE ": No such file or directory\n"
 # define S_NO_DIR ": Not a directory\n"
 # define S_PERM ": Permission denied\n"

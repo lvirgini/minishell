@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:31:33 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/24 18:09:29 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/25 10:25:22 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	cd_errors(int error, char *arg, char *path)
 {
 	ft_putstr_fd("cd: ", STDERR_FILENO);
 	if (error == TOO_MANY_ARGS)
-		ft_putstr_fd(S_TOO_MANY_ARGS, STDERR_FILENO);
+		ft_putstr_fd(S_TOO_MANY_ARGS_CD, STDERR_FILENO);
 	else if (errno == EACCES)
 	{
 		ft_putstr_fd(arg, STDERR_FILENO);
