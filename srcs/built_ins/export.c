@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 10:59:10 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/25 09:08:49 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/25 09:49:28 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	print_export(char **env)
 		len = ft_strlen_set(sort_env[i], "=");
 		write(1, sort_env[i], len);
 		if (*(sort_env[i] + len) == '=')
-			printf("=\"%s\"\n", sort_env[i] + len + 1); //print key="value"
+			printf("=\"%s\"\n", sort_env[i] + len + 1);
 		else
 			printf("\n");
 		i++;

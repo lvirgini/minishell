@@ -6,11 +6,20 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 17:19:00 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/25 09:25:45 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/25 09:47:59 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	export_shell(char ***env)
+{
+	static char	*shell[3];
+
+	shell[1] = S_SHELL;
+	shell[2] = NULL;
+	exec_export(shell, env);
+}
 
 static char	*new_nb(char *value)
 {
@@ -29,15 +38,15 @@ void	export_shlvl(char ***env)
 	static char	*shlvl[3];
 
 	shlvl[2] = NULL;
-	value = get_env_value(*env, SHLVL);
+	value = get_env_value(*env, S_SHLVL);
 	new_value = new_nb(value);
 	if (value == NULL || new_value == NULL)
 	{
-		shlvl[1] = SHLVL1;
+		shlvl[1] = S_SHLVL1;
 		exec_export(shlvl, env);
 		return ;
 	}
-	shlvl[1] = ft_strjoin(SHLVL, new_value);
+	shlvl[1] = ft_strjoin(S_SHLVL, new_value);
 	if (shlvl[1])
 		exec_export(shlvl, env);
 	free(new_value);
@@ -64,13 +73,4 @@ void	unset_oldpwd(char ***env)
 	oldpwd[1] = OLDPWD;
 	oldpwd[2] = NULL;
 	exec_unset(oldpwd, env);
-}
-
-void	export_shell(char ***env)
-{
-	static char	*shell[3];
-
-	shell[1] = S_SHELL;
-	shell[2] = NULL;
-	exec_export(shell, env);
 }

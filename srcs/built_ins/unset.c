@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:26:09 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/25 09:26:26 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/25 09:44:35 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,24 @@ static void	unset_error(char *arg, int error)
 	} //set a 1 variable globale
 }
 
+void	shift_list(char *arg, char **unset_env)
+{
+	int	i;
+	int	len;
+
+	i = get_env_index(unset_env, arg);
+	if (i != -1)
+	{
+		len = listlen(unset_env);
+		free(unset_env[i]);
+		list_nmove(unset_env + i, unset_env + i + 1, len - i);
+		unset_env[len - 1] = NULL;
+	}
+}
+
 void	exec_unset(char **arg, char ***env)
 {
-	// Recreer SHLVL a 1 si unset SHLVL
 	int		a;
-	int		len;
 	int		i;
 	char	**unset_env;
 
@@ -39,16 +52,7 @@ void	exec_unset(char **arg, char ***env)
 		if (i == 0 || ft_strchr(arg[a], '='))
 			unset_error(arg[a], NOT_ID);
 		else
-		{
-			i = get_env_index(unset_env, arg[a]);
-			if (i != -1)
-			{
-				len = listlen(unset_env);
-				free(unset_env[i]);
-				list_nmove(unset_env + i, unset_env + i + 1, len - i);
-				unset_env[len - 1] = NULL;
-			}
-		}
+			shift_list(arg[a], unset_env);
 		a++;
 	}
 }
