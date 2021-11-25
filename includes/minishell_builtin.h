@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 12:24:39 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/25 09:25:36 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/25 09:59:34 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@
 # define S_NO_HOME "cd: HOME not set\n"
 # define S_NO_OLDPWD "cd: OLDPWD not set\n"
 # define S_SHELL "SHELL=./minishell" //
-
-# define SHLVL "SHLVL="
-# define SHLVL1 "SHLVL=1"
+# define S_SHLVL "SHLVL="
+# define S_SHLVL1 "SHLVL=1"
 # define S_OLDPWD "OLDPWD="
+
+# define SHLVL "SHLVL"
 # define OLDPWD "OLDPWD"
 
 # define NOT_BUILTIN -1
@@ -84,12 +85,5 @@ void	exec_unset(char **arg, char ***env);
 void	exec_env(char **arg, char ***env);
 
 void	exec_exit(char **arg, char ***env);
-
-char	**list_cdup(char **src, char c);
-size_t	listclen(char **list, char c);
-int		list_ccpy(char **dst, char **src, char c);
-
-void	add_new_env(char ***env, char *to_add);
-int		edit_env(char **env, int index, char *to_edit);
 
 #endif
