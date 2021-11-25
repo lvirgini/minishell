@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 16:14:04 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/24 16:25:54 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/25 09:53:38 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ int	get_env_index(char **env, char *key)
 	{
 		if (ft_strncmp(env[index], key, key_size) == 0
 			&& (ft_strncmp(env[index], key, key_size + 1) == -61
-			|| ft_strncmp(env[index], key, key_size + 1) == '='
-			|| ft_strncmp(env[index], key, key_size + 1) == 0))
+				|| ft_strncmp(env[index], key, key_size + 1) == '='
+				|| ft_strncmp(env[index], key, key_size + 1) == 0))
 			return (index);
 		index++;
 	}
