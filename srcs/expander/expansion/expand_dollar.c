@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/23 23:15:32 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/23 16:25:42 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/25 13:51:20 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static void	dollar_is_env_value_split(t_expansion *expansion, char *s,
 	char		end_of_key;
 
 	end_of_key = isolate_key(s + 1, expansion);
-	printf("expansion dollar = %s\n", s);
 	value = get_env_value(env, s + 1);
 	if (value)
 	{
@@ -64,7 +63,6 @@ static void	dollar_is_env_value_literal(t_expansion *expansion, char *s,
 	char		end_of_key;
 
 	end_of_key = isolate_key(s + 1, expansion);
-	printf("expansion dollar = %s\n", s);
 	value = get_env_value(env, s + 1);
 	if (value)
 	{

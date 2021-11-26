@@ -1,48 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_print.c                                       :+:      :+:    :+:   */
+/*   list_add.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/26 16:48:40 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/24 19:49:04 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/11/24 19:37:22 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/11/25 16:45:19 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	print_str(char *str)
+char	**ft_list_add_one(char **list, char *to_add)
 {
-	if (str)
+	char	**result;
+	size_t	list_len;
+
+	list_len = listlen(list) + 1;
+	result = malloc_list(list_len);
+	if (!result)
 	{
-		ft_putstr(str);
-		ft_putstr("\n");
+		free_list(list);
+		free(to_add);
+		return (NULL);
 	}
-}
-
-void	print_list(char **list)
-{
-	int	i;
-
-	i = 0;
-	while (list && list[i])
+	list_move(result, list);
+	result[list_len - 1] = ft_strdup(to_add);
+	if (!result[list_len - 1])
 	{
-		ft_putstr(list[i]);
-		ft_putstr("\n");
-		i++;
+		free_list(result);
+		free(result);
+		return (NULL);
 	}
-}
-
-void	print_list_fd(char **list, int fd)
-{
-	int	i;
-
-	i = 0;
-	while (list && list[i])
-	{
-		ft_putstr_fd(list[i], fd);
-		ft_putstr_fd("\n", fd);
-		i++;
-	}
+	result[list_len] = NULL;
+	free(list);
+	free(to_add);
+	return (result);
 }

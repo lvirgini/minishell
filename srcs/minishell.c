@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 16:25:24 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/25 18:14:44 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/26 10:14:08 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int argc, char *argv[], char *env[])
 
 	(void)argc;
 	(void)argv;
-	minishell_env = make_minishell_env(env); // secure malloc
+	minishell_env = make_minishell_env(env); //protection
 	make_terminal(&minishell_env);
 	free_list(minishell_env);
 	return (get_exit_status());

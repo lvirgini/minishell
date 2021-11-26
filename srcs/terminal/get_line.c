@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/26 08:20:56 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/26 10:15:39 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ int	make_terminal(char ***env)
 		else
 			printf("exit\n");
 	}
-	if (get_exit_value() == 0)
-		;
+	// if (get_exit_value() == 0)
+	// 	;
 	free_t_prompt(prompt);
 	// rl_clear_history();
 	return (SUCCESS);

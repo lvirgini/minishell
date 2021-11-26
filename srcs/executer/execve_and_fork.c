@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 17:19:13 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/25 15:36:13 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/26 10:13:13 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,6 @@ static int	execve_this_command(t_cmd *cmd, char *env[])
 	return (-1);
 }
 
-int	create_pipe(t_cmd *cmd)
-{
-	if (pipe(cmd->pipe) == -1)
-	{
-		perror ("pipe in make_pipe_redirection()");
-		return (FAILURE);
-	}
-	return (SUCCESS);
-}
 /*
 ** create a child processus with fork()
 ** in CHILD : 

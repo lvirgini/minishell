@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:32:30 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/25 10:14:37 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/26 10:13:18 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ static int	open_input(char *input)
 
 	fd = open(input, O_RDONLY);
 	if (fd == -1)
+	{
+		ft_putstr_fd("minishell: ", STDERR_FILENO);
 		perror(input);
+	}
 	else if (dup2(fd, IN) == -1)
 		perror("dup2 set up input");
 	else
@@ -65,7 +68,10 @@ static int	open_output(char *output, int type)
 		fd = open(output, O_CREAT | O_APPEND | O_WRONLY | O_SYNC,
 				S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 	if (fd == -1)
+	{
+		ft_putstr_fd("minishell: ", STDERR_FILENO);
 		perror(output);
+	}
 	else if (dup2(fd, OUT) == -1)
 		perror("dup2 set up output");
 	else
@@ -92,7 +98,7 @@ int	setup_redirection(t_cmd *cmd, char **env)
 		if (redir->type == INPUT_REDIRECTION)
 		{
 			if (setup_inputs(redir) == FAILURE)
-				return (FAILURE); // voir si pas de leaks
+				return (FAILURE);
 		}		
 		else if (setup_outputs(redir) == FAILURE)
 			return (FAILURE);

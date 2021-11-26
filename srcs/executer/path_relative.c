@@ -1,48 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   list_print.c                                       :+:      :+:    :+:   */
+/*   path_relative.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/26 16:48:40 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/24 19:49:04 by lvirgini         ###   ########.fr       */
+/*   Created: 2021/11/25 13:28:01 by lvirgini          #+#    #+#             */
+/*   Updated: 2021/11/25 16:20:13 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	print_str(char *str)
+t_bool	add_relative_path(t_cmd *cmd, char *argv)
 {
-	if (str)
-	{
-		ft_putstr(str);
-		ft_putstr("\n");
+	int	fd;
+
+	fd = open(cmd->argv[0], __O_DIRECTORY);
+	if (fd != -1)
+	{	
+		close(fd);
+		display_error(ERR_IS_A_DIRECTORY, argv);
+		return (FAILURE);
 	}
-}
-
-void	print_list(char **list)
-{
-	int	i;
-
-	i = 0;
-	while (list && list[i])
-	{
-		ft_putstr(list[i]);
-		ft_putstr("\n");
-		i++;
-	}
-}
-
-void	print_list_fd(char **list, int fd)
-{
-	int	i;
-
-	i = 0;
-	while (list && list[i])
-	{
-		ft_putstr_fd(list[i], fd);
-		ft_putstr_fd("\n", fd);
-		i++;
-	}
+	return (add_absolute_path(cmd, argv));
 }
