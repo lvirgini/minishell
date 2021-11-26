@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   recover_complete_env.c                             :+:      :+:    :+:   */
+/*   minishell_return.h                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/16 13:28:18 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/25 10:18:49 by eassouli         ###   ########.fr       */
+/*   Created: 2021/11/25 15:55:36 by eassouli          #+#    #+#             */
+/*   Updated: 2021/11/26 08:14:46 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+# ifndef MINISHELL_RETURN
+# define MINISHELL_RETURN
 
-char	**make_minishell_env(char *env[])
-{
-	char	**minishell_env;
+unsigned char	set_exit_status(int exit_status);
+unsigned char	set_exit_value(int exit_value);
+unsigned char	get_exit_status(void);
+unsigned char	get_exit_value(void);
 
-	minishell_env = list_cdup(env, '=');
-	if (!minishell_env)
-		return (NULL);
-	export_shell(&minishell_env);
-	export_shlvl(&minishell_env);
-	unset_oldpwd(&minishell_env);
-	return (minishell_env);
-}
+#endif

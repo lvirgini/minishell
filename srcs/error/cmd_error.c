@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 13:24:38 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/25 16:15:01 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/26 11:57:32 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,14 @@ int	display_error(int error, char *object)
 	if (error < NB_ERROR)
 	{
 		ft_putstr_fd(str_error[error], STDERR_FILENO);
-		errno = errno_nb[error];
+		set_exit_status(errno_nb[error]);
 	}
 	else
-		errno = 1;
+	{
+		perror(object);
+		set_exit_status(1);
+	}	
+
 	return (errno);
 }
 
@@ -48,5 +52,5 @@ void	exit_minishell(t_cmd **list_cmd, char **env)
 {
 	free_list_cmd(list_cmd);
 	free_list(env);
-	exit(errno);
+	exit(get_exit_status());
 }

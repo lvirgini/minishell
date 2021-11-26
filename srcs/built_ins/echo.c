@@ -1,31 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/03 16:25:24 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/26 10:14:08 by eassouli         ###   ########.fr       */
+/*   Created: 2021/11/19 12:37:45 by eassouli          #+#    #+#             */
+/*   Updated: 2021/11/25 18:03:13 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*	
-**	ATTENTION pas de doublon dans les variables d'environnements
-**	ATTENTION lors de l'affichage des valeurs NULL : peut etre plus judicieux 
-** de mettre "" que NULL ?
-*/
-
-int	main(int argc, char *argv[], char *env[])
+void	print_echo(char **arg, int i)
 {
-	char	**minishell_env;
+	while (arg[i])
+	{
+		printf("%s", arg[i]);
+		if (arg[i + 1] != NULL)
+			printf(" ");
+		i++;
+	}
+}
 
-	(void)argc;
-	(void)argv;
-	minishell_env = make_minishell_env(env); //protection
-	make_terminal(&minishell_env);
-	free_list(minishell_env);
-	return (get_exit_status());
+void	exec_echo(char **arg, char ***env)
+{
+	int	trail;
+
+	(void)env;
+	set_exit_status(0);
+	trail = 0;
+	if (arg[1] == NULL)
+	{
+		printf("\n");
+		return ;
+	}
+	else if (ft_strcmp(arg[1], "-n") == 0)
+		trail = 1;
+	print_echo(arg, 1 + trail);
+	if (trail == 0)
+		printf("\n");
 }

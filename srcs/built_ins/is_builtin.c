@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   is_builtin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/03 16:25:24 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/26 10:14:08 by eassouli         ###   ########.fr       */
+/*   Created: 2021/11/11 16:21:39 by eassouli          #+#    #+#             */
+/*   Updated: 2021/11/22 17:30:24 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*	
-**	ATTENTION pas de doublon dans les variables d'environnements
-**	ATTENTION lors de l'affichage des valeurs NULL : peut etre plus judicieux 
-** de mettre "" que NULL ?
-*/
-
-int	main(int argc, char *argv[], char *env[])
+int	is_builtin(char *cmd)
 {
-	char	**minishell_env;
+	static char	*str_cmd[7] = {S_ECHO, S_CD, S_PWD, S_EXPORT, S_UNSET, S_ENV,
+		S_EXIT};
+	int			i;
 
-	(void)argc;
-	(void)argv;
-	minishell_env = make_minishell_env(env); //protection
-	make_terminal(&minishell_env);
-	free_list(minishell_env);
-	return (get_exit_status());
+	i = 0;
+	while (i < 7)
+	{
+		if (ft_strcmp(cmd, str_cmd[i]) == 0)
+			return (i);
+		i++;
+	}
+	return (NOT_BUILTIN);
 }

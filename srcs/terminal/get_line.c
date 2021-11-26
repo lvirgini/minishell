@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/23 18:11:10 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/26 12:01:53 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 ** il faut trouver un bon nom pour cette fonction...
 */
 
-void	make_shell(char *line, char **env)
+void	make_shell(char *line, char ***env, t_prompt *prompt)
 {
 	t_token		**token;
 	t_cmd		**cmd;
@@ -26,10 +26,14 @@ void	make_shell(char *line, char **env)
 	token = lexer_minishell(line);
 	cmd = parser_minishell(token);
 	free_list_token(token);
-	if (expanser(cmd, env) && cmd)
+	if (expanser(cmd, *env) && cmd)
 	{
 		if (executer(cmd, env) == FAILURE)
-			exit_minishell(cmd, env);
+		{
+			free_t_prompt(prompt);
+			//  dprintf(2, "exit status %d\n", get_exit_status());
+			exit_minishell(cmd, *env);
+		}
 	}
 	free_list_cmd(cmd);
 }
@@ -41,36 +45,32 @@ void	make_shell(char *line, char **env)
 ** si la ligne n'est pas vide on la rajoute a l'historique (cmd de readline)
 */
 
-int	make_terminal(char **env)
+int	make_terminal(char ***env)
 {
 	char		*line;
 	t_prompt	*prompt;
 
-	prompt = get_prompt(env, NULL);
-
-	while (1)
+	prompt = get_prompt(*env, NULL);
+	while (get_exit_value() == 0)
 	{
-		line = NULL;
 		line = readline(prompt->formatted);
 		if (line)
 		{
 			if (*line)
 			{
-				if (ft_strcmp(line, "exit") == 0) // EXIT PROVISOIRE POUR VOIR LES LEAKS
-				{
-					free(line);
-					free_t_prompt(prompt);
-					rl_clear_history();
-					return (SUCCESS);
-				}
 				add_history(line);
-				make_shell(line, env);
+				make_shell(line, env, prompt);
+				prompt = get_prompt(*env, prompt);
 			}
-			prompt = get_prompt(env, prompt);
 			free(line);
 		}
 		else
-			printf("\n");
+		{
+			printf("exit\n");
+			break ;
+		}
 	}
 	free_t_prompt(prompt);
+	rl_clear_history();
+	return (SUCCESS);
 }

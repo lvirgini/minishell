@@ -1,31 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/03 16:25:24 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/26 10:14:08 by eassouli         ###   ########.fr       */
+/*   Created: 2021/11/19 12:31:16 by eassouli          #+#    #+#             */
+/*   Updated: 2021/11/26 13:01:53 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*	
-**	ATTENTION pas de doublon dans les variables d'environnements
-**	ATTENTION lors de l'affichage des valeurs NULL : peut etre plus judicieux 
-** de mettre "" que NULL ?
-*/
-
-int	main(int argc, char *argv[], char *env[])
+static void	pwd_error(int error)
 {
-	char	**minishell_env;
+	ft_putstr_fd("pwd", STDERR_FILENO);
+	if (error == TOO_MANY_ARGS)
+		ft_putstr_fd(S_TOO_MANY_ARGS, STDERR_FILENO);
+	set_exit_status(1);
+}
 
-	(void)argc;
-	(void)argv;
-	minishell_env = make_minishell_env(env); //protection
-	make_terminal(&minishell_env);
-	free_list(minishell_env);
-	return (get_exit_status());
+void	exec_pwd(char **arg, char ***env)
+{
+	char	*cwd;
+
+	(void)env;
+	set_exit_status(0);
+	if (arg[1] != NULL)
+	{
+		pwd_error(TOO_MANY_ARGS);
+		return ;
+	}
+	cwd = get_current_dir();
+	if (cwd)
+	{
+		printf("%s\n", cwd);
+		free(cwd);
+	}
 }
