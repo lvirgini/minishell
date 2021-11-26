@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/25 18:10:24 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/26 08:20:56 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	make_shell(char *line, char ***env, t_prompt *prompt)
 
 int	make_terminal(char ***env)
 {
-	char		*line;
+	char		*line = "ok";
 	t_prompt	*prompt;
 
 	prompt = get_prompt(*env, NULL);
@@ -70,6 +70,6 @@ int	make_terminal(char ***env)
 	if (get_exit_value() == 0)
 		;
 	free_t_prompt(prompt);
-	rl_clear_history();
+	// rl_clear_history();
 	return (SUCCESS);
 }

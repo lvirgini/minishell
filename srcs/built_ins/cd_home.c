@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 18:05:40 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/24 19:50:49 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/26 08:29:38 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,8 @@ void	cd_home(char **arg, char ***env)
 		cd_errors(0, arg[1], NULL);
 	else
 		export_oldpwd(new_old, env); // A faire ?
+	if (home)
+		free(home);
+	if (new_old)
+		free(new_old);
 }

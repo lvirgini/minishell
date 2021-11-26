@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:31:16 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/25 18:02:41 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/26 08:28:08 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,6 @@ void	exec_pwd(char **arg, char ***env)
 	}
 	cwd = get_current_dir();
 	printf("%s\n", cwd);
+	if (cwd)
+		free(cwd);
 }
