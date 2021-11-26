@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:43:30 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/25 13:44:34 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/26 16:27:31 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ static int	setup_pipe_input(t_cmd *cmd)
 		perror ("dup2() in setup_pipe_input()");
 		return (FAILURE);
 	}
-	close_fd(cmd->prev->pipe[OUT]);
 	return (SUCCESS);
 }
 
