@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:27:42 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/26 10:15:27 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/26 11:49:17 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,6 @@ int	wait_all_process(t_cmd *cmd)
 	return (WEXITSTATUS(last_status));
 }
 
-void	close_parent_pipe(t_cmd *cmd)
-{
-	if (cmd->next && cmd->type == PIPE)
-		close_fd(cmd->pipe[OUT]);
-}
-
 int	execute_this_cmd(t_cmd *cmd, char **env)
 {
 	cmd->pid = create_child_process(cmd, env);
@@ -50,17 +44,18 @@ int	execute_this_cmd(t_cmd *cmd, char **env)
 int	executer(t_cmd **list_cmd, char ***env)
 {
 	t_cmd	*cmd;
-	// int		std_io[2];
 	int		builtin;
 
 	cmd = *list_cmd;
+	builtin = NOT_BUILTIN;
 	while (cmd)
 	{
 		if (make_heredoc(cmd->heredoc, *env) == FAILURE)
 			return (FAILURE);
 		if (cmd->type == PIPE && create_pipe(cmd) == FAILURE)
 			return (FAILURE);
-		builtin = is_builtin(cmd->argv[0]);
+		if (cmd->argv)
+			builtin = is_builtin(cmd->argv[0]);
 		if (builtin != NOT_BUILTIN)
 		{
 			if (exec_builtin(builtin, env, cmd) == FAILURE)
@@ -70,9 +65,16 @@ int	executer(t_cmd **list_cmd, char ***env)
 			return (FAILURE);
 		cmd = cmd->next;
 	}
-	if (builtin == NOT_BUILTIN)
-		set_exit_status((wait_all_process(*list_cmd)));
-	if (builtin != NOT_BUILTIN)
-		set_exit_status((wait_all_process(*list_cmd)));
+	if (builtin != NOT_BUILTIN && (*list_cmd)->next == NULL)
+		return (SUCCESS);
+	//else if (builtin == NOT_BUILTIN || (*list_cmd)->type == PIPE)
+	set_exit_status((wait_all_process(*list_cmd)));
+	// if (builtin != NOT_BUILTIN )
+	//  	wait_all_process(*list_cmd);
+	// else
+	// if (builtin == NOT_BUILTIN)
+	 	// set_exit_status((wait_all_process(*list_cmd)));
+	// else
+		// set_exit_status((wait_all_process(*list_cmd)));
 	return (SUCCESS);
 }

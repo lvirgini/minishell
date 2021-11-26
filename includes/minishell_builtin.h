@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 12:24:39 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/25 13:32:23 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/26 11:59:56 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define S_NO_OLDPWD "cd: OLDPWD not set\n"
 # define S_NOT_NUM ": numeric argument required\n"
 
-# define S_SHELL "SHELL=./minishell" //
+# define S_SHELL "SHELL=minishell" //
 # define S_SHLVL "SHLVL="
 # define S_SHLVL1 "SHLVL=1"
 # define S_OLDPWD "OLDPWD="

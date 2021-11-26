@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/26 10:15:39 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/26 12:01:53 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	make_shell(char *line, char ***env, t_prompt *prompt)
 		if (executer(cmd, env) == FAILURE)
 		{
 			free_t_prompt(prompt);
+			//  dprintf(2, "exit status %d\n", get_exit_status());
 			exit_minishell(cmd, *env);
 		}
 	}
@@ -46,13 +47,12 @@ void	make_shell(char *line, char ***env, t_prompt *prompt)
 
 int	make_terminal(char ***env)
 {
-	char		*line = "ok";
+	char		*line;
 	t_prompt	*prompt;
 
 	prompt = get_prompt(*env, NULL);
-	while (line && get_exit_value() == 0)
+	while (get_exit_value() == 0)
 	{
-		line = NULL;
 		line = readline(prompt->formatted);
 		if (line)
 		{
@@ -65,11 +65,12 @@ int	make_terminal(char ***env)
 			free(line);
 		}
 		else
+		{
 			printf("exit\n");
+			break ;
+		}
 	}
-	// if (get_exit_value() == 0)
-	// 	;
 	free_t_prompt(prompt);
-	// rl_clear_history();
+	rl_clear_history();
 	return (SUCCESS);
 }
