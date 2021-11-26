@@ -6,67 +6,11 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 15:19:24 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/20 19:51:46 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/26 15:58:44 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*
-// redirection ambigue : si $TEST="plusieurs elements"
-// t_expansion list_toutes les expansion.
-//
-	si plusieurs char * dans une expansion : $TEST = "s -l" :
-		: erreur ambigue
-	si une seule char * $TEST="lsl" : fusion avec char *filename 
-
-
-ex:   toto$USER"truc pouet" -> totominitruc pouet
-ex:		toto$TEST		-> erreur ambigue car "totos" et "-l".
-
-	pour redirection : 
-					filename		expansion
-					l$TEST"a"
-					l[s] [-l]"a"		> ERR_AMBIGOUS : expansion > 1
-
-					fiename			expansion
-					l$USER"a b"
-					l[mini]"a b "		$USER="mini" = 1 char * = OK
-					lmini["a b"]		"a b"="a\ b" = 1 char * = OK
-					lminia\ b		
-
-	pour argv : 
-					argv0			argv1		argv2
-	si l$TEST"a" : 	l$TEST"a"		NULL
-	expand $TEST	l[s] [-l]"a"	NULL
-					ls				-l"a"		NULL
-					ls				-la			NULL
-*/
-/*
-expand_str	t_expand *expansion char *s;
-
-while (s[i])
-	if (s[i] == NEED_EXPAND)
-		expansion = expand (s[i])
-		add_back(expansion, expand (s[i]));
-		if !t_expansion
-			return NULL
-		i++;
-
-
-expand_list
-
-{
-	expansion = malloc_expansion
-	while list
-			expansion = expand_str;
-			if (!expansion)
-	}
-		if listlen(expansion) > 1
-			err ERR_AMBIGUOU
-			return FAILURE
-		fusion expansion;
-*/
 
 static int	check_redir_expansion(t_expansion *expansion, char *filename)
 {
