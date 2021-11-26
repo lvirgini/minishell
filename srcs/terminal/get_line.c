@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/26 12:01:53 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/26 14:27:20 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	make_shell(char *line, char ***env, t_prompt *prompt)
 		if (executer(cmd, env) == FAILURE)
 		{
 			free_t_prompt(prompt);
-			//  dprintf(2, "exit status %d\n", get_exit_status());
 			exit_minishell(cmd, *env);
 		}
 	}
@@ -45,7 +44,7 @@ void	make_shell(char *line, char ***env, t_prompt *prompt)
 ** si la ligne n'est pas vide on la rajoute a l'historique (cmd de readline)
 */
 
-int	make_terminal(char ***env)
+void	make_terminal(char ***env)
 {
 	char		*line;
 	t_prompt	*prompt;
@@ -72,5 +71,4 @@ int	make_terminal(char ***env)
 	}
 	free_t_prompt(prompt);
 	rl_clear_history();
-	return (SUCCESS);
 }

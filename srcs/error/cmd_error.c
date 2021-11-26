@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 13:24:38 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/26 13:14:30 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/26 14:14:58 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ int	display_error(int error, char *object)
 		perror(object);
 		set_exit_status(1);
 	}	
-
 	return (errno);
 }
 

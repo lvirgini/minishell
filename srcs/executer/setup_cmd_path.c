@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 11:34:17 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/26 13:23:59 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/26 14:07:57 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ static t_bool	is_command_executable(t_cmd *cmd)
 }
 
 /*
-** check if argv[0] is an absolute path or relative path and duplicate it in cmd->path.
+** check if argv[0] is an absolute path or relative path and duplicate it
+**	in cmd->path.
 */
 
 static t_bool	is_relative_or_absolute_path(char *argv)
@@ -59,7 +60,6 @@ static t_bool	add_absolute_or_relative_path(t_cmd *cmd, char *argv)
 	display_error(ERR_ABSOLUTE_PATH_NOT_FOUND, argv);
 	return (FAILURE);
 }
-
 
 /*
 ** if no cmd return SUCCESS because it can be only redirections.
