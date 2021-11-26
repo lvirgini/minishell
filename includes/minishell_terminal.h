@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 14:56:01 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/24 15:34:30 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/26 14:35:42 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,6 @@ void		free_t_prompt(t_prompt *prompt);
 void		layout_prompt(t_prompt *prompt);
 t_prompt	*get_prompt(char **env, t_prompt *prompt);
 
-int			make_terminal(char***env);
+void		make_terminal(char***env);
 
 #endif
