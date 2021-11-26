@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 15:51:54 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/26 14:26:21 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/26 18:00:37 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ pid_t	create_child_process(t_cmd *cmd, char *env[]);
 */
 
 int		setup_cmd_path(t_cmd *cmd, char **env);
-t_bool	add_absolute_path(t_cmd *cmd, char *argv);
 t_bool	add_path_with_envpath(t_cmd *cmd, char **env);
-t_bool	add_relative_path(t_cmd *cmd, char *argv);
+t_bool	add_absolute_or_relative_path(t_cmd *cmd, char *argv);
 
 #endif
