@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:31:33 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/26 08:12:54 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/26 12:52:05 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	cd_errors(int error, char *arg, char *path)
 	set_exit_status(1);
 }
 
-void	cd_old(char **arg, char ***env)
+char	*cd_old(char **arg, char ***env)
 {
 	char	*new_old;
 	char	*old;
@@ -51,45 +51,47 @@ void	cd_old(char **arg, char ***env)
 	if (old && chdir(old) == -1)
 	{
 		cd_errors(0, arg[1], NULL);
-		return ;
+		return (new_old);
 	}
 	else if (old)
 	{
 		printf("%s\n", old);
 		export_oldpwd(new_old, env);
 	}
-	if (new_old)
-		free(new_old);
+	return (new_old);
 }
 
-void	cd_path(char **arg, char ***env)
+char	*cd_path(char **arg, char ***env)
 {
-	char	*old;
+	char	*new_old;
 
-	old = get_current_dir();
+	new_old = get_current_dir();
 	if (chdir(arg[1]) == -1)
 		cd_errors(0, arg[1], NULL);
 	else
-		export_oldpwd(old, env);
-	if (old)
-		free(old);
+		export_oldpwd(new_old, env);
+	return (new_old);
 }
 
 void	exec_cd(char **arg, char ***env)
 {
+	char	*old;
+
 	set_exit_status(0);
 	if (arg[1] == NULL)
-		cd_home(arg, env);
+		old = cd_home(arg, env);
 	else if (arg[1] && arg[2] == NULL)
 	{
 		if (arg[1][0] == '~')
-			cd_home(arg, env);
+			old = cd_home(arg, env);
 		else if (ft_strcmp(arg[1], "-") == 0)
-			cd_old(arg, env);
+			old = cd_old(arg, env);
 		else
-			cd_path(arg, env);
+			old = cd_path(arg, env);
 	}
 	else if (arg[2])
 		cd_errors(TOO_MANY_ARGS, arg[1], NULL);
+	if (old)
+		free(old);
 	return ;
 }

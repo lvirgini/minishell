@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 12:24:39 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/26 11:59:56 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/26 12:50:22 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	exec_echo(char **arg, char ***env);
 
 void	exec_cd(char **arg, char ***env);
 void	cd_errors(int error, char *arg, char *path);
-void	cd_home(char **arg, char ***env);
+char	*cd_home(char **arg, char ***env);
 
 void	exec_pwd(char **arg, char ***env);
 

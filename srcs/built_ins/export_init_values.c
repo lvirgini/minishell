@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 17:19:00 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/25 09:47:59 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/26 13:16:53 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,11 @@ void	export_shlvl(char ***env)
 	}
 	shlvl[1] = ft_strjoin(S_SHLVL, new_value);
 	if (shlvl[1])
+	{
 		exec_export(shlvl, env);
-	free(new_value);
-	if (shlvl[1])
 		free(shlvl[1]);
+	}
+	free(new_value);
 }
 
 void	export_oldpwd(char *old, char ***env)

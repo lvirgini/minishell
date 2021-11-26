@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 10:59:10 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/25 18:04:08 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/26 13:09:50 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,22 @@ void	export_error(char *arg, int error)
 		ft_putstr_fd(S_NOT_ID, STDERR_FILENO);
 	}
 	set_exit_status(1);
+}
+
+int	is_valid_key(char *str)
+{
+	int	i;
+
+	if (!ft_isalpha(str[0]) && str[0] != '_')
+		return (0);
+	i = 1;
+	while (str[i] && str[i] != '=')
+	{
+		if (!ft_isalnum(str[i]) && str[i] != '_')
+			return (0);
+		i++;
+	}
+	return (i);
 }
 
 char	**sort_export(char **env)
@@ -71,22 +87,6 @@ void	print_export(char **env)
 	if (sort_env)
 		free_list(sort_env);
 	sort_env = NULL;
-}
-
-int	is_valid_key(char *str)
-{
-	int	i;
-
-	if (!ft_isalpha(str[0]) && str[0] != '_')
-		return (0);
-	i = 1;
-	while (str[i] && str[i] != '=')
-	{
-		if (!ft_isalnum(str[i]) && str[i] != '_')
-			return (0);
-		i++;
-	}
-	return (i);
 }
 
 void	exec_export(char **arg, char ***env)

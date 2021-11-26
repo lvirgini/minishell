@@ -6,11 +6,17 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:26:37 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/25 18:07:27 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/26 13:27:01 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+** Exit return an error if there the next argument is not a number and set
+** error to 2
+** Exit return an error if there is too many argument and set the error to 1
+*/
 
 static void	exit_error(int error, char *arg)
 {
@@ -45,6 +51,11 @@ int	str_isdigit(char *str)
 	return (TRUE);
 }
 
+/*
+** Exit stop if there is not argument / a number only or no number and too
+** many arguments
+*/
+
 void	exec_exit(char **arg, char ***env) // Ctrl + C set a 130 la valeur de retour
 {
 	(void)env;
@@ -66,7 +77,6 @@ void	exec_exit(char **arg, char ***env) // Ctrl + C set a 130 la valeur de retou
 	}
 	else
 		set_exit_value(1);
-	// Cast chiffre en unsigned char
 	// Si 0 arg print et return last return value
 	// Si 1 arg chiffre, print et return chiffre
 	// Si 1 arg pas chiffre print error arg1: numeric argument required\n return 2
