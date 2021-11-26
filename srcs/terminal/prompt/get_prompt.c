@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:12:26 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/21 21:18:12 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/26 14:02:45 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	layout_prompt(t_prompt *prompt)
 	if (prompt->formatted == NULL)
 	{
 		perror("layout_prompt malloc()");
-		return ; //
+		return ;
 	}
 	ft_strlcpy(prompt->formatted, color_green, len);
 	if (prompt->user && *prompt->user)

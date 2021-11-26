@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:32:30 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/26 11:59:05 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/26 14:17:28 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,7 @@ static int	open_input(char *input)
 
 	fd = open(input, O_RDONLY);
 	if (fd == -1)
-	{
-		display_error(NB_ERROR +1 , input);
-		// ft_putstr_fd("minishell: ", STDERR_FILENO);
-		// perror(input);
-		// set_exit_status(errno);
-	}
+		display_error(NB_ERROR + 1, input);
 	else if (dup2(fd, IN) == -1)
 		perror("dup2 set up input");
 	else
@@ -70,11 +65,7 @@ static int	open_output(char *output, int type)
 		fd = open(output, O_CREAT | O_APPEND | O_WRONLY | O_SYNC,
 				S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 	if (fd == -1)
-	{
-		ft_putstr_fd("minishell: ", STDERR_FILENO);
-		perror(output);
-		set_exit_status(errno);
-	}
+		display_error(NB_ERROR + 1, output);
 	else if (dup2(fd, OUT) == -1)
 		perror("dup2 set up output");
 	else

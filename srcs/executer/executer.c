@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:27:42 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/26 11:49:17 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/26 14:13:30 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,8 @@ int	executer(t_cmd **list_cmd, char ***env)
 	builtin = NOT_BUILTIN;
 	while (cmd)
 	{
-		if (make_heredoc(cmd->heredoc, *env) == FAILURE)
-			return (FAILURE);
-		if (cmd->type == PIPE && create_pipe(cmd) == FAILURE)
+		if (make_heredoc(cmd->heredoc, *env) == FAILURE
+			|| (cmd->type == PIPE && create_pipe(cmd) == FAILURE))
 			return (FAILURE);
 		if (cmd->argv)
 			builtin = is_builtin(cmd->argv[0]);
@@ -67,14 +66,6 @@ int	executer(t_cmd **list_cmd, char ***env)
 	}
 	if (builtin != NOT_BUILTIN && (*list_cmd)->next == NULL)
 		return (SUCCESS);
-	//else if (builtin == NOT_BUILTIN || (*list_cmd)->type == PIPE)
 	set_exit_status((wait_all_process(*list_cmd)));
-	// if (builtin != NOT_BUILTIN )
-	//  	wait_all_process(*list_cmd);
-	// else
-	// if (builtin == NOT_BUILTIN)
-	 	// set_exit_status((wait_all_process(*list_cmd)));
-	// else
-		// set_exit_status((wait_all_process(*list_cmd)));
 	return (SUCCESS);
 }

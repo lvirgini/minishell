@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 13:24:38 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/26 11:57:32 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/26 14:14:58 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ int	display_error(int error, char *object)
 		": ambiguous redirect\n",
 		": Is a directory\n"
 	};
-	static int	errno_nb[NB_ERROR] = {1, 127, 126, 127, 126};
+	static int	errno_nb[NB_ERROR] = {1, 127, 126, 127, 126, 126};
 
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
-	ft_putstr_fd(object, STDERR_FILENO);
 	if (error < NB_ERROR)
 	{
+		ft_putstr_fd(object, STDERR_FILENO);
 		ft_putstr_fd(str_error[error], STDERR_FILENO);
 		set_exit_status(errno_nb[error]);
 	}
@@ -36,7 +36,6 @@ int	display_error(int error, char *object)
 		perror(object);
 		set_exit_status(1);
 	}	
-
 	return (errno);
 }
 

@@ -6,7 +6,7 @@
 #    By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 17:38:13 by lvirgini          #+#    #+#              #
-#    Updated: 2021/11/11 13:28:04 by lvirgini         ###   ########.fr        #
+#    Updated: 2021/11/26 14:01:20 by lvirgini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,50 +19,93 @@ NAME =		minishell
 OBJ_DIR =	obj/
 LIB_DIR =	libft/ 
 INC_DIR =	includes/	libft/includes/
-
-SRC_DIR_TEST = srcs/testing 
-
-# CI DESSOUS METTRE TOUS LES DOSSIER CONTENANT DES SOURCES !!!!!!!
-#SRC_DIR =	$(SRC_DIR_TEST) \
-			srcs			\
-			srcs/env		\
-			srcs/prompt		\
-			srcs/terminal	\
-			srcs/lexer		\
-			srcs/lexer/ft_get_token_by_type \
-			srcs/lexer/init_token \
-			srcs/error \
-			srcs/structures/t_cmd \
-			srcs/structures/t_redir \
-			srcs/structures/t_token \
-			srcs/parser \
-			srcs/parser/parse_redirections \
-#			
-
-
 SRC_DIR =	$(shell find srcs -type d)
-#INC_DIR = 	$(shell find includes -type d) libft/includes 
 
 LIB		=	ft ncurses readline
 
-SRC 	=	$(foreach dir, $(SRC_DIR), $(foreach file, $(wildcard $(dir)/*.c), $(notdir $(file))))
+#SRC 	=	$(foreach dir, $(SRC_DIR), $(foreach file, $(wildcard $(dir)/*.c), $(notdir $(file))))
+SRC		= 	cd.c \
+			cd_home.c \
+			echo.c \
+			env.c \
+			exec_builtin.c \
+			exit.c \
+			export.c \
+			export_init_values.c \
+			getdir_builtin.c \
+			is_builtin.c \
+			pwd.c \
+			unset.c \
+			add_env.c \
+			get_env_utils.c \
+			recover_complete_env.c \
+			cmd_error.c \
+			syntax_error.c \
+			executer.c \
+			execve_and_fork.c \
+			get_cmd_path.c \
+			path_in_envpath.c \
+			setup_cmd_path.c \
+			expand_argv.c \
+			expand_heredoc.c \
+			expand_redirection.c \
+			expand_utils.c \
+			expanser.c \
+			dollar_is_dollar.c \
+			expand_dollar.c \
+			expand_dollar_usefull.c \
+			expand_double_quotes.c \
+			expand_list.c \
+			expand_simple_quotes.c \
+			expand_str.c \
+			fusion_list_argv.c \
+			fusion_str_and_expansion.c \
+			add_token.c \
+			char_is_something.c \
+			lexer.c \
+			get_next_cmd.c \
+			is_token_something.c \
+			parse_argv.c \
+			parse_control_operator.c \
+			parser_general.c \
+			close.c \
+			heredoc.c \
+			pipe.c \
+			redirection.c \
+			setup_redirection.c \
+			get_line.c \
+			str.c \
+			get_token_pipe.c \
+			get_token_quotes.c \
+			get_token_tild.c \
+			get_token_word.c \
+			parse_all_redir.c \
+			free_t_cmd.c \
+			malloc_t_cmd.c \
+			t_expansion_add_back.c \
+			t_expansion_free.c \
+			t_expansion_malloc.c \
+			t_hdoc_create.c \
+			t_hdoc_free.c \
+			t_hdoc_malloc.c \
+			add_t_redir.c \
+			free_t_redir.c \
+			t_struct_add_back.c \
+			t_struct_add_front.c \
+			t_struct_len.c \
+			t_token_free.c \
+			t_token_malloc.c \
+			t_token_remove.c \
+			get_prompt.c \
+			init_prompt.c\
+			minishell.c \
+			return_value.c
+
 OBJ 	=	$(addprefix $(OBJ_DIR),$(SRC:%.c=%.o))
-
-
-#SRC_TEST 		= $(SRC) main_test.c
-#SRC_MINISHELL	= $(SRC) minishell.c
-
-
-#OBJ_TEST 		=	$(addprefix $(OBJ_DIR),$(SRC_TEST:%.c=%.o))
-#OBJ_MINISHELL	=	$(addprefix $(OBJ_DIR),$(SRC_MINISHELL:%.c=%.o))
-
-
 HEADERS = 	$(foreach dir, $(INC_DIR), $(wildcard $(dir)/*.h))
-
 
 vpath %.c $(foreach dir, $(SRC_DIR)/, $(dir):)
 vpath %.h $(foreach dir, $(INC_DIR)/, $(dir):)
-
 
 # ----------------- #
 #	 COMPILATION	#
@@ -70,17 +113,13 @@ vpath %.h $(foreach dir, $(INC_DIR)/, $(dir):)
 
 CC 		=	gcc
 
-CFLAG 	= 	-Wall -Wextra -g
-# add -Werror
+CFLAG 	= 	-Wall -Wextra -Werror
 IFLAG 	= 	$(foreach dir, $(INC_DIR), -I $(dir) )
 LFLAG 	=	$(foreach lib, $(LIB), -l $(lib) ) $(foreach dir, $(LIB_DIR), -L $(dir) ) 
-
 
 # ----------------- #
 #	  FONCTIONS		#
 # ----------------- #
-
-
 
 $(OBJ_DIR)%.o: %.c $(HEADERS)
 			@mkdir -p $(OBJ_DIR)
@@ -92,15 +131,6 @@ $(NAME):	install $(OBJ)
 			@echo "\n*     Compilation $(NAME)     *\t   \033[32;1m--> \033[4;5mComplete\033[0m"
 
 all:		$(NAME)
-
-#$(NAME): 	install $(OBJ)
-#			@$(CC) $(CFLAG) $(IFLAG) $(OBJ) $(LFLAG)-o $@
-#			@echo "\n*     Compilation $(NAME)     *\t   \033[32;1m--> \033[4;5mComplete\033[0m"
-
-test:		install $(OBJ_TEST)		
-			@$(CC) $(CFLAG) $(IFLAG) $(OBJ_TEST) $(LFLAG) -o $@
-			@echo "\n*     Compilation test     *\t   \033[32;1m--> \033[4;5mComplete\033[0m"
-
 
 install :
 			@make -C libft/
