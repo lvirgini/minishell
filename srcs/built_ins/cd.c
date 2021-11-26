@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:31:33 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/26 12:52:05 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/26 18:16:52 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	cd_errors(int error, char *arg, char *path)
 			ft_putstr_fd(path, STDERR_FILENO);
 		ft_putstr_fd(S_NO_DIR, STDERR_FILENO);
 	}
-	set_exit_status(1);
+	set_exit_status(1, 0);
 }
 
 char	*cd_old(char **arg, char ***env)
@@ -73,11 +73,11 @@ char	*cd_path(char **arg, char ***env)
 	return (new_old);
 }
 
-void	exec_cd(char **arg, char ***env)
+void	exec_cd(char **arg, char ***env) // Si reussite et PWD existe dans l'env export PWD
 {
 	char	*old;
 
-	set_exit_status(0);
+	set_exit_status(0, 0);
 	if (arg[1] == NULL)
 		old = cd_home(arg, env);
 	else if (arg[1] && arg[2] == NULL)

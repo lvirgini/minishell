@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/26 14:27:20 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/26 17:26:33 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*
-** il faut trouver un bon nom pour cette fonction...
-*/
 
 void	make_shell(char *line, char ***env, t_prompt *prompt)
 {
@@ -52,6 +48,8 @@ void	make_terminal(char ***env)
 	prompt = get_prompt(*env, NULL);
 	while (get_exit_value() == 0)
 	{
+		// signal(SIGINT, ); // heredoc stop readline
+		signal(SIGQUIT, SIG_IGN); // ignore pour heredoc aussi
 		line = readline(prompt->formatted);
 		if (line)
 		{

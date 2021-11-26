@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 13:24:38 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/26 14:14:58 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/26 17:38:29 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,12 @@ int	display_error(int error, char *object)
 	{
 		ft_putstr_fd(object, STDERR_FILENO);
 		ft_putstr_fd(str_error[error], STDERR_FILENO);
-		set_exit_status(errno_nb[error]);
+		set_exit_status(errno_nb[error], 0);
 	}
 	else
 	{
 		perror(object);
-		set_exit_status(1);
+		set_exit_status(1, 0);
 	}	
 	return (errno);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:27:42 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/26 14:13:30 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/26 17:38:38 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,6 @@ int	executer(t_cmd **list_cmd, char ***env)
 	}
 	if (builtin != NOT_BUILTIN && (*list_cmd)->next == NULL)
 		return (SUCCESS);
-	set_exit_status((wait_all_process(*list_cmd)));
+	set_exit_status((wait_all_process(*list_cmd)), 0);
 	return (SUCCESS);
 }
