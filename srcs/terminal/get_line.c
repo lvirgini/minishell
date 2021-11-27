@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/27 13:25:25 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/27 17:49:14 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	make_shell(char *line, char ***env, t_prompt *prompt)
 **		update prompt
 */
 
-in	manage_readline(char ***env, t_prompt *prompt)
+int	manage_readline(char ***env, t_prompt *prompt)
 {
 	char		*line;
 
