@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:37:45 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/25 18:03:13 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/27 12:36:49 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,42 @@ void	print_echo(char **arg, int i)
 	}
 }
 
+int	is_trail(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str[i] == '-')
+		i++;
+	if (!str[i])
+		return (0);
+	while (str[i] && str[i] == 'n')
+		i++;
+	if (str[i])
+		return (0);
+	return (1);
+}
+
 void	exec_echo(char **arg, char ***env)
 {
+	int	i;
 	int	trail;
 
 	(void)env;
-	set_exit_status(0);
+	i = 1;
 	trail = 0;
-	if (arg[1] == NULL)
+	set_exit_status(0, 0);
+	if (arg[i] == NULL)
 	{
 		printf("\n");
 		return ;
 	}
-	else if (ft_strcmp(arg[1], "-n") == 0)
+	while (arg[i] && is_trail(arg[i]) == 1)
+	{
 		trail = 1;
-	print_echo(arg, 1 + trail);
+		i++;
+	}
+	print_echo(arg, i);
 	if (trail == 0)
 		printf("\n");
 }

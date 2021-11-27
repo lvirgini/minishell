@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 10:04:02 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/26 14:14:24 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/26 17:38:34 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	print_syntax_error(int err, char char_data, char *str_data)
 	else
 		ft_putstr_fd(str_data, STDERR_FILENO);
 	ft_putstr_fd("»\n", STDERR_FILENO);
-	set_exit_status(2);
+	set_exit_status(2, 0);
 	return (SYNTAX_ERROR);
 }
 

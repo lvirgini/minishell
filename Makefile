@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+         #
+#    By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 17:38:13 by lvirgini          #+#    #+#              #
-#    Updated: 2021/11/27 13:21:38 by lvirgini         ###   ########.fr        #
+#    Updated: 2021/11/27 16:35:02 by eassouli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRC		= 	cd.c \
 			get_cmd_path.c \
 			path_in_envpath.c \
 			setup_cmd_path.c \
+			signals.c \
 			expand_argv.c \
 			expand_heredoc.c \
 			expand_redirection.c \
@@ -161,7 +162,7 @@ clean:
 			rm -rf $(OBJ_DIR)
 
 fclean: clean
-			rm -f $(NAME) test
+			rm -f $(NAME)
 
 re: 	fclean all
 
