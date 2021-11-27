@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:32:30 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/21 20:37:03 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/26 14:17:28 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ static int	open_input(char *input)
 {
 	int	fd;
 
-	fd = open(input, O_RDONLY | __O_CLOEXEC);
+	fd = open(input, O_RDONLY);
 	if (fd == -1)
-		perror(input);
+		display_error(NB_ERROR + 1, input);
 	else if (dup2(fd, IN) == -1)
 		perror("dup2 set up input");
 	else
@@ -65,7 +65,7 @@ static int	open_output(char *output, int type)
 		fd = open(output, O_CREAT | O_APPEND | O_WRONLY | O_SYNC,
 				S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 	if (fd == -1)
-		perror(output);
+		display_error(NB_ERROR + 1, output);
 	else if (dup2(fd, OUT) == -1)
 		perror("dup2 set up output");
 	else
@@ -92,7 +92,7 @@ int	setup_redirection(t_cmd *cmd, char **env)
 		if (redir->type == INPUT_REDIRECTION)
 		{
 			if (setup_inputs(redir) == FAILURE)
-				return (FAILURE); // voir si pas de leaks
+				return (FAILURE);
 		}		
 		else if (setup_outputs(redir) == FAILURE)
 			return (FAILURE);

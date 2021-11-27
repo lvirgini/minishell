@@ -6,13 +6,18 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 11:34:17 by lvirgini          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/11/23 21:42:45 by lvirgini         ###   ########.fr       */
+=======
+/*   Updated: 2021/11/27 13:22:19 by lvirgini         ###   ########.fr       */
+>>>>>>> 93c5868c177ee546f4033f7c0a92e432c68cad18
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
+<<<<<<< HEAD
 ** split of line env PATH with ':' as delimitor
 */
 
@@ -30,20 +35,50 @@ static char	**split_path_env(char *env)
 
 /*
 ** check if argv[0] is an absolute path and duplicate it in cmd->path.
+=======
+** check with access X_OK (executable) if file is well executable
 */
 
-static t_bool	is_absolute_path(char *argv)
+static t_bool	is_command_executable(t_cmd *cmd)
 {
-	if (!ft_strncmp(argv, "./", 2) || argv[0] == '/')
+	if (access(cmd->path, X_OK | R_OK) == 0)
+		return (true);
+	display_error(ERR_CMD_NOT_EXECUTABLE, cmd->argv[0]);
+	return (false);
+}
+
+/*
+** check if argv[0] is an absolute path or relative path and duplicate it
+**	in cmd->path.
+>>>>>>> 93c5868c177ee546f4033f7c0a92e432c68cad18
+*/
+
+static t_bool	is_relative_or_absolute_path(char *argv)
+{
+	if (ft_strchr(argv, '/') || !ft_strcmp(argv, ".") || !ft_strcmp(argv, ".."))
 		return (true);
 	return (false);
 }
 
-static t_bool	get_absolute_path(t_cmd *cmd, char *argv)
+t_bool	add_absolute_or_relative_path(t_cmd *cmd, char *argv)
 {
+	int	fd;
+
+	fd = open(argv, __O_DIRECTORY);
+	if (fd != -1)
+	{	
+		close(fd);
+		display_error(ERR_IS_A_DIRECTORY, argv);
+		return (FAILURE);
+	}
 	if (access(argv, F_OK) == 0)
 	{
 		cmd->path = ft_strdup(argv);
+		if (!cmd->path)
+		{
+			perror("malloc in add_absolute_path");
+			return (FAILURE);
+		}
 		return (SUCCESS);
 	}
 	display_error(ERR_ABSOLUTE_PATH_NOT_FOUND, argv);
@@ -71,24 +106,17 @@ t_bool	argv_is_empty(char **argv)
 
 int	setup_cmd_path(t_cmd *cmd, char **env)
 {
-	char	**path_env;
-
 	if (!cmd->argv || !cmd->argv[0] || argv_is_empty(cmd->argv))
 		return (FAILURE);
-	if (is_absolute_path(cmd->argv[0]) == true)
+	if (is_relative_or_absolute_path(cmd->argv[0]))
 	{
-		if (get_absolute_path(cmd, cmd->argv[0]) == FAILURE)
+		if (add_absolute_or_relative_path(cmd, cmd->argv[0]) == FAILURE)
 			return (FAILURE);
 	}
 	else
 	{
-		path_env = split_path_env(get_env_value(env, "PATH"));
-		if (!path_env || get_cmd_path_from_path_env(cmd, path_env) == FAILURE)
-		{
-			free_list(path_env);
+		if (add_path_with_envpath(cmd, env) == FAILURE)
 			return (FAILURE);
-		}	
-		free_list(path_env);
 	}
 	if (is_command_executable(cmd) == true)
 		return (SUCCESS);

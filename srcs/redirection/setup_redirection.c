@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:33:20 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/23 21:54:04 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/27 21:26:15 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,12 @@ int	get_back_std_io(int std_io[2])
 {
 	if (dup2(std_io[IN], IN) == -1)
 	{
-		perror ("dup2() in get_back_std_io()");
+		perror ("dup2(IN) in get_back_std_io()");
 		return (FAILURE);
 	}
 	if (dup2(std_io[OUT], OUT) == -1)
 	{
-		perror ("dup2() in get_back_std_io()");
+		perror ("dup2(OUT) in get_back_std_io()");
 		return (FAILURE);
 	}
 	return (SUCCESS);
@@ -37,10 +37,9 @@ int	setup_all_redirections(t_cmd *cmd, char **env)
 {
 	if (make_pipe_redirection(cmd) == FAILURE)
 		return (FAILURE);
-	// MAKE HERE DOC here
 	if (setup_redirection(cmd, env) == FAILURE)
 		return (FAILURE);
-	// if HEREDOC is last : here doc = input
-	// else close HEREDOC ?
+	if (setup_heredoc_input(cmd->heredoc) == FAILURE)
+		return (FAILURE);
 	return (SUCCESS);
 }

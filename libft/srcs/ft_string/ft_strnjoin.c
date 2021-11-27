@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 22:10:50 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/21 19:29:26 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/23 18:42:16 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*ft_strnjoin(char const *s1, char const *s2, size_t n)
 
 char	*ft_strnjoin_free(char *s1, char const *s2, size_t n)
 {
-	char *dst;
+	char	*dst;
 
 	dst = ft_strnjoin(s1, s2, n);
 	if (s1)

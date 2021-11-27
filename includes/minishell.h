@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 16:24:41 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/08 17:22:03 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/27 11:17:43 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** includes lib headers
 */
 
-# include <unistd.h>
+# include <unistd.h> // remove tests
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <stdio.h>
@@ -51,6 +51,8 @@
 # include "minishell_redirection.h"
 # include "minishell_execution.h"
 # include "minishell_terminal.h"
-# include "test_minishell.h" //
+# include "minishell_builtin.h"
+# include "minishell_return.h"
+# include "minishell_signals.h"
 
 #endif

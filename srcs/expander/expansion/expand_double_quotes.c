@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 11:51:41 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/22 22:30:53 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/26 17:34:53 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void	strcpy_double_quotes_expand(char *result,
 	{
 		if (sub_expansion && i == sub_expansion->start_of_the_expand)
 		{
-			len_expand = strcpy_sub_expansion_double_quotes(
+			len_expand += strcpy_sub_expansion_double_quotes(
 					result + len_expand, sub_expansion);
 			i += sub_expansion->size_to_remove;
 			sub_expansion = sub_expansion->next;
@@ -129,7 +129,6 @@ t_expansion	*expand_double_quote(char *s, char **env)
 	t_expansion	*expansion;
 	t_expansion	*sub_expansion;
 
-	printf("expand double quotes : %s\n", s);
 	size_to_remove = strlen_double_quote(s, 0);
 	sub_expansion = NULL;
 	if (ft_strnchr(s, CHAR_DOLLAR, size_to_remove))

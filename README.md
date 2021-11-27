@@ -35,3 +35,23 @@ mini@debian:~$ echo $TEST
 -dtest
 
  "$USER $ $SDFSDFSDFDFSDF $$"
+
+
+ HEREDOC
+
+> creat << test  < inexist > dontcreat << test
+
+ << '' cat
+ << "" cat
+ << 't'e"est" cat
+ << " " cat
+  << "t"'e'st'' cat
+    $USER
+
+ERROR : 
+/ ou n'importe quel repertoire.
+
+minishell: /: Is a directory
+lvirgini@minishell:/mnt/nfs/homes/lvirgini/42/minishell$ echo $?
+126
+

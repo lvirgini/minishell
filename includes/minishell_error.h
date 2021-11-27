@@ -6,15 +6,16 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 19:47:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/18 11:03:51 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/27 18:27:28 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_ERROR_H
 # define MINISHELL_ERROR_H
 
-# define NB_ERR_SYNTAX 2
-# define NB_ERROR 5
+# define NB_ERR_SYNTAX	2
+# define NB_ERROR 		7
+
 
 enum	e_error_syntax
 {
@@ -35,11 +36,15 @@ enum	e_reason_cmd_not_work
 	ERR_CMD_NOT_EXECUTABLE,
 	ERR_ABSOLUTE_PATH_NOT_FOUND,
 	ERR_AMBIGUOUS,
+	ERR_IS_A_DIRECTORY,
+	ERR_STDIN_MINISHELL,
 };
 
 int		print_syntax_error(int err, char char_data, char *str_data);
 int		syntax_error_redirection(t_token *token);
 int		display_error(int error, char *object);
 void	exit_minishell(t_cmd **list_cmd, char **env);
+void	display_heredoc_error(char *delimitor);
+int		syntax_error_redirection(t_token *token);
 
 #endif

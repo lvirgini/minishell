@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 14:56:01 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/23 22:35:43 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/27 15:24:05 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,40 @@
 
 # include "minishell.h"
 
+# define PROMPT_LEN 		34
+# define GREEN_COLOR		"\33[32m"
+# define WHITE_COLOR		"\33[0m"
+# define BLUE_COLOR			"\33[94m"
+
 typedef struct s_prompt	t_prompt;
 
 struct s_prompt
 {
 	char	*user;
-	char	*minishell;
 	char	*cwd;
-	char	*end;
 	char	*formatted;
+	t_bool	need_change;
 };
 
 /*
 ** initialisation and free
 */
 
-t_prompt	*init_prompt(char *user, char *pwd);
+t_prompt	*initialize_prompt(char **env);
 void		free_t_prompt(t_prompt *prompt);
+
+/*
+** Change and update prompt
+*/
+
+t_bool		change_prompt_user(t_prompt *prompt, char *actual_user);
+int			layout_prompt(t_prompt *prompt);
+int			update_prompt(char **env, t_prompt **prompt);
 
 /*
 ** get_prompt for readline()
 */
 
-void		layout_prompt(t_prompt *prompt);
-t_prompt	*get_prompt(char **env, t_prompt *prompt);
-
-int			make_terminal(char**env);
+void		make_terminal(char***env);
 
 #endif

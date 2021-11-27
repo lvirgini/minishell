@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_dollar.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/23 23:15:32 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/23 16:25:42 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/26 11:44:11 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,14 @@ static void	dollar_is_digits(t_expansion *expansion)
 
 static void	dollar_is_exit_status(t_expansion *expansion)
 {
-	(void)expansion;
-	// TO DO
+	expansion->value = malloc_list(1);
+	if (!expansion->value)
+		free(expansion);
+	else
+	{
+		expansion->size_to_remove = 2;
+		expansion->value[0] = ft_itoa(get_exit_status());
+	}	
 }
 
 /*
@@ -43,7 +49,6 @@ static void	dollar_is_env_value_split(t_expansion *expansion, char *s,
 	char		end_of_key;
 
 	end_of_key = isolate_key(s + 1, expansion);
-	printf("expansion dollar = %s\n", s);
 	value = get_env_value(env, s + 1);
 	if (value)
 	{
@@ -64,7 +69,6 @@ static void	dollar_is_env_value_literal(t_expansion *expansion, char *s,
 	char		end_of_key;
 
 	end_of_key = isolate_key(s + 1, expansion);
-	printf("expansion dollar = %s\n", s);
 	value = get_env_value(env, s + 1);
 	if (value)
 	{

@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/21 20:20:37 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/21 20:26:29 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/25 13:50:40 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static t_bool	fusion_argv_expansion(char **new, char *old_arg,
 	t_expansion *expansion, int *i)
 {
 	char	**value;
-	int		j;
+	size_t	j;
 
 	j = 0;
 	while (expansion)

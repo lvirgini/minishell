@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_env.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 15:29:10 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/26 16:54:24 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/24 17:15:50 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ void	testing_env(char **env)
 	testing_get_env_value(myenv);
 //	print_list_env(env);
 	print_str(myenv[get_env_index(myenv, "USER")]);
-	myenv = add_env(myenv, "TEST", "test");
+	// myenv = add_env(myenv, "TEST", "test");
 	print_str(myenv[get_env_index(myenv, "TEST")]);
-	myenv = add_env(myenv, "TEST", "deuxieme");
+	// myenv = add_env(myenv, "TEST", "deuxieme");
 	print_str(myenv[get_env_index(myenv, "TEST")]);
 
 	free_list(myenv);

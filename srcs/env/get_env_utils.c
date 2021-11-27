@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 16:14:04 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/08 16:18:13 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/27 13:48:04 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,16 @@
 ** return the env index of key or -1 if not.
 */
 
+size_t	ft_strclen(char *s, char c)
+{
+	size_t	i;
+
+	i = 0;
+	while (s && s[i] && s[i] != c)
+		++i;
+	return (i);
+}
+
 int	get_env_index(char **env, char *key)
 {
 	int		index;
@@ -24,11 +34,13 @@ int	get_env_index(char **env, char *key)
 	if (!env || !*env || !key)
 		return (-1);
 	index = 0;
-	key_size = ft_strlen(key);
+	key_size = ft_strclen(key, '=');
 	while (env[index])
 	{
 		if (ft_strncmp(env[index], key, key_size) == 0
-			&& env[index][key_size] == '=')
+			&& (ft_strncmp(env[index], key, key_size + 1) == -61
+				|| ft_strncmp(env[index], key, key_size + 1) == '='
+				|| ft_strncmp(env[index], key, key_size + 1) == 0))
 			return (index);
 		index++;
 	}
@@ -50,6 +62,8 @@ char	*get_env_value(char **env, char *key)
 	index = get_env_index(env, key);
 	if (index == -1)
 		return (NULL);
-	value = ft_strchr(env[index], '=') + 1;
-	return (value);
+	value = ft_strchr(env[index], '=');
+	if (value)
+		return (value + 1);
+	return (NULL);
 }

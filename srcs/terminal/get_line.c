@@ -6,71 +6,83 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/21 20:04:16 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/27 18:59:43 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-** il faut trouver un bon nom pour cette fonction...
-*/
-
-void	make_shell(char *line, char **env)
+void	make_shell(char *line, char ***env, t_prompt *prompt)
 {
 	t_token		**token;
 	t_cmd		**cmd;
 
-	token = NULL;
-	cmd = NULL;
 	token = lexer_minishell(line);
 	cmd = parser_minishell(token);
 	free_list_token(token);
-	if (expanser(cmd, env) && cmd)
+	if (expanser(cmd, *env) && cmd)
 	{
-		if (executer(cmd, env) == FAILURE)
-			exit_minishell(cmd, env);
+		if (executer(cmd, env) == FAILURE && get_exit_status() != 130)
+		{
+			free_t_prompt(prompt);
+			exit_minishell(cmd, *env);
+		}
 	}
 	free_list_cmd(cmd);
 }
 
 /*
-** premier appel : get_prompt va creer t_prompt via l'environnement récuperé
-** while 1 -> pour le moment pas d'arret // voir les signaux
-** readline renvoi la ligne saisie
-** si la ligne n'est pas vide on la rajoute a l'historique (cmd de readline)
+** get line from std IN
+** if line is NULL : it 's Ctrl-D
+** if line != \0 :
+**		add to history
+**		make shell (lexer - parser - expanser - IO setup - exec cmds)
+**		update prompt
 */
 
-int	make_terminal(char **env)
+int	manage_readline(char ***env, t_prompt *prompt)
 {
 	char		*line;
+
+	line = readline(prompt->formatted);
+	if (line)
+	{
+		if (*line)
+		{
+			add_history(line);
+			make_shell(line, env, prompt);
+			if (update_prompt(*env, &prompt) == FAILURE)
+				return (FAILURE);
+		}
+		free(line);
+	}
+	else
+	{
+		printf("exit\n");
+		return (FAILURE);
+	}
+	return (SUCCESS);
+}
+
+/*
+**	while not exited signals or functions read stdin for make shell
+** if manage readline failed: a functions somewhere has failed
+*/
+
+void	make_terminal(char ***env)
+{
 	t_prompt	*prompt;
 
-	prompt = get_prompt(env, NULL);
-
-	while (1)
+	prompt = initialize_prompt(*env);
+	if (!prompt)
+		return ;
+	while (get_exit_value() == 0)
 	{
-		line = NULL;
-		line = readline(prompt->formatted);
-		if (line)
-		{
-			if (*line)
-			{
-				if (ft_strcmp(line, "exit") == 0) // EXIT PROVISOIRE POUR VOIR LES LEAKS
-				{
-					free(line);
-					free_t_prompt(prompt);
-					rl_clear_history();
-					return (SUCCESS);
-				}
-				add_history(line);
-				make_shell(line, env);
-			}
-			prompt = get_prompt(env, prompt);
-			free(line);
-		}
-		else
-			printf("\n");
+		signal(SIGINT, handle_prompt); // heredoc stop readline
+		signal(SIGQUIT, SIG_IGN);
+		if (manage_readline(env, prompt) == FAILURE)
+			break ;
 	}
 	free_t_prompt(prompt);
+	rl_clear_history();
 }
