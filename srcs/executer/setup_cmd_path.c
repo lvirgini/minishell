@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 11:34:17 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/26 14:07:57 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/27 13:22:19 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,11 @@ static t_bool	is_relative_or_absolute_path(char *argv)
 	return (false);
 }
 
-static t_bool	add_absolute_or_relative_path(t_cmd *cmd, char *argv)
+t_bool	add_absolute_or_relative_path(t_cmd *cmd, char *argv)
 {
 	int	fd;
 
-	fd = open(cmd->argv[0], __O_DIRECTORY);
+	fd = open(argv, __O_DIRECTORY);
 	if (fd != -1)
 	{	
 		close(fd);

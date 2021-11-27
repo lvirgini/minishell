@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 16:14:04 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/25 09:53:38 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/27 13:48:04 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ char	*get_env_value(char **env, char *key)
 	index = get_env_index(env, key);
 	if (index == -1)
 		return (NULL);
-	value = ft_strchr(env[index], '=') + 1;
-	return (value);
+	value = ft_strchr(env[index], '=');
+	if (value)
+		return (value + 1);
+	return (NULL);
 }

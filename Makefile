@@ -99,6 +99,7 @@ SRC		= 	cd.c \
 			t_token_remove.c \
 			get_prompt.c \
 			init_prompt.c\
+			layout_prompt.c \
 			minishell.c \
 			return_value.c
 
@@ -114,7 +115,7 @@ vpath %.h $(foreach dir, $(INC_DIR)/, $(dir):)
 
 CC 		=	gcc
 
-CFLAG 	= 	-Wall -Wextra -Werror
+CFLAG 	= 	-Wall -Wextra -Werror -g
 IFLAG 	= 	$(foreach dir, $(INC_DIR), -I $(dir) )
 LFLAG 	=	$(foreach lib, $(LIB), -l $(lib) ) $(foreach dir, $(LIB_DIR), -L $(dir) ) 
 

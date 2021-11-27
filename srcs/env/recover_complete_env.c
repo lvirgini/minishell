@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   recover_complete_env.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 13:28:18 by lvirgini          #+#    #+#             */
 /*   Updated: 2021/11/27 15:43:44 by eassouli         ###   ########.fr       */

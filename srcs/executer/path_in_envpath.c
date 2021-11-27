@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 13:29:06 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/26 13:08:54 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/26 18:08:37 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,12 @@ static int	get_cmd_path_from_path_env(t_cmd *cmd, char *path_env[])
 t_bool	add_path_with_envpath(t_cmd *cmd, char **env)
 {
 	char	**path_env;
+	char	*path;
 
-	path_env = split_path_env(get_env_value(env, "PATH"));
+	path = get_env_value(env, "PATH");
+	if (!path)
+		return (add_absolute_or_relative_path(cmd, cmd->argv[0]));
+	path_env = split_path_env(path);
 	if (!path_env || get_cmd_path_from_path_env(cmd, path_env) == FAILURE)
 	{
 		free_list(path_env);
