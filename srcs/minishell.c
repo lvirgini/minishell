@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 16:25:24 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/27 18:45:32 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/27 19:02:37 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	main(int argc, char *argv[], char *env[])
 	}	
 	minishell_env = make_minishell_env(env);
 	if (!minishell_env)
-		return (1);
+		return (EXIT_FAILURE);
 	make_terminal(&minishell_env);
 	free_list(minishell_env);
 	return (get_exit_status());
