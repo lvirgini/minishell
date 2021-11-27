@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+         #
+#    By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 17:38:13 by lvirgini          #+#    #+#              #
-#    Updated: 2021/11/27 16:35:02 by eassouli         ###   ########.fr        #
+#    Updated: 2021/11/27 17:59:40 by lvirgini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,6 @@ SRC_DIR =	$(shell find srcs -type d)
 
 LIB		=	ft ncurses readline
 
-#SRC 	=	$(foreach dir, $(SRC_DIR), $(foreach file, $(wildcard $(dir)/*.c), $(notdir $(file))))
 SRC		= 	cd.c \
 			cd_home.c \
 			echo.c \
@@ -70,7 +69,8 @@ SRC		= 	cd.c \
 			parse_control_operator.c \
 			parser_general.c \
 			close.c \
-			heredoc.c \
+			heredoc_setup.c \
+			heredoc_maker.c \
 			pipe.c \
 			redirection.c \
 			setup_redirection.c \
@@ -97,9 +97,8 @@ SRC		= 	cd.c \
 			t_token_free.c \
 			t_token_malloc.c \
 			t_token_remove.c \
-			get_prompt.c \
 			init_prompt.c\
-			layout_prompt.c \
+			update_prompt.c \
 			minishell.c \
 			return_value.c
 

@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 13:58:59 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/27 15:10:15 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/27 16:39:18 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,6 @@ void	free_t_prompt(t_prompt *prompt)
 {
 	if (prompt)
 	{	
-		if (prompt->user)
-			free(prompt->user);
-		if (prompt->cwd)
-			free(prompt->cwd);
 		if (prompt->formatted)
 			free(prompt->formatted);
 		free(prompt);
@@ -59,20 +55,13 @@ char	*get_prompt_cwd(void)
 
 t_prompt	*initialize_prompt(char **env)
 {
-	char		*user;
 	t_prompt	*prompt;
 
 	prompt = malloc_prompt();
 	if (!prompt)
 		return (NULL);
-	prompt->cwd = get_prompt_cwd();
-	user = get_env_value(env, "USER");
-	if (user && change_prompt_user(prompt, user) == FAILURE)
-	{
-		free_t_prompt(prompt);
-		return (NULL);
-	}
-	prompt->need_change = true;
+	prompt->cwd = get_env_value(env, "PWD");
+	prompt->user = get_env_value(env, "USER");
 	if (layout_prompt(prompt) == FAILURE)
 	{
 		free_t_prompt(prompt);

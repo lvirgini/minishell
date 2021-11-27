@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 13:24:38 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/26 17:38:29 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/27 18:46:13 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,16 @@ int	display_error(int error, char *object)
 		": permission denied\n",
 		": No such file or directory\n",
 		": ambiguous redirect\n",
-		": Is a directory\n"
+		": Is a directory\n",
+		"error stdin_fileno not referring to a terminal\n"
 	};
-	static int	errno_nb[NB_ERROR] = {1, 127, 126, 127, 126, 126};
+	static int	errno_nb[NB_ERROR] = {1, 127, 126, 127, 126, 126, 1};
 
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	if (error < NB_ERROR)
 	{
-		ft_putstr_fd(object, STDERR_FILENO);
+		if (object)
+			ft_putstr_fd(object, STDERR_FILENO);
 		ft_putstr_fd(str_error[error], STDERR_FILENO);
 		set_exit_status(errno_nb[error], 0);
 	}

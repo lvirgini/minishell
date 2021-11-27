@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/27 18:21:23 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/27 18:59:43 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void	make_shell(char *line, char ***env, t_prompt *prompt)
 	t_token		**token;
 	t_cmd		**cmd;
 
-	token = NULL;
-	cmd = NULL;
 	token = lexer_minishell(line);
 	cmd = parser_minishell(token);
 	free_list_token(token);
