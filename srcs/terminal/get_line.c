@@ -6,15 +6,11 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/27 16:17:05 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/27 17:59:25 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*
-** il faut trouver un bon nom pour cette fonction...
-*/
 
 void	make_shell(char *line, char ***env, t_prompt *prompt)
 {
@@ -53,6 +49,11 @@ int	manage_readline(char ***env, t_prompt *prompt)
 	line = readline(prompt->formatted);
 	if (line)
 	{
+		signal(SIGINT, handle_prompt); // heredoc stop readline
+		// putstr("signal fail");
+		// exit(1);
+		signal(SIGQUIT, SIG_IGN); // ignore pour heredoc aussi
+		line = readline(prompt->formatted);
 		if (*line)
 		{
 			add_history(line);

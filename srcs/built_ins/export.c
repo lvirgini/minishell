@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 10:59:10 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/26 13:09:50 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/26 17:38:05 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	export_error(char *arg, int error)
 		ft_putstr_fd(arg, STDERR_FILENO);
 		ft_putstr_fd(S_NOT_ID, STDERR_FILENO);
 	}
-	set_exit_status(1);
+	set_exit_status(1, 0);
 }
 
 int	is_valid_key(char *str)
@@ -95,7 +95,7 @@ void	exec_export(char **arg, char ***env)
 	int		index_key;
 
 	a = 1;
-	set_exit_status(0);
+	set_exit_status(0, 0);
 	if (arg[a] == NULL)
 		print_export(*env);
 	while (arg[a])

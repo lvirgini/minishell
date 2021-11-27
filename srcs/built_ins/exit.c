@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:26:37 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/26 13:27:01 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/26 17:43:03 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,19 +18,19 @@
 ** Exit return an error if there is too many argument and set the error to 1
 */
 
-static void	exit_error(int error, char *arg)
+static void	exit_error(int error, char *arg) // revoir exit -1 !
 {
 	ft_putstr_fd("exit: ", STDERR_FILENO);
 	if (error == 1)
 	{
 		ft_putstr_fd(S_TOO_MANY_ARGS_CD, STDERR_FILENO); // ne pas stop
-		set_exit_status(1);
+		set_exit_status(1, 0);
 	}
 	else if (error == 2)
 	{
 		ft_putstr_fd(arg, STDERR_FILENO);
 		ft_putstr_fd(S_NOT_NUM, STDERR_FILENO); // stop dans tous les cas
-		set_exit_status(2);
+		set_exit_status(2, 0);
 		set_exit_value(1);
 	}
 }
@@ -43,6 +43,8 @@ int	str_isdigit(char *str)
 	if (str[0] == '-' || str[0] == '+' || ft_isdigit(str[0]))
 		i++;
 	else
+		return (FALSE);
+	if (!ft_isdigit(str[0]) && !ft_isdigit(str[i]))
 		return (FALSE);
 	while (str[i] && ft_isdigit(str[i]))
 		i++;
@@ -66,7 +68,7 @@ void	exec_exit(char **arg, char ***env) // Ctrl + C set a 130 la valeur de retou
 		{
 			if (arg[2] == NULL)
 			{
-				set_exit_status(ft_atoi(arg[1])); //variable globale directement et stop
+				set_exit_status(ft_atoi(arg[1]), 0); //variable globale directement et stop
 				set_exit_value(1);
 			}
 			else
