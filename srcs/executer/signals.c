@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 16:44:50 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/26 16:55:58 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/27 15:42:26 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ void	handle_prompt(int sig)
 
 void	handle_cmd(int sig)
 {
-	if (sig == SIGINT)
+	if (sig == SIGINT) // set exit status 130
 	{
-		rl_on_new_line();
+		// rl_on_new_line();
 		printf("\n");
-		rl_replace_line("", 0);
+		// rl_replace_line("", 0);
 		// rl_redisplay(); // pas redisplay pour cat mais redisplay pour heredoc
 	}
 	else if (sig == SIGQUIT)

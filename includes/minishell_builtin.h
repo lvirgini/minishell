@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 12:24:39 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/26 12:50:22 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/27 16:07:33 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,13 @@
 # define S_NO_HOME "cd: HOME not set\n"
 # define S_NO_OLDPWD "cd: OLDPWD not set\n"
 # define S_NOT_NUM ": numeric argument required\n"
+# define S_NO_CWD ": error retrieving current directory\n"
 
 # define S_SHELL "SHELL=minishell" //
-# define S_SHLVL "SHLVL="
-# define S_SHLVL1 "SHLVL=1"
-# define S_OLDPWD "OLDPWD="
+# define SHLVL_KEY "SHLVL="
+# define SHLVL1_KEY "SHLVL=1"
+# define OLDPWD_KEY "OLDPWD="
+# define PWD_KEY "PWD="
 
 # define SHLVL "SHLVL"
 # define OLDPWD "OLDPWD"
@@ -37,6 +39,7 @@
 # define TOO_MANY_ARGS -2
 # define NO_FILE -3
 # define NOT_ID -4
+# define NO_CWD -5
 
 # define S_ECHO		"echo"
 # define S_CD		"cd"
@@ -78,10 +81,10 @@ void	exec_pwd(char **arg, char ***env);
 void	exec_export(char **arg, char ***env);
 int		is_valid_key(char *str);
 
+void	export_keyvalue(char *str, char ***env);
+void	export_join_keyvalue(char *key, char *value, char ***env);
 void	export_shlvl(char ***env);
-void	export_oldpwd(char *old, char ***env);
-void	export_shell(char ***env);
-void	unset_oldpwd(char ***env);
+void	unset_key(char *key, char ***env);
 
 void	exec_unset(char **arg, char ***env);
 

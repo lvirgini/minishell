@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 13:28:18 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/26 18:12:58 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/27 15:43:44 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,18 @@
 char	**make_minishell_env(char *env[])
 {
 	char	**minishell_env;
+	char	*cwd;
 
 	minishell_env = list_cdup(env, '=');
-	export_shell(&minishell_env);
+	export_keyvalue(S_SHELL, &minishell_env);
+	unset_key(OLDPWD, &minishell_env);
+	export_keyvalue(OLDPWD, &minishell_env);
+	cwd = get_current_dir();
+	if (cwd)
+	{
+		export_join_keyvalue(PWD_KEY, cwd, &minishell_env);
+		free(cwd);
+	}
 	export_shlvl(&minishell_env);
-	//export pwd
-	//export if path introuvable path=/bin
-	unset_oldpwd(&minishell_env);
 	return (minishell_env);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 14:02:22 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/06/21 17:47:49 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/27 11:58:45 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static int	get_first_sign_from_str(const char *s, size_t *i)
 			*i += 1;
 			return (-1);
 		}
+		*i += 1;
 	}
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:31:33 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/26 18:16:52 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/27 16:27:56 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	cd_errors(int error, char *arg, char *path)
 		ft_putstr_fd(arg, STDERR_FILENO);
 		ft_putstr_fd(S_PERM, STDERR_FILENO);
 	}
-	else if (errno == ENOENT) // Autres erreurs ?
+	else if (errno == ENOENT || error == NO_FILE) // Autres erreurs ?
 	{
 		if (path == NULL)
 			ft_putstr_fd(arg, STDERR_FILENO);
@@ -56,7 +56,7 @@ char	*cd_old(char **arg, char ***env)
 	else if (old)
 	{
 		printf("%s\n", old);
-		export_oldpwd(new_old, env);
+		export_join_keyvalue(OLDPWD_KEY, new_old, env);
 	}
 	return (new_old);
 }
@@ -66,10 +66,12 @@ char	*cd_path(char **arg, char ***env)
 	char	*new_old;
 
 	new_old = get_current_dir();
-	if (chdir(arg[1]) == -1)
+	if (new_old == NULL)
+		cd_errors(NO_CWD, arg[1], NULL);
+	else if (chdir(arg[1]) == -1)
 		cd_errors(0, arg[1], NULL);
 	else
-		export_oldpwd(new_old, env);
+		export_join_keyvalue(OLDPWD_KEY, new_old, env);
 	return (new_old);
 }
 
@@ -77,6 +79,7 @@ void	exec_cd(char **arg, char ***env) // Si reussite et PWD existe dans l'env ex
 {
 	char	*old;
 
+	old = NULL;
 	set_exit_status(0, 0);
 	if (arg[1] == NULL)
 		old = cd_home(arg, env);
