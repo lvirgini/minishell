@@ -6,7 +6,7 @@
 #    By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 17:38:13 by lvirgini          #+#    #+#              #
-#    Updated: 2021/11/27 16:15:26 by lvirgini         ###   ########.fr        #
+#    Updated: 2021/11/27 16:42:19 by lvirgini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,9 +96,8 @@ SRC		= 	cd.c \
 			t_token_free.c \
 			t_token_malloc.c \
 			t_token_remove.c \
-			get_prompt.c \
 			init_prompt.c\
-			layout_prompt.c \
+			update_prompt.c \
 			minishell.c \
 			return_value.c
 

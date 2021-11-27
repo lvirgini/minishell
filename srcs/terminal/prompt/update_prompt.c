@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   layout_prompt.c                                    :+:      :+:    :+:   */
+/*   update_prompt.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 12:54:38 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/27 16:21:00 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/27 16:41:36 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	formatted_prompt(char *formatted, char *user, char *cwd, size_t len)
 		ft_strlcat(formatted, minishell, len);
 	}
 	else
-		ft_strlcat(formatted, &(minishell[1]), len);
+		ft_strlcat(formatted, minishell + 1, len);
 	if (cwd)
 		ft_strlcat(formatted, cwd, len);
 	else
@@ -50,7 +50,7 @@ static	size_t	get_prompt_len(t_prompt *prompt)
 	if (prompt->user)
 	len += ft_strlen(prompt->user);
 	else
-		len -= 1;
+		len --;
 	return (len);
 }
 
@@ -58,9 +58,6 @@ int	layout_prompt(t_prompt *prompt)
 {
 	size_t		len;
 
-	if (prompt->need_change == false)
-		return (SUCCESS);
-	prompt->need_change = false;
 	if (prompt->formatted)
 		free(prompt->formatted);
 	len = get_prompt_len(prompt);
@@ -71,5 +68,21 @@ int	layout_prompt(t_prompt *prompt)
 		return (FAILURE);
 	}
 	formatted_prompt(prompt->formatted, prompt->user, prompt->cwd, len);
+	return (SUCCESS);
+}
+
+/*
+** getcwd : in this way returns a malloc char *
+*/
+
+int	update_prompt(char **env, t_prompt **prompt)
+{	
+	(*prompt)->user = get_env_value(env, "USER");
+	(*prompt)->cwd = get_env_value(env, "PWD");
+	if (layout_prompt(*prompt) == FAILURE)
+	{
+		free_t_prompt(*prompt);
+		return (FAILURE);
+	}
 	return (SUCCESS);
 }
