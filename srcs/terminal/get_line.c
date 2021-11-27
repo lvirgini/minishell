@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/27 17:49:14 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/27 18:21:23 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	make_shell(char *line, char ***env, t_prompt *prompt)
 	free_list_token(token);
 	if (expanser(cmd, *env) && cmd)
 	{
-		if (executer(cmd, env) == FAILURE)
+		if (executer(cmd, env) == FAILURE && get_exit_status() != 130)
 		{
 			free_t_prompt(prompt);
 			exit_minishell(cmd, *env);
@@ -49,11 +49,6 @@ int	manage_readline(char ***env, t_prompt *prompt)
 	line = readline(prompt->formatted);
 	if (line)
 	{
-		signal(SIGINT, handle_prompt); // heredoc stop readline
-		// putstr("signal fail");
-		// exit(1);
-		signal(SIGQUIT, SIG_IGN); // ignore pour heredoc aussi
-		line = readline(prompt->formatted);
 		if (*line)
 		{
 			add_history(line);
@@ -85,6 +80,8 @@ void	make_terminal(char ***env)
 		return ;
 	while (get_exit_value() == 0)
 	{
+		signal(SIGINT, handle_prompt); // heredoc stop readline
+		signal(SIGQUIT, SIG_IGN);
 		if (manage_readline(env, prompt) == FAILURE)
 			break ;
 	}

@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:27:42 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/26 17:38:38 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/27 18:02:01 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ int	wait_all_process(t_cmd *cmd)
 
 int	execute_this_cmd(t_cmd *cmd, char **env)
 {
+	signal(SIGINT, handle_cmd);
+	signal(SIGQUIT, handle_cmd);
 	cmd->pid = create_child_process(cmd, env);
 	close_parent_pipe(cmd);
 	if (cmd->pid == -1)
