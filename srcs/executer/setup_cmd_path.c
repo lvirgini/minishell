@@ -6,36 +6,13 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 11:34:17 by lvirgini          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/11/23 21:42:45 by lvirgini         ###   ########.fr       */
-=======
-/*   Updated: 2021/11/27 13:22:19 by lvirgini         ###   ########.fr       */
->>>>>>> 93c5868c177ee546f4033f7c0a92e432c68cad18
+/*   Updated: 2021/11/27 21:29:25 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
-<<<<<<< HEAD
-** split of line env PATH with ':' as delimitor
-*/
-
-static char	**split_path_env(char *env)
-{
-	char	**split;
-
-	if (!env)
-		return (NULL);
-	split = ft_split(env, ':');
-	if (!split)
-		perror("split env");
-	return (split);
-}
-
-/*
-** check if argv[0] is an absolute path and duplicate it in cmd->path.
-=======
 ** check with access X_OK (executable) if file is well executable
 */
 
@@ -50,7 +27,6 @@ static t_bool	is_command_executable(t_cmd *cmd)
 /*
 ** check if argv[0] is an absolute path or relative path and duplicate it
 **	in cmd->path.
->>>>>>> 93c5868c177ee546f4033f7c0a92e432c68cad18
 */
 
 static t_bool	is_relative_or_absolute_path(char *argv)
