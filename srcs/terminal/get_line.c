@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/27 17:59:25 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/27 18:01:38 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void	make_shell(char *line, char ***env, t_prompt *prompt)
 	t_token		**token;
 	t_cmd		**cmd;
 
-	token = NULL;
-	cmd = NULL;
 	token = lexer_minishell(line);
 	cmd = parser_minishell(token);
 	free_list_token(token);
@@ -53,7 +51,6 @@ int	manage_readline(char ***env, t_prompt *prompt)
 		// putstr("signal fail");
 		// exit(1);
 		signal(SIGQUIT, SIG_IGN); // ignore pour heredoc aussi
-		line = readline(prompt->formatted);
 		if (*line)
 		{
 			add_history(line);
