@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 12:54:38 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/27 13:54:36 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/27 16:21:00 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	formatted_prompt(char *formatted, char *user, char *cwd, size_t len)
 		ft_strlcat(formatted, &(minishell[1]), len);
 	if (cwd)
 		ft_strlcat(formatted, cwd, len);
+	else
+		ft_strlcat(formatted, ".", len);
 	ft_strlcat(formatted, end, len);
 }
 
@@ -43,6 +45,8 @@ static	size_t	get_prompt_len(t_prompt *prompt)
 	len = PROMPT_LEN;
 	if (prompt->cwd)
 		len += ft_strlen(prompt->cwd);
+	else
+		len++;
 	if (prompt->user)
 	len += ft_strlen(prompt->user);
 	else

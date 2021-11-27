@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:12:26 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/27 13:57:38 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/27 16:16:39 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,11 @@ t_bool	need_change_user(char *old_user, char *actual_user)
 t_bool	need_change_cwd(char *old_cwd, char *actual_cwd)
 {
 	if (!actual_cwd)
-		return (false);
+	{
+		if (!old_cwd)
+			return (false);
+		return (true);
+	}
 	if (!old_cwd || ft_strcmp(old_cwd, actual_cwd))
 		return (true);
 	return (false);

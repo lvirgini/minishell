@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/27 15:22:20 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/27 16:17:05 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	make_shell(char *line, char ***env, t_prompt *prompt)
 **		update prompt
 */
 
-in	manage_readline(char ***env, t_prompt *prompt)
+int	manage_readline(char ***env, t_prompt *prompt)
 {
 	char		*line;
 
