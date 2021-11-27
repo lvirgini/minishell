@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 13:32:05 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/27 18:18:20 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/27 18:57:37 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@ int	get_line_for_heredoc(t_hdoc *heredoc, char **env)
 		}
 		if (heredoc->need_expand)
 			line = expand_heredoc_line(line, env);
-		if (!line)
-			return (FAILURE);
 		heredoc->data = ft_list_add_one(heredoc->data, line);
 		if (!heredoc->data)
 			return (FAILURE);
