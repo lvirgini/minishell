@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/26 16:44:50 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/27 18:47:42 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/27 18:58:58 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@
 ** 
 */
 
-void	handle_prompt(int sig)
+void	handle_prompt(int sig) // set exit status 130
 {
 	(void)sig;
+	set_exit_status(130, 0);
 	rl_on_new_line();
 	printf("\n");
 	rl_replace_line("", 0);
@@ -33,13 +34,14 @@ void	handle_cmd(int sig)
 {
 	if (sig == SIGINT) // set exit status 130
 	{
-		// rl_on_new_line();
+		set_exit_status(130, 0);
 		printf("\n");
-		// rl_replace_line("", 0);
-		// rl_redisplay(); // pas redisplay pour cat mais redisplay pour heredoc
 	}
 	else if (sig == SIGQUIT)
-		ft_putstr_fd("Quit (core dumped)\n", 2); // Ne pas afficher pour heredoc
+	{
+		set_exit_status(131, 0);
+		ft_putstr_fd("Quit\n", 2); // Ne pas afficher pour heredoc
+	}
 }
 
 /*
@@ -49,8 +51,7 @@ void	handle_cmd(int sig)
 void	handle_heredoc(int sig)
 {
 	(void)sig;
-	rl_on_new_line();
+	set_exit_status(130, 0);
+	close(0);
 	printf("\n");
-	rl_replace_line("", 0);
-	rl_redisplay();
 }

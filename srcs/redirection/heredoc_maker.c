@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 13:32:05 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/27 17:05:49 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/27 18:59:08 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	get_line_for_heredoc(t_hdoc *heredoc, char **env)
 		line = readline("> ");
 		if (!line)
 		{
+			if (get_exit_status() == 130)
+				return (FAILURE);
 			display_heredoc_error(heredoc->delimitor);
 			return (SUCCESS);
 		}
@@ -38,11 +40,9 @@ int	get_line_for_heredoc(t_hdoc *heredoc, char **env)
 		{
 			free(line);
 			return (SUCCESS);
-		}	
+		}
 		if (heredoc->need_expand)
 			line = expand_heredoc_line(line, env);
-		if (!line)
-			return (FAILURE);
 		heredoc->data = ft_list_add_one(heredoc->data, line);
 		if (!heredoc->data)
 			return (FAILURE);
@@ -56,11 +56,21 @@ int	get_line_for_heredoc(t_hdoc *heredoc, char **env)
 
 int	make_heredoc(t_hdoc *heredoc, char **env)
 {
-	//setup_heredoc_signals()
+	int	stdinput;
+
+	signal(SIGINT, handle_heredoc);
+	signal(SIGQUIT, SIG_IGN);
 	while (heredoc)
 	{
+		stdinput = dup(0);
 		if (get_line_for_heredoc(heredoc, env) == FAILURE)
+		{
+			dup2(stdinput, 0);
+			close(stdinput);
 			return (FAILURE);
+		}
+		dup2(stdinput, 0);
+		close(stdinput);
 		heredoc = heredoc->next;
 	}
 	return (SUCCESS);

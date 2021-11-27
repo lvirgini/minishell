@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/15 17:37:21 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/26 17:26:24 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/27 18:02:12 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ int	exec_builtin(int builtin, char ***env, t_cmd *cmd) // comment expand_argv li
 	static const t_callback	f_builtin[7] = {exec_echo, exec_cd, exec_pwd,
 		exec_export, exec_unset, exec_env, exec_exit};
 
-	// signal(SIGINT, handle_sigint2);
-	// signal(SIGQUIT, handle_sigint2);
+	signal(SIGINT, handle_cmd);
+	signal(SIGQUIT, handle_cmd);
 	if (cmd->type == PIPE || (cmd->prev && cmd->prev->type == PIPE))
 	{
 		cmd->pid = create_child_builtin(cmd->argv, env, f_builtin[builtin], cmd);
