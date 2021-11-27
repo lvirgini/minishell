@@ -6,55 +6,11 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:12:26 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/26 14:02:45 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/27 13:57:38 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*
-** layout a char * for getline prompt : 
-**
-*/
-
-static	size_t	get_prompt_len(t_prompt *prompt)
-{
-	size_t	len;
-
-	len = ft_strlen(prompt->user) + ft_strlen(prompt->cwd)
-		+ 34;
-	if (!prompt->user)
-		len -= 1;
-	return (len);
-}
-
-void	layout_prompt(t_prompt *prompt)
-{
-	static char	*color_green = "\33[32m";
-	static char	*minishell = "@minishell\33[0m:\33[94m";
-	static char	*end = "\33[0m$ ";
-	size_t		len;
-
-	len = get_prompt_len(prompt);
-	if (prompt->formatted)
-		free(prompt->formatted);
-	prompt->formatted = (char *)malloc(sizeof(char) * len);
-	if (prompt->formatted == NULL)
-	{
-		perror("layout_prompt malloc()");
-		return ;
-	}
-	ft_strlcpy(prompt->formatted, color_green, len);
-	if (prompt->user && *prompt->user)
-	{
-		ft_strlcat(prompt->formatted, prompt->user, len);
-		ft_strlcat(prompt->formatted, minishell, len);
-	}
-	else
-		ft_strlcat(prompt->formatted, &(minishell[1]), len);
-	ft_strlcat(prompt->formatted, prompt->cwd, len);
-	ft_strlcat(prompt->formatted, end, len);
-}
 
 /*
 ** check for update prompt
@@ -63,57 +19,78 @@ void	layout_prompt(t_prompt *prompt)
 **	return : true if prompt->formatted for getline must be updated.
 */
 
-static	int	check_prompt_update(t_prompt *prompt, char *actual_cwd,
-	char *actual_user)
+t_bool	need_change_user(char *old_user, char *actual_user)
 {
-	t_bool	need_change;
+	if (!actual_user)
+	{
+		if (!old_user)
+			return (false);
+		return (true);
+	}
+	if (!old_user || ft_strcmp(old_user, actual_user))
+		return (true);
+	return (false);
+}
 
-	need_change = false;
-	if (!actual_cwd || ft_strcmp(prompt->cwd, actual_cwd) != 0)
-	{
-		free(prompt->cwd);
-		prompt->cwd = ft_strdup(actual_cwd);
-		if (!prompt->cwd)
-			perror("check prompt update (user)");
-		need_change = true;
-	}
-	if (!actual_user || !prompt->user
-		|| ft_strcmp(prompt->user, actual_user) != 0)
-	{
+t_bool	need_change_cwd(char *old_cwd, char *actual_cwd)
+{
+	if (!actual_cwd)
+		return (false);
+	if (!old_cwd || ft_strcmp(old_cwd, actual_cwd))
+		return (true);
+	return (false);
+}
+
+t_bool	change_prompt_user(t_prompt *prompt, char *actual_user)
+{
+	if (prompt->user)
 		free(prompt->user);
+	prompt->user = NULL;
+	if (actual_user)
+	{
 		prompt->user = ft_strdup(actual_user);
-		if (!prompt->user && actual_user)
-			perror("check prompt update (user)");
-		need_change = true;
+		if (!prompt->user)
+		{
+			perror("malloc change_prompt_user())");
+			return (FAILURE);
+		}
 	}
-	return (need_change);
+	prompt->need_change = true;
+	return (SUCCESS);
+}
+
+static void	change_prompt_cwd(t_prompt *prompt, char *actual_cwd)
+{
+	free(prompt->cwd);
+	prompt->cwd = actual_cwd;
+	prompt->need_change = true;
 }
 
 /*
 ** getcwd : in this way returns a malloc char *
 */
 
-t_prompt	*get_prompt(char **env, t_prompt *prompt)
+int	update_prompt(char **env, t_prompt **prompt)
 {	
 	char		*user;
 	char		*cwd;
-	t_bool		need_change;
-	t_prompt	*new;
 
 	user = get_env_value(env, "USER");
-	cwd = NULL;
-	cwd = getcwd(NULL, 0);
-	if (!prompt)
-		new = init_prompt(user, cwd);
-	else
+	if (need_change_user((*prompt)->user, user)
+		&& !change_prompt_user(*prompt, user))
 	{
-		need_change = check_prompt_update(prompt, cwd, user);
-		if (need_change == true)
-			layout_prompt(prompt);
+		free_t_prompt(*prompt);
+		return (FAILURE);
 	}
-	if (cwd)
+	cwd = getcwd(NULL, 0);
+	if (need_change_cwd((*prompt)->cwd, cwd))
+		change_prompt_cwd(*prompt, cwd);
+	else if (cwd)
 		free(cwd);
-	if (prompt)
-		return (prompt);
-	return (new);
+	if (layout_prompt(*prompt) == FAILURE)
+	{
+		free_t_prompt(*prompt);
+		return (FAILURE);
+	}
+	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/26 16:02:21 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/27 15:22:20 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,36 +38,54 @@ void	make_shell(char *line, char ***env, t_prompt *prompt)
 }
 
 /*
-** premier appel : get_prompt va creer t_prompt via l'environnement récuperé
-** while 1 -> pour le moment pas d'arret // voir les signaux
-** readline renvoi la ligne saisie
-** si la ligne n'est pas vide on la rajoute a l'historique (cmd de readline)
+** get line from std IN
+** if line is NULL : it 's Ctrl-D
+** if line != \0 :
+**		add to history
+**		make shell (lexer - parser - expanser - IO setup - exec cmds)
+**		update prompt
+*/
+
+in	manage_readline(char ***env, t_prompt *prompt)
+{
+	char		*line;
+
+	line = readline(prompt->formatted);
+	if (line)
+	{
+		if (*line)
+		{
+			add_history(line);
+			make_shell(line, env, prompt);
+			if (update_prompt(*env, &prompt) == FAILURE)
+				return (FAILURE);
+		}
+		free(line);
+	}
+	else
+	{
+		printf("exit\n");
+		return (FAILURE);
+	}
+	return (SUCCESS);
+}
+
+/*
+**	while not exited signals or functions read stdin for make shell
+** if manage readline failed: a functions somewhere has failed
 */
 
 void	make_terminal(char ***env)
 {
-	char		*line;
 	t_prompt	*prompt;
 
-	prompt = get_prompt(*env, NULL);
+	prompt = initialize_prompt(*env);
+	if (!prompt)
+		return ;
 	while (get_exit_value() == 0)
 	{
-		line = readline(prompt->formatted);
-		if (line)
-		{
-			if (*line)
-			{
-				add_history(line);
-				make_shell(line, env, prompt);
-				prompt = get_prompt(*env, prompt);
-			}
-			free(line);
-		}
-		else
-		{
-			printf("exit\n");
+		if (manage_readline(env, prompt) == FAILURE)
 			break ;
-		}
 	}
 	free_t_prompt(prompt);
 	rl_clear_history();
