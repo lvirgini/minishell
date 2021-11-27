@@ -6,7 +6,7 @@
 #    By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 17:38:13 by lvirgini          #+#    #+#              #
-#    Updated: 2021/11/26 14:01:20 by lvirgini         ###   ########.fr        #
+#    Updated: 2021/11/27 13:21:38 by lvirgini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,6 +98,7 @@ SRC		= 	cd.c \
 			t_token_remove.c \
 			get_prompt.c \
 			init_prompt.c\
+			layout_prompt.c \
 			minishell.c \
 			return_value.c
 
@@ -113,7 +114,7 @@ vpath %.h $(foreach dir, $(INC_DIR)/, $(dir):)
 
 CC 		=	gcc
 
-CFLAG 	= 	-Wall -Wextra -Werror
+CFLAG 	= 	-Wall -Wextra -Werror -g
 IFLAG 	= 	$(foreach dir, $(INC_DIR), -I $(dir) )
 LFLAG 	=	$(foreach lib, $(LIB), -l $(lib) ) $(foreach dir, $(LIB_DIR), -L $(dir) ) 
 
