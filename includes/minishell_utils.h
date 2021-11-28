@@ -6,14 +6,12 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 15:07:51 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/27 22:01:10 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/28 12:35:00 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_UTILS_H
 # define MINISHELL_UTILS_H
-
-# include "minishell.h"
 
 typedef struct s_struct	t_struct;
 struct	s_struct

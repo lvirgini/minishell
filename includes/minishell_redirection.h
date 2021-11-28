@@ -6,14 +6,12 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 15:53:59 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/27 21:51:43 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/28 12:34:12 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_REDIRECTION_H
 # define MINISHELL_REDIRECTION_H
-
-# include "minishell.h"
 
 enum	e_stdio
 {

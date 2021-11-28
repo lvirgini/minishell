@@ -6,14 +6,12 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 22:25:50 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/27 21:54:08 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/28 12:34:24 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_STRUCT_CMD_H
 # define MINISHELL_STRUCT_CMD_H
-
-# include "minishell.h"
 
 /*
 ** One command structure : 

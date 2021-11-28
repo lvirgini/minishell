@@ -6,11 +6,15 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 14:10:35 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/25 14:18:52 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/28 15:30:34 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+** Special expansion for HEREDOC line.
+*/
 
 static t_expansion	*expand_only_dollar(char *s, char **env)
 {
@@ -22,7 +26,7 @@ static t_expansion	*expand_only_dollar(char *s, char **env)
 	first = NULL;
 	while (s[i])
 	{
-		if (s[i] == CHAR_DOLLAR && (i == 0 || s[i - 1] != BACKSLASH))
+		if (s[i] == CHAR_DOLLAR)
 		{
 			expansion = expand_dollar(s + i, env, false);
 			if (!expansion)
@@ -47,7 +51,7 @@ static t_bool	is_dollar_expansion(char *s)
 	i = 0;
 	while (s[i])
 	{
-		if (s[i] == CHAR_DOLLAR && (i == 0 || s[i - 1] != BACKSLASH))
+		if (s[i] == CHAR_DOLLAR)
 			return (true);
 		i++;
 	}
@@ -55,7 +59,7 @@ static t_bool	is_dollar_expansion(char *s)
 }
 
 /*
-** expand la ligne du heredoc.
+** expand line receive by STDIN for heredoc.
 */
 
 char	*expand_heredoc_line(char *line, char **env)

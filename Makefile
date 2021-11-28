@@ -6,7 +6,7 @@
 #    By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 17:38:13 by lvirgini          #+#    #+#              #
-#    Updated: 2021/11/27 17:59:40 by lvirgini         ###   ########.fr        #
+#    Updated: 2021/11/28 12:16:12 by lvirgini         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,8 +42,7 @@ SRC		= 	cd.c \
 			syntax_error.c \
 			executer.c \
 			execve_and_fork.c \
-			get_cmd_path.c \
-			path_in_envpath.c \
+			setup_cmd_path_with_envpath.c \
 			setup_cmd_path.c \
 			signals.c \
 			expand_argv.c \
@@ -55,7 +54,6 @@ SRC		= 	cd.c \
 			expand_dollar.c \
 			expand_dollar_usefull.c \
 			expand_double_quotes.c \
-			expand_list.c \
 			expand_simple_quotes.c \
 			expand_str.c \
 			fusion_list_argv.c \
@@ -77,7 +75,6 @@ SRC		= 	cd.c \
 			get_line.c \
 			str.c \
 			get_token_pipe.c \
-			get_token_quotes.c \
 			get_token_tild.c \
 			get_token_word.c \
 			parse_all_redir.c \

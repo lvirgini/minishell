@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 13:32:05 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/28 10:26:08 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/28 11:36:47 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,11 @@ int	get_line_for_heredoc(t_hdoc *heredoc, char **env)
 	}
 }
 
+/*
+** specially for HEREDOC if a signal has been occured : 
+**	Stop heredoc in handle_heredoc signal function : close STDIN_FILENO.
+** 	it the only whay
+*/
 
 static int	get_back_stdin_when_stop_heredoc(int stdinput)
 {

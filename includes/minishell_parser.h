@@ -6,14 +6,12 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 11:00:39 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/27 21:50:43 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/28 12:34:04 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_PARSER_H
 # define MINISHELL_PARSER_H
-
-# include "minishell.h"
 
 /*
 ** general rules for parsing

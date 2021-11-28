@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 13:29:06 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/26 18:08:37 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/28 11:58:30 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,10 @@ static char	**split_path_env(char *env)
 		perror("split env");
 	return (split);
 }
+
+/*
+** check for any path if <path> / cmd exist with access.
+*/
 
 static char	*find_good_path(char **path_env, char *cmd_name)
 {
@@ -70,8 +74,10 @@ static int	get_cmd_path_from_path_env(t_cmd *cmd, char *path_env[])
 	}
 	return (SUCCESS);
 }
+
 /*
 ** find PATH in env and check every path for this cmd.
+** if no path is set : return error value of checking "absolute path"
 */
 
 t_bool	add_path_with_envpath(t_cmd *cmd, char **env)

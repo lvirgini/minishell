@@ -6,14 +6,12 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 10:54:51 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/27 22:28:48 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/28 12:33:56 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_LEXER_H
 # define MINISHELL_LEXER_H
-
-# include "minishell.h"
 
 /*
 ** NB_METACHARACTER : 

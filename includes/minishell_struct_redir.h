@@ -6,14 +6,12 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:29:00 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/27 21:55:58 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/28 12:34:32 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_STRUCT_REDIR_H
 # define MINISHELL_STRUCT_REDIR_H
-
-# include "minishell.h"
 
 /*
 ** Multi redirection possibility :

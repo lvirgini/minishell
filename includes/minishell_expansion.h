@@ -6,14 +6,16 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 16:38:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/27 21:48:30 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/28 15:03:19 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_EXPANSION_H
 # define MINISHELL_EXPANSION_H
 
-# include "minishell.h"
+/*
+** Don't keep all this for 21sh or 42sh. recode it.
+*/
 
 # define STR_ESCAPE	" \t\n"
 # define STR_ESCAPE_IN_DQUOTES "$\"\\`"
@@ -73,7 +75,7 @@ t_expansion	*expand_double_quote(char *s, char **env);
 t_expansion	*expand_dollar(char *s, char **env, int is_in_double_quotes);
 t_expansion	*expand_dollar_in_double_quotes(char *s, char **env, int max);
 t_expansion	*expand_dollar_in_argv(char *s, char **env);
-void		dollar_is_dollar(t_expansion *expansion);
+t_expansion	*dollar_is_dollar(void);
 
 /*
 ** Useful functions for t_expansion
