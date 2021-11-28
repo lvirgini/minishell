@@ -6,19 +6,12 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 21:24:00 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/23 16:34:10 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/27 22:00:07 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_STRUCT_TOKEN_H
 # define MINISHELL_STRUCT_TOKEN_H
-
-/*
-** NB_TOKEN : number of token types.
-**			token types are defined in the enum e_token_type.
-*/
-
-# define NB_TOKEN	9
 
 /*
 ** Struct token : for lexer.

@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 18:18:56 by mini              #+#    #+#             */
-/*   Updated: 2021/11/21 20:32:35 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/27 22:18:33 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 
 static void	set_functions_get_token(t_func_get_token ft_token[NB_METACHARACTER])
 {
+	ft_token[FT_WORD] = &get_token_word;
 	ft_token[FT_PIPE] = &get_token_pipe;
 	ft_token[FT_TILD_LEFT] = &get_token_tild_left;
 	ft_token[FT_TILD_RIGHT] = &get_token_tild_right;
-	ft_token[FT_WORD] = &get_token_word;
 }
 
 static char	*move_line_for_next_token(char *line, t_token *current)
@@ -42,9 +42,9 @@ static char	*move_line_for_next_token(char *line, t_token *current)
 
 t_token	**lexer_minishell(char *line)
 {
-	t_token					**list_token;
-	t_token					*new_token;
-	static t_func_get_token	get_token[NB_METACHARACTER];
+	t_token				**list_token;
+	t_token				*new_token;
+	t_func_get_token	get_token[NB_METACHARACTER];
 
 	set_functions_get_token(get_token);
 	list_token = malloc_list_token();

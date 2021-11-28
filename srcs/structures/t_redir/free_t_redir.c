@@ -6,13 +6,13 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 17:00:14 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/21 15:52:57 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/27 21:54:58 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_this_redir(t_redir *redir)
+static void	free_this_redir(t_redir *redir)
 {
 	if (redir)
 	{

@@ -3,27 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_error.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 10:04:02 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/26 17:38:34 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/27 22:14:53 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
-** ex error : 
-**		si error syntax :  n'effectue aucune commande ! 
-**			si un metacharactere puis un autre metacharactere.
-**			<<<
-**			bash: erreur de syntaxe près du symbole inattendu « newline »
-**			<|<
-**			bash: erreur de syntaxe près du symbole inattendu « | »  
-**					------> $? = 2
+** Syntax Error:
+**	if there is a syntax error, the shell stops and return to readline: 
+**	- never runs the command
+**	- does not open the following redirections.
 */
 
-int	print_syntax_error(int err, char char_data, char *str_data)
+int	display_syntax_error(int err, char char_data, char *str_data)
 {
 	static char	*syntax[NB_ERR_SYNTAX] = {
 		"syntax error near unexpected token «",
@@ -48,21 +44,21 @@ int	print_syntax_error(int err, char char_data, char *str_data)
 /*
 ** SYNTAX ERROR from redirections : 
 **
-** if no token after redirection : it's the end of line
-** if token after is another redirection or operator
+**	if there is no token after the redirection : it is the end of the line.
+**	if the next token is not a word.
 */
 
-int	syntax_error_redirection(t_token *token)
+int	check_syntax_error_redirection(t_token *token)
 {
 	if (!token->next)
 	{
-		print_syntax_error(ERR_SYMBOL, '\0', NULL);
-		return (SYNTAX_ERROR);
+		display_syntax_error(ERR_SYMBOL, '\0', NULL);
+		return (FAILURE);
 	}
 	if (is_token_words(token->next->type) == false)
 	{
-		print_syntax_error(ERR_SYMBOL, 0, token->next->word);
-		return (SYNTAX_ERROR);
+		display_syntax_error(ERR_SYMBOL, 0, token->next->word);
+		return (FAILURE);
 	}
 	return (SUCCESS);
 }

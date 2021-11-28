@@ -6,14 +6,21 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 13:24:38 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/27 18:46:13 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/28 10:01:24 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/*
+** Display global errors in Minishell
+**
+** Minishell : <object> STR_ERROR
+*/
+
 int	display_error(int error, char *object)
 {
+	static int	errno_nb[NB_ERROR] = {1, 127, 126, 127, 126, 126, 1};
 	static char	*str_error[NB_ERROR] = {
 		"\n",
 		": command not found\n",
@@ -21,9 +28,8 @@ int	display_error(int error, char *object)
 		": No such file or directory\n",
 		": ambiguous redirect\n",
 		": Is a directory\n",
-		"error stdin_fileno not referring to a terminal\n"
+		"error stdin_fileno does not refer to a terminal\n"
 	};
-	static int	errno_nb[NB_ERROR] = {1, 127, 126, 127, 126, 126, 1};
 
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	if (error < NB_ERROR)
@@ -40,6 +46,10 @@ int	display_error(int error, char *object)
 	}	
 	return (errno);
 }
+
+/*
+**	Special error for Heredoc
+*/
 
 void	display_heredoc_error(char *delimitor)
 {

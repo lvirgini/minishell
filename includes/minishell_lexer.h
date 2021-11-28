@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 10:54:51 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/21 14:54:14 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/27 22:28:48 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,5 @@ int			strlen_simple_quote(char *line, int len);
 int			strlen_double_quote(char *line, int len);
 int			is_metacharacter(char c);
 int			is_operator(char c);
-int			strlen_quote(char *line, int len, char quote_type);
 
 #endif

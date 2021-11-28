@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 11:32:01 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/25 13:55:50 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/27 21:39:41 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ static int	parse_redirection(t_cmd *cmd, t_token *token)
 {
 	t_redir	*redir;
 
-	if (syntax_error_redirection(token) == SYNTAX_ERROR)
-		return (SYNTAX_ERROR);
+	if (check_syntax_error_redirection(token) == FAILURE)
+		return (FAILURE);
 	redir = create_redir(token->type, token->next->word);
 	if (!redir)
 		return (FAILURE);
@@ -60,8 +60,8 @@ static int	parse_heredoc(t_cmd *cmd, t_token *token)
 {
 	t_hdoc	*heredoc;
 
-	if (syntax_error_redirection(token) == SYNTAX_ERROR)
-		return (SYNTAX_ERROR);
+	if (check_syntax_error_redirection(token) == FAILURE)
+		return (FAILURE);
 	heredoc = create_heredoc(token->next->word);
 	if (!heredoc)
 		return (FAILURE);

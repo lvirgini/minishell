@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:43:30 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/26 16:27:31 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/27 21:52:30 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	create_pipe(t_cmd *cmd)
 {
 	if (pipe(cmd->pipe) == -1)
 	{
-		perror ("pipe in make_pipe_redirection()");
+		perror ("pipe in create_pipe()");
 		return (FAILURE);
 	}
 	return (SUCCESS);
@@ -64,7 +64,7 @@ static int	setup_pipe_output(t_cmd *cmd)
 ** if cmd is a PIPE : make pipe[OUT] to output
 */
 
-int	make_pipe_redirection(t_cmd *cmd)
+int	setup_pipe_redirection(t_cmd *cmd)
 {
 	if (cmd->prev && cmd->prev->type == PIPE)
 	{

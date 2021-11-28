@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 16:38:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/25 14:12:47 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/27 21:48:30 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,17 @@
 # define NB_EXPANDER	3
 
 typedef struct s_expansion	t_expansion;
-typedef t_expansion			*(*t_ft_expand)(char *s, char **env);
 
+/*
+**	t_expansion : 
+**	from a string, the expansion structure allows to get the value 
+**	of the expansion.
+**		start of expansion: is the index of the string where the expansion
+**	must be done
+**		size to remove: is the length to remove.
+*/
+
+typedef t_expansion			*(*t_ft_expand)(char *s, char **env);
 struct s_expansion
 {
 	t_expansion	*next;

@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 17:36:34 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/21 20:36:24 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/27 22:30:23 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ static int	add_argv_from_token(char **argv, t_token *token, int argc)
 		argv[i] = ft_strdup(token->word);
 		if (!argv[i])
 		{
-			free_n_list(argv, i);
 			perror("malloc() in add_cmd_arguments_from token");
+			free_n_list(argv, i);
 			return (FAILURE);
 		}
 		i++;

@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 14:56:01 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/27 15:24:05 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/27 22:00:18 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ struct s_prompt
 	char	*user;
 	char	*cwd;
 	char	*formatted;
-	t_bool	need_change;
 };
 
 /*
