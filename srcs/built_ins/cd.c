@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:31:33 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/27 16:27:56 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/28 10:27:11 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,18 @@ void	cd_errors(int error, char *arg, char *path)
 		ft_putstr_fd(S_NO_DIR, STDERR_FILENO);
 	}
 	set_exit_status(1, 0);
+}
+
+void	set_current_pwd(char ***env)
+{
+	char	*cwd;
+
+	cwd = get_current_dir();
+	if (cwd)
+	{
+		export_join_keyvalue(PWD_KEY, cwd, env);
+		free(cwd);
+	}
 }
 
 char	*cd_old(char **arg, char ***env)
@@ -94,6 +106,7 @@ void	exec_cd(char **arg, char ***env) // Si reussite et PWD existe dans l'env ex
 	}
 	else if (arg[2])
 		cd_errors(TOO_MANY_ARGS, arg[1], NULL);
+	set_current_pwd(env);
 	if (old)
 		free(old);
 	return ;
