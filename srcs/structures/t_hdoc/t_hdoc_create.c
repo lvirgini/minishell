@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   t_hdoc_create.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 17:05:09 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/25 14:17:04 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/28 00:03:37 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static char	*removed_quotes(char *s)
 	size_t	s_len;
 	size_t	res_len;
 
-	result = (char *)malloc(sizeof(char) * (strlen(s) + 1));
+	result = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
 	if (!result)
 		return (NULL);
 	s_len = 0;
