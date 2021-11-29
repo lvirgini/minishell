@@ -6,11 +6,13 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 10:04:02 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/26 17:38:34 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/29 13:31:03 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_return_value	g_exit;
 
 /*
 ** ex error : 
@@ -41,7 +43,7 @@ int	print_syntax_error(int err, char char_data, char *str_data)
 	else
 		ft_putstr_fd(str_data, STDERR_FILENO);
 	ft_putstr_fd("»\n", STDERR_FILENO);
-	set_exit_status(2, 0);
+	g_exit.status = 2;
 	return (SYNTAX_ERROR);
 }
 

@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 18:05:40 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/27 16:25:48 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/29 14:20:10 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ char	*cd_home(char **arg, char ***env)
 	}
 	else if (arg[1][1] == '/')
 		cd_home_plus(home, new_old, arg[1], env);
-	else if (chdir(arg[1]) == -1) // revoir le comportement
+	else if (chdir(arg[1]) == -1)
 		cd_errors(0, arg[1], NULL);
 	else
-		export_join_keyvalue(OLDPWD_KEY, new_old, env); // A faire ?
+		export_join_keyvalue(OLDPWD_KEY, new_old, env);
 	free(home);
 	return (new_old);
 }

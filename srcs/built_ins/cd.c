@@ -6,11 +6,13 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:31:33 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/28 10:27:11 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/29 13:32:11 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_return_value	g_exit;
 
 void	cd_errors(int error, char *arg, char *path)
 {
@@ -22,7 +24,7 @@ void	cd_errors(int error, char *arg, char *path)
 		ft_putstr_fd(arg, STDERR_FILENO);
 		ft_putstr_fd(S_PERM, STDERR_FILENO);
 	}
-	else if (errno == ENOENT || error == NO_FILE) // Autres erreurs ?
+	else if (errno == ENOENT || error == NO_FILE)
 	{
 		if (path == NULL)
 			ft_putstr_fd(arg, STDERR_FILENO);
@@ -38,7 +40,7 @@ void	cd_errors(int error, char *arg, char *path)
 			ft_putstr_fd(path, STDERR_FILENO);
 		ft_putstr_fd(S_NO_DIR, STDERR_FILENO);
 	}
-	set_exit_status(1, 0);
+	g_exit.status = 1;
 }
 
 void	set_current_pwd(char ***env)
@@ -87,12 +89,12 @@ char	*cd_path(char **arg, char ***env)
 	return (new_old);
 }
 
-void	exec_cd(char **arg, char ***env) // Si reussite et PWD existe dans l'env export PWD
+void	exec_cd(char **arg, char ***env)
 {
 	char	*old;
 
 	old = NULL;
-	set_exit_status(0, 0);
+	g_exit.status = 0;
 	if (arg[1] == NULL)
 		old = cd_home(arg, env);
 	else if (arg[1] && arg[2] == NULL)

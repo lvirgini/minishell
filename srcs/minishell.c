@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 16:25:24 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/27 19:02:37 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/29 10:52:34 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 /*	
 ** MINISHELL by eassouli and lvirgini
 */
+
+t_return_value	g_exit = {0, 0};
 
 int	main(int argc, char *argv[], char *env[])
 {
@@ -32,5 +34,5 @@ int	main(int argc, char *argv[], char *env[])
 		return (EXIT_FAILURE);
 	make_terminal(&minishell_env);
 	free_list(minishell_env);
-	return (get_exit_status());
+	return (g_exit.status);
 }

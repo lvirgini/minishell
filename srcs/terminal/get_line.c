@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/27 18:59:43 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/29 14:21:57 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_return_value	g_exit;
 
 void	make_shell(char *line, char ***env, t_prompt *prompt)
 {
@@ -22,7 +24,7 @@ void	make_shell(char *line, char ***env, t_prompt *prompt)
 	free_list_token(token);
 	if (expanser(cmd, *env) && cmd)
 	{
-		if (executer(cmd, env) == FAILURE && get_exit_status() != 130)
+		if (executer(cmd, env) == FAILURE && g_exit.status != 130)
 		{
 			free_t_prompt(prompt);
 			exit_minishell(cmd, *env);
@@ -76,9 +78,9 @@ void	make_terminal(char ***env)
 	prompt = initialize_prompt(*env);
 	if (!prompt)
 		return ;
-	while (get_exit_value() == 0)
+	while (g_exit.value == 0)
 	{
-		signal(SIGINT, handle_prompt); // heredoc stop readline
+		signal(SIGINT, handle_prompt);
 		signal(SIGQUIT, SIG_IGN);
 		if (manage_readline(env, prompt) == FAILURE)
 			break ;

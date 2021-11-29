@@ -6,11 +6,13 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/23 23:15:32 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/26 11:44:11 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/29 13:30:50 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_return_value	g_exit;
 
 /*
 ** in minishell we don't expand $[0-9], we just pass throw.
@@ -34,7 +36,7 @@ static void	dollar_is_exit_status(t_expansion *expansion)
 	else
 	{
 		expansion->size_to_remove = 2;
-		expansion->value[0] = ft_itoa(get_exit_status());
+		expansion->value[0] = ft_itoa(g_exit.status);
 	}	
 }
 

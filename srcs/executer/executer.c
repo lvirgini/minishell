@@ -6,11 +6,13 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:27:42 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/27 18:02:01 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/29 13:30:02 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_return_value	g_exit;
 
 /*
 ** PARENT : wait all processus terminated
@@ -68,6 +70,6 @@ int	executer(t_cmd **list_cmd, char ***env)
 	}
 	if (builtin != NOT_BUILTIN && (*list_cmd)->next == NULL)
 		return (SUCCESS);
-	set_exit_status((wait_all_process(*list_cmd)), 0);
+	g_exit.status = wait_all_process(*list_cmd);
 	return (SUCCESS);
 }

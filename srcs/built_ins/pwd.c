@@ -6,11 +6,13 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:31:16 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/27 16:10:32 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/29 13:32:49 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_return_value	g_exit;
 
 /*
 ** Print an error if there are more than 1 argument
@@ -24,7 +26,7 @@ static void	pwd_error(int error)
 		ft_putstr_fd(S_TOO_MANY_ARGS, STDERR_FILENO);
 	else if (error == NO_CWD)
 		ft_putstr_fd(S_NO_CWD, STDERR_FILENO);
-	set_exit_status(1, 0);
+	g_exit.status = 1;
 }
 
 void	exec_pwd(char **arg, char ***env)
@@ -32,7 +34,7 @@ void	exec_pwd(char **arg, char ***env)
 	char	*cwd;
 
 	(void)env;
-	set_exit_status(0, 0);
+	g_exit.status = 0;
 	if (arg[1] != NULL)
 	{
 		pwd_error(TOO_MANY_ARGS);

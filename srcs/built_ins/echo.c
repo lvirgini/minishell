@@ -6,11 +6,13 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:37:45 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/27 12:36:49 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/29 13:34:50 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_return_value	g_exit;
 
 void	print_echo(char **arg, int i)
 {
@@ -47,7 +49,7 @@ void	exec_echo(char **arg, char ***env)
 	(void)env;
 	i = 1;
 	trail = 0;
-	set_exit_status(0, 0);
+	g_exit.status = 0;
 	if (arg[i] == NULL)
 	{
 		printf("\n");

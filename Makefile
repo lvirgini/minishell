@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+         #
+#    By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/31 17:38:13 by lvirgini          #+#    #+#              #
-#    Updated: 2021/11/27 17:59:40 by lvirgini         ###   ########.fr        #
+#    Updated: 2021/11/29 13:09:36 by eassouli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -99,8 +99,7 @@ SRC		= 	cd.c \
 			t_token_remove.c \
 			init_prompt.c\
 			update_prompt.c \
-			minishell.c \
-			return_value.c
+			minishell.c
 
 OBJ 	=	$(addprefix $(OBJ_DIR),$(SRC:%.c=%.o))
 HEADERS = 	$(foreach dir, $(INC_DIR), $(wildcard $(dir)/*.h))

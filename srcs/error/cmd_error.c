@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_error.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/10 13:24:38 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/27 18:46:13 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/29 13:30:55 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_return_value	g_exit;
 
 int	display_error(int error, char *object)
 {
@@ -31,12 +33,12 @@ int	display_error(int error, char *object)
 		if (object)
 			ft_putstr_fd(object, STDERR_FILENO);
 		ft_putstr_fd(str_error[error], STDERR_FILENO);
-		set_exit_status(errno_nb[error], 0);
+		g_exit.status = errno_nb[error];
 	}
 	else
 	{
 		perror(object);
-		set_exit_status(1, 0);
+		g_exit.status = 1;
 	}	
 	return (errno);
 }
@@ -53,5 +55,5 @@ void	exit_minishell(t_cmd **list_cmd, char **env)
 {
 	free_list_cmd(list_cmd);
 	free_list(env);
-	exit(get_exit_status());
+	exit(g_exit.status);
 }

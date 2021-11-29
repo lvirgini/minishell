@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_maker.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 13:32:05 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/27 18:59:08 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/29 13:30:32 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_return_value	g_exit;
 
 /*
 **  HERE DOC
@@ -31,7 +33,7 @@ int	get_line_for_heredoc(t_hdoc *heredoc, char **env)
 		line = readline("> ");
 		if (!line)
 		{
-			if (get_exit_status() == 130)
+			if (g_exit.status == 130)
 				return (FAILURE);
 			display_heredoc_error(heredoc->delimitor);
 			return (SUCCESS);
