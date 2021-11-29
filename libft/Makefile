@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+         #
+#    By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/01/21 18:13:44 by lvirgini          #+#    #+#              #
-#    Updated: 2021/11/03 15:40:11 by lvirgini         ###   ########.fr        #
+#    Updated: 2021/11/29 16:00:58 by eassouli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ SRCS	   += $(SRCS_MEMORY) $(SRCS_FT_PRINT) $(SRCS_STRING) $(SRCS_GNL) $(SRCS_LIT
 SRCS_ALLOCATION = ft_calloc.c \
 
 SRCS_CONVERTION = 	ft_atof.c		ft_atoi_base.c	ft_atoi.c		ft_itoa.c  \
-					ft_lltoa.c 		ft_ulltoa.c		ft_utoa.c
+					ft_lltoa.c 		ft_ulltoa.c		ft_utoa.c		ft_atoll.c
 
 SRCS_IS_SOMETHING = ft_isalnum.c	ft_isalpha.c	ft_isascii.c	ft_isdigit.c \
 					ft_isprint.c	ft_isspace.c	ft_tolower.c	ft_toupper.c

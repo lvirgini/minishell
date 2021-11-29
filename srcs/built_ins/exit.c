@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:26:37 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/29 13:34:43 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/29 16:42:45 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,21 @@ static void	exit_error(int error, char *arg)
 int	str_isdigit(char *str)
 {
 	int	i;
+	int	j;
 
 	i = 0;
-	if (str[0] == '-' || str[0] == '+' || ft_isdigit(str[0]))
+	j = 0;
+	while ((str[i] >= '\t' && str[i] <= '\r') || str[i] == ' ')
 		i++;
-	else
-		return (FALSE);
-	if (!ft_isdigit(str[0]) && !ft_isdigit(str[i]))
-		return (FALSE);
-	while (str[i] && ft_isdigit(str[i]))
+	if (str[i] == '-' || str[i] == '+')
 		i++;
-	if (str[i])
+	if (!ft_isdigit(str[i]))
+		return (FALSE);
+	while (str[i] == '0')
+		i++;
+	while (str[i + j] && ft_isdigit(str[i + j]))
+		j++;
+	if (str[i + j] || j > 19)
 		return (FALSE);
 	return (TRUE);
 }
@@ -70,7 +74,7 @@ void	exec_exit(char **arg, char ***env)
 		{
 			if (arg[2] == NULL)
 			{
-				g_exit.status = ft_atoi(arg[1]);
+				g_exit.status = ft_atoll(arg[1]);
 				g_exit.value = 1;
 			}
 			else

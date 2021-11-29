@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve_and_fork.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
+/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 17:19:13 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/29 14:10:28 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/29 16:31:06 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ static int	execve_this_command(t_cmd *cmd, char *env[])
 	int		ret;
 	char	**clean_env;
 
-	clean_env = make_minishell_env(env);
+	clean_env = list_cdup(env, '=');
 	if (clean_env == NULL)
 		return (-1);
-	free_list(env);
 	env = NULL;
 	ret = execve(cmd->path, cmd->argv, clean_env);
 	perror("execve");
+	free_list(clean_env);
 	errno = ret;
 	return (-1);
 }

@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:37:45 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/29 13:34:50 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/29 16:23:49 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	print_echo(char **arg, int i)
 {
 	while (arg[i])
 	{
-		printf("%s", arg[i]);
+		ft_putstr(arg[i]);
 		if (arg[i + 1] != NULL)
-			printf(" ");
+			ft_putstr(" ");
 		i++;
 	}
 }
@@ -52,7 +52,7 @@ void	exec_echo(char **arg, char ***env)
 	g_exit.status = 0;
 	if (arg[i] == NULL)
 	{
-		printf("\n");
+		ft_putstr("\n");
 		return ;
 	}
 	while (arg[i] && is_trail(arg[i]) == 1)
@@ -62,5 +62,5 @@ void	exec_echo(char **arg, char ***env)
 	}
 	print_echo(arg, i);
 	if (trail == 0)
-		printf("\n");
+		ft_putstr("\n");
 }
