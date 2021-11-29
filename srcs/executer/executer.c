@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:27:42 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/29 14:29:39 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/29 19:26:22 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,13 @@ int	executer_this_cmd(t_cmd *cmd, char ***env, int builtin)
 	if (make_heredoc(cmd->heredoc, *env) == FAILURE
 		|| (cmd->type == PIPE && create_pipe(cmd) == FAILURE))
 		return (FAILURE);
-	if (cmd->argv)
+	if (cmd->argv && builtin != NOT_BUILTIN)
 	{
-		if (builtin != NOT_BUILTIN)
-		{
-			if (exec_builtin(builtin, env, cmd) == FAILURE)
-				return (FAILURE);
-		}
-		else if (execute_this_cmd(cmd, *env) == FAILURE)
+		if (exec_builtin(builtin, env, cmd) == FAILURE)
 			return (FAILURE);
 	}
+	else if (execute_this_cmd(cmd, *env) == FAILURE)
+		return (FAILURE);
 	return (SUCCESS);
 }
 /*

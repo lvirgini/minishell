@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:32:30 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/26 14:17:28 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/29 19:39:18 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	open_input(char *input)
 {
 	int	fd;
 
-	fd = open(input, O_RDONLY);
+	fd = open(input, O_RDONLY, __O_CLOEXEC);
 	if (fd == -1)
 		display_error(NB_ERROR + 1, input);
 	else if (dup2(fd, IN) == -1)

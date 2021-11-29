@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/27 12:54:38 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/27 16:41:36 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/29 19:25:29 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,25 @@ int	layout_prompt(t_prompt *prompt)
 
 int	update_prompt(char **env, t_prompt **prompt)
 {	
+	int	need_free;
+
+	need_free = 0;
 	(*prompt)->user = get_env_value(env, "USER");
 	(*prompt)->cwd = get_env_value(env, "PWD");
+	if ((*prompt)->cwd == NULL)
+	{
+		(*prompt)->cwd = getcwd(NULL, 0);
+		need_free = 1;
+	}	
 	if (layout_prompt(*prompt) == FAILURE)
 	{
 		free_t_prompt(*prompt);
 		return (FAILURE);
 	}
+	if (need_free == 1 && (*prompt)->cwd != NULL)
+	{
+		free((*prompt)->cwd);
+		(*prompt)->cwd = NULL;
+	}	
 	return (SUCCESS);
 }
