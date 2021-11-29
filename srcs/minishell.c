@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 16:25:24 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/29 10:52:34 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/29 14:29:30 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	main(int argc, char *argv[], char *env[])
 	minishell_env = make_minishell_env(env);
 	if (!minishell_env)
 		return (EXIT_FAILURE);
+	export_keyvalue(OLDPWD, &minishell_env);
 	make_terminal(&minishell_env);
 	free_list(minishell_env);
 	return (g_exit.status);

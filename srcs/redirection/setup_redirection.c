@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setup_redirection.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:33:20 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/26 10:13:21 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/27 21:52:52 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	get_back_std_io(int std_io[2])
 
 int	setup_all_redirections(t_cmd *cmd, char **env)
 {
-	if (make_pipe_redirection(cmd) == FAILURE)
+	if (setup_pipe_redirection(cmd) == FAILURE)
 		return (FAILURE);
 	if (setup_redirection(cmd, env) == FAILURE)
 		return (FAILURE);

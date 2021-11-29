@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   t_hdoc_create.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 17:05:09 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/28 00:03:37 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/28 12:22:19 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+** create heredoc and expand if needed the delimitor
+*/
 
 static void	remove_simple_quotes(char *res, char *s, size_t *s_len,
 		size_t *res_len)

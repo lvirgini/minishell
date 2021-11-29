@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_maker.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 13:32:05 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/29 13:30:32 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/29 14:29:42 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	get_line_for_heredoc(t_hdoc *heredoc, char **env)
 
 	while (1)
 	{
-		line = NULL;
 		line = readline("> ");
 		if (!line)
 		{
@@ -52,6 +51,24 @@ int	get_line_for_heredoc(t_hdoc *heredoc, char **env)
 }
 
 /*
+** specially for HEREDOC if a signal has been occured : 
+**	Stop heredoc in handle_heredoc signal function : close STDIN_FILENO.
+** 	it the only whay
+*/
+
+static int	get_back_stdin_when_stop_heredoc(int stdinput)
+{
+	if (stdinput == -1)
+		return (FAILURE);
+	if (dup2(stdinput, STDIN_FILENO) != 0)
+	{
+		perror("dup2 in get_back_stdin_when_stop_heredoc()");
+		return (FAILURE);
+	}
+	close(stdinput);
+	return (SUCCESS);
+}
+/*
 **	Mise en place des heredoc ; ceation de la liste des donnes
 **	recuperation de la liste par get line for heredoc;
 */
@@ -64,15 +81,13 @@ int	make_heredoc(t_hdoc *heredoc, char **env)
 	signal(SIGQUIT, SIG_IGN);
 	while (heredoc)
 	{
-		stdinput = dup(0);
+		stdinput = dup(STDIN_FILENO);
 		if (get_line_for_heredoc(heredoc, env) == FAILURE)
 		{
-			dup2(stdinput, 0);
-			close(stdinput);
+			get_back_stdin_when_stop_heredoc(stdinput);
 			return (FAILURE);
 		}
-		dup2(stdinput, 0);
-		close(stdinput);
+		get_back_stdin_when_stop_heredoc(stdinput);
 		heredoc = heredoc->next;
 	}
 	return (SUCCESS);

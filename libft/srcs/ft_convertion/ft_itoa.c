@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/21 14:26:04 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/06/21 16:42:58 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/28 15:45:49 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	get_str_from_int(char *dst, int n, size_t size)
 	unsigned int	unsigned_nbr;
 
 	dst[size] = '\0';
-	unsigned_nbr = ft_abs(n);
+	unsigned_nbr = (unsigned int)ft_abs(n);
 	while (size-- > 0)
 	{
 		dst[size] = unsigned_nbr % 10 + '0';

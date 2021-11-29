@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/09 21:17:03 by mini              #+#    #+#             */
-/*   Updated: 2021/11/23 16:37:20 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/27 21:37:18 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	strlen_simple_quote(char *line, int len)
 	quotes_len = ft_strchr_len(line + len + 1, CHAR_SIMPLE_QUOTE);
 	if (quotes_len == -1)
 	{
-		print_syntax_error(ERR_QUOTES_NOT_CLOSED, 0, line);
+		display_syntax_error(ERR_QUOTES_NOT_CLOSED, 0, line);
 		return (-1);
 	}
 	return (len + quotes_len + 2);
@@ -38,7 +38,7 @@ int	strlen_double_quote(char *line, int len)
 			return (len + quotes_len + 1);
 		quotes_len++;
 	}
-	print_syntax_error(ERR_QUOTES_NOT_CLOSED, 0, line);
+	display_syntax_error(ERR_QUOTES_NOT_CLOSED, 0, line);
 	return (-1);
 }
 

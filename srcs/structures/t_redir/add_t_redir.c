@@ -6,17 +6,11 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 19:54:42 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/23 16:38:46 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/28 12:22:45 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-/*
-t_bool	need_expand_heredoc(char *delimitor)
-{
-	while ()
-}*/
 
 /*
 ** malloc and create t_redir from this token 

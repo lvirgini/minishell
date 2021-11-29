@@ -6,19 +6,15 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 14:56:01 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/27 15:24:05 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/28 12:34:50 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_TERMINAL_H
 # define MINISHELL_TERMINAL_H
 
-# include "minishell.h"
-
 # define PROMPT_LEN 		34
 # define GREEN_COLOR		"\33[32m"
-# define WHITE_COLOR		"\33[0m"
-# define BLUE_COLOR			"\33[94m"
 
 typedef struct s_prompt	t_prompt;
 
@@ -27,7 +23,6 @@ struct s_prompt
 	char	*user;
 	char	*cwd;
 	char	*formatted;
-	t_bool	need_change;
 };
 
 /*

@@ -6,14 +6,12 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 14:29:00 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/25 14:19:56 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/28 12:34:32 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_STRUCT_REDIR_H
 # define MINISHELL_STRUCT_REDIR_H
-
-# include "minishell.h"
 
 /*
 ** Multi redirection possibility :
@@ -45,7 +43,6 @@ struct s_heredoc
 
 t_redir		*create_redir(int type, char *filename);
 void		free_list_redir(t_redir *redir);
-void		free_this_redir(t_redir *redir); // static ?
 
 /*
 **	management heredoc : 

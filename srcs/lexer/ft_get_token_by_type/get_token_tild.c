@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 13:30:06 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/10/26 16:15:55 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/27 21:36:54 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	get_token_tild_right(t_token *token, char *line)
 		token->type = OUTPUT_REDIRECTION;
 	if (is_operator(line[len]))
 	{
-		print_syntax_error(ERR_SYMBOL, line[len], NULL);
+		display_syntax_error(ERR_SYMBOL, line[len], NULL);
 		return (FAILURE);
 	}
 	token->word = ft_strdup_max(line, len);

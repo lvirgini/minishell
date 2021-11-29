@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 17:36:34 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/21 20:36:24 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/28 10:13:48 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,8 @@ static int	add_argv_from_token(char **argv, t_token *token, int argc)
 		argv[i] = ft_strdup(token->word);
 		if (!argv[i])
 		{
-			free_n_list(argv, i);
 			perror("malloc() in add_cmd_arguments_from token");
+			free_n_list(argv, i);
 			return (FAILURE);
 		}
 		i++;
@@ -79,8 +79,8 @@ int	parse_cmd_argv(t_cmd *cmd, t_token **list_token)
 		perror("malloc() in parse_cmd_argv()");
 		return (FAILURE);
 	}
-	if (add_argv_from_token(cmd->argv, *list_token, argc) == FAILURE)
+	if (add_argv_from_token(cmd->argv, token, argc) == FAILURE)
 		return (FAILURE);
-	remove_multi_token(list_token, *list_token, argc);
+	remove_multi_token(list_token, token, argc);
 	return (SUCCESS);
 }

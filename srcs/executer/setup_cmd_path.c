@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 11:34:17 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/27 13:22:19 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/28 12:04:17 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,12 @@ static t_bool	is_relative_or_absolute_path(char *argv)
 	return (false);
 }
 
+/*
+**	verifies that the given command is not directory.
+**	(open is the only command available on minishell)
+**	checks if the command exists.
+*/
+
 t_bool	add_absolute_or_relative_path(t_cmd *cmd, char *argv)
 {
 	int	fd;
@@ -63,11 +69,9 @@ t_bool	add_absolute_or_relative_path(t_cmd *cmd, char *argv)
 
 /*
 ** if no cmd return SUCCESS because it can be only redirections.
-**	- check absolute path
-**
-** 	path of command is needed for execve
-**	- find executable file path with split env "PATH" with ':'.
-** 	- check if executable file has permission to be executed.
+**	- if / is inside cmd : it 's a absolute or relative path.
+**	else find path with PATH env
+** 	- then check if executable file has permission to be executed.
 */
 
 t_bool	argv_is_empty(char **argv)

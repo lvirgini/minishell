@@ -6,16 +6,14 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 11:51:41 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/26 17:34:53 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/28 12:15:48 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
-**	The backslash retains its special meaning only when followed by one of the 
-**	following characters: ‘$’, ‘`’, ‘"’, ‘\’, or newline
-**	"$USER$$$$$\\\`\"""""""""""""$USER$OK""""   "
+**	calculate of the final chain length: with expansion and without escapes
 */
 
 static size_t	strlen_without_double_quotes(char *s, size_t s_len,
@@ -48,12 +46,10 @@ static size_t	strlen_without_double_quotes(char *s, size_t s_len,
 }
 
 /*
-**
-**	static char	escape_quotes[] = {CHAR_DOLLAR, CHAR_DOUBLE_QUOTE, BACKSLASH,
-**					GRAVE_ACCENT, '\0'};
+**	strccpy of the sub expansion (dollar) ini final chain.
 */
 
-size_t	strcpy_sub_expansion_double_quotes(char *result,
+static size_t	strcpy_sub_expansion_double_quotes(char *result,
 		t_expansion *sub_expansion)
 {
 	if (sub_expansion->value && sub_expansion->value[0])
@@ -63,6 +59,10 @@ size_t	strcpy_sub_expansion_double_quotes(char *result,
 	}	
 	return (0);
 }
+
+/*
+** remove escapes and expand $.
+*/
 
 static void	strcpy_double_quotes_expand(char *result,
 		t_expansion *sub_expansion, char *s, size_t max_len)
@@ -92,6 +92,10 @@ static void	strcpy_double_quotes_expand(char *result,
 	result[len_expand] = '\0';
 }
 
+/*
+** creation of expansion final
+*/
+
 static t_expansion	*removed_and_expand_double_quotes(char *s,
 		t_expansion *sub_expansion, size_t max_len)
 {
@@ -115,12 +119,9 @@ static t_expansion	*removed_and_expand_double_quotes(char *s,
 /*
 **	expand double quotes :
 **
-**	get strlen des doubles quotes a retirer (l'ensemble)
-**	get les dollars sub_expansions si il y en a
-**	expandre la chaine finale a mettre dans expansion
-**	get strlen final sans les \escapes et la size to remove
-**		de toutes les expansion dollar
-**
+**	expansion of the complete string between double quotes : 
+**	with sub-expansion for dollars inside the double quotes
+**	returns the final expansion with expansion of $ and escapes
 */
 
 t_expansion	*expand_double_quote(char *s, char **env)

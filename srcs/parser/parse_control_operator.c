@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 18:41:46 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/23 16:37:38 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/27 21:36:11 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,12 @@ int	parse_control_operator(t_cmd *cmd, t_token **list_token)
 		return (SUCCESS);
 	if (cmd_can_be_pipe(cmd) == false)
 	{
-		print_syntax_error(ERR_SYMBOL, 0, token->word);
+		display_syntax_error(ERR_SYMBOL, 0, token->word);
 		return (FAILURE);
 	}
 	if (!token->next)
 	{
-		print_syntax_error(ERR_SYMBOL, 0, NULL);
+		display_syntax_error(ERR_SYMBOL, 0, NULL);
 		return (FAILURE);
 	}
 	cmd->type = PIPE;

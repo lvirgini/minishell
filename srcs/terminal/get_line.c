@@ -3,15 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   get_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 15:10:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/29 14:21:57 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/29 14:29:32 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static t_bool	is_only_space_line(char *line)
+{
+	while (*line && ft_isspace(*line))
+		line++;
+	if (*line == '\0')
+		return (true);
+	return (false);
+}
 extern t_return_value	g_exit;
 
 void	make_shell(char *line, char ***env, t_prompt *prompt)
@@ -19,6 +27,8 @@ void	make_shell(char *line, char ***env, t_prompt *prompt)
 	t_token		**token;
 	t_cmd		**cmd;
 
+	if (is_only_space_line(line))
+		return ;
 	token = lexer_minishell(line);
 	cmd = parser_minishell(token);
 	free_list_token(token);

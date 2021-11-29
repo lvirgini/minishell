@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executer.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/08 14:27:42 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/29 13:30:02 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/29 14:29:39 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,34 @@ int	execute_this_cmd(t_cmd *cmd, char **env)
 	return (SUCCESS);
 }
 
+int	executer_this_cmd(t_cmd *cmd, char ***env, int builtin)
+{
+	if (make_heredoc(cmd->heredoc, *env) == FAILURE
+		|| (cmd->type == PIPE && create_pipe(cmd) == FAILURE))
+		return (FAILURE);
+	if (cmd->argv)
+	{
+		if (builtin != NOT_BUILTIN)
+		{
+			if (exec_builtin(builtin, env, cmd) == FAILURE)
+				return (FAILURE);
+		}
+		else if (execute_this_cmd(cmd, *env) == FAILURE)
+			return (FAILURE);
+	}
+	return (SUCCESS);
+}
+/*
+** execute the command one by one:
+**	- execute the heredoc if there is.
+**	- if builtin : execute the built in
+**	- otherwise execute with execve.
+**	return value:
+**	- if it's only a built in : don't need to wait for the processes
+**	(no pipe created).
+**	- else get the exit status by waiting for all the processes
+*/
+
 int	executer(t_cmd **list_cmd, char ***env)
 {
 	t_cmd	*cmd;
@@ -54,17 +82,9 @@ int	executer(t_cmd **list_cmd, char ***env)
 	builtin = NOT_BUILTIN;
 	while (cmd)
 	{
-		if (make_heredoc(cmd->heredoc, *env) == FAILURE
-			|| (cmd->type == PIPE && create_pipe(cmd) == FAILURE))
-			return (FAILURE);
 		if (cmd->argv)
 			builtin = is_builtin(cmd->argv[0]);
-		if (builtin != NOT_BUILTIN)
-		{
-			if (exec_builtin(builtin, env, cmd) == FAILURE)
-				return (FAILURE);
-		}
-		else if (execute_this_cmd(cmd, *env) == FAILURE)
+		if (executer_this_cmd(cmd, env, builtin) == FAILURE)
 			return (FAILURE);
 		cmd = cmd->next;
 	}
