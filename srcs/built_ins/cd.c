@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:31:33 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/29 13:32:11 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/29 17:14:47 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,8 @@ void	exec_cd(char **arg, char ***env)
 	}
 	else if (arg[2])
 		cd_errors(TOO_MANY_ARGS, arg[1], NULL);
-	set_current_pwd(env);
+	if (g_exit.status == 0)
+		set_current_pwd(env);
 	if (old)
 		free(old);
 	return ;
