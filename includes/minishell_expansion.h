@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 16:38:57 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/28 15:03:19 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/29 16:52:08 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ t_expansion	*add_back_expansion(t_expansion *first, t_expansion *to_add);
 */
 
 int			expanser(t_cmd **list_cmd, char **env);
-void		expand_argv(t_cmd *cmd, char **env);
+int			expand_argv(t_cmd *cmd, char **env);
 t_bool		redesign_argv(char **new, char **old,
 				t_expansion *expansion, int *index);
 int			expand_redirection(t_redir *redir, char **env);

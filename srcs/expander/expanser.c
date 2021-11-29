@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expanser.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/23 23:15:41 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/25 10:12:45 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/29 16:52:27 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ int	expanser(t_cmd **list_cmd, char **env)
 	{
 		if (cmd->argv)
 		{
-			expand_argv(cmd, env);
-			if (!cmd->argv)
+			if (expand_argv(cmd, env) == FAILURE)
 				return (FAILURE);
 		}
 		cmd = cmd->next;

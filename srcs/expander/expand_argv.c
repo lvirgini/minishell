@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 11:09:02 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/21 20:21:10 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/29 16:53:23 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	get_new_argv_with_expansion(t_cmd *cmd, int *i, t_expansion *expansion)
 	cmd->argv = new_argv;
 }
 
-void	expand_argv(t_cmd *cmd, char **env)
+int	expand_argv(t_cmd *cmd, char **env)
 {
 	int			i;
 	t_expansion	*expansion;
@@ -58,17 +58,14 @@ void	expand_argv(t_cmd *cmd, char **env)
 		{
 			expansion = expand_str(cmd->argv[i], env);
 			if (!expansion)
-			{
-				free_list(cmd->argv);
-				cmd->argv = NULL;
-				return ;
-			}
+				return (FAILURE);
 			get_new_argv_with_expansion(cmd, &i, expansion);
 			free_list_expansion(expansion);
 			if (!cmd->argv)
-				return ;
+				return (FAILURE);
 		}
 		else
 			i++;
 	}
+	return (SUCCESS);
 }
