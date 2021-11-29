@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/23 23:15:32 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/29 14:30:58 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/29 15:29:39 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static t_expansion	*dollar_is_exit_status(void)
 	if (!expansion)
 		return (NULL);
 	expansion->value = malloc_list(1);
-	if (!expansion->value)
+	if (expansion->value)
 	{
 		expansion->size_to_remove = 2;
 		expansion->value[0] = ft_itoa((int)g_exit.status);
