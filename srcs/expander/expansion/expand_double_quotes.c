@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 11:51:41 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/28 12:15:48 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/29 16:13:06 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ static size_t	strlen_without_double_quotes(char *s, size_t s_len,
 
 	len = 0;
 	i = 1;
-	while (s[i] && i + 1 < s_len)
+	while (i + 1 < s_len && s[i])
 	{
 		if (sub_expansion && sub_expansion->value
 			&& i == sub_expansion->start_of_the_expand)
 		{
 			i += sub_expansion->size_to_remove;
 			len += ft_strlen(sub_expansion->value[0]);
-			sub_expansion++;
+			sub_expansion = sub_expansion->next;
 		}
 		else
 		{
