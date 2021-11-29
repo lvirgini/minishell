@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 22:10:50 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/23 18:42:16 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/29 16:02:31 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_strnjoin(char const *s1, char const *s2, size_t n)
 	while (s1[i])
 		dest[j++] = s1[i++];
 	i = 0;
-	while (s2[i] && j < n)
+	while (s2[i] && j < len)
 		dest[j++] = s2[i++];
 	while (j < n)
 		dest[j] = '\0';

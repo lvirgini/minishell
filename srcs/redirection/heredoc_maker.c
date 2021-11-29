@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 13:32:05 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/29 14:29:42 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/29 15:39:17 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,9 @@ int	make_heredoc(t_hdoc *heredoc, char **env)
 	{
 		stdinput = dup(STDIN_FILENO);
 		if (get_line_for_heredoc(heredoc, env) == FAILURE)
-		{
-			get_back_stdin_when_stop_heredoc(stdinput);
+			return (get_back_stdin_when_stop_heredoc(stdinput));
+		if (get_back_stdin_when_stop_heredoc(stdinput) == FAILURE)
 			return (FAILURE);
-		}
-		get_back_stdin_when_stop_heredoc(stdinput);
 		heredoc = heredoc->next;
 	}
 	return (SUCCESS);
