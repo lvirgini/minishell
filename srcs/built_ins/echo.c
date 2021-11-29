@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:37:45 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/29 16:23:49 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/29 18:27:40 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	is_trail(char *str)
 	int	i;
 
 	i = 0;
+	if (str[i] != '-')
+		return (0);
 	if (str[i] == '-')
 		i++;
 	if (!str[i])
