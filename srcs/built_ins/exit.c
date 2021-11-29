@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:26:37 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/29 16:42:45 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/29 17:43:54 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	str_isdigit(char *str)
 void	exec_exit(char **arg, char ***env)
 {
 	(void)env;
-	ft_putstr_fd("exit\n", STDERR_FILENO);
+	ft_putstr_fd("exit\n", STDOUT_FILENO);
 	if (arg[1])
 	{
 		if (str_isdigit(arg[1]))
