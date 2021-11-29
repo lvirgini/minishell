@@ -6,11 +6,13 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 13:32:05 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/28 11:36:47 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/29 14:29:42 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_return_value	g_exit;
 
 /*
 **  HERE DOC
@@ -30,7 +32,7 @@ int	get_line_for_heredoc(t_hdoc *heredoc, char **env)
 		line = readline("> ");
 		if (!line)
 		{
-			if (get_exit_status() == 130)
+			if (g_exit.status == 130)
 				return (FAILURE);
 			display_heredoc_error(heredoc->delimitor);
 			return (SUCCESS);

@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 11:56:22 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/25 09:59:36 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/29 11:44:46 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 ** get env
 */
 
+char	*dup_variable_to_plus(char *to_add, char *to_join);
 char	*get_env_value(char **env, char *key);
 int		get_env_index(char **env, char *key);
 int		get_list_env_size(char **env); //

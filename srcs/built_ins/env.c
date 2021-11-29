@@ -6,11 +6,13 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/19 12:31:30 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/26 17:37:43 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/29 10:52:59 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_return_value	g_exit;
 
 static void	env_error(int error)
 {
@@ -19,7 +21,7 @@ static void	env_error(int error)
 		ft_putstr_fd(S_TOO_MANY_ARGS, STDERR_FILENO);
 	if (error == NO_FILE)
 		ft_putstr_fd(S_NO_FILE, STDERR_FILENO);
-	set_exit_status(1, 0);
+	g_exit.status = 1;
 }
 
 void	exec_env(char **arg, char ***env)
@@ -27,7 +29,7 @@ void	exec_env(char **arg, char ***env)
 	int		i;
 	char	**envp;
 
-	set_exit_status(0, 0);
+	g_exit.status = 0;
 	i = 0;
 	envp = *env;
 	if (arg[1] != NULL)

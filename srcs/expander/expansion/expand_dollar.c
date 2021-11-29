@@ -6,11 +6,13 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/23 23:15:32 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/28 15:50:04 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/29 14:30:58 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_return_value	g_exit;
 
 /*
 ** in minishell we don't expand $[0-9], we just pass throw.
@@ -38,11 +40,14 @@ static t_expansion	*dollar_is_exit_status(void)
 	expansion->value = malloc_list(1);
 	if (!expansion->value)
 	{
-		free(expansion);
-		return (NULL);
+		expansion->size_to_remove = 2;
+		expansion->value[0] = ft_itoa((int)g_exit.status);
+		if (expansion->value[0] == NULL)
+		{
+			free_list_expansion(expansion);
+			return (NULL);
+		}
 	}
-	expansion->size_to_remove = 2;
-	expansion->value[0] = ft_itoa((int)(get_exit_status()));
 	return (expansion);
 }
 

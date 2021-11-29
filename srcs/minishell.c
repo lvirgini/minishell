@@ -6,7 +6,7 @@
 /*   By: lvirgini <lvirgini@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 16:25:24 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/29 14:06:00 by lvirgini         ###   ########.fr       */
+/*   Updated: 2021/11/29 14:29:30 by lvirgini         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 /*	
 ** MINISHELL by eassouli and lvirgini
 */
+
+t_return_value	g_exit = {0, 0};
 
 int	main(int argc, char *argv[], char *env[])
 {
@@ -33,5 +35,5 @@ int	main(int argc, char *argv[], char *env[])
 	export_keyvalue(OLDPWD, &minishell_env);
 	make_terminal(&minishell_env);
 	free_list(minishell_env);
-	return (get_exit_status());
+	return (g_exit.status);
 }

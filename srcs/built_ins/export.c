@@ -6,11 +6,13 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/22 10:59:10 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/26 17:38:05 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/29 13:31:14 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_return_value	g_exit;
 
 void	export_error(char *arg, int error)
 {
@@ -21,7 +23,7 @@ void	export_error(char *arg, int error)
 		ft_putstr_fd(arg, STDERR_FILENO);
 		ft_putstr_fd(S_NOT_ID, STDERR_FILENO);
 	}
-	set_exit_status(1, 0);
+	g_exit.status = 1;
 }
 
 int	is_valid_key(char *str)
@@ -33,6 +35,13 @@ int	is_valid_key(char *str)
 	i = 1;
 	while (str[i] && str[i] != '=')
 	{
+		if (str[i] == '+')
+		{
+			if (str[i + 1] == '=')
+				return (i);
+			else
+				return (0);
+		}
 		if (!ft_isalnum(str[i]) && str[i] != '_')
 			return (0);
 		i++;
@@ -95,7 +104,7 @@ void	exec_export(char **arg, char ***env)
 	int		index_key;
 
 	a = 1;
-	set_exit_status(0, 0);
+	g_exit.status = 0;
 	if (arg[a] == NULL)
 		print_export(*env);
 	while (arg[a])

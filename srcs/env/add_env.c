@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 11:55:27 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/26 10:09:58 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/29 13:36:15 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,13 +101,13 @@ void	add_new_env(char ***env, char *to_add)
 	new_list_env = malloc_list(env_size);
 	if (!new_list_env)
 		return ;
-	new_key = ft_strdup(to_add);
+	new_key = dup_variable_to_plus(to_add, NULL);
 	if (new_key == NULL)
 	{
 		free(new_list_env);
 		return ;
 	}
-	list_nmove(new_list_env, *env, env_size - 1); //
+	list_nmove(new_list_env, *env, env_size - 1);
 	new_list_env[env_size - 1] = new_key;
 	free(*env);
 	*env = new_list_env;
@@ -122,30 +122,10 @@ int	edit_env(char **env, int index, char *to_edit)
 {
 	char	*new_key;
 
-	new_key = ft_strdup(to_edit);
+	new_key = dup_variable_to_plus(to_edit, env[index]);
 	if (new_key == NULL)
-		return (FAILURE); // Secure malloc
+		return (FAILURE);
 	free(env[index]);
 	env[index] = new_key;
 	return (SUCCESS);
 }
-
-/*
-** Si env "KEY" existe modifié l'index (edit env) sinon ajouter un nouvel element
-*/
-
-// char	**add_env(char **env, char *key, char *value)
-// {
-// 	int		index;
-// 	char	*to_add;
-
-// 	to_add = create_new_env(key, value);
-// 	if (!to_add)
-// 		return (env);
-// 	index = get_env_index(env, key);
-// 	if (index == -1)
-// 		env = add_new_env(env, to_add);
-// 	else
-// 		edit_env(env, index, to_add);
-// 	return (env);
-// }

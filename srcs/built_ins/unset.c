@@ -6,11 +6,13 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/23 16:26:09 by eassouli          #+#    #+#             */
-/*   Updated: 2021/11/27 17:05:07 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/29 13:34:54 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+extern t_return_value	g_exit;
 
 static void	unset_error(char *arg, int error)
 {
@@ -21,7 +23,7 @@ static void	unset_error(char *arg, int error)
 		ft_putstr_fd(arg, STDERR_FILENO);
 		ft_putstr_fd(S_NOT_ID, STDERR_FILENO);
 	}
-	set_exit_status(1, 0);
+	g_exit.status = 1;
 }
 
 void	shift_list(char *arg, char **unset_env)
@@ -45,7 +47,7 @@ void	exec_unset(char **arg, char ***env)
 	int		i;
 	char	**unset_env;
 
-	set_exit_status(0, 0);
+	g_exit.status = 0;
 	a = 1;
 	unset_env = *env;
 	while (arg[a])
