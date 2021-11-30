@@ -6,7 +6,7 @@
 /*   By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 13:32:05 by lvirgini          #+#    #+#             */
-/*   Updated: 2021/11/29 17:30:49 by eassouli         ###   ########.fr       */
+/*   Updated: 2021/11/30 14:40:24 by eassouli         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,9 @@ int	make_heredoc(t_hdoc *heredoc, char **env)
 
 	signal(SIGINT, handle_heredoc);
 	signal(SIGQUIT, SIG_IGN);
-	g_exit.status = 0;
 	while (heredoc)
 	{
+		g_exit.status = 0;
 		stdinput = dup(STDIN_FILENO);
 		if (get_line_for_heredoc(heredoc, env) == FAILURE)
 		{
